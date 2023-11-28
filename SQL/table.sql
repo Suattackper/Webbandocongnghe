@@ -75,7 +75,7 @@ CREATE TABLE Product(
 -- HÌNH ẢNH SẢN PHẨM
 CREATE TABLE ProductImg (
 	ProductImgCode int identity(1,1) primary key,
-	Img image null,
+	Img nvarchar(500) null,
 	ProductCode varchar(15) null,
 	foreign key (ProductCode) references Product(ProductCode)
 )

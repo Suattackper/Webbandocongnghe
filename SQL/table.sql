@@ -19,10 +19,10 @@ CREATE TABLE Account (
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
 	AccountAddressCode int identity(1,1) primary key,
-	AccountCode int not null,
+	AccountCode int null,
 	--first name + last name
-	FullName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS not null,
-	PhoneNumber varchar(10) not null,
+	FullName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	PhoneNumber varchar(10) null,
 	-- mã bưu chính
 	PostalCode varchar(20) null,
 	Country nvarchar(50) null,
@@ -56,11 +56,11 @@ CREATE TABLE Promotion (
 CREATE TABLE Product(
 	ProductCode varchar(15) primary key,
 	ProductName nvarchar(50),
-	BrandCode int not null,
-	CategoryCode int not null,
+	BrandCode int null,
+	CategoryCode int null,
 	ImageProduct nvarchar(500),
 	Price decimal(18,2),
-	PromotionCode char(10) not null,
+	PromotionCode char(10) null,
 	-- Số lượng còn lại 
 	Quantity int default 1000,
 	-- Mô tả 
@@ -76,7 +76,7 @@ CREATE TABLE Product(
 CREATE TABLE ProductImg (
 	ProductImgCode int identity(1,1) primary key,
 	Img image null,
-	ProductCode varchar(15) not null,
+	ProductCode varchar(15) null,
 	foreign key (ProductCode) references Product(ProductCode)
 )
 
@@ -104,10 +104,10 @@ CREATE TABLE Payment (
 -- ĐẶT HÀNG 
 CREATE TABLE Orders(
 	OrderCode int identity(1,1) primary key,
-	PaymentCode int not null,
-	AccountCode int not null,
+	PaymentCode int null,
+	AccountCode int null,
 	--Mã giảm giá
-	PromotionCode char(10) not null,
+	PromotionCode char(10) null,
 	-- Ngày đặt hàng 
 	OrderDate date default getdate() null,
 	-- Đã giao hay chưa 1-yes 0-no
@@ -116,7 +116,7 @@ CREATE TABLE Orders(
 	OrderTotal money null,
 	-- Ghi chu don hang
 	OrderNote nvarchar(100),
-	AccountAddressCode int not null,
+	AccountAddressCode int null,
 	foreign key (PaymentCode) references Payment(PaymentCode),
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (AccountAddressCode) references AccountAddress(AccountAddressCode),
@@ -136,9 +136,9 @@ CREATE TABLE OrderDetail (
 
 -- COMMENT
 CREATE TABLE Comment (
-	CommentCode int identity(1,1) not null primary key,
-	AccountCode int not null,
-	ProductCode varchar(15) not null,
+	CommentCode int identity(1,1) primary key,
+	AccountCode int null,
+	ProductCode varchar(15) null,
 	CommentContent nvarchar(max) null,
 	CommentTime smalldatetime default getdate() null,
 	Rate tinyint default 0 null,
@@ -150,10 +150,10 @@ CREATE TABLE Comment (
 CREATE TABLE Contact (
 	ContactCode int identity(1,1) primary key,
 	FullName varchar(45) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS not null,
-	Phonenumber varchar(10) not null,
+	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Phonenumber varchar(10) null,
 	Message varchar(1000) null,
-	AccountCode int not null,
+	AccountCode int null,
 	foreign key (AccountCode) references Account(AccountCode)
 )
 

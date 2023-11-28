@@ -13,13 +13,13 @@ CREATE TABLE Account (
 	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Avatar nvarchar(500) null,
 	RequestCode varchar(10) null,
-	CreateAt datetime null
+	CreateAt datetime default getdate() null
 )
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
 	AccountAddressCode int identity(1,1) primary key,
-	AccountCode int,
+	AccountCode int not null,
 	--first name + last name
 	FullName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS not null,
 	PhoneNumber varchar(10) not null,
@@ -56,18 +56,18 @@ CREATE TABLE Promotion (
 CREATE TABLE Product(
 	ProductCode varchar(15) primary key,
 	ProductName nvarchar(50),
-	BrandCode int,
-	CategoryCode int,
+	BrandCode int not null,
+	CategoryCode int not null,
 	ImageProduct nvarchar(500),
 	Price decimal(18,2),
-	PromotionCode char(10),
+	PromotionCode char(10) not null,
 	-- Số lượng còn lại 
-	Quantity int,
+	Quantity int default 1000,
 	-- Mô tả 
-	Description nvarchar(max) not null,
+	Description nvarchar(max) null,
 	-- Lượt xem 
-	ViewCount int,
-	Rate int null,
+	ViewCount int  default 0,
+	Rate int default 0 null,
 	foreign key (CategoryCode) references Category(CategoryCode),
 	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
@@ -76,7 +76,7 @@ CREATE TABLE Product(
 CREATE TABLE ProductImg (
 	ProductImgCode int identity(1,1) primary key,
 	Img image null,
-	ProductCode varchar(15),
+	ProductCode varchar(15) not null,
 	foreign key (ProductCode) references Product(ProductCode)
 )
 
@@ -87,7 +87,7 @@ CREATE TABLE Delivery (
 	PriceTotal money null,
 	-- Phí giao hàng
 	DeliveryFee money null,
-	Status bit null
+	Status bit default 0 null
 );
 
 -- PHƯƠNG THỨC THANH TOÁN 
@@ -104,19 +104,19 @@ CREATE TABLE Payment (
 -- ĐẶT HÀNG 
 CREATE TABLE Orders(
 	OrderCode int identity(1,1) primary key,
-	PaymentCode int,
-	AccountCode int,
+	PaymentCode int not null,
+	AccountCode int not null,
 	--Mã giảm giá
-	PromotionCode char(10),
+	PromotionCode char(10) not null,
 	-- Ngày đặt hàng 
-	OrderDate date null,
+	OrderDate date default getdate() null,
 	-- Đã giao hay chưa 1-yes 0-no
-	Delivered bit null,
+	Delivered bit default 0 null,
 	DeliveryDate date null,
 	OrderTotal money null,
 	-- Ghi chu don hang
 	OrderNote nvarchar(100),
-	AccountAddressCode int,
+	AccountAddressCode int not null,
 	foreign key (PaymentCode) references Payment(PaymentCode),
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (AccountAddressCode) references AccountAddress(AccountAddressCode),
@@ -125,14 +125,13 @@ CREATE TABLE Orders(
 
 -- CHI TIẾT ĐẶT HÀNG
 CREATE TABLE OrderDetail (
-	OrderCode int identity(1,1) primary key,
+	OrderCode int identity(1,1),
 	ProductCode varchar(15),
-	-- Ngày giờ đặt hàng
-	OrderedTime datetime null,
 	Price money null,
 	Quantity int null,
 	Total money null,
-	foreign key (ProductCode) references Product(ProductCode)
+	foreign key (ProductCode) references Product(ProductCode),
+	primary key(ProductCode,OrderCode)
 )
 
 -- COMMENT
@@ -141,20 +140,20 @@ CREATE TABLE Comment (
 	AccountCode int not null,
 	ProductCode varchar(15) not null,
 	CommentContent nvarchar(max) null,
-	CommentTime smalldatetime null,
-	Rate tinyint null,
+	CommentTime smalldatetime default getdate() null,
+	Rate tinyint default 0 null,
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (ProductCode) references Product(ProductCode)
 )
 
 -- LIÊN HỆ
 CREATE TABLE Contact (
-	ContactCode int identity(1,1) not null primary key,
+	ContactCode int identity(1,1) primary key,
 	FullName varchar(45) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS not null,
 	Phonenumber varchar(10) not null,
 	Message varchar(1000) null,
-	AccountCode int,
+	AccountCode int not null,
 	foreign key (AccountCode) references Account(AccountCode)
 )
 

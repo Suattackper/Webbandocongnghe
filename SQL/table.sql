@@ -69,7 +69,8 @@ CREATE TABLE Product(
 	ViewCount int  default 0,
 	Rate int default 0 null,
 	foreign key (CategoryCode) references Category(CategoryCode),
-	foreign key (PromotionCode) references Promotion(PromotionCode)
+	foreign key (PromotionCode) references Promotion(PromotionCode),
+	foreign key (BrandCode) references Brand(BrandCode)
 )
 
 -- HÌNH ẢNH SẢN PHẨM
@@ -106,6 +107,7 @@ CREATE TABLE Orders(
 	OrderCode int identity(1,1) primary key,
 	PaymentCode int null,
 	AccountCode int null,
+	DeliveryCode varchar(10),
 	--Mã giảm giá
 	PromotionCode char(10) null,
 	-- Ngày đặt hàng 
@@ -120,7 +122,8 @@ CREATE TABLE Orders(
 	foreign key (PaymentCode) references Payment(PaymentCode),
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (AccountAddressCode) references AccountAddress(AccountAddressCode),
-	foreign key (PromotionCode) references Promotion(PromotionCode)
+	foreign key (PromotionCode) references Promotion(PromotionCode),
+	foreign key (DeliveryCode) references Delivery(DeliveryCode)
 )
 
 -- CHI TIẾT ĐẶT HÀNG

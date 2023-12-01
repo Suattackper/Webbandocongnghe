@@ -160,3 +160,7 @@ D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.dll
 D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.dll
 D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.xml
 D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.xml

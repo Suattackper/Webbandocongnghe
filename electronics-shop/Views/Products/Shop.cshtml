@@ -1,4 +1,6 @@
-﻿@model List<electronics_shop.Models.Product>
+﻿@model PagedList.IPagedList<electronics_shop.Models.Product>
+@using PagedList.Mvc
+@using PagedList
 @{
     ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -234,7 +236,7 @@
                                 </span>
                             </div>
                             <div class="h-[190px] overflow-hidden rounded-lg">
-                                <a href="#">
+                                <a href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
                                     <img class="card-object-fit h-full w-full" src="@product.ImageProduct" alt="@product.ProductName" />
                                 </a>
                             </div>
@@ -296,7 +298,7 @@
                                     }
                                     else
                                     {
-                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">saleout</span>
+                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
                                     }
                                 </div>
                             </div>
@@ -313,276 +315,50 @@
 
                             <div class="my-1">
                                 @*<span class="text-lg font-bold">@product.Price </span>*@
+                                @*định dạng tiền vn đxxx.xxx.xxx*@
                                 <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price)</span>
-                                
+
                                 <span class="text-sm text-primary-color line-through">$50.00</span>
                             </div>
                             <div class="mt-auto">
                                 <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                                   href="#">
+                                   href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
                                     <span class="font-bold uppercase text-white">View details</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 }
-                <div class="mix mix-list col-span-12">
-                    <div class="cardlist-container transition-all-300 translateY-2 relative overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute top-[10px] right-[10px]">
-                            <div class="favorite-product p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="quick-view p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute top-0 left-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="flex flex-col sm:flex-row">
-                            <div class="h-[240px] overflow-hidden rounded-lg sm:min-w-[240px]">
-                                <a href="#">
-                                    <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_1.jpg" alt="product" />
-                                </a>
-                            </div>
-                            <div class="w-full">
-                                <div class="my-1">
-                                    <a class="clamp break-all text-lg font-medium" href="#">
-                                        Apple Macbook Air 13
-                                    </a>
-                                </div>
-                                <div class="my-2">
-                                    <div class="fav-group flex">
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                    </div>
-                                </div>
-                                <div class="my-2">
-                                    <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
-                                </div>
-                                <div class="my-1">
-                                    <p class="clamp-2 text-sm text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Itaque culpa, odio, qui praesentium dignissimos eaque
-                                        dolorum porro alias neque, eius animi ipsa voluptates.
-                                        Optio repellat tempora voluptas, dolores ipsam ad!
-                                    </p>
-                                </div>
 
-                                <div class="my-1">
-                                    <span class="price-now text-lg font-bold">$37.00</span>
-                                    <span class="prev-price text-sm text-primary-color line-through">$50.00</span>
-                                </div>
-                                <div class="mt-2">
-                                    <a class="btn-effect transition-all-300 block rounded-lg bg-primary-color p-2 px-5 text-center lg:inline-flex"
-                                       href="#">
-                                        <span class="font-bold uppercase text-white">View details</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mix mix-list col-span-12">
-                    <div class="cardlist-container transition-all-300 translateY-2 relative overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute top-[10px] right-[10px]">
-                            <div class="favorite-product p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="quick-view p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row">
-                            <div class="h-[240px] overflow-hidden rounded-lg sm:min-w-[240px]">
-                                <a href="#">
-                                    <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_2.jpg" alt="product" />
-                                </a>
-                            </div>
-                            <div class="w-full">
-                                <div class="my-1">
-                                    <a class="clamp break-all text-lg font-medium" href="#">
-                                        Asus ZenBook 14
-                                    </a>
-                                </div>
-                                <div class="my-2">
-                                    <div class="fav-group flex">
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                    </div>
-                                </div>
-                                <div class="my-2">
-                                    <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
-                                </div>
-                                <div class="my-1">
-                                    <p class="clamp-2 text-sm text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Itaque culpa, odio, qui praesentium dignissimos eaque
-                                        dolorum porro alias neque, eius animi ipsa voluptates.
-                                        Optio repellat tempora voluptas, dolores ipsam ad!
-                                    </p>
-                                </div>
-
-                                <div class="my-1">
-                                    <span class="price-now text-lg font-bold">$50.00</span>
-                                </div>
-                                <div class="mt-2">
-                                    <a class="btn-effect transition-all-300 block rounded-lg bg-primary-color p-2 px-5 text-center lg:inline-flex"
-                                       href="#">
-                                        <span class="font-bold uppercase text-white">View details</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mix mix-list col-span-12">
-                    <div class="cardlist-container transition-all-300 translateY-2 relative overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute top-[10px] right-[10px]">
-                            <div class="favorite-product p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="quick-view p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row">
-                            <div class="h-[240px] overflow-hidden rounded-lg sm:min-w-[240px]">
-                                <a href="#">
-                                    <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_3.jpg" alt="product" />
-                                </a>
-                            </div>
-                            <div class="w-full">
-                                <div class="my-1">
-                                    <a class="clamp break-all text-lg font-medium" href="#">
-                                        Lenovo V15
-                                    </a>
-                                </div>
-                                <div class="my-2">
-                                    <div class="fav-group flex">
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                    </div>
-                                </div>
-                                <div class="my-2">
-                                    <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
-                                </div>
-                                <div class="my-1">
-                                    <p class="clamp-2 text-sm text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Itaque culpa, odio, qui praesentium dignissimos eaque
-                                        dolorum porro alias neque, eius animi ipsa voluptates.
-                                        Optio repellat tempora voluptas, dolores ipsam ad!
-                                    </p>
-                                </div>
-
-                                <div class="my-1">
-                                    <span class="price-now text-lg font-bold">$50.00</span>
-                                </div>
-                                <div class="mt-2">
-                                    <a class="btn-effect transition-all-300 block rounded-lg bg-primary-color p-2 px-5 text-center lg:inline-flex"
-                                       href="#">
-                                        <span class="font-bold uppercase text-white">View details</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mix mix-list col-span-12">
-                    <div class="cardlist-container transition-all-300 translateY-2 relative overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute top-[10px] right-[10px]">
-                            <div class="favorite-product p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="quick-view p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row">
-                            <div class="h-[240px] overflow-hidden rounded-lg sm:min-w-[240px]">
-                                <a href="#">
-                                    <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_4.jpg" alt="product" />
-                                </a>
-                            </div>
-                            <div class="w-full">
-                                <div class="my-1">
-                                    <a class="clamp break-all text-lg font-medium" href="#">
-                                        HP 255 G7
-                                    </a>
-                                </div>
-                                <div class="my-2">
-                                    <div class="fav-group flex">
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-star"></i>
-                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                    </div>
-                                </div>
-                                <div class="my-2">
-                                    <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
-                                </div>
-                                <div class="my-1">
-                                    <p class="clamp-2 text-sm text-gray-400">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Itaque culpa, odio, qui praesentium dignissimos eaque
-                                        dolorum porro alias neque, eius animi ipsa voluptates.
-                                        Optio repellat tempora voluptas, dolores ipsam ad!
-                                    </p>
-                                </div>
-
-                                <div class="my-1">
-                                    <span class="price-now text-lg font-bold">$50.00</span>
-                                </div>
-                                <div class="mt-2">
-                                    <a class="btn-effect transition-all-300 block rounded-lg bg-primary-color p-2 px-5 text-center lg:inline-flex"
-                                       href="#">
-                                        <span class="font-bold uppercase text-white">View details</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-span-12">
+            <div class="flex items-center justify-center">
+                @Html.PagedListPager(
+                    Model,
+                    page => Url.Action("Shop", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        //danh sách các lớp CSS được áp dụng cho thẻ <ul> của phân trang.
+                        UlElementClasses = new[] { "pagination", "flex", "items-center" },
+                        //danh sách các lớp CSS được áp dụng cho thẻ <li> của phân trang.
+                        LiElementClasses = new[] { "cursor-pointer", "py-2", "px-3" },
+                        //có hiển thị dấu ba chấm(...) khi không hiển thị tất cả số trang không.
+                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                        //hiển thị liên kết đến trang đầu và trang cuối không
+                        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                        //định dạng hiển thị liên kết đến trang đầu và trang cuối
+                        LinkToFirstPageFormat = "<<",
+                        LinkToLastPageFormat = ">>",
+                        MaximumPageNumbersToDisplay = 5, // Số lượng trang tối đa hiển thị
+                        // Định dạng cho dấu ba chấm khi nó được hiển thị.
+                        EllipsesFormat = "..."
+                    }
+                )
+            </div>
+        </div>
+        @*<div class="col-span-12">
             <div class="flex items-center justify-center">
                 <ul class="pagination flex items-center">
                     <li class="pointer-events-none py-2 px-3 text-gray-200">
@@ -599,9 +375,10 @@
                     <li class="cursor-pointer py-2 px-3 text-primary-color">
                         <i class="bi bi-arrow-right-short flex"></i>
                     </li>
+                    @Html.PagedListPager(Model, page => Url.Action("Shop", new { page }))
                 </ul>
             </div>
-        </div>
+        </div>*@
     </div>
 </div>
 

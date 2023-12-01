@@ -1,4 +1,4 @@
-﻿
+﻿@model electronics_shop.Models.ProductDetail
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -26,19 +26,20 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="~/Content/images/product/prod-1.jpg" alt="product" />
+                            <img src="@Model.Product.ImageProduct" alt="product" />
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-zoom-container">
-                            <img src="~/Content/images/product/prod-2.jpg" alt="product" />
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-zoom-container">
-                            <img src="~/Content/images/product/prod-3.jpg" alt="product" />
-                        </div>
-                    </div>
+                    @if (Model.productImgsList.Count > 0)
+                    {
+                        foreach (var item in Model.productImgsList)
+                        {
+                            <div class="swiper-slide">
+                                <div class="swiper-zoom-container">
+                                    <img src="@item.Img" alt="product" />
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
                 <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
                     &#10095;
@@ -50,14 +51,17 @@
             <div class="swiper swiper-thumbs">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide cursor-pointer rounded-lg">
-                        <img src="~/Content/images/product/prod-1.jpg" alt="product" />
+                        <img src="@Model.Product.ImageProduct" alt="product" />
                     </div>
-                    <div class="swiper-slide cursor-pointer rounded-lg">
-                        <img src="~/Content/images/product/prod-2.jpg" alt="product" />
-                    </div>
-                    <div class="swiper-slide cursor-pointer rounded-lg">
-                        <img src="~/Content/images/product/prod-3.jpg" alt="product" />
-                    </div>
+                    @if (Model.productImgsList.Count > 0)
+                    {
+                        foreach (var item in Model.productImgsList)
+                        {
+                            <div class="swiper-slide cursor-pointer rounded-lg">
+                                <img src="@item.Img" alt="product" />
+                            </div>
+                        }
+                    }
                 </div>
                 <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
                     &#10095;
@@ -70,7 +74,7 @@
         <div class="col-span-12 md:col-span-6">
             <div class="my-1">
                 <a class="clamp-2 transition-all-300 break-all text-2xl font-medium hover:text-primary-color" href="#">
-                    Ryzen 5 3600x
+                    @Model.Product.ProductName
                 </a>
             </div>
             <div class="product-val-stock my-2 flex justify-between">
@@ -82,13 +86,20 @@
                     <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                 </div>
                 <div class="ml-auto">
-                    <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
+                    @if (Model.Product.Quantity > 0)
+                    {
+                        <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
+                    }
+                    else
+                    {
+                        <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
+                    }
                 </div>
             </div>
             <div class="my-5 flex items-center gap-5">
                 <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
                     <span class="text-sm">$</span>
-                    <span class="text-2xl font-semibold leading-7">37.00</span>
+                    <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", Model.Product.Price)</span>
                 </div>
                 <div class="flex flex-col">
                     <span class="text-md font-semibold uppercase text-green-400">
@@ -100,10 +111,7 @@
 
             <div class="my-4">
                 <p class="clamp-5 break-all">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                    cupiditate repellat magni exercitationem non, quaerat consequatur.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-                    cupiditate.
+                    @Model.Product.Description
                 </p>
             </div>
 

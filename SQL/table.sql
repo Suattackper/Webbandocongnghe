@@ -41,7 +41,8 @@ CREATE TABLE Brand(
 -- DANH MỤC - LOẠI HÀNG HÓA 
 CREATE TABLE Category (
 	CategoryCode int identity(1,1) primary key,
-	CategoryName nvarchar(100)
+	CategoryName nvarchar(100),
+	Img nvarchar(500)
 )
 
 -- KHUYẾN MÃI

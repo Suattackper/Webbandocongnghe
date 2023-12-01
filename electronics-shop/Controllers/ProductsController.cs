@@ -1,4 +1,5 @@
 ﻿using electronics_shop.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace electronics_shop.Controllers
         {
             return View();
         }
-        public ActionResult Shop()
+        public ActionResult Shop(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "Shop";
             ViewBag.danhmuc = "Shop";
@@ -25,9 +26,9 @@ namespace electronics_shop.Controllers
             }
             //List<Product> data = db.Products.ToList();
             List<Product> data = (List<Product>)(from Product in db.Products select Product).ToList();
-            return View(data);
+            return View(data.ToPagedList(page,pagesize));
         }
-        public ActionResult Smarthome()
+        public ActionResult Smarthome(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "Smarthome";
             ViewBag.danhmuc = "Smarthome";
@@ -39,9 +40,9 @@ namespace electronics_shop.Controllers
                                                  join Category in db.Categories on Product.CategoryCode equals Category.CategoryCode
                                                  where Category.CategoryName == "smarthome"
                                                  select Product).ToList();
-            return View("Shop",data);
+            return View("Shop", data.ToPagedList(page, pagesize));
         }
-        public ActionResult Keyboard()
+        public ActionResult Keyboard(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "Keyboard";
             ViewBag.danhmuc = "Keyboard";
@@ -53,9 +54,9 @@ namespace electronics_shop.Controllers
                                                  join Category in db.Categories on Product.CategoryCode equals Category.CategoryCode
                                                  where Category.CategoryName == "keyboard"
                                                  select Product).ToList();
-            return View("Shop", data);
+            return View("Shop", data.ToPagedList(page, pagesize));
         }
-        public ActionResult ComputerAccessories()
+        public ActionResult ComputerAccessories(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "ComputerAccessories";
             ViewBag.danhmuc = "Computer Accessories";
@@ -67,11 +68,28 @@ namespace electronics_shop.Controllers
                                                  join Category in db.Categories on Product.CategoryCode equals Category.CategoryCode
                                                  where Category.CategoryName == "computer accessories"
                                                  select Product).ToList();
-            return View("Shop", data);
+            return View("Shop", data.ToPagedList(page, pagesize));
         }
-        public ActionResult Detail()
+        public ActionResult Detail(string id)
         {
-            return View();
+            if (db == null || db.Products == null)
+            {
+                return View("Error");
+            }
+
+            ProductDetail data = new ProductDetail();
+            data.Product = db.Products.FirstOrDefault(p => p.ProductCode == id);
+            data.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
+            return View(data);
+
+
+            //if (db.Products == null || db == null)
+            //{
+            //    return View("Error");
+            //}
+            ////List<Product> data = db.Products.ToList();
+            //Product data = (Product)(from Product in db.Products where Product.ProductCode == id select Product);
+            //return View(data);
         }
     }
 }

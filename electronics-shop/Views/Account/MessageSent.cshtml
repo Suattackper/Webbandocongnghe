@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container mx-auto my-5 px-2 sm:px-8">
+    <div class="flex flex-col items-center gap-2 text-center">
+        <div class="max-h-[300px] max-w-[300px]">
+            <img class="h-full w-full" src="~/Content/images/svg/message-sent.svg" alt="message sent" />
+        </div>
+        <h1 class="text-4xl uppercase text-primary-color">Message Sent</h1>
+        <p class="text-lg">Your message has been sent successfully.</p>
+        <p class="text-lg">You will receive our answer shortly.</p>
+        <a class="btn-effect rounded-lg bg-primary-color p-2 font-bold uppercase text-white" href="@Url.Action("Index", "Home")">
+            <span>Go Back Home</span>
+        </a>
+    </div>
+</div>
+

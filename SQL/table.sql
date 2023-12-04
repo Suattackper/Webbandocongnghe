@@ -1,16 +1,16 @@
-﻿create database ECOMMERCE
-go
-USE ECOMMERCE
-GO
+﻿--create database ECOMMERCE
+--go
+--USE ECOMMERCE
+--GO
 
 -- TÀI KHOẢN 
-CREATE TABLE Account (
+CREATE TABLE Accounts (
 	AccountCode int identity(1,1) primary key,
-	Password varchar(15) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Password varchar(20) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	ConfirmPassword varchar(20) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Email varchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	PhoneNumber varchar(10) null,
-	FirstName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	FullName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Avatar nvarchar(500) null,
 	RequestCode varchar(10) null,
 	CreateAt datetime default getdate() null
@@ -28,7 +28,7 @@ CREATE TABLE AccountAddress (
 	Country nvarchar(50) null,
 	City nvarchar(50) null,
 	Address nvarchar(50) null,
-	foreign key (AccountCode) references Account(AccountCode)
+	foreign key (AccountCode) references Accounts(AccountCode)
 );
 
 -- THƯƠNG HIỆU 
@@ -41,7 +41,8 @@ CREATE TABLE Brand(
 -- DANH MỤC - LOẠI HÀNG HÓA 
 CREATE TABLE Category (
 	CategoryCode int identity(1,1) primary key,
-	CategoryName nvarchar(100)
+	CategoryName nvarchar(100),
+	img varchar(500)
 )
 
 -- KHUYẾN MÃI
@@ -118,7 +119,7 @@ CREATE TABLE Orders(
 	OrderNote nvarchar(100),
 	AccountAddressCode int null,
 	foreign key (PaymentCode) references Payment(PaymentCode),
-	foreign key (AccountCode) references Account(AccountCode),
+	foreign key (AccountCode) references Accounts(AccountCode),
 	foreign key (AccountAddressCode) references AccountAddress(AccountAddressCode),
 	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
@@ -142,7 +143,7 @@ CREATE TABLE Comment (
 	CommentContent nvarchar(max) null,
 	CommentTime smalldatetime default getdate() null,
 	Rate tinyint default 0 null,
-	foreign key (AccountCode) references Account(AccountCode),
+	foreign key (AccountCode) references Accounts(AccountCode),
 	foreign key (ProductCode) references Product(ProductCode)
 )
 
@@ -154,7 +155,7 @@ CREATE TABLE Contact (
 	Phonenumber varchar(10) null,
 	Message varchar(1000) null,
 	AccountCode int null,
-	foreign key (AccountCode) references Account(AccountCode)
+	foreign key (AccountCode) references Accounts(AccountCode)
 )
 
 

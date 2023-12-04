@@ -5,13 +5,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="~/Content/~/Content/images/svg/logo.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/Content/images/svg/logo.svg" type="image/x-icon" />
     <link rel="stylesheet" href="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.css" />
     <link rel="stylesheet" href="~/Content/cdn.jsdelivr.net/npm/bootstrap-icons%401.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.css" />
     <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
     <title>Besnik. - Electronics store</title>
+
+
+    <style>
+        .field-validation-error {
+            display: block;
+        }
+    </style>
+
 </head>
 
 <body class="flex min-h-screen flex-col overflow-hidden bg-body font-poppins text-txt">
@@ -103,7 +111,7 @@
                             <div class="arrow relative">
                                 <ul class="overflow-hidden rounded-md bg-white p-[6px] shadow-custom-1">
                                     <li class="hover:font-semibold">
-                                        <a href="#" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                        <a href="@Url.Action("Login", "Account")" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                             <div class="pointer-events-none flex items-center gap-2 p-1">
                                                 <i class="bi bi-box-arrow-in-right flex text-xl text-primary-color" style="color: #011638;"></i>
                                                 <span>Login</span>
@@ -111,7 +119,7 @@
                                         </a>
                                     </li>
                                     <li class="hover:font-semibold">
-                                        <a href="#" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
+                                        <a href="@Url.Action("Register", "Account")" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
                                             <div class="pointer-events-none flex items-center gap-2 p-1">
                                                 <i class="bi bi-person flex text-xl text-primary-color" style="color: #011638;"></i>
                                                 <span>Sign up</span>
@@ -385,18 +393,7 @@
                                         <span class="group-1-hover-font">My Account</span>
                                     </a>
                                 </li>
-                                <li class="group-1">
-                                    <a href="login.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Login</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="sign-up.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Sign Up</span>
-                                    </a>
-                                </li>
+
                                 <li class="group-1">
                                     <a href="forgot-password.html" class="flex items-center gap-2 p-2">
                                         <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
@@ -452,14 +449,13 @@
                 <div class="grid grid-cols-12 gap-2">
                     <div class="col-span-12 sm:col-span-6 lg:col-span-4">
                         <div class="pb-6">
-                            <img src="~/Content/images/svg/logo.svg" class="h-[40px]" alt="logo" />
+                            <img src="~/Content/images/svg/logo.svg" class="h-[40px]" alt="Besnik." />
                         </div>
                         <div>
                             <div class="flex items-center gap-[10px] py-2">
                                 <i class="bi bi-envelope-fill flex text-xl text-primary-color"></i>
                                 <a class="break-all" href="#">besnik@example.com</a>
                             </div>
-                            <div class="flex items-center gap-[10px] py-2">
                                 <i class="bi bi-telephone-fill flex text-xl text-primary-color"></i>
                                 <a class="break-all" href="#">0987-083245</a>
                             </div>
@@ -573,6 +569,8 @@
     <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
     <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
     <script src="~/Content/js/main.js"></script>
+
+    @RenderSection("scriptsJS", required: false)
 </body>
 
 </html>

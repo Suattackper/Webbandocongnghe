@@ -40,5 +40,7 @@ namespace electronics_shop.Models
         public virtual DbSet<Promotion> Promotions { get; set; }
 
         public System.Data.Entity.DbSet<electronics_shop.Models.RegisterViewModels> RegisterViewModels { get; set; }
+
+        public System.Data.Entity.DbSet<electronics_shop.Models.LoginViewModels> LoginViewModels { get; set; }
     }
 }

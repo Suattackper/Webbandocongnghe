@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace electronics_shop.Models
 {
@@ -20,21 +21,26 @@ namespace electronics_shop.Models
 
 
         [Required(ErrorMessage = "This field is required")]
-        [Compare("Password", ErrorMessage = "Password do not match")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password do not match")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
 
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Please enter the correct email format")]
+        [Remote("EmailExists", "Account", ErrorMessage = "Email had already in use")]
         public string Email { get; set; }
 
+
         [Required(ErrorMessage = "This field is required")]
+        [StringLength(10)]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression("^(0)([0-9]{9})$",
                             ErrorMessage = "Phone number must start with 0 and have 10 digits")]
-        [StringLength(10)]
+        [Remote("PhoneNumberExists", "Account", ErrorMessage = "Phone number had already in use")]
         public string PhoneNumber { get; set; }
+
 
         [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.Text)]

@@ -230,11 +230,19 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="absolute top-0 left-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                                <span class="text-md text-center font-semibold uppercase text-white">
-                                    25% Off
-                                </span>
-                            </div>
+                            @foreach (var pro in ViewBag.Promotion)
+                            {
+                                if (pro.PromotionCode == product.PromotionCode)
+                                {
+                                    if (pro.EndDate < DateTime.Now) { break; }
+                                    <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
+                                        <span class="text-md text-center font-semibold uppercase text-white">
+                                            @pro.PromotionPercentage% Off
+                                        </span>
+                                    </div>
+                                    break;
+                                }
+                            }
                             <div class="h-[190px] overflow-hidden rounded-lg">
                                 <a href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
                                     <img class="card-object-fit h-full w-full" src="@product.ImageProduct" alt="@product.ProductName" />
@@ -303,7 +311,7 @@
                                 </div>
                             </div>
                             <div class="my-1">
-                                <a class="clamp break-all font-medium" href="#">
+                                <a class="clamp break-all font-medium" href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
                                     @product.ProductName
                                 </a>
                             </div>
@@ -316,9 +324,22 @@
                             <div class="my-1">
                                 @*<span class="text-lg font-bold">@product.Price </span>*@
                                 @*định dạng tiền vn đxxx.xxx.xxx*@
-                                <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price)</span>
-
-                                <span class="text-sm text-primary-color line-through">$50.00</span>
+                                @{ int d = 0;}
+                                @foreach (var pro in ViewBag.Promotion)
+                                {
+                                    if (pro.PromotionCode == product.PromotionCode)
+                                    {
+                                        if (pro.EndDate < DateTime.Now) { break; }
+                                        d++;
+                                        <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price - pro.PromotionPercentage * product.Price / 100)</span>
+                                        <span class="text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", product.Price)</span>
+                                        break;
+                                    }
+                                }
+                                @if (d == 0)
+                                {
+                                    <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price)</span>
+                                }
                             </div>
                             <div class="mt-auto">
                                 <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
@@ -336,7 +357,7 @@
             <div class="flex items-center justify-center">
                 @Html.PagedListPager(
                     Model,
-                    page => Url.Action("Shop", new { page }),
+                    page => Url.Action(ViewBag.view, new { page }),
                     new PagedListRenderOptions
                     {
                         //danh sách các lớp CSS được áp dụng cho thẻ <ul> của phân trang.
@@ -358,27 +379,30 @@
                 )
             </div>
         </div>
-        @*<div class="col-span-12">
-            <div class="flex items-center justify-center">
-                <ul class="pagination flex items-center">
-                    <li class="pointer-events-none py-2 px-3 text-gray-200">
-                        <i class="bi bi-arrow-left-short flex"></i>
-                    </li>
-                    <li class="active cursor-pointer py-2 px-3">1</li>
-                    <li class="cursor-pointer py-2 px-3">2</li>
-                    <li class="cursor-pointer py-2 px-3">3</li>
-                    <li class="hidden cursor-pointer py-2 px-3 tracking-wide sm:block">
-                        ...
-                    </li>
-                    <li class="hidden cursor-pointer py-2 px-3 sm:block">10</li>
-                    <li class="hidden cursor-pointer py-2 px-3 sm:block">11</li>
-                    <li class="cursor-pointer py-2 px-3 text-primary-color">
-                        <i class="bi bi-arrow-right-short flex"></i>
-                    </li>
-                    @Html.PagedListPager(Model, page => Url.Action("Shop", new { page }))
-                </ul>
-            </div>
-        </div>*@
+        <!--
+        <div class="col-span-12">
+        <div class="flex items-center justify-center">
+            <ul class="pagination flex items-center">
+                <li class="pointer-events-none py-2 px-3 text-gray-200">
+                    <i class="bi bi-arrow-left-short flex"></i>
+                </li>
+                <li class="active cursor-pointer py-2 px-3">1</li>
+                <li class="cursor-pointer py-2 px-3">2</li>
+                <li class="cursor-pointer py-2 px-3">3</li>
+                <li class="hidden cursor-pointer py-2 px-3 tracking-wide sm:block">
+                    ...
+                </li>
+                <li class="hidden cursor-pointer py-2 px-3 sm:block">10</li>
+                <li class="hidden cursor-pointer py-2 px-3 sm:block">11</li>
+                <li class="cursor-pointer py-2 px-3 text-primary-color">
+                    <i class="bi bi-arrow-right-short flex"></i>
+                </li>
+                @*@Html.PagedListPager(Model, page => Url.Action("Shop", new { page }))*@
+            </ul>
+        </div>
+        </div>
+        -->
+
     </div>
 </div>
 

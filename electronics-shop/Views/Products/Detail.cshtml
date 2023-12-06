@@ -1,4 +1,4 @@
-﻿@model electronics_shop.Models.ProductDetail
+﻿@*@model electronics_shop.Models.ProductDetail*@
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -26,12 +26,12 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="@Model.Product.ImageProduct" alt="product" />
+                            <img src="@ViewBag.Product.ImageProduct" alt="product" />
                         </div>
                     </div>
-                    @if (Model.productImgsList.Count > 0)
+                    @if (ViewBag.productImgsList.Count > 0)
                     {
-                        foreach (var item in Model.productImgsList)
+                        foreach (var item in ViewBag.productImgsList)
                         {
                             <div class="swiper-slide">
                                 <div class="swiper-zoom-container">
@@ -51,11 +51,11 @@
             <div class="swiper swiper-thumbs">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide cursor-pointer rounded-lg">
-                        <img src="@Model.Product.ImageProduct" alt="product" />
+                        <img src="@ViewBag.Product.ImageProduct" alt="product" />
                     </div>
-                    @if (Model.productImgsList.Count > 0)
+                    @if (ViewBag.productImgsList.Count > 0)
                     {
-                        foreach (var item in Model.productImgsList)
+                        foreach (var item in ViewBag.productImgsList)
                         {
                             <div class="swiper-slide cursor-pointer rounded-lg">
                                 <img src="@item.Img" alt="product" />
@@ -74,19 +74,62 @@
         <div class="col-span-12 md:col-span-6">
             <div class="my-1">
                 <a class="clamp-2 transition-all-300 break-all text-2xl font-medium hover:text-primary-color" href="#">
-                    @Model.Product.ProductName
+                    @ViewBag.Product.ProductName
                 </a>
             </div>
             <div class="product-val-stock my-2 flex justify-between">
                 <div class="flex">
-                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                    <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    @if (@ViewBag.Product.Rate == 0)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                    }
                 </div>
                 <div class="ml-auto">
-                    @if (Model.Product.Quantity > 0)
+                    @if (ViewBag.Product.Quantity > 0)
                     {
                         <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
                     }
@@ -97,21 +140,29 @@
                 </div>
             </div>
             <div class="my-5 flex items-center gap-5">
+                @if (ViewBag.Promotion != null)
+                {
+                    <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
+                        <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price - ViewBag.Product.Price * @ViewBag.Promotion.PromotionPercentage / 100)</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-md font-semibold uppercase text-green-400">
+                            @ViewBag.Promotion.PromotionPercentage% Off
+                        </span>
+                        <span class="prev-price text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
+                    </div>
+                }
+                else
+                {
                 <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
-                    <span class="text-sm">$</span>
-                    <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", Model.Product.Price)</span>
+                    <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
                 </div>
-                <div class="flex flex-col">
-                    <span class="text-md font-semibold uppercase text-green-400">
-                        25% Off
-                    </span>
-                    <span class="prev-price text-sm text-primary-color line-through">$50.00</span>
-                </div>
+                }
             </div>
 
             <div class="my-4">
-                <p class="clamp-5 break-all">
-                    @Model.Product.Description
+                <p class="clamp-5 break-all font-bold uppercase">
+                    <br /><br />Số lượng: @ViewBag.Product.Quantity<br />
                 </p>
             </div>
 
@@ -162,8 +213,7 @@
                 <div>
                     <b>Categories: </b>
                     <span>
-                        <a href="#" class="text-zinc-500">Hardware</a>,
-                        <a href="#" class="text-zinc-500">Processors</a>
+                        <a href="@Url.Action(ViewBag.Category.CategoryName,"Products")" class="text-zinc-500">@ViewBag.Category.CategoryName</a>
                     </span>
                 </div>
                 <div class="flex gap-2">
@@ -240,50 +290,7 @@
                 <div class="see-more-container gradient-bottom max-h-[220px] overflow-hidden">
                     <div class="see-more-content">
                         <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum dolor sit amet consectetur
-                            adipisicing elit. Unde sapiente quisquam placeat excepturi
-                            sunt mollitia vero cumque, aliquam libero veniam odit
-                            inventore totam quis! Hic quis perferendis quaerat enim magni.
-                        </p>
-                        <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum dolor sit amet consectetur
-                            adipisicing elit. Repellat culpa quidem reprehenderit dolor
-                            aperiam, eius consequatur est deserunt. Nisi nesciunt
-                            repellendus dolorem quam obcaecati atque animi quas debitis
-                            qui harum.
-                        </p>
-                        <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum, dolor sit amet consectetur
-                            adipisicing elit. Aut, veritatis. Ea voluptatibus eveniet,
-                            quam dicta quisquam repellat maxime libero. Enim omnis quis,
-                            cumque facilis doloremque doloribus tempore expedita quia
-                            accusantium.
-                        </p>
-                        <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum dolor sit amet consectetur
-                            adipisicing elit. Unde sapiente quisquam placeat excepturi
-                            sunt mollitia vero cumque, aliquam libero veniam odit
-                            inventore totam quis! Hic quis perferendis quaerat enim magni.
-                        </p>
-                        <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum dolor sit amet consectetur
-                            adipisicing elit. Repellat culpa quidem reprehenderit dolor
-                            aperiam, eius consequatur est deserunt. Nisi nesciunt
-                            repellendus dolorem quam obcaecati atque animi quas debitis
-                            qui harum.
-                        </p>
-                        <p>
-                            Lorem Unde sapiente quisquam placeat excepturi sunt mollitia
-                            vero cumque, aliquam libero ipsum, dolor sit amet consectetur
-                            adipisicing elit. Aut, veritatis. Ea voluptatibus eveniet,
-                            quam dicta quisquam repellat maxime libero. Enim omnis quis,
-                            cumque facilis doloremque doloribus tempore expedita quia
-                            accusantium.
+                            @ViewBag.Product.Description
                         </p>
                     </div>
                 </div>
@@ -295,130 +302,96 @@
         <div class="col-span-12">
             <div class="tabs-container">
                 <ul class="flex justify-between">
-                    <li class="btn-tabs tab-active-1 transition-all-300 active w-full cursor-pointer bg-gray-200 p-2 text-center text-gray-400">
-                        Comments
-                    </li>
-                    <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer bg-gray-200 p-2 text-center text-gray-400">
+                    <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer bg-gray-200 p-2 text-center text-gray-400 font-bold">
                         Reviews
                     </li>
                 </ul>
                 <div class="tabs-content mt-5">
-                    <div class="tab-content active invisible absolute w-full opacity-0">
-                        <div class="flex gap-5">
-                            <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
-                            </div>
-                            <form class="w-full">
-                                <div class="h-20">
-                                    <textarea class="input resize-none" placeholder="Add a comment..." required></textarea>
-                                </div>
-                                <button class="btn-effect mt-2 rounded-lg bg-primary-color p-2 font-bold text-white" type="submit">
-                                    <span>Comment</span>
-                                </button>
-                            </form>
-                        </div>
-                        <form class="my-5 flex flex-col xs:flex-row xs:items-center xs:justify-between">
-                            <span class="text-lg font-bold uppercase">Comments</span>
-                            <select class="nice-select select order-by">
-                                <option value="0">Most recent</option>
-                                <option value="1">Oldest</option>
-                            </select>
-                        </form>
-                        <div class="mt-5 flex gap-5">
-                            <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <a class="font-bold hover:text-primary-color" href="#">John Doe</a>
-                                    <span class="text-xs text-slate-400">2 feb. 11:28am</span>
-                                </div>
-                                <p class="my-2">
-                                    Hello, how are you? I am interested in the product. Is
-                                    there stock available?
-                                </p>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                        <i class="bi bi-reply-fill flex"></i>
-                                        <span>Reply</span>
-                                    </div>
-                                    <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                        <i class="bi bi-pencil-square flex"></i>
-                                        <span>Edit</span>
-                                    </div>
-                                </div>
-                                <div class="mt-5 flex gap-5">
-                                    <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                        <img class="h-full w-full object-cover" src="~/Content/images/svg/logo.svg" alt="profile_logo" />
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <a class="font-bold text-blue-400 hover:text-primary-color" href="#">Besbik.</a>
-                                            <span class="text-xs text-slate-400">Just now</span>
-                                        </div>
-                                        <small class="flex items-center gap-1 text-slate-400">
-                                            <i class="bi bi-reply-fill flex"></i>
-                                            Responding to
-                                            <a class="hover:text-primary-color" href="#">John Doe</a>
-                                        </small>
-                                        <p class="my-2">
-                                            Hi John Doe! If there is stock available, any other
-                                            questions please feel free to contact us, have a nice
-                                            day.
-                                        </p>
-                                        <div class="flex items-center gap-3">
-                                            <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                                <i class="bi bi-reply-fill flex"></i>
-                                                <span>Reply</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="tab-content invisible absolute w-full bg-white opacity-0">
                         <div class="my-5 flex flex-col items-center justify-center gap-5 sm:flex-row">
                             <div class="flex flex-col items-center gap-2">
-                                <span class="text-5xl">4,0</span>
+                                <span class="text-5xl">@ViewBag.Product.Rate.ToString("F1")</span>
                                 <div class="flex">
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    @if (@ViewBag.Product.Rate == 0)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                    }
                                 </div>
-                                <span class="flex items-center gap-1"><i class="bi bi-chat-quote flex"></i> 93 Reviews</span>
+                                <span class="flex items-center gap-1"><i class="bi bi-chat-quote flex"></i> @ViewBag.Comment.Count Reviews</span>
                             </div>
                             <div class="w-full max-w-[600px]">
                                 <div class="my-2 flex items-center gap-2">
                                     <span>5</span>
                                     <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                        <div class="absolute left-0 top-0 h-full w-[50%] rounded bg-primary-color"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[50%] rounded bg-primary-color" style="width: @ViewBag.Rate5%"></div>
                                     </div>
                                 </div>
                                 <div class="my-2 flex items-center gap-2">
                                     <span>4</span>
                                     <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                        <div class="absolute left-0 top-0 h-full w-[40%] rounded bg-primary-color"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[40%] rounded bg-primary-color" style="width: @ViewBag.Rate4%"></div>
                                     </div>
                                 </div>
                                 <div class="my-2 flex items-center gap-2">
                                     <span>3</span>
                                     <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                        <div class="absolute left-0 top-0 h-full w-[30%] rounded bg-primary-color"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[30%] rounded bg-primary-color" style="width: @ViewBag.Rate3%"></div>
                                     </div>
                                 </div>
                                 <div class="my-2 flex items-center gap-2">
                                     <span>2</span>
                                     <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                        <div class="absolute left-0 top-0 h-full w-[20%] rounded bg-primary-color"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[20%] rounded bg-primary-color" style="width: @ViewBag.Rate2%"></div>
                                     </div>
                                 </div>
                                 <div class="my-2 flex items-center gap-2">
                                     <span>1</span>
                                     <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                        <div class="absolute left-0 top-0 h-full w-[10%] rounded bg-primary-color"></div>
+                                        <div class="absolute left-0 top-0 h-full w-[10%] rounded bg-primary-color" style="width: @ViewBag.Rate1%"></div>
                                     </div>
                                 </div>
                             </div>
@@ -456,33 +429,44 @@
                                 <option value="6">1 &#x2605;</option>
                             </select>
                         </form>
-                        <div class="mt-5 flex gap-5">
-                            <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
-                            </div>
-                            <div>
-                                <div class="flex items-center gap-2">
-                                    <a class="font-bold hover:text-primary-color" href="#">John Doe</a>
-                                    <span class="text-xs text-slate-400">2 feb. 11:28am</span>
-                                </div>
-                                <div class="flex">
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-star"></i>
-                                    <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                </div>
-                                <p class="my-2">
-                                    Everything perfect, the product arrived impeccable and I
-                                    had no problem, very satisfied.
-                                </p>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                        <i class="bi bi-pencil-square flex"></i>
-                                        <span>Edit</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="mt-5">
+                            @if (ViewBag.Comment.Count > 0)
+                            {
+                                foreach (var item in ViewBag.Comment)
+                                {
+                                    foreach (var ac in ViewBag.Account)
+                                    {
+                                        if (item.AccountCode == ac.AccountCode)
+                                        {
+                                            <div class="my-4">
+                                                <div class="flex gap-5">
+                                                    <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
+                                                        <img class="h-full w-full object-cover" src="@ac.Avatar" alt="Avatar" />
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex items-center gap-2">
+                                                            <a class="font-bold hover:text-primary-color" href="#">@ac.FirstName @ac.LastName</a>
+                                                            <span class="text-xs text-slate-400">@item.CommentTime</span>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <!-- Các ngôi sao và điều kiện đánh giá tương tự như trước -->
+                                                        </div>
+                                                        <p class="my-2">
+                                                            @item.CommentContent
+                                                        </p>
+                                                        <div class="flex items-center gap-3">
+                                                            <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
+                                                                <i class="bi bi-pencil-square flex"></i>
+                                                                <span>Edit</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -491,6 +475,7 @@
     </div>
 </div>
 
+@if(ViewBag.Relate.Count > 1){
 <div class="related-products container mx-auto my-5 px-2 sm:px-8">
     <div class="liner-container mt-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
         <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
@@ -500,528 +485,148 @@
     <div class="swiper-container">
         <div class="swiper swiper-cards group relative flex items-center py-5">
             <div class="swiper-wrapper">
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
+                @{ int i = 1;}
+                @foreach (var item in ViewBag.Relate)
+                {
+                    if(item.ProductCode == ViewBag.Product.ProductCode) { continue; }
+                    i++;
+                    <div class="swiper-slide h-auto">
+                        <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
+                            <div class="absolute right-[10px] top-[10px]">
+                                <div class="p-[2px]">
+                                    <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                       href="javascript:void(0)">
+                                        <i class="bi bi-heart pointer-events-none flex text-white"></i>
+                                    </a>
+                                </div>
+                                <div class="p-[2px]">
+                                    <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                       href="javascript:void(0)" data-target=".quick-view-modal">
+                                        <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @foreach (var pro in ViewBag.RelatePromotion)
+                            {
+                                if (pro.PromotionCode == item.PromotionCode)
+                                {
+                                    if (pro.EndDate < DateTime.Now) { break; }
+                                    <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
+                                        <span class="text-md text-center font-semibold uppercase text-white">
+                                            @pro.PromotionPercentage% Off
+                                        </span>
+                                    </div>
+                                    break;
+                                }
+                            }
+                            <div class="h-[190px] overflow-hidden rounded-lg">
+                                <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
+                                    <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
                                 </a>
                             </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
+                            <div class="my-2 flex justify-between">
+                                <div class="flex">
+                                    @if (item.Rate == 0)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (item.Rate > 0 && item.Rate <= 1)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (item.Rate > 1 && item.Rate <= 2)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (item.Rate > 2 && item.Rate <= 3)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (item.Rate > 3 && item.Rate <= 4)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                    }
+                                </div>
+                                <div>
+                                    @if (item.Quantity > 0)
+                                    {
+                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <a class="clamp break-all font-medium" href="#">
+                                    @item.ProductName
                                 </a>
                             </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_1.jpg" alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                            <div class="my-1">
+                                <p class="clamp-2 text-sm text-gray-400">
+                                    @item.Description
+                                </p>
                             </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Apple Macbook Aire 13
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
 
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
+                            <div class="my-1">
+                                @*<span class="text-lg font-bold">@product.Price </span>*@
+                                @*định dạng tiền vn đxxx.xxx.xxx*@
+                                @{ int d = 0;}
+                                @foreach (var pro in ViewBag.RelatePromotion)
+                                {
+                                    if (pro.PromotionCode == item.PromotionCode)
+                                    {
+                                        if (pro.EndDate < DateTime.Now) { break; }
+                                        d++;
+                                        <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price - pro.PromotionPercentage * item.Price / 100)</span>
+                                        <span class="text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", item.Price)</span>
+                                        break;
+                                    }
+                                }
+                                @if (d == 0)
+                                {
+                                    <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price)</span>
+                                }
+                            </div>
+                            <div class="mt-auto">
+                                <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                                   href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
+                                    <span class="font-bold uppercase text-white">View details</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/categories/gaming/consoles.jpg"
-                                     alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                PlayStation 5
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/cards/mousepad.jpg" alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Mousepad Hyperx Fury S Pro Speed
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/categories/pc_components/processors.jpg"
-                                     alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Ryzen 5 3600x
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/categories/peripherals/mouse.jpg"
-                                     alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Mouse Logitech g403
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/cards/phones/phone_1.jpg" alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Moto e7i Power
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/cards/notebooks/note_6.jpg" alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Dell Inspiron
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide h-auto">
-                    <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                        <div class="absolute right-[10px] top-[10px]">
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
-                            </div>
-                            <div class="p-[2px]">
-                                <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                   href="javascript:void(0)" data-target=".quick-view-modal">
-                                    <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                            <span class="text-md text-center font-semibold uppercase text-white">
-                                25% Off
-                            </span>
-                        </div>
-                        <div class="h-[190px] overflow-hidden rounded-lg">
-                            <a href="#">
-                                <img class="card-object-fit h-full w-full" src="~/Content/images/cards/phones/phone_5.jpg" alt="product" />
-                            </a>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <div class="flex">
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            </div>
-                            <div>
-                                <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                            </div>
-                        </div>
-                        <div class="my-1">
-                            <a class="clamp break-all font-medium" href="#">
-                                Samsung Galaxy Z Fold4
-                            </a>
-                        </div>
-                        <div class="my-1">
-                            <p class="clamp-2 text-sm text-gray-400">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Itaque culpa, odio, qui praesentium dignissimos eaque
-                                dolorum porro alias neque, eius animi ipsa voluptates. Optio
-                                repellat tempora voluptas, dolores ipsam ad!
-                            </p>
-                        </div>
-
-
-                        <div class="my-1">
-                            <span class="text-lg font-bold">$37.00</span>
-                            <span class="text-sm text-primary-color line-through">$50.00</span>
-                        </div>
-                        <div class="mt-auto">
-                            <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                               href="product-details.html">
-                                <span class="font-bold uppercase text-white">View details</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    if (i == 8) { break; }
+                }
             </div>
             <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
                 &#10095;
@@ -1033,6 +638,7 @@
         </div>
     </div>
 </div>
+}
 <div class="calculate-shipping-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
     <div class="my-10 flex w-full justify-center">
         <div class="modal-content relative mx-3 w-[900px] min-w-[250px] scale-0 rounded-lg bg-body px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">

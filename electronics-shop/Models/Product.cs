@@ -32,7 +32,7 @@ namespace electronics_shop.Models
         public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
         public Nullable<int> ViewCount { get; set; }
-        public Nullable<int> Rate { get; set; }
+        public Nullable<double> Rate { get; set; }
     
         public virtual Brand Brand { get; set; }
         public virtual Category Category { get; set; }
@@ -43,6 +43,5 @@ namespace electronics_shop.Models
         public virtual Promotion Promotion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImg> ProductImgs { get; set; }
-
     }
 }

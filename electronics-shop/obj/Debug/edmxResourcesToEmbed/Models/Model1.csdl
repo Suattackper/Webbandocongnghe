@@ -48,6 +48,7 @@
     </Key>
     <Property Name="CategoryCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Img" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__45F365D3" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="Comment">
@@ -59,7 +60,7 @@
     <Property Name="ProductCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="CommentContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CommentTime" Type="DateTime" Precision="0" />
-    <Property Name="Rate" Type="Byte" />
+    <Property Name="Rate" Type="Double" />
     <NavigationProperty Name="Account" Relationship="Self.FK__Comment__Account__5DCAEF64" FromRole="Comment" ToRole="Account" />
     <NavigationProperty Name="Product" Relationship="Self.FK__Comment__Product__5EBF139D" FromRole="Comment" ToRole="Product" />
   </EntityType>
@@ -134,7 +135,7 @@
       <PropertyRef Name="ProductCode" />
     </Key>
     <Property Name="ProductCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="BrandCode" Type="Int32" />
     <Property Name="CategoryCode" Type="Int32" />
     <Property Name="ImageProduct" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -143,7 +144,7 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ViewCount" Type="Int32" />
-    <Property Name="Rate" Type="Int32" />
+    <Property Name="Rate" Type="Double" />
     <NavigationProperty Name="Brand" Relationship="Self.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__45F365D3" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__5EBF139D" FromRole="Product" ToRole="Comment" />
@@ -338,7 +339,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ECOMMERCEEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ECOMMERCEEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="AccountAddresses" EntityType="Self.AccountAddress" />
     <EntitySet Name="Brands" EntityType="Self.Brand" />

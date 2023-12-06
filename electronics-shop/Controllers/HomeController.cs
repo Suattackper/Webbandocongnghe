@@ -10,10 +10,15 @@ namespace electronics_shop.Controllers
 {
     public class HomeController : Controller
     {
-        ECOMMERCEEntities1 db = new ECOMMERCEEntities1();
+        ECOMMERCEEntities db = new ECOMMERCEEntities();
         public ActionResult Index(/*string id*/)
         {
             //ViewBag.Id = id;
+            ViewBag.Offers = db.Products.Where(p => p.PromotionCode != null && p.Quantity > 0 && db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now)).Take(8).ToList();
+            ViewBag.OffersPromotion = db.Promotions.ToList();
+            ViewBag.Smarthome = db.Products.Where(p => p.Quantity > 0 && db.Categories.Any(h => h.CategoryCode == p.CategoryCode && h.CategoryName == "Smarthome")).Take(6).ToList();
+            ViewBag.Accessory = db.Products.Where(p => p.Quantity > 0 && db.Categories.Any(h => h.CategoryCode == p.CategoryCode && h.CategoryName == "Accessory")).Take(6).ToList();
+            ViewBag.GamingGear = db.Products.Where(p => p.Quantity > 0 && db.Categories.Any(h => h.CategoryCode == p.CategoryCode && h.CategoryName == "GamingGear")).Take(6).ToList();
             return View();
         }
 
@@ -51,7 +56,8 @@ namespace electronics_shop.Controllers
             Contact p = new Contact();
             p.FullName = name;
             p.Email = email;
-            p.Message = message ;
+            p.Message = message;
+            //sử dụng cookie khi đăng nhập
             p.AccountCode = 1;
             db.Contacts.Add(p);
             db.SaveChanges();

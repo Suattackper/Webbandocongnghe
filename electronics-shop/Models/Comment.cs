@@ -19,7 +19,7 @@ namespace electronics_shop.Models
         public string ProductCode { get; set; }
         public string CommentContent { get; set; }
         public Nullable<System.DateTime> CommentTime { get; set; }
-        public Nullable<byte> Rate { get; set; }
+        public Nullable<double> Rate { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Product Product { get; set; }

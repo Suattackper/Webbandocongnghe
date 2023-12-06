@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ECOMMERCEModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities1">
+  <EntityContainerMapping StorageEntityContainer="ECOMMERCEModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="ECOMMERCEModel.Account">
         <MappingFragment StoreEntitySet="Account">
@@ -44,6 +44,7 @@
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Img" ColumnName="Img" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

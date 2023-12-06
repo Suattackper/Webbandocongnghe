@@ -41,6 +41,7 @@
     </Key>
     <Property Name="CategoryCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CategoryName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Img" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -51,7 +52,7 @@
     <Property Name="ProductCode" Type="varchar" MaxLength="15" />
     <Property Name="CommentContent" Type="nvarchar(max)" />
     <Property Name="CommentTime" Type="smalldatetime" />
-    <Property Name="Rate" Type="tinyint" />
+    <Property Name="Rate" Type="float" />
   </EntityType>
   <EntityType Name="Contact">
     <Key>
@@ -115,7 +116,7 @@
       <PropertyRef Name="ProductCode" />
     </Key>
     <Property Name="ProductCode" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="500" />
     <Property Name="BrandCode" Type="int" />
     <Property Name="CategoryCode" Type="int" />
     <Property Name="ImageProduct" Type="nvarchar" MaxLength="500" />
@@ -124,7 +125,7 @@
     <Property Name="Quantity" Type="int" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="ViewCount" Type="int" />
-    <Property Name="Rate" Type="int" />
+    <Property Name="Rate" Type="float" />
   </EntityType>
   <EntityType Name="ProductImg">
     <Key>

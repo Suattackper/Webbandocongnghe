@@ -85,6 +85,7 @@ namespace electronics_shop.Controllers
             {
                 return View("Error");
             }
+            //List<Product> sanpham = db.Products.ToList();
             //ProductDetail data = new ProductDetail();
             //data.Product = db.Products.FirstOrDefault(p => p.ProductCode == id);
             //data.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
@@ -129,7 +130,7 @@ namespace electronics_shop.Controllers
                 ViewBag.Rate5 = rate5;
             }
             //return View(data);
-            return View();
+            return View(product);
         }
     }
 }

@@ -132,72 +132,73 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Account.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountAddress.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\Brand.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contact.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Products1Controller.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Models\Delivery.cs">
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECOMMERCEE.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECOMMERCEE.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECOMMERCEE.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECOMMERCEE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ECOMMERCEE.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Account.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccountAddress.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Brand.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Category.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Contact.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Delivery.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\Order.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Payment.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductDetail.cs" />
     <Compile Include="Models\ProductImg.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Promotion.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +391,7 @@
     <Content Include="Content\images\svg\purchase-done.svg" />
     <Content Include="Content\images\svg\visa-logo.svg" />
     <Content Include="Content\index.html" />
+    <Content Include="Content\js\jsShoppingCart.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\libraries\iziToast\iziToast.min.css" />
     <Content Include="Content\libraries\iziToast\iziToast.min.js" />
@@ -406,31 +408,31 @@
     <Content Include="Content\unpkg.com\popperjs\core.js" />
     <Content Include="Content\unpkg.com\swiper%4011.0.4\swiper-bundle.min.css" />
     <Content Include="Content\unpkg.com\swiper%4011.0.4\swiper-bundle.min.js" />
+    <Content Include="Models\ECOMMERCEE.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECOMMERCEE.edmx</DependentUpon>
+      <LastGenOutput>ECOMMERCEE.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ECOMMERCEE.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ECOMMERCEE.edmx</DependentUpon>
+      <LastGenOutput>ECOMMERCEE.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\cdn.jsdelivr.net\npm\bootstrap-icons%401.7.2\font\fonts\bootstrap-iconsf114.woff" />
     <Content Include="Content\cdn.jsdelivr.net\npm\bootstrap-icons%401.7.2\font\fonts\bootstrap-iconsf114.woff2" />
     <Content Include="Content\images\product\Category-03\Tai nghe Gaming Inzone-01.avif" />
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\ECOMMERCEE.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>ECOMMERCEE.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <Content Include="Models\ECOMMERCEE.edmx.diagram">
+      <DependentUpon>ECOMMERCEE.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

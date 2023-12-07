@@ -18,6 +18,11 @@ namespace electronics_shop
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+              name: "Cart",
+              url: "{controller}/{action}/{id}",
+              defaults: new { controller = "ShoppingCart", action = "ShowCount" }
+          );
         }
     }
 }

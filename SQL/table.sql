@@ -1,20 +1,20 @@
-﻿create database ECOMMERCE
-go
+﻿--create database ECOMMERCE
+--go
 USE ECOMMERCE
 GO
 
 -- TÀI KHOẢN 
 CREATE TABLE Account (
 	AccountCode int identity(1,1) primary key,
-	Password varchar(15) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Password varchar(255) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	PhoneNumber varchar(10) null,
-	FirstName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	FullName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Avatar nvarchar(500) null,
 	RequestCode varchar(10) null,
 	CreateAt datetime default getdate() null
 )
+
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
@@ -188,3 +188,6 @@ CREATE TABLE Contact (
 ---- INDEX	
 --CREATE NONCLUSTERED INDEX idx_BrandCode ON Product (BrandCode ASC)
 --CREATE NONCLUSTERED INDEX idx_CategoryCode ON Product (CategoryCode ASC)
+
+
+select * from Account

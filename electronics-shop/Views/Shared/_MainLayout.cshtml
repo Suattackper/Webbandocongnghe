@@ -199,20 +199,19 @@
                         </div>
                     </div>
                     <div class="group relative hidden lg:flex">
-                        <div class="flex cursor-pointer select-none items-center gap-1 underlined-animated group relative">
+                        <div class="flex cursor-pointer select-none items-center gap-1 relative">
                             @if (Session["info"] != null)
                             {
                                 <div class="group relative hidden lg:flex">
-                                    <div class="flex cursor-pointer select-none items-center gap-1">
-                                        <a class="font-semibold text-white" style="color: #011638;">Sign Up</a>
-                                        <span>@account.FullName<i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-sm text-white group-hover:rotate-180"></i></span>
+                                    <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.7rem;">        
+                                        <span>@account.FullName<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i></span>
                                     </div>
                                     <div class="transition-all-300 invisible absolute top-full z-30 w-[120%] pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
                                         <div class="arrow relative">
                                             <ul class="overflow-hidden rounded-md bg-white p-[6px] shadow-custom-1">
                                                 <li class="hover:font-semibold">
                                                     <a href="@Url.Action("EditProfile", "Account")" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
-                                                        <div class="pointer-events-none flex items-center gap-2 p-1">
+                                                        <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
                                                             <span>My Account</span>
                                                         </div>
@@ -220,16 +219,15 @@
                                                 </li>
                                                 <li class="hover:font-semibold">
                                                     <a href="@Url.Action("ChangePassword", "Account")" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
-                                                        <div class="pointer-events-none flex items-center gap-2 p-1">
-                                                            <i class="bi bi-key-fill flex text-xl text-primary-color"></i>
+                                                        <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                            <i class="bi bi-key flex text-xl text-primary-color"></i>
                                                             <span>Change password</span>
                                                         </div>
                                                     </a>
                                                 </li>
-                                                <li class="hover:font-semibold">
-                                                    <div class="pointer-events-none flex items-center gap-2 p-1">
-                                                        <i class="bi bi-arrow-right-circle-fill flex text-xl text-primary-color">@Html.ActionLink("Log Out", "Logout", "Account")</i>
-                                                    </div>
+                                                <li class="hover:font-semibold flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                    <i class="bi bi-arrow-right-circle-fill flex text-xl text-primary-color"></i>
+                                                        @Html.ActionLink("Log Out", "Logout", "Account")
                                                 </li>
                                             </ul>
                                         </div>

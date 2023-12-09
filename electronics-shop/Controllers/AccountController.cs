@@ -57,8 +57,8 @@ namespace electronics_shop.Controllers
 
             } catch (Exception ex)
             {
-                TempData["msgFailed"] = "Failed create account! " + ex.Message;
-                return View();
+                TempData["msgSuccess"] = "Create account failed!" + ex.Message;
+                return RedirectToAction("Login");
             }
         }
 

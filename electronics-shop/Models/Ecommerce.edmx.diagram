@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fec66c7fb0f8481a9612f0e4bc3a85da" Name="Diagram1">
+      <Diagram DiagramId="7bf14b0bdefe4715ac622c3606539242" Name="Diagram1">
         <EntityTypeShape EntityType="ECOMMERCEModel.Account" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ECOMMERCEModel.AccountAddress" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ECOMMERCEModel.Brand" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
@@ -18,18 +18,18 @@
         <EntityTypeShape EntityType="ECOMMERCEModel.Product" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ECOMMERCEModel.ProductImg" Width="1.5" PointX="8.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="ECOMMERCEModel.Promotion" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__AccountAd__Accou__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Comment__Account__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Contact__Account__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__AccountC__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__AccountA__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Product__Categor__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Comment__Product__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__OrderDeta__Produ__59063A47" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__PaymentC__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__Promotio__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__Product__Promoti__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="ECOMMERCEModel.FK__ProductIm__Produ__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__AccountAd__Accou__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Comment__Account__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Contact__Account__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__AccountC__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__AccountA__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Product__Categor__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Comment__Product__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__OrderDeta__Produ__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__PaymentC__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Orders__Promotio__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__Product__Promoti__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCEModel.FK__ProductIm__Produ__5BE2A6F2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

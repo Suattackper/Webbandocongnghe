@@ -2,9 +2,11 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace electronics_shop.Controllers
 {
@@ -22,6 +24,8 @@ namespace electronics_shop.Controllers
             ViewBag.view = "Shop";
             ViewBag.danhmuc = "Shop";
             ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db == null)
             {
                 return View("Error");
@@ -36,7 +40,9 @@ namespace electronics_shop.Controllers
             ViewBag.view = "Smarthome";
             ViewBag.danhmuc = "Smarthome";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -52,7 +58,9 @@ namespace electronics_shop.Controllers
             ViewBag.view = "Accessory";
             ViewBag.danhmuc = "Phụ kiện LapTop - PC";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -66,9 +74,11 @@ namespace electronics_shop.Controllers
         public ActionResult GamingGear(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "GamingGear";
-            ViewBag.danhmuc = "GamingGear";
+            ViewBag.danhmuc = "Gaming Gear";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -130,6 +140,79 @@ namespace electronics_shop.Controllers
             }
             //return View(data);
             return View();
+        }
+        //tìm kiếm sp
+        public ActionResult Search(string s, int page = 1,int pagesize = 9)
+        {
+            ViewBag.Search = s;
+            ViewBag.view = "Search";
+            ViewBag.danhmuc = "Shop";
+            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
+            {
+                return View("Error");
+            }
+            List<Product> data;
+            if (s == "" || s == null)
+            {
+                data = db.Products.ToList();
+            }
+            else
+            {
+                data = db.Products.Where(p => p.ProductName.Contains(s)).ToList();
+            }
+            return View("Shop", data.ToPagedList(page, pagesize));
+        }
+        //lọc sp
+        public ActionResult Fill(string with, string avai, string brand, string min, string max, string search, string view, string danhmuc , int page = 1, int pagesize = 9)
+        {
+            ViewBag.Search = search;
+            ViewBag.view = view;
+            ViewBag.Fill = "Fill";
+            ViewBag.danhmuc = danhmuc;
+            ViewBag.With = with;
+            ViewBag.Avai = avai;
+            ViewBag.brandd = brand;
+            ViewBag.Min = min;
+            ViewBag.Max = max;
+            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
+            {
+                return View("Error");
+            }
+            List<Product> data = db.Products.ToList();
+            if(with == "with")
+            {
+                data = data.Where(p => db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now)).ToList();
+            }
+            if (avai == "avai")
+            {
+                data = data.Where(p => p.Quantity > 0).ToList();
+            }
+            if (brand != "ALL")
+            {
+                data = data.Where(p => db.Brands.Any(h => h.BrandCode == p.BrandCode && h.BrandName == brand)).ToList();
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                data = data.Where(p => p.ProductName.Contains(search)).ToList();
+            }
+            if (view != "Shop")
+            {
+                data = data.Where(p => db.Categories.Any(h => h.CategoryCode == p.CategoryCode && h.CategoryName == view)).ToList();
+            }
+            if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
+            {
+                decimal Min = decimal.Parse(min);
+                decimal Max = decimal.Parse(max);
+                data = data.Where(p => p.Price >= Min && p.Price <= Max).ToList();
+            }
+            data = data.ToList();
+            return View("Shop", data.ToPagedList(page, pagesize));
         }
     }
 }

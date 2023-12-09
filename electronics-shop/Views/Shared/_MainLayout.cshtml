@@ -57,9 +57,9 @@
                     </a>
                 </div>
                 <div class="header-search transition-all-300 order-3 col-span-4 mt-[10px] hidden self-center lg:order-2 lg:col-span-6 lg:mt-0 lg:block">
-                    <form class="search" action="#">
+                    <form class="search" action="@Url.Action("Search","Products")">
                         <div class="flex h-[40px] overflow-hidden rounded-[50px] bg-primary-rgba">
-                            <input class="search w-full border-none bg-transparent py-[5px] pl-5 text-white placeholder-icon focus:border-none focus:ring-0 focus:ring-transparent"
+                            <input class="search w-full border-none bg-transparent py-[5px] pl-5 text-white placeholder-icon focus:border-none focus:ring-0 focus:ring-transparent" name="s"
                                    type="search" placeholder="Search..." />
                             <button class="btn-search px-3 text-white" type="submit">
                                 <i class="bi bi-search flex text-xl"></i>
@@ -129,7 +129,7 @@
             <nav class="container mx-auto px-2 sm:px-8">
                 <ul class="menu flex flex-wrap items-center justify-between py-[10px] text-lg">
                     <li class="underlined-animated group relative">
-                        <a href="#" class="btn-open flex items-center gap-1 font-semibold">
+                        <a href="@Url.Action("Shop","Products")" class="btn-open flex items-center gap-1 font-semibold">
                             <span>Products</span>
                             <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
                         </a>
@@ -137,138 +137,31 @@
                             <ul class="relative w-[250px] bg-white text-base shadow-custom-1">
 
                                 <li class="group-1">
-                                    <a href="#" class="flex items-center gap-2 p-2">
+                                    <a href="@Url.Action("Accessory","Products")" class="flex items-center gap-2 p-2">
                                         <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Ergonic Chair</span>
+                                        <span class="group-1-hover-font">Phụ kiện LapTop - PC</span>
                                         <i class="bi bi-caret-right-fill group-1-hover-visible invisible ml-auto flex text-xs text-primary-color"></i>
                                     </a>
                                     <div class="submenu group-1-hover-visible transition-all-300 invisible absolute top-0 left-full min-h-full min-w-[680px] opacity-0">
                                         <div class="bg-white shadow-custom-2">
                                             <div class="border-b-2 border-primary-color py-[10px]">
-                                                <span class="px-5 text-3xl font-bold uppercase text-primary-color">Ergonic Chair</span>
+                                                <span class="px-5 text-3xl font-bold uppercase text-primary-color">Phụ kiện LapTop - PC</span>
                                             </div>
                                             <div class="submenu-categories flex flex-wrap">
                                                 <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Bàn phím cơ"})">
                                                         <div class="categorie-img h-[150px] w-[150px]">
                                                             <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/motherboards.jpg" alt="motherboard" />
+                                                                 src="~/Content/images/categories/keyboard-custom.jpg" alt="motherboard" />
                                                         </div>
                                                         <span class="group-2-hover-font block text-center">Keyboard</span>
                                                     </a>
                                                 </div>
                                                 <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Webcam"})">
                                                         <div class="categorie-img h-[150px] w-[150px]">
                                                             <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/processors.jpg" alt="processors" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Gaming Gear</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/pc_components/rams.jpg"
-                                                                 alt="rams" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Smarthome</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/video_cards.jpg" alt="video cards" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Computer Accessories</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/power_supplys.jpg" alt="video cards" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block object-contain text-center">Power Supplys</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/hard_drives.jpg" alt="video cards" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Hard Drives</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/ssd_disk.jpg" alt="video cards" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">SSD Disk</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/pc_components/computer_case.jpg" alt="video cards" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Case</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="group-1">
-                                    <a href="#" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Keyboard</span>
-                                        <i class="bi bi-caret-right-fill group-1-hover-visible invisible ml-auto flex text-xs text-primary-color"></i>
-                                    </a>
-                                    <div class="submenu group-1-hover-visible transition-all-300 invisible absolute top-0 left-full min-h-full min-w-[680px] opacity-0">
-                                        <div class="bg-white shadow-custom-2">
-                                            <div class="border-b-2 border-primary-color py-[10px]">
-                                                <span class="px-5 text-3xl font-bold uppercase text-primary-color">Keyboard</span>
-                                            </div>
-                                            <div class="submenu-categories flex flex-wrap">
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img"
-                                                                 src="~/Content/images/categories/peripherals/keywords.jpg" alt="motherboard" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Keywords</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/peripherals/mouse.jpg"
-                                                                 alt="processors" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Mouses</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/peripherals/mic.jpg"
-                                                                 alt="rams" />
-                                                        </div>
-                                                        <span class="group-2-hover-font block text-center">Mics</span>
-                                                    </a>
-                                                </div>
-                                                <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
-                                                        <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/peripherals/webcam.jpg"
-                                                                 alt="rams" />
+                                                                 src="~/Content/images/product/Category-02/Webcam Logitech Brio Micro 500.jpg" alt="processors" />
                                                         </div>
                                                         <span class="group-2-hover-font block text-center">Webcam</span>
                                                     </a>
@@ -279,7 +172,7 @@
                                 </li>
 
                                 <li class="group-1">
-                                    <a href="#" class="flex items-center gap-2 p-2">
+                                    <a href="@Url.Action("GamingGear","Products")" class="flex items-center gap-2 p-2">
                                         <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
                                         <span class="group-1-hover-font">Gaming Gear</span>
                                         <i class="bi bi-caret-right-fill group-1-hover-visible invisible ml-auto flex text-xs text-primary-color"></i>
@@ -291,21 +184,21 @@
                                             </div>
                                             <div class="submenu-categories flex flex-wrap">
                                                 <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Kính thực tế ảo"})">
                                                         <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/computers/desktops.jpg"
+                                                            <img class="img-product group-2-hover-img" src="~/Content/images/product/Category-03/Kính thực tế ảo Meta Quest 2.jpg"
                                                                  alt="motherboard" />
                                                         </div>
-                                                        <span class="group-2-hover-font block text-center">Desktops</span>
+                                                        <span class="group-2-hover-font block text-center">VR</span>
                                                     </a>
                                                 </div>
                                                 <div class="group-2 p-[10px]">
-                                                    <a class="categorie-container inline-block" href="#">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Máy chơi game"})">
                                                         <div class="categorie-img h-[150px] w-[150px]">
-                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/computers/notebooks.jpg"
+                                                            <img class="img-product group-2-hover-img" src="~/Content/images/product/Category-03/Máy chơi game ASUS ROG Ally Z1.jpg"
                                                                  alt="processors" />
                                                         </div>
-                                                        <span class="group-2-hover-font block text-center">Notebooks</span>
+                                                        <span class="group-2-hover-font block text-center">Games Machine</span>
                                                     </a>
                                                 </div>
                                             </div>
@@ -314,17 +207,37 @@
                                 </li>
 
                                 <li class="group-1">
-                                    <a href="#" class="flex items-center gap-2 p-2">
+                                    <a href="@Url.Action("Smarthome","Products")" class="flex items-center gap-2 p-2">
                                         <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
                                         <span class="group-1-hover-font">Smarthome</span>
                                     </a>
-                                </li>
-
-                                <li class="group-1">
-                                    <a href="#" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Computer Accessories</span>
-                                    </a>
+                                    <div class="submenu group-1-hover-visible transition-all-300 invisible absolute top-0 left-full min-h-full min-w-[680px] opacity-0">
+                                        <div class="bg-white shadow-custom-2">
+                                            <div class="border-b-2 border-primary-color py-[10px]">
+                                                <span class="px-5 text-3xl font-bold uppercase text-primary-color">Smarthome</span>
+                                            </div>
+                                            <div class="submenu-categories flex flex-wrap">
+                                                <div class="group-2 p-[10px]">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Ghế công thái học"})">
+                                                        <div class="categorie-img h-[150px] w-[150px]">
+                                                            <img class="img-product group-2-hover-img" src="~/Content/images/product/Category-01/Ghế công thái học E-DRA EEC213.jpg"
+                                                                 alt="motherboard" />
+                                                        </div>
+                                                        <span class="group-2-hover-font block text-center">Ergonic Chair</span>
+                                                    </a>
+                                                </div>
+                                                <div class="group-2 p-[10px]">
+                                                    <a class="categorie-container inline-block" href="@Url.Action("Search", "Products", new {s = "Robot hút bụi"})">
+                                                        <div class="categorie-img h-[150px] w-[150px]">
+                                                            <img class="img-product group-2-hover-img" src="~/Content/images/categories/banner-robot.png"
+                                                                 alt="processors" />
+                                                        </div>
+                                                        <span class="group-2-hover-font block text-center">Robot Vacuum</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
 
                             </ul>
@@ -345,97 +258,99 @@
                     <li class="underlined-animated group">
                         <a href="@Url.Action("Shop","Products")" class="flex items-center gap-1">
                             <span>Shop</span>
-                            <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
+                            <!--<i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>-->
                         </a>
                     </li>
-                    <li class="underlined-animated group">
-                        <a href="#" class="flex items-center gap-1">
-                            <span>Pages</span>
-                            <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
-                        </a>
-                        <div class="transition-all-300 invisible absolute left-0 pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
-                            <ul class="relative w-[250px] bg-white text-base shadow-custom-1">
-                                <li class="group-1">
-                                    <a href="wishlist.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Wishlist</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="shopping-cart.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Shopping Cart</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="product-details.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Product Details</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="checkout.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Checkout</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="my-account.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">My Account</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="login.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Login</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="sign-up.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Sign Up</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="forgot-password.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Forgot Password</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="error404.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Error 404</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="purchase-completed.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Purchase Completed</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="purchase-failed.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Purchase Failed</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="message-sent.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Message Sent</span>
-                                    </a>
-                                </li>
-                                <li class="group-1">
-                                    <a href="verification.html" class="flex items-center gap-2 p-2">
-                                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
-                                        <span class="group-1-hover-font">Verification</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    <!--
+    <li class="underlined-animated group">
+        <a href="#" class="flex items-center gap-1">
+            <span>Pages</span>
+            <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
+        </a>
+        <div class="transition-all-300 invisible absolute left-0 pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
+            <ul class="relative w-[250px] bg-white text-base shadow-custom-1">
+                <li class="group-1">
+                    <a href="wishlist.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Wishlist</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="shopping-cart.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Shopping Cart</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="product-details.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Product Details</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="checkout.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Checkout</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="my-account.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">My Account</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="login.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Login</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="sign-up.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Sign Up</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="forgot-password.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Forgot Password</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="error404.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Error 404</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="purchase-completed.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Purchase Completed</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="purchase-failed.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Purchase Failed</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="message-sent.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Message Sent</span>
+                    </a>
+                </li>
+                <li class="group-1">
+                    <a href="verification.html" class="flex items-center gap-2 p-2">
+                        <i class="bi bi-circle-fill group-1-hover-visible invisible flex text-[6px] text-primary-color"></i>
+                        <span class="group-1-hover-font">Verification</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    -->
                     <li class="underlined-animated">
                         <a href="@Url.Action("Contact","Home")">Contact Us</a>
                     </li>

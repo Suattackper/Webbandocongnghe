@@ -400,16 +400,26 @@
                             <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
                                 <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
                             </div>
-                            <form class="form-review flex w-full flex-col gap-2" method="GET">
+                            <form class="form-review flex w-full flex-col gap-2" action="@Url.Action("Review","Products")" method="post" >
                                 <div class="flex items-center gap-2">
-                                    <span class="text-sm uppercase">Your Valoration:</span>
-                                    <div id="rater"></div>
-                                    <input name="ratingvalue" class="rating-value hidden" type="number" value="" />
+                                    <span class="text-sm uppercase" style="color: #0a1638; font-weight: 600;">Your Valoration:</span>
+                                    <div class="rating">
+                                        <input type="number" name="rating" hidden>
+                                        <i class='bi bi-star star' style="--i: 0;"></i>
+                                        <i class='bi bi-star star' style="--i: 1;"></i>
+                                        <i class='bi bi-star star' style="--i: 2;"></i>
+                                        <i class='bi bi-star star' style="--i: 3;"></i>
+                                        <i class='bi bi-star star' style="--i: 4;"></i>
+                                    </div>
+                                    @*<span class="text-sm uppercase">Your Valoration:</span>
+        <div id="rater"></div>
+        <input name="ratingvalue" class="rating-value hidden" type="number" value="" />*@
                                 </div>
                                 <div class="h-20">
                                     <textarea name="reviewvalue" class="input resize-none" placeholder="Add a review..."
                                               required></textarea>
                                 </div>
+                                <input type="hidden" name="productcode" value="@ViewBag.Product.ProductCode" />
                                 <div>
                                     <button class="btn-effect rounded-lg bg-primary-color p-2 font-bold text-white" type="submit">
                                         <span>Post review</span>
@@ -449,7 +459,54 @@
                                                             <span class="text-xs text-slate-400">@item.CommentTime</span>
                                                         </div>
                                                         <div class="flex">
-                                                            <!-- Các ngôi sao và điều kiện đánh giá tương tự như trước -->
+                                                            @if (item.Rate == 0)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 0 && item.Rate <= 1)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 1 && item.Rate <= 2)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 2 && item.Rate <= 3)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 3 && item.Rate <= 4)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                            }
                                                         </div>
                                                         <p class="my-2">
                                                             @item.CommentContent

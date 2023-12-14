@@ -404,6 +404,8 @@
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.css" />
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.js" />
     <Content Include="Content\unpkg.com\popperjs\core.js" />
+    <Content Include="Content\unpkg.com\swiper%4011.0.44\swiper-bundle.min.css" />
+    <Content Include="Content\unpkg.com\swiper%4011.0.44\swiper-bundle.min.js" />
     <Content Include="Content\unpkg.com\swiper%4011.0.4\swiper-bundle.min.css" />
     <Content Include="Content\unpkg.com\swiper%4011.0.4\swiper-bundle.min.js" />
     <Content Include="favicon.ico" />

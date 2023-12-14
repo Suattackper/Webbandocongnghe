@@ -1,6 +1,7 @@
 ﻿using electronics_shop.Models;
 using PagedList;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing.Printing;
 using System.Linq;
@@ -95,9 +96,6 @@ namespace electronics_shop.Controllers
             {
                 return View("Error");
             }
-            //ProductDetail data = new ProductDetail();
-            //data.Product = db.Products.FirstOrDefault(p => p.ProductCode == id);
-            //data.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
             Product product = db.Products.FirstOrDefault(p => p.ProductCode == id);
             ViewBag.Product = product;
             ViewBag.Promotion = db.Promotions.FirstOrDefault(p => p.PromotionCode == product.PromotionCode && p.EndDate >= DateTime.Now);
@@ -185,7 +183,7 @@ namespace electronics_shop.Controllers
                 return View("Error");
             }
             List<Product> data = db.Products.ToList();
-            if(with == "with")
+            if (with == "with")
             {
                 data = data.Where(p => db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now)).ToList();
             }
@@ -209,10 +207,44 @@ namespace electronics_shop.Controllers
             {
                 decimal Min = decimal.Parse(min);
                 decimal Max = decimal.Parse(max);
-                data = data.Where(p => p.Price >= Min && p.Price <= Max).ToList();
+                //data = data.Where(p => p.Price >= Min && p.Price <= Max).ToList();
+                List<Product> d1 = data.Join(db.Promotions, product => product.PromotionCode, promotion => promotion.PromotionCode, (product, promotion) => new { product, promotion })
+                            .Where(x => (x.promotion.EndDate >= DateTime.Now && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || (x.promotion.EndDate < DateTime.Now && x.product.Price >= Min && x.product.Price <= Max))
+                            .Select(x => x.product)
+                            .ToList();
+                List<Product> d2 = data.Where(p => p.Promotion == null && p.Price >= Min && p.Price <= Max).ToList();
+                data = d1.Concat(d2).ToList();
+                //data = data.Join(db.Promotions, product => product.PromotionCode, promotion => promotion.PromotionCode, (product, promotion) => new { product, promotion })
+                //            .Where(x => (x.promotion == null && x.product.Price >= Min && x.product.Price <= Max) || (x.promotion != null && x.promotion.EndDate >= DateTime.Now && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || (x.promotion != null && x.promotion.EndDate < DateTime.Now && x.product.Price >= Min && x.product.Price <= Max))
+                //            .Select(x => x.product)
+                //            .ToList();
             }
             data = data.ToList();
             return View("Shop", data.ToPagedList(page, pagesize));
+        }
+        //add review
+        [HttpPost]
+        public ActionResult Review(string ratingvalue, string reviewvalue, string productcode)
+        {
+            Comment c = new Comment();
+            c.AccountCode = 1;
+            c.ProductCode = productcode;
+            c.CommentContent = reviewvalue;
+            c.CommentTime = DateTime.Now;
+            c.Rate = double.Parse(ratingvalue);
+            db.Comments.Add(c);
+            db.SaveChanges();
+            List<Comment> data = db.Comments.Where(p => p.ProductCode == productcode).ToList();
+            double ratep = 0;
+            foreach(var i in data)
+            {
+                ratep = ratep + (double)i.Rate;
+            }
+            ratep = ratep / data.Count;
+            Product product = db.Products.FirstOrDefault(p => p.ProductCode == productcode);
+            product.Rate = ratep;
+            db.SaveChanges();
+            return RedirectToAction("Detail", new { id = productcode});
         }
     }
 }

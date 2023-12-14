@@ -19,6 +19,8 @@ namespace electronics_shop.Controllers
         //Trang sp
         public ActionResult Shop(int page = 1, int pagesize = 9)
         {
+         
+          
             ViewBag.view = "Shop";
             ViewBag.danhmuc = "Shop";
             ViewBag.Promotion = db.Promotions.ToList();
@@ -27,9 +29,63 @@ namespace electronics_shop.Controllers
                 return View("Error");
             }
             //List<Product> data = db.Products.ToList();
+  
+            
+
             List<Product> data = (List<Product>)(from Product in db.Products select Product).ToList();
             return View(data.ToPagedList(page,pagesize));
         }
+
+        public ActionResult RenderShoppingCart()
+        {
+            //var shoppingCart = GetShoppingCartData();
+            //if (shoppingCart != null)
+            //{
+            //    ViewBag.ShoppingCart = shoppingCart;
+
+            //}
+            //else
+            //{
+            //    return View("Error");
+            //}
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return PartialView("_RenderShoppingCart",cart.Items);
+            }
+            return PartialView("_RenderShoppingCart");
+        }
+
+    
+
+      
+        public ActionResult RenderActionCart()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+
+            if (cart != null)
+            {
+             
+                
+
+                return PartialView("_ActionViewCart", cart.Items);
+            }
+
+            return PartialView("_ActionViewCart");
+        }
+
+        private IEnumerable<electronics_shop.Models.ShoppingCartItem> GetShoppingCartData()
+        {
+            if (Session["CartShop"] is List<electronics_shop.Models.ShoppingCartItem> carts)
+            {
+                return carts;
+            }
+            carts = new List<ShoppingCartItem>();
+            Session["CartShop"] = carts;
+            return carts;
+        }
+
+
         //Trang sp loại Smarthome
         public ActionResult Smarthome(int page = 1, int pagesize = 9)
         {
@@ -78,6 +134,15 @@ namespace electronics_shop.Controllers
                                                  select Product).ToList();
             return View("Shop", data.ToPagedList(page, pagesize));
         }
+
+        public dynamic GetViewBag()
+        {
+            return ViewBag;
+        }
+
+
+
+
         //Trang chi tiết sp
         public ActionResult Detail(string id)
         {
@@ -92,13 +157,15 @@ namespace electronics_shop.Controllers
             Product product = db.Products.FirstOrDefault(p => p.ProductCode == id);
             ViewBag.Product = product;
             ViewBag.Promotion = db.Promotions.FirstOrDefault(p => p.PromotionCode == product.PromotionCode && p.EndDate >= DateTime.Now);
-            ViewBag.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
-            ViewBag.Category = db.Categories.FirstOrDefault(p => p.CategoryCode == product.CategoryCode);
+            List<ProductImg> productImgs = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
+            ViewBag.productImgsList = productImgs;
+            Category category = db.Categories.FirstOrDefault(p => p.CategoryCode == product.CategoryCode);
+            ViewBag.Category = category;
             var comment = db.Comments.Where(p => p.ProductCode == id).ToList();
             ViewBag.Comment = comment;
             var account = db.Accounts.ToList();
             ViewBag.Account = account;
-            ViewBag.Relate = db.Products.Where(p=>p.CategoryCode==product.CategoryCode).ToList();
+            ViewBag.Relate = db.Products.Where(p => p.CategoryCode == product.CategoryCode).ToList();
             ViewBag.RelatePromotion = db.Promotions.ToList();
             int rate1 = 0;
             int rate2 = 0;

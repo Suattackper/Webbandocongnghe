@@ -63,5 +63,7 @@ namespace electronics_shop.Controllers
             db.SaveChanges();
             return RedirectToAction("MessageSent", "Account");
         }
+
+     
     }
 }

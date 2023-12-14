@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +12,9 @@
     <link rel="stylesheet" href="~/Content/cdn.jsdelivr.net/npm/bootstrap-icons%401.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.css" />
     <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
+   
     <title>Besnik. - Electronics store</title>
 </head>
 
@@ -84,10 +88,10 @@
                                 <i class="bi bi-heart pointer-events-none flex translate-y-1 transform text-[32px] text-white"
                                    style="color: #011638;"></i>
                             </a>
-                            <span class="badge absolute top-0 right-[-6px] h-[15px] min-w-[15px] px-[2px]">0</span>
+                            <span id="checkout_wishs" class="badge absolute top-0 right-[-6px] h-[15px] min-w-[15px] px-[2px]">0</span>
                         </div>
                         <div class="relative">
-                            <a class="btn-open-modal" data-target=".shopping-cart-modal" href="javascript:void(0)">
+                            <a class="btn-open-modal" data-target=".shopping-cart-modal"  href="javascript:void(0)">
                                 <i class="bi bi-cart2 pointer-events-none flex text-[35px] text-white" style="color: #011638;"></i>
                             </a>
                             <span id="checkout_items" class="badge absolute top-0 right-[-6px] h-[15px] min-w-[15px] px-[2px]">0</span>
@@ -478,7 +482,7 @@
                             </div>
                         </li>
                         <li class="border-b border-gray-200">
-                            <div class="btn-open-modal cursor-pointer p-2" data-target=".wishlist-modal">
+                            <div class=" btnOpenWish  btn-open-modal cursor-pointer p-2" data-target=".wishlist-modal">
                                 <div class="pointer-events-none flex cursor-pointer select-none items-center">
                                     <i class="bi bi-heart mr-3 flex text-xl text-primary-color"></i>
                                     <span class="font-semibold">Wishlist</span>
@@ -591,70 +595,7 @@
         </div>
     </div>
 
-    <div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-        <div class="flex h-full w-full">
-            <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-                <div class="w-full">
-                    <div class="border-b-2 border-gray-200 p-5">
-                        <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                    </div>
-                    <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
-                        <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                    </button>
-                </div>
-                <div class="h-full overflow-auto">
-                    <!-- If the shopping cart is empty (replace hidden with flex) -->
-                    <div class="hidden flex-col items-center justify-center gap-4 p-5">
-                        <i class="bi bi-cart-x text-8xl text-gray-200"></i>
-                        <p class="font-semibold">There are no products in the cart.</p>
-                        <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                           href="#">
-                            <span class="font-bold uppercase text-white">Go to the store</span>
-                        </a>
-                    </div>
-                    <!-- -->
-                    <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                       href="#">
-                        <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                            <img class="h-full w-full object-cover" src="~/Content/images/product/prod-1.jpg" alt="product" />
-                        </div>
-                        <div class="flex w-full flex-col">
-                            <h6 class="clamp-2 break-all text-lg font-semibold">
-                                Ryzen 5 3600x
-                            </h6>
-                            <div class="flex gap-2">
-                                <div class="flex gap-1 leading-7 text-gray-400">
-                                    <span>1</span>
-                                    <span>X</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold text-primary-color">$37.00</span>
-                                    <small class="text-xs text-primary-color line-through">$50.00</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                            <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
-                    <div class="flex justify-between">
-                        <span class="text-lg uppercase">Subtotal:</span>
-                        <span class="text-lg font-semibold text-primary-color">$37.00</span>
-                    </div>
-                    <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                       href="shopping-cart.html">
-                        <span class="font-bold uppercase text-white">View Shopping Cart</span>
-                    </a>
-                    <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                       href="checkout.html">
-                        <span class="font-bold uppercase text-white">Checkout now</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="wishlist-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
         <div class="flex h-full w-full">
@@ -667,39 +608,7 @@
                         <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
                     </button>
                 </div>
-                <div class="h-full overflow-auto">
-                    <!-- If the wishlist is empty (replace hidden with flex) -->
-                    <div class="hidden flex-col items-center justify-center gap-4 p-5">
-                        <i class="bi bi-heart text-8xl text-gray-200"></i>
-                        <p class="font-semibold">
-                            There are no products in the wishlist.
-                        </p>
-                        <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                           href="#">
-                            <span class="font-bold uppercase text-white">Go to the store</span>
-                        </a>
-                    </div>
-                    <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                       href="#">
-                        <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                            <img class="h-full w-full object-cover" src="~/Content/images/product/prod-1.jpg" alt="product" />
-                        </div>
-
-                        <div class="flex w-full flex-col">
-                            <h6 class="clamp-2 break-all text-lg font-semibold">
-                                Ryzen 5 3600x
-                            </h6>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-primary-color">$37.00</span>
-                                <small class="text-xs text-primary-color line-through">$50.00</small>
-                            </div>
-                        </div>
-
-                        <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                            <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                        </div>
-                    </a>
-                </div>
+                @Html.Action("Partial_Wish_Cart","WishList")
                 <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 xs:px-5">
                     <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
                        href="wishlist.html">
@@ -935,8 +844,8 @@
                                         </div>
                                     </div>
                                     <div class="flex gap-2">
-                                        <button class="btn-effect transition-all-300 flex h-full w-full items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                                                type="submit">
+                                        <button class="  btn-effect transition-all-300 flex h-full w-full items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
+                                                type="submit" >
                                             <i class="bi bi-cart-fill flex text-xl text-white"></i>
                                             <span class="font-bold uppercase text-white">Add to cart</span>
                                         </button>
@@ -944,7 +853,7 @@
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
+                                    </div>  
                                 </div>
                             </form>
                         </div>
@@ -1115,26 +1024,25 @@
     </footer>
 
     @*<script src="~/Content/unpkg.com/popperjs/core.js"></script>
-        <script src="https://unpkg.com/tippy.js@6"></script>
-        <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
-        <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
-        <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
-        <script src="~/Content/js/main.js"></script>
-        <script src="~/Content/js/jsShoppingCart.js"></script>*@
+            <script src="https://unpkg.com/tippy.js@6"></script>
+            <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
+            <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
+            <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
+            <script src="~/Content/js/main.js"></script>
+            <script src="~/Content/js/jsShoppingCart.js"></script>
 
 
-    <script src="~/unpkg.com/popperjs/core.js"></script>
+        @*<script src="~/unpkg.com/popperjs/core.js"></script>*@
     <script src="https://unpkg.com/tippy.js@6"></script>
-    <script src="~/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
-    <script src="~/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
-    <script src="~/libraries/iziToast/iziToast.min.js"></script>
-    <script src="~/unpkg.com/swiper@11.0.4/swiper-bundle.min.js"></script>
-    <script src="~/libraries/nice-select2/nice-select2.js"></script>
-    <script src="~/libraries/rater-js/rater-js.js"></script>
-    <script src="~/unpkg.com/metismenujs@1.4.0/dist/metismenujs.min.js"></script>
-    <script src="~/libraries/mixitup/mixitup.min.js"></script>
-    <script src="~/unpkg.com/metismenujs@1.4.0/dist/metismenujs.min.js"></script>
-    <script src="~/libraries/iziToast/iziToast.min.js"></script>
+    @*<script src="~/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>*@
+    @*<script src="~/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>*@
+    @*<script src="~/libraries/iziToast/iziToast.min.js"></script>*@
+    @*<script src="~/unpkg.com/swiper@11.0.4/swiper-bundle.min.js"></script>*@
+    @*<script src="~/libraries/nice-select2/nice-select2.js"></script>*@
+    @*<script src="~/libraries/rater-js/rater-js.js"></script>*@
+    @*<script src="~/libraries/mixitup/mixitup.min.js"></script>*@
+    @*<script src="~/unpkg.com/metismenujs@1.4.0/dist/metismenujs.min.js"></script>*@
+    @*<script src="~/libraries/iziToast/iziToast.min.js"></script>*@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
@@ -1147,7 +1055,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-   
+
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 
     <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>

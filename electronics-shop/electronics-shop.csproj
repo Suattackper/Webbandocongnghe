@@ -132,6 +132,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="Models\Account.cs">
       <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
@@ -195,10 +197,12 @@
     <Compile Include="Models\ProductImg.cs">
       <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductModelDetails.cs" />
     <Compile Include="Models\Promotion.cs">
       <DependentUpon>ECOMMERCEE.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\WishListCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -468,10 +472,18 @@
     <Content Include="Views\Products1\Details.cshtml" />
     <Content Include="Views\Products1\Edit.cshtml" />
     <Content Include="Views\Products1\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\Base\YourAction.cshtml" />
+    <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
+    <Content Include="Views\Shared\_ActionViewCart.cshtml" />
+    <Content Include="Views\Shared\_Partial_Item_Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
+    <Content Include="Views\Shared\_Partial_Wish_Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\WishList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

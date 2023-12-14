@@ -1,8 +1,12 @@
 ﻿@model PagedList.IPagedList<electronics_shop.Models.Product>
 @using PagedList.Mvc
 @using PagedList
-@{
-    ViewBag.Title = "Shop";
+
+@{ 
+    var shoppingCart = ViewBag.Shoppingcart as List<electronics_shop.Models.ShoppingCartItem>;
+  }
+
+@{      ViewBag.Title = "Shop";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -379,29 +383,53 @@
                 )
             </div>
         </div>
+
+        <div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+            <div class="flex h-full w-full">
+                <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+                    <div class="w-full">
+                        <div class="border-b-2 border-gray-200 p-5">
+                            <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                        </div>
+                        <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                            <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                        </button>
+                    </div>
+
+
+                    @Html.Action("RenderShoppingCart", "Products")
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
         <!--
-        <div class="col-span-12">
-        <div class="flex items-center justify-center">
-            <ul class="pagination flex items-center">
-                <li class="pointer-events-none py-2 px-3 text-gray-200">
-                    <i class="bi bi-arrow-left-short flex"></i>
-                </li>
-                <li class="active cursor-pointer py-2 px-3">1</li>
-                <li class="cursor-pointer py-2 px-3">2</li>
-                <li class="cursor-pointer py-2 px-3">3</li>
-                <li class="hidden cursor-pointer py-2 px-3 tracking-wide sm:block">
-                    ...
-                </li>
-                <li class="hidden cursor-pointer py-2 px-3 sm:block">10</li>
-                <li class="hidden cursor-pointer py-2 px-3 sm:block">11</li>
-                <li class="cursor-pointer py-2 px-3 text-primary-color">
-                    <i class="bi bi-arrow-right-short flex"></i>
-                </li>
-                @*@Html.PagedListPager(Model, page => Url.Action("Shop", new { page }))*@
-            </ul>
-        </div>
-        </div>
-        -->
+    <div class="col-span-12">
+    <div class="flex items-center justify-center">
+        <ul class="pagination flex items-center">
+            <li class="pointer-events-none py-2 px-3 text-gray-200">
+                <i class="bi bi-arrow-left-short flex"></i>
+            </li>
+            <li class="active cursor-pointer py-2 px-3">1</li>
+            <li class="cursor-pointer py-2 px-3">2</li>
+            <li class="cursor-pointer py-2 px-3">3</li>
+            <li class="hidden cursor-pointer py-2 px-3 tracking-wide sm:block">
+                ...
+            </li>
+            <li class="hidden cursor-pointer py-2 px-3 sm:block">10</li>
+            <li class="hidden cursor-pointer py-2 px-3 sm:block">11</li>
+            <li class="cursor-pointer py-2 px-3 text-primary-color">
+                <i class="bi bi-arrow-right-short flex"></i>
+            </li>
+            @*@Html.PagedListPager(Model, page => Url.Action("Shop", new { page }))*@
+        </ul>
+    </div>
+    </div>
+    -->
 
     </div>
 </div>

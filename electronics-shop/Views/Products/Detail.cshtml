@@ -19,185 +19,186 @@
     </ul>
 </div>
 
-    <div class="product-details container mx-auto my-5 px-2 sm:px-8">
-        <div class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8">
-            <div class="col-span-12 max-h-[500px] md:col-span-6">
-                <div class="swiper swiper-top group relative flex items-center rounded-lg">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="swiper-zoom-container">
-                                <img src="@ViewBag.Product.ImageProduct" alt="product" />
-                            </div>
-                        </div>
-                        @if (ViewBag.productImgsList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.productImgsList)
-                            {
-                                <div class="swiper-slide">
-                                    <div class="swiper-zoom-container">
-                                        <img src="@item.Img" alt="product" />
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </div>
-                    <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
-                        &#10095;
-                    </div>
-                    <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
-                        &#10094;
-                    </div>
-                </div>
-                <div class="swiper swiper-thumbs">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide cursor-pointer rounded-lg">
+<div class="product-details container mx-auto my-5 px-2 sm:px-8">
+    <div class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8">
+        <div class="col-span-12 max-h-[500px] md:col-span-6">
+            <div class="swiper swiper-top group relative flex items-center rounded-lg">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="swiper-zoom-container">
                             <img src="@ViewBag.Product.ImageProduct" alt="product" />
                         </div>
-                        @if (ViewBag.productImgsList.Count > 0)
+                    </div>
+                    @if (ViewBag.productImgsList.Count > 0)
+                    {
+                        foreach (var item in ViewBag.productImgsList)
                         {
-                            foreach (var item in ViewBag.productImgsList)
-                            {
-                                <div class="swiper-slide cursor-pointer rounded-lg">
+                            <div class="swiper-slide">
+                                <div class="swiper-zoom-container">
                                     <img src="@item.Img" alt="product" />
                                 </div>
-                            }
+                            </div>
                         }
-                    </div>
-                    <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
-                        &#10095;
-                    </div>
-                    <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
-                        &#10094;
-                    </div>
+                    }
+                </div>
+                <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
+                    &#10095;
+                </div>
+                <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
+                    &#10094;
                 </div>
             </div>
-            <div class="col-span-12 md:col-span-6">
-                <div class="my-1">
-                    <a class="clamp-2 transition-all-300 break-all text-2xl font-medium hover:text-primary-color" href="#">
-                        @ViewBag.Product.ProductName
-                    </a>
-                </div>
-                <div class="product-val-stock my-2 flex justify-between">
-                    <div class="flex">
-                        @if (@ViewBag.Product.Rate == 0)
-                        {
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                        }
-                        else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
-                        {
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                        }
-                        else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
-                        {
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                        }
-                        else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
-                        {
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                        }
-                        else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
-                        {
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                        }
-                        else
-                        {
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                            <i class="bi bi-star-fill flex text-base text-star"></i>
-                        }
+            <div class="swiper swiper-thumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide cursor-pointer rounded-lg">
+                        <img src="@ViewBag.Product.ImageProduct" alt="product" />
                     </div>
-                    <div class="ml-auto">
-                        @if (ViewBag.Product.Quantity > 0)
-                        {
-                            <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
-                        }
-                        else
-                        {
-                            <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
-                        }
-                    </div>
-                </div>
-                <div class="my-5 flex items-center gap-5">
-                    @if (ViewBag.Promotion != null)
+                    @if (ViewBag.productImgsList.Count > 0)
                     {
-                        <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
-                            <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price - ViewBag.Product.Price * @ViewBag.Promotion.PromotionPercentage / 100)</span>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-md font-semibold uppercase text-green-400">
-                                @ViewBag.Promotion.PromotionPercentage% Off
-                            </span>
-                            <span class="prev-price text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
-                        </div>
+                        foreach (var item in ViewBag.productImgsList)
+                        {
+                            <div class="swiper-slide cursor-pointer rounded-lg">
+                                <img src="@item.Img" alt="product" />
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
+                    &#10095;
+                </div>
+                <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
+                    &#10094;
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-6">
+            <div class="my-1">
+                <a class="clamp-2 transition-all-300 break-all text-2xl font-medium hover:text-primary-color" href="#">
+                    @ViewBag.Product.ProductName
+                </a>
+            </div>
+            <div class="product-val-stock my-2 flex justify-between">
+                <div class="flex">
+                    @if (@ViewBag.Product.Rate == 0)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                    }
+                    else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
+                    {
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                     }
                     else
                     {
-                        <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
-                            <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
-                        </div>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                        <i class="bi bi-star-fill flex text-base text-star"></i>
                     }
                 </div>
-
-                <div class="my-4">
-                    <p class="clamp-5 break-all font-bold uppercase">
-                        <br /><br />Số lượng: @ViewBag.Product.Quantity  <br />
-                    </p>
+                <div class="ml-auto">
+                    @if (ViewBag.Product.Quantity > 0)
+                    {
+                        <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white">instock</span>
+                    }
+                    else
+                    {
+                        <span class="rounded-md bg-green-300 px-2 py-1 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
+                    }
                 </div>
+            </div>
+            <div class="my-5 flex items-center gap-5">
+                @if (ViewBag.Promotion != null)
+                {
+                    <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
+                        <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price - ViewBag.Product.Price * @ViewBag.Promotion.PromotionPercentage / 100)</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-md font-semibold uppercase text-green-400">
+                            @ViewBag.Promotion.PromotionPercentage% Off
+                        </span>
+                        <span class="prev-price text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="flex rounded-lg bg-white px-3 py-2 text-primary-color shadow">
+                        <span class="text-2xl font-semibold leading-7">@string.Format("₫{0:#,0}", ViewBag.Product.Price)</span>
+                    </div>
+                }
+            </div>
 
-                <div class="flex gap-1">
-                    <form action="javascript:void(0)">
-                        <div class="block">
-                        </div>
-                        <div class="flex flex-wrap justify-start gap-5">
-                            <div class="quantity inline-flex rounded-lg bg-white shadow">
-                                <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                       type="number" value="1" />
-                                <div class="flex w-5 flex-col justify-between">
-                                    <button class="quantity-btn increment text-primary-color" type="button">
-                                        <i class="bi bi-caret-up-fill"></i>
-                                    </button>
-                                    <button class="quantity-btn decrement text-primary-color" type="button">
-                                        <i class="bi bi-caret-down-fill"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="btnAddToCart btn-effect transition-all-300 flex h-full w-full items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                                        type="submit" data-id="@Model.ProductCode">
-                                    <i class="bi bi-cart-fill flex text-xl text-white"></i>
-                                    <span class="font-bold uppercase text-white">Add to cart</span>
+            <div class="my-4">
+                <p class="clamp-5 break-all font-bold uppercase">
+                    <br /><br />Số lượng: @ViewBag.Product.Quantity  <br />
+                </p>
+            </div>
+
+            <div class="flex gap-1">
+                <form action="javascript:void(0)">
+                    <div class="block">
+                    </div>
+                    <div class="flex flex-wrap justify-start gap-5">
+                        <div class="quantity inline-flex rounded-lg bg-white shadow">
+                            <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
+                                   type="number" value="1" />
+                            <div class="flex w-5 flex-col justify-between">
+                                <button class="quantity-btn increment text-primary-color" type="button">
+                                    <i class="bi bi-caret-up-fill"></i>
                                 </button>
-                                <a class="tippy tippy-wishlist btn-wishlist transition-all-300 flex min-h-[40px] min-w-[40px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary-color p-2 hover:bg-primary-hover"
-                                   href="javascript:void(0)">
-                                    <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                </a>
+                                <button class="quantity-btn decrement text-primary-color" type="button">
+                                    <i class="bi bi-caret-down-fill"></i>
+                                </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="my-5 flex flex-col gap-2">
+                        <div class="flex gap-2">
+                            <button class="btnAddToCart btn-effect transition-all-300 flex h-full w-full items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
+                                    type="submit" data-id="@Model.ProductCode">
+                                <i class="bi bi-cart-fill flex text-xl text-white"></i>
+                                <span class="font-bold uppercase text-white">Add to cart</span>
+                            </button>
+                            <a class="tippy tippy-wishlist btn-wishlist transition-all-300 flex min-h-[40px] min-w-[40px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary-color p-2 hover:bg-primary-hover"
+                               href="javascript:void(0)" data-id="@Model.ProductCode">
+                                <i class="bi bi-heart pointer-events-none flex text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="my-5 flex flex-col gap-2">
+                <button class="btnOpenCart" type="submit">
                     <a class="btn-open-modal transition-all-300 rounded-lg border bg-slate-100 p-2 hover:bg-slate-200"
                        href="javascript:void(0)" data-target=".calculate-shipping-modal">
                         <div class="pointer-events-none flex items-center justify-between gap-2">
@@ -208,111 +209,328 @@
                             <i class="bi bi-arrow-right-short flex text-2xl text-primary-color"></i>
                         </div>
                     </a>
+
+                </button>
+            </div>
+            <div class="mt-5 border-t border-gray-200 pt-5">
+                <div>
+                    <b>Categories: </b>
+                    <span>
+                        <a href="@Url.Action(ViewBag.Category.CategoryName,"Products")" class="text-zinc-500">@ViewBag.Category.CategoryName</a>
+                    </span>
                 </div>
-                <div class="mt-5 border-t border-gray-200 pt-5">
-                    <div>
-                        <b>Categories: </b>
-                        <span>
-                            <a href="@Url.Action(ViewBag.Category.CategoryName,"Products")" class="text-zinc-500">@ViewBag.Category.CategoryName</a>
-                        </span>
+                <div class="flex gap-2">
+                    <b>Share:</b>
+                    <div class="flex items-center gap-[10px]">
+                        <a href="#">
+                            <i class="bi bi-facebook transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
+                        </a>
+                        <a href="#">
+                            <i class="bi bi-twitter transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
+                        </a>
+                        <a href="#">
+                            <i class="bi bi-whatsapp transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
+                        </a>
+                        <a href="#">
+                            <i class="bi bi-link-45deg transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
+                        </a>
                     </div>
-                    <div class="flex gap-2">
-                        <b>Share:</b>
-                        <div class="flex items-center gap-[10px]">
-                            <a href="#">
-                                <i class="bi bi-facebook transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
-                            </a>
-                            <a href="#">
-                                <i class="bi bi-twitter transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
-                            </a>
-                            <a href="#">
-                                <i class="bi bi-whatsapp transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
-                            </a>
-                            <a href="#">
-                                <i class="bi bi-link-45deg transition-all-300 flex text-zinc-500 hover:text-primary-color"></i>
-                            </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12">
+            <div class="liner-container mb-5 flex border-b-2 border-[rgba(119,119,119,.17)]">
+                <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-xl font-bold uppercase">
+                    Specifications
+                </h1>
+            </div>
+            <div class="grid grid-cols-3 gap-5">
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Aplication:</b> Desktop</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b># of CPU cores:</b> 3.8GHz</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Total L3 cache:</b> 32MB</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b># of threads:</b> 12</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Total L1 cache:</b> 384KB</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>TDP/Default TDP:</b> 95W</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>CPU Socket:</b> AM4</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Temp. max:</b> 95°C</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Product line:</b> AMD Ryzen™ 5 Desktop Processors</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Max Magnification Clock:</b> Up to 4.4GHz</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Total L2 cache:</b> 3MB</span>
+                </div>
+                <div class="col-span-12 sm:col-span-1">
+                    <span><b>Gamer:</b> Yes</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12">
+            <div class="liner-container mb-5 flex border-b-2 border-[rgba(119,119,119,.17)]">
+                <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-xl font-bold uppercase">
+                    Description
+                </h1>
+            </div>
+            <div class="see-more relative pb-5">
+                <div class="see-more-container gradient-bottom max-h-[220px] overflow-hidden">
+                    <div class="see-more-content">
+                        <p>
+                            @ViewBag.Product.Description
+                        </p>
+                    </div>
+                </div>
+                <button class="btn-see-more absolute bottom-0 z-10 flex w-full justify-center hover:text-primary-color">
+                    <i class="bi bi-chevron-compact-down text-stroke-medium transition-all-300 flex text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-span-12">
+            <div class="tabs-container">
+                <ul class="flex justify-between">
+                    <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer bg-gray-200 p-2 text-center text-gray-400 font-bold">
+                        Reviews
+                    </li>
+                </ul>
+                <div class="tabs-content mt-5">
+                    <div class="tab-content invisible absolute w-full bg-white opacity-0">
+                        <div class="my-5 flex flex-col items-center justify-center gap-5 sm:flex-row">
+                            <div class="flex flex-col items-center gap-2">
+                                <span class="text-5xl">@ViewBag.Product.Rate.ToString("F1")</span>
+                                <div class="flex">
+                                    @if (@ViewBag.Product.Rate == 0)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                    }
+                                </div>
+                                <span class="flex items-center gap-1"><i class="bi bi-chat-quote flex"></i> @ViewBag.Comment.Count Reviews</span>
+                            </div>
+                            <div class="w-full max-w-[600px]">
+                                <div class="my-2 flex items-center gap-2">
+                                    <span>5</span>
+                                    <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
+                                        <div class="absolute left-0 top-0 h-full w-[50%] rounded bg-primary-color" style="width: @ViewBag.Rate5%"></div>
+                                    </div>
+                                </div>
+                                <div class="my-2 flex items-center gap-2">
+                                    <span>4</span>
+                                    <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
+                                        <div class="absolute left-0 top-0 h-full w-[40%] rounded bg-primary-color" style="width: @ViewBag.Rate4%"></div>
+                                    </div>
+                                </div>
+                                <div class="my-2 flex items-center gap-2">
+                                    <span>3</span>
+                                    <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
+                                        <div class="absolute left-0 top-0 h-full w-[30%] rounded bg-primary-color" style="width: @ViewBag.Rate3%"></div>
+                                    </div>
+                                </div>
+                                <div class="my-2 flex items-center gap-2">
+                                    <span>2</span>
+                                    <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
+                                        <div class="absolute left-0 top-0 h-full w-[20%] rounded bg-primary-color" style="width: @ViewBag.Rate2%"></div>
+                                    </div>
+                                </div>
+                                <div class="my-2 flex items-center gap-2">
+                                    <span>1</span>
+                                    <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
+                                        <div class="absolute left-0 top-0 h-full w-[10%] rounded bg-primary-color" style="width: @ViewBag.Rate1%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-5">
+                            <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
+                                <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
+                            </div>
+                            <form class="form-review flex w-full flex-col gap-2" method="GET">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm uppercase">Your Valoration:</span>
+                                    <div id="rater"></div>
+                                    <input name="ratingvalue" class="rating-value hidden" type="number" value="" />
+                                </div>
+                                <div class="h-20">
+                                    <textarea name="reviewvalue" class="input resize-none" placeholder="Add a review..."
+                                              required></textarea>
+                                </div>
+                                <div>
+                                    <button class="btn-effect rounded-lg bg-primary-color p-2 font-bold text-white" type="submit">
+                                        <span>Post review</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <form class="my-5 flex flex-col xs:flex-row xs:items-center xs:justify-between">
+                            <span class="text-lg font-bold uppercase">Reviews</span>
+                            <select class="nice-select select order-by">
+                                <option value="0">Most recent</option>
+                                <option value="1">Oldest</option>
+                                <option value="2">5 &#x2605;</option>
+                                <option value="3">4 &#x2605;</option>
+                                <option value="4">3 &#x2605;</option>
+                                <option value="5">2 &#x2605;</option>
+                                <option value="6">1 &#x2605;</option>
+                            </select>
+                        </form>
+                        <div class="mt-5">
+                            @if (ViewBag.Comment.Count > 0)
+                            {
+                                foreach (var item in ViewBag.Comment)
+                                {
+                                    foreach (var ac in ViewBag.Account)
+                                    {
+                                        if (item.AccountCode == ac.AccountCode)
+                                        {
+                                            <div class="my-4">
+                                                <div class="flex gap-5">
+                                                    <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
+                                                        <img class="h-full w-full object-cover" src="@ac.Avatar" alt="Avatar" />
+                                                    </div>
+                                                    <div>
+                                                        <div class="flex items-center gap-2">
+                                                            <a class="font-bold hover:text-primary-color" href="#">@ac.FirstName @ac.LastName</a>
+                                                            <span class="text-xs text-slate-400">@item.CommentTime</span>
+                                                        </div>
+                                                        <div class="flex">
+                                                            <!-- Các ngôi sao và điều kiện đánh giá tương tự như trước -->
+                                                        </div>
+                                                        <p class="my-2">
+                                                            @item.CommentContent
+                                                        </p>
+                                                        <div class="flex items-center gap-3">
+                                                            <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
+                                                                <i class="bi bi-pencil-square flex"></i>
+                                                                <span>Edit</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12">
-                <div class="liner-container mb-5 flex border-b-2 border-[rgba(119,119,119,.17)]">
-                    <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-xl font-bold uppercase">
-                        Specifications
-                    </h1>
-                </div>
-                <div class="grid grid-cols-3 gap-5">
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Aplication:</b> Desktop</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b># of CPU cores:</b> 3.8GHz</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Total L3 cache:</b> 32MB</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b># of threads:</b> 12</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Total L1 cache:</b> 384KB</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>TDP/Default TDP:</b> 95W</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>CPU Socket:</b> AM4</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Temp. max:</b> 95°C</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Product line:</b> AMD Ryzen™ 5 Desktop Processors</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Max Magnification Clock:</b> Up to 4.4GHz</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Total L2 cache:</b> 3MB</span>
-                    </div>
-                    <div class="col-span-12 sm:col-span-1">
-                        <span><b>Gamer:</b> Yes</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-span-12">
-                <div class="liner-container mb-5 flex border-b-2 border-[rgba(119,119,119,.17)]">
-                    <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-xl font-bold uppercase">
-                        Description
-                    </h1>
-                </div>
-                <div class="see-more relative pb-5">
-                    <div class="see-more-container gradient-bottom max-h-[220px] overflow-hidden">
-                        <div class="see-more-content">
-                            <p>
-                                @ViewBag.Product.Description
-                            </p>
-                        </div>
-                    </div>
-                    <button class="btn-see-more absolute bottom-0 z-10 flex w-full justify-center hover:text-primary-color">
-                        <i class="bi bi-chevron-compact-down text-stroke-medium transition-all-300 flex text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-span-12">
-                <div class="tabs-container">
-                    <ul class="flex justify-between">
-                        <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer bg-gray-200 p-2 text-center text-gray-400 font-bold">
-                            Reviews
-                        </li>
-                    </ul>
-                    <div class="tabs-content mt-5">
-                        <div class="tab-content invisible absolute w-full bg-white opacity-0">
-                            <div class="my-5 flex flex-col items-center justify-center gap-5 sm:flex-row">
-                                <div class="flex flex-col items-center gap-2">
-                                    <span class="text-5xl">@ViewBag.Product.Rate.ToString("F1")</span>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.Relate.Count > 1)
+{
+    <div class="related-products container mx-auto my-5 px-2 sm:px-8">
+        <div class="liner-container mt-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+            <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+                Related Products
+            </h1>
+        </div>
+        <div class="swiper-container">
+            <div class="swiper swiper-cards group relative flex items-center py-5">
+                <div class="swiper-wrapper">
+                    @{ int i = 1;}
+                    @foreach (var item in ViewBag.Relate)
+                    {
+                        if (item.ProductCode == ViewBag.Product.ProductCode) { continue; }
+                        i++;
+                        <div class="swiper-slide h-auto">
+                            <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
+                                <div class="absolute right-[10px] top-[10px]">
+                                    <div class="p-[2px]">
+                                        <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                           href="javascript:void(0)">
+                                            <i class="bi bi-heart pointer-events-none flex text-white"></i>
+                                        </a>
+                                    </div>
+                                    <div class="p-[2px]">
+                                        <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                           href="javascript:void(0)" data-target=".quick-view-modal">
+                                            <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                @foreach (var pro in ViewBag.RelatePromotion)
+                                {
+                                    if (pro.PromotionCode == item.PromotionCode)
+                                    {
+                                        if (pro.EndDate < DateTime.Now) { break; }
+                                        <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
+                                            <span class="text-md text-center font-semibold uppercase text-white">
+                                                @pro.PromotionPercentage% Off
+                                            </span>
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                <div class="h-[190px] overflow-hidden rounded-lg">
+                                    <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
+                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                    </a>
+                                </div>
+                                <div class="my-2 flex justify-between">
                                     <div class="flex">
-                                        @if (@ViewBag.Product.Rate == 0)
+                                        @if (item.Rate == 0)
                                         {
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
@@ -320,7 +538,7 @@
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                         }
-                                        else if (@ViewBag.Product.Rate > 0 && @ViewBag.Product.Rate <= 1)
+                                        else if (item.Rate > 0 && item.Rate <= 1)
                                         {
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
@@ -328,7 +546,7 @@
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                         }
-                                        else if (@ViewBag.Product.Rate > 1 && @ViewBag.Product.Rate <= 2)
+                                        else if (item.Rate > 1 && item.Rate <= 2)
                                         {
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
@@ -336,7 +554,7 @@
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                         }
-                                        else if (@ViewBag.Product.Rate > 2 && @ViewBag.Product.Rate <= 3)
+                                        else if (item.Rate > 2 && item.Rate <= 3)
                                         {
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
@@ -344,7 +562,7 @@
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                             <i class="bi bi-star-fill flex text-base text-gray-200"></i>
                                         }
-                                        else if (@ViewBag.Product.Rate > 3 && @ViewBag.Product.Rate <= 4)
+                                        else if (item.Rate > 3 && item.Rate <= 4)
                                         {
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
@@ -361,321 +579,177 @@
                                             <i class="bi bi-star-fill flex text-base text-star"></i>
                                         }
                                     </div>
-                                    <span class="flex items-center gap-1"><i class="bi bi-chat-quote flex"></i> @ViewBag.Comment.Count Reviews</span>
-                                </div>
-                                <div class="w-full max-w-[600px]">
-                                    <div class="my-2 flex items-center gap-2">
-                                        <span>5</span>
-                                        <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                            <div class="absolute left-0 top-0 h-full w-[50%] rounded bg-primary-color" style="width: @ViewBag.Rate5%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="my-2 flex items-center gap-2">
-                                        <span>4</span>
-                                        <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                            <div class="absolute left-0 top-0 h-full w-[40%] rounded bg-primary-color" style="width: @ViewBag.Rate4%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="my-2 flex items-center gap-2">
-                                        <span>3</span>
-                                        <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                            <div class="absolute left-0 top-0 h-full w-[30%] rounded bg-primary-color" style="width: @ViewBag.Rate3%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="my-2 flex items-center gap-2">
-                                        <span>2</span>
-                                        <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                            <div class="absolute left-0 top-0 h-full w-[20%] rounded bg-primary-color" style="width: @ViewBag.Rate2%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="my-2 flex items-center gap-2">
-                                        <span>1</span>
-                                        <div class="relative h-5 w-full overflow-hidden rounded bg-primary-rgba">
-                                            <div class="absolute left-0 top-0 h-full w-[10%] rounded bg-primary-color" style="width: @ViewBag.Rate1%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex gap-5">
-                                <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                    <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
-                                </div>
-                                <form class="form-review flex w-full flex-col gap-2" method="GET">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-sm uppercase">Your Valoration:</span>
-                                        <div id="rater"></div>
-                                        <input name="ratingvalue" class="rating-value hidden" type="number" value="" />
-                                    </div>
-                                    <div class="h-20">
-                                        <textarea name="reviewvalue" class="input resize-none" placeholder="Add a review..."
-                                                  required></textarea>
-                                    </div>
                                     <div>
-                                        <button class="btn-effect rounded-lg bg-primary-color p-2 font-bold text-white" type="submit">
-                                            <span>Post review</span>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <form class="my-5 flex flex-col xs:flex-row xs:items-center xs:justify-between">
-                                <span class="text-lg font-bold uppercase">Reviews</span>
-                                <select class="nice-select select order-by">
-                                    <option value="0">Most recent</option>
-                                    <option value="1">Oldest</option>
-                                    <option value="2">5 &#x2605;</option>
-                                    <option value="3">4 &#x2605;</option>
-                                    <option value="4">3 &#x2605;</option>
-                                    <option value="5">2 &#x2605;</option>
-                                    <option value="6">1 &#x2605;</option>
-                                </select>
-                            </form>
-                            <div class="mt-5">
-                                @if (ViewBag.Comment.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.Comment)
-                                    {
-                                        foreach (var ac in ViewBag.Account)
+                                        @if (item.Quantity > 0)
                                         {
-                                            if (item.AccountCode == ac.AccountCode)
-                                            {
-                                                <div class="my-4">
-                                                    <div class="flex gap-5">
-                                                        <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                                            <img class="h-full w-full object-cover" src="@ac.Avatar" alt="Avatar" />
-                                                        </div>
-                                                        <div>
-                                                            <div class="flex items-center gap-2">
-                                                                <a class="font-bold hover:text-primary-color" href="#">@ac.FirstName @ac.LastName</a>
-                                                                <span class="text-xs text-slate-400">@item.CommentTime</span>
-                                                            </div>
-                                                            <div class="flex">
-                                                                <!-- Các ngôi sao và điều kiện đánh giá tương tự như trước -->
-                                                            </div>
-                                                            <p class="my-2">
-                                                                @item.CommentContent
-                                                            </p>
-                                                            <div class="flex items-center gap-3">
-                                                                <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                                                    <i class="bi bi-pencil-square flex"></i>
-                                                                    <span>Edit</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
+                                            <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
                                         }
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @if (ViewBag.Relate.Count > 1)
-    {
-        <div class="related-products container mx-auto my-5 px-2 sm:px-8">
-            <div class="liner-container mt-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
-                <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
-                    Related Products
-                </h1>
-            </div>
-            <div class="swiper-container">
-                <div class="swiper swiper-cards group relative flex items-center py-5">
-                    <div class="swiper-wrapper">
-                        @{ int i = 1;}
-                        @foreach (var item in ViewBag.Relate)
-                        {
-                            if (item.ProductCode == ViewBag.Product.ProductCode) { continue; }
-                            i++;
-                            <div class="swiper-slide h-auto">
-                                <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                    <div class="absolute right-[10px] top-[10px]">
-                                        <div class="p-[2px]">
-                                            <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                               href="javascript:void(0)">
-                                                <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                                            </a>
-                                        </div>
-                                        <div class="p-[2px]">
-                                            <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
-                                               href="javascript:void(0)" data-target=".quick-view-modal">
-                                                <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
-                                            </a>
-                                        </div>
+                                        else
+                                        {
+                                            <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
+                                        }
                                     </div>
+                                </div>
+                                <div class="my-1">
+                                    <a class="clamp break-all font-medium" href="#">
+                                        @item.ProductName
+                                    </a>
+                                </div>
+                                <div class="my-1">
+                                    <p class="clamp-2 text-sm text-gray-400">
+                                        @item.Description
+                                    </p>
+                                </div>
+
+                                <div class="my-1">
+                                    @*<span class="text-lg font-bold">@product.Price </span>*@
+                                    @*định dạng tiền vn đxxx.xxx.xxx*@
+                                    @{ int d = 0;}
                                     @foreach (var pro in ViewBag.RelatePromotion)
                                     {
                                         if (pro.PromotionCode == item.PromotionCode)
                                         {
                                             if (pro.EndDate < DateTime.Now) { break; }
-                                            <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
-                                                <span class="text-md text-center font-semibold uppercase text-white">
-                                                    @pro.PromotionPercentage% Off
-                                                </span>
-                                            </div>
+                                            d++;
+                                            <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price - pro.PromotionPercentage * item.Price / 100)</span>
+                                            <span class="text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", item.Price)</span>
                                             break;
                                         }
                                     }
-                                    <div class="h-[190px] overflow-hidden rounded-lg">
-                                        <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                            <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
-                                        </a>
-                                    </div>
-                                    <div class="my-2 flex justify-between">
-                                        <div class="flex">
-                                            @if (item.Rate == 0)
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                            }
-                                            else if (item.Rate > 0 && item.Rate <= 1)
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                            }
-                                            else if (item.Rate > 1 && item.Rate <= 2)
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                            }
-                                            else if (item.Rate > 2 && item.Rate <= 3)
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                            }
-                                            else if (item.Rate > 3 && item.Rate <= 4)
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
-                                            }
-                                            else
-                                            {
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                                <i class="bi bi-star-fill flex text-base text-star"></i>
-                                            }
-                                        </div>
-                                        <div>
-                                            @if (item.Quantity > 0)
-                                            {
-                                                <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="my-1">
-                                        <a class="clamp break-all font-medium" href="#">
-                                            @item.ProductName
-                                        </a>
-                                    </div>
-                                    <div class="my-1">
-                                        <p class="clamp-2 text-sm text-gray-400">
-                                            @item.Description
-                                        </p>
-                                    </div>
-
-                                    <div class="my-1">
-                                        @*<span class="text-lg font-bold">@product.Price </span>*@
-                                        @*định dạng tiền vn đxxx.xxx.xxx*@
-                                        @{ int d = 0;}
-                                        @foreach (var pro in ViewBag.RelatePromotion)
-                                        {
-                                            if (pro.PromotionCode == item.PromotionCode)
-                                            {
-                                                if (pro.EndDate < DateTime.Now) { break; }
-                                                d++;
-                                                <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price - pro.PromotionPercentage * item.Price / 100)</span>
-                                                <span class="text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", item.Price)</span>
-                                                break;
-                                            }
-                                        }
-                                        @if (d == 0)
-                                        {
-                                            <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price)</span>
-                                        }
-                                    </div>
-                                    <div class="mt-auto">
-                                        <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                                           href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                            <span class="font-bold uppercase text-white">View details</span>
-                                        </a>
-                                    </div>
+                                    @if (d == 0)
+                                    {
+                                        <span class="text-lg font-bold">@string.Format("₫{0:#,0}", item.Price)</span>
+                                    }
+                                </div>
+                                <div class="mt-auto">
+                                    <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                                       href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
+                                        <span class="font-bold uppercase text-white">View details</span>
+                                    </a>
                                 </div>
                             </div>
-                            if (i == 8) { break; }
-                        }
-                    </div>
-                    <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
-                        &#10095;
-                    </div>
-                    <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
-                        &#10094;
-                    </div>
-                    <div class="swiper-pagination"></div>
+                        </div>
+                        if (i == 8) { break; }
+                    }
                 </div>
+                <div class="button-next btn-slider-1 transition-all-300 -right-16 group-hover:right-4">
+                    &#10095;
+                </div>
+                <div class="button-prev btn-slider-1 transition-all-300 -left-16 group-hover:left-4">
+                    &#10094;
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
-    }
-    <div class="calculate-shipping-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
-        <div class="my-10 flex w-full justify-center">
-            <div class="modal-content relative mx-3 w-[900px] min-w-[250px] scale-0 rounded-lg bg-body px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
-                <button class="btn-close-modal transition-all-300 absolute right-0 top-0 p-2 sm:right-[-10px] sm:top-[-10px] sm:rounded-lg sm:bg-primary-color sm:text-white sm:hover:bg-primary-hover">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex"></i>
-                </button>
-                <span class="block text-xl font-bold">Calculate Shipping Cost</span>
-                <form class="mt-5" action="#">
-                    <label class="flex w-full flex-col">
-                        <span class="text-sm">Postal Code</span>
-                        <div class="flex">
-                            <input class="input-rounded-l" type="text" placeholder="7400" />
-                            <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
-                                    type="submit">
-                                <span class="font-bold uppercase text-white">Calculate</span>
-                            </button>
-                        </div>
-                    </label>
-                </form>
-                <div class="mt-5 w-full text-sm">
-                    <div class="flex justify-between font-bold">
-                        <span>Shipping methods</span>
-                        <span>Cost</span>
+    </div>
+}
+<div class="calculate-shipping-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
+    <div class="my-10 flex w-full justify-center">
+        <div class="modal-content relative mx-3 w-[900px] min-w-[250px] scale-0 rounded-lg bg-body px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
+            <button class="btn-close-modal transition-all-300 absolute right-0 top-0 p-2 sm:right-[-10px] sm:top-[-10px] sm:rounded-lg sm:bg-primary-color sm:text-white sm:hover:bg-primary-hover">
+                <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex"></i>
+            </button>
+            <span class="block text-xl font-bold">Calculate Shipping Cost</span>
+            <form class="mt-5" action="#">
+                <label class="flex w-full flex-col">
+                    <span class="text-sm">Postal Code</span>
+                    <div class="flex">
+                        <input class="input-rounded-l" type="text" placeholder="7400" />
+                        <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
+                                type="submit">
+                            <span class="font-bold uppercase text-white">Calculate</span>
+                        </button>
                     </div>
-                    <div class="flex justify-between">
-                        <span>At Home</span>
-                        <span>$30.00</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Post Office</span>
-                        <span>$20.00</span>
-                    </div>
+                </label>
+            </form>
+            <div class="mt-5 w-full text-sm">
+                <div class="flex justify-between font-bold">
+                    <span>Shipping methods</span>
+                    <span>Cost</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>At Home</span>
+                    <span>$30.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>Post Office</span>
+                    <span>$20.00</span>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+    <div class="flex h-full w-full">
+        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+            <div class="w-full">
+                <div class="border-b-2 border-gray-200 p-5">
+                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                </div>
+                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                </button>
+            </div>
+
+
+            @Html.Action("RenderShoppingCart", "Products")
+
+            @Html.Action("RenderActionCart", "Products")
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+    <div class="flex h-full w-full">
+        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+            <div class="w-full">
+                <div class="border-b-2 border-gray-200 p-5">
+                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                </div>
+                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                </button>
+            </div>
 
 
 
+
+            <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
+
+                <div class="flex justify-between">
+                    <span class="text-lg uppercase">Subtotal:</span>
+                    <span class="text-lg font-semibold text-primary-color">$@ViewBag.TotalPrice</span>
+                </div>
+
+                <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                   href="@Url.Action("Index", "ShoppingCart") ">
+                    <span class="font-bold uppercase text-white">View Shopping Cart</span>
+                </a>
+                <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                   href="checkout.html">
+                    <span class="font-bold uppercase text-white">Checkout now</span>
+                </a>
+            </div>
+
+            <!--</div>
+            </div>
+            </div>-->
+
+            @*<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+                    <div class="flex h-full w-full">
+                        @Html.Action("RenderShoppingCart", "Products")
+
+                    </div>
+                </div>*@
+
+
+            @*<div>
+                @Html.Action("RenderShoppingCart", "Products")
+
+            </div>*@

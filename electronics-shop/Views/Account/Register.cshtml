@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-@section fixStyle{
+@section styles{
     <style>
         /*======= VALIDATOR =========*/
         .gap-4 {
@@ -55,58 +55,65 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="flex flex-col gap-4 form-1">
+    <div class="flex flex-col gap-4 form-1">
 
-                <div class="relative flex h-[40px] items-center form-group">
-                    <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
-                    <input class="input pl-10 form-control" id="fullname" name="fullname" type="text" placeholder="Name" required />
-                    @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                    <span class="form-message"></span>
-                </div>
-
-                <div class="relative flex h-[40px] items-center form-group">
-                    <i class="bi bi-phone absolute ml-2 flex text-[24px] text-gray-400"></i>
-                    <input class="input pl-10 form-control" id="phone" name="phonenumber" type="text" placeholder="Phone number" required />
-                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                    <span class="form-message"></span>
-                </div>
-
-                <div class="relative flex h-[40px] items-center form-group">
-                    <i class="bi bi-envelope absolute ml-2 flex text-[24px] text-gray-400"></i>
-                    <input class="input pl-10 form-control" id="email" name="email" type="text" placeholder="Email" required />
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    <span class="form-message"></span>
-                </div>
-
-                <div class="relative flex h-[40px] items-center form-group">
-                    <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-                    <input class="input pl-10 form-control" id="password" name="password" type="password" placeholder="Password" required />
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    <span class="form-message"></span>
-                </div>
-
-                <div class="relative flex h-[40px] items-center form-group">
-                    <i class="bi bi-lock-fill absolute ml-2 flex text-[24px] text-gray-400"></i>
-                    <input class="input pl-10 form-control" id="password-confirmation" name="confirmpassword" type="password"
-                           placeholder="Confirm Password" required />
-                    <span class="form-message"></span>
-                </div>
-
-                <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2" type="submit">
-                    <span class="font-bold uppercase text-white">Sign Up</span>
-                </button>
+        <div class="NameI" style="display:flex; justify-content: space-between; gap: 5px;">
+            <div class="relative flex h-[40px] items-center form-group">
+                <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
+                <input class="input pl-10 form-control" id="firstname" name="firstname" type="text" placeholder="First Name" required />
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                <span class="form-message"></span>
             </div>
-            <div class="my-2 flex items-center justify-between">
-                <label class="flex select-none items-center gap-2">
-                    <input class="checkbox" type="checkbox" />
-                    <span class="text-gray-title">
-                        I agree with all
-                        <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Terms of Use</a>
-                        &
-                        <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Privacy Policy</a>.
-                    </span>
-                </label>
+            <div class="relative flex h-[40px] items-center form-group">
+                <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
+                <input class="input pl-10 form-control" id="lastname" name="lastname" type="text" placeholder="Last Name" required />
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                <span class="form-message"></span>
             </div>
+        </div>
+        <div class="relative flex h-[40px] items-center form-group">
+            <i class="bi bi-phone absolute ml-2 flex text-[24px] text-gray-400"></i>
+            <input class="input pl-10 form-control" id="phone" name="phonenumber" type="text" placeholder="Phone number" required />
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            <span class="form-message"></span>
+        </div>
+
+        <div class="relative flex h-[40px] items-center form-group">
+            <i class="bi bi-envelope absolute ml-2 flex text-[24px] text-gray-400"></i>
+            <input class="input pl-10 form-control" id="email" name="email" type="text" placeholder="Email" required />
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <span class="form-message"></span>
+        </div>
+
+        <div class="relative flex h-[40px] items-center form-group">
+            <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
+            <input class="input pl-10 form-control" id="password" name="password" type="password" placeholder="Password" required />
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            <span class="form-message"></span>
+        </div>
+
+        <div class="relative flex h-[40px] items-center form-group">
+            <i class="bi bi-lock-fill absolute ml-2 flex text-[24px] text-gray-400"></i>
+            <input class="input pl-10 form-control" id="password-confirmation" name="confirmpassword" type="password"
+                   placeholder="Confirm Password" required />
+            <span class="form-message"></span>
+        </div>
+        <div class="my-2 flex items-center justify-between">
+            <label class="flex select-none items-center gap-2">
+                <input class="checkbox" type="checkbox" />
+                <span class="text-gray-title">
+                    I agree with all
+                    <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Terms of Use</a>
+                    &
+                    <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Privacy Policy</a>.
+                </span>
+            </label>
+        </div>
+        <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2" type="submit">
+            <span class="font-bold uppercase text-white">Sign Up</span>
+        </button>
+    </div>
+            
         }
         <span class="or text-gray-title flex h-[50px] items-center py-2">
             <span class="mx-2 text-sm uppercase">Or</span>
@@ -117,10 +124,10 @@
             </button>
         </div>
         <div class="mt-5 flex flex-col items-center justify-center border-t border-t-gray-400 pt-5">
-            <span>Do you already have an account?</span>
-            <a class="btn-effect rounded-lg bg-primary-color p-2 text-white" href="@Url.Action("Login", "Account")">
+            <p style="font-weight: 500;">Already have an account <a href="@Url.Action("Login", "Account")" style="color: #211d70; font-weight: 600">Login</a></p>
+            @*<a class="btn-effect rounded-lg bg-primary-color p-2 text-white" href="@Url.Action("Login", "Account")">
                 <span>Login</span>
-            </a>
+            </a>*@
         </div>
     </div>
 </div>
@@ -136,16 +143,15 @@
 </div>
 
 @section scriptsJS {
-    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
     <script src="~/Content/js/validator.js"></script>
-    <script src="~/Content/js/main.js"></script>
     <script>
         Validator({
             form: '#form-1',
             formGroupSelector: '.form-group',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#fullname'),
+                Validator.isRequired('#firstname'),
+                Validator.isRequired('#lastname'),
                 Validator.isPhone('#phone'),
                 Validator.isEmail('#email'),
                 Validator.validatePass('#password'),

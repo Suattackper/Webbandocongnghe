@@ -1055,8 +1055,33 @@ select {
     margin-top: 0.5rem;
 }
 
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-2-5 {
+    margin-top: 0.625rem; /* 10px */
+}
+
+.mt-3 {
+    margin-top: 0.75rem; /* 12px */
+}
+
+.mt-4 {
+    margin-top: 1rem; /* 16px */
+}
+
 .mt-5 {
     margin-top: 1.25rem;
+}
+
+.mt-6 {
+    margin-top: 1.5rem; /* 24px */
+}
+
+.mt-7 {
+    margin-top: 1.75rem;
+    /* 28px */
 }
 
 .mt-\[10px\] {
@@ -1782,6 +1807,11 @@ select {
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-blue-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .bg-blue-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -1794,6 +1824,11 @@ select {
 .bg-facebook {
     --tw-bg-opacity: 1;
     background-color: rgb(24 119 242 / var(--tw-bg-opacity));
+}
+
+.bg-youtube {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-google {
@@ -2161,6 +2196,11 @@ select {
     line-height: 1.5rem;
 }
 
+.text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+}
+
 .text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -2211,6 +2251,10 @@ select {
 
 .leading-7 {
     line-height: 1.75rem;
+}
+
+.leading-normal {
+    line-height: 1.5;
 }
 
 /*============ Validator message==============*/

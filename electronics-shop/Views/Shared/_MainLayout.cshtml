@@ -1,6 +1,7 @@
 ﻿@using System.Web.Optimization
 @using electronics_shop.Models
-@{ Account account = (Account)Session["info"];}
+@{ Account account = (Account)Session["info"];
+    }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,15 +10,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="~/Content/images/svg/logo.svg" type="image/x-icon" />
-
-    <link rel="stylesheet" href="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.css" />
     <link rel="stylesheet" href="~/Content/cdn.jsdelivr.net/npm/bootstrap-icons%401.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.css" />
-    <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
-    <title>Besnik. - Electronics store</title>
 
-    @RenderSection("fixStyle", required: false)
+    <title>Besnik. - Electronics store</title>
+    @RenderSection("styles", required: false)
 </head>
 
 <body class="flex min-h-screen flex-col overflow-hidden bg-body font-poppins text-txt">
@@ -42,11 +40,11 @@
                                 <span class="font-semibold">Home</span>
                             </a>
                         </li>
-                        <li class="border-b border-gray-200">
-                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2 underlined-animated group"
+                        <li class="border-b border-gray-200 underlined-animated group relative">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2 "
                                  aria-expanded="false" role="menu">
-                                <i class="bi bi-person mr-3 flex text-xl text-primary-color"></i>
-                                <a href="@Url.Action("Register", "Account")" class="font-semibold" style="color: #011638;">Sign Up</a>
+                                <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
+                                <a href="@Url.Action("Login", "Account")" class="font-semibold " style="color: #011638;">Sign In</a>
                             </div>
                         </li>
                         <li class="border-b border-gray-200">
@@ -77,7 +75,7 @@
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Robot Cleaner</a>
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Ergonic Chair</a>
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Air Purifier</a>
-                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Scale</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Scale</a> grd  12
                             </div>
                         </li>
                         <li class="border-b border-gray-200">
@@ -202,15 +200,17 @@
                         <div class="flex cursor-pointer select-none items-center gap-1 relative">
                             @if (Session["info"] != null)
                             {
-                                <div class="group relative hidden lg:flex">
-                                    <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.7rem;">        
-                                        <span>@account.FullName<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i></span>
+                                <div class="group relative hidden lg:flex" style="width: 115px;">
+                                    <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.9rem;">
+                                        <span class="font-semibold text-white" style="color: #011638;">
+                                            @account.FirstName<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i>
+                                        </span>
                                     </div>
                                     <div class="transition-all-300 invisible absolute top-full z-30 w-[120%] pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
                                         <div class="arrow relative">
                                             <ul class="overflow-hidden rounded-md bg-white p-[6px] shadow-custom-1">
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("EditProfile", "Account")" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                    <a href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
                                                             <span>My Account</span>
@@ -218,7 +218,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("ChangePassword", "Account")" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
+                                                    <a href="@Url.Action("ChangePassword", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-key flex text-xl text-primary-color"></i>
                                                             <span>Change password</span>
@@ -227,7 +227,7 @@
                                                 </li>
                                                 <li class="hover:font-semibold flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                     <i class="bi bi-arrow-right-circle-fill flex text-xl text-primary-color"></i>
-                                                        @Html.ActionLink("Log Out", "Logout", "Account")
+                                                    @Html.ActionLink("Log Out", "Logout", "Account")
                                                 </li>
                                             </ul>
                                         </div>
@@ -237,7 +237,7 @@
                             else
                             {
                                 <div class="flex cursor-pointer select-none items-center gap-1">
-                                    <a href="~/Account/Register" class="font-semibold text-white" style="color: #011638;">Sign Up</a>
+                                    <a href="~/Account/Login" class="font-semibold text-white" style="color: #011638;">Sign In</a>
                                 </div>
 
                             }
@@ -535,23 +535,23 @@
                             </div>
                         </form>
                         <div class="flex gap-2 py-2">
-                            <div class="relative h-8 w-8 overflow-hidden rounded-full">
-                                <a class="instagram-before flex h-8 w-8 items-center justify-center bg-gray-rgba text-center text-white"
+                            <div class="relative h-8 w-8 overflow-hidden rounded-full" style="background-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                                <a class="instagram-before flex h-8 w-8 items-center justify-center text-center text-white"
                                    href="#">
                                     <i class="bi bi-instagram relative z-[2] flex"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-facebook">
+                            <div class="transition-all-300 h-8 w-8 rounded-full bg-facebook">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-facebook flex text-white"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-twitter">
+                            <div class="transition-all-300 h-8 w-8 rounded-full bg-twitter">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-twitter flex text-white"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-youtube">
+                            <div class="transition-all-300 h-8 w-8 rounded-full" style="background-color: #ff0000;">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-youtube flex text-white"></i>
                                 </a>
@@ -570,14 +570,10 @@
 
     <script src="~/Content/unpkg.com/popperjs/core.js"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
-    <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
     <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
-    <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
-    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-    <script src="~/Content/js/main.js"></script>
 
     @RenderSection("scriptsJS", required: false);
-
+    <script src="~/Content/js/main.js"></script>
 </body>
 
 </html>

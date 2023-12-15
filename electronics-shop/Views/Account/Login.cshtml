@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-@section fixStyle{
+@section styles{
     <style>
         /*======= VALIDATOR =========*/
         .gap-4 {
@@ -108,10 +108,7 @@
             </button>
         </div>
         <div class="mt-5 flex flex-col items-center justify-center border-t border-t-gray-400 pt-5">
-            <span>Don't have a account?</span>
-            <a class="btn-effect rounded-lg bg-primary-color p-2 text-white" href="@Url.Action("Register", "Account")">
-                <span>Create one</span>
-            </a>
+            <p style="font-weight: 500;">Don't have an account?<a href="@Url.Action("Register", "Account")" style="color: #211d70; font-weight: 600"> Create one</a></p>
         </div>
     </div>
 </div>
@@ -127,9 +124,7 @@
 </div>
 
 @section scriptsJS {
-    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
     <script src="~/Content/js/validator.js"></script>
-    <script src="~/Content/js/main.js"></script>
     <script>
         Validator({
             form: '#form-1',

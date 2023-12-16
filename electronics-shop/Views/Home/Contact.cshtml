@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
+@using electronics_shop.Models
 
 <div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
     <ul class="flex flex-wrap items-center gap-1">
@@ -90,7 +91,7 @@
             <h1 class="inline-block pb-3 text-xl font-bold uppercase">
                 Leave a Message
             </h1>
-            <form class="form-leave-message flex flex-col gap-5" action="@Url.Action("Contact", "Home")" method="post">
+            <form id="contactForm" class="form-leave-message flex flex-col gap-5" action="@Url.Action("Contact", "Home")" method="post">
                 <div>
                     <input class="input" name="name" type="text" placeholder="Your Name" required />
                 </div>
@@ -99,6 +100,17 @@
                 </div>
                 <div class="h-32">
                     <textarea class="input h-full resize-none" name="message" placeholder="Write your message here..." required></textarea>
+                </div>
+                <div>
+                    @if (Session["info"] != null)
+                    {
+                        Account account = (Account)Session["info"];
+                        <input class="input" name="accountcode" type="hidden" value="@account.AccountCode" />
+                    }
+                    else
+                    {
+                        <input class="input" name="accountcode" type="hidden" value="null" />
+                    }
                 </div>
                 <div>
                     <button class="btn-view-shopping-cart btn-effect transition-all-300 flex items-center justify-center rounded-lg bg-primary-color p-4"
@@ -110,3 +122,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        var accountCodeInput = document.getElementsByName('accountcode')[0];
+        if (accountCodeInput.value === 'null') {
+            alert('Please log in before sending a message.');
+            event.preventDefault(); // Ngăn chặn form từ việc submit
+        }
+    });
+</script>

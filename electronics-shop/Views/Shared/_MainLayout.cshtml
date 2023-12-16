@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+@using electronics_shop.Models
+@{ Account account = (Account)Session["info"];
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,6 +24,105 @@
 </head>
 
 <body class="flex min-h-screen flex-col overflow-hidden bg-body font-poppins text-txt">
+
+    <!--=============== MENU OFFCANVAS - BEGIN : thiết bị di động ==============-->
+    <div class="menu-mob modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+        <div class="flex h-full w-full">
+            <div class="modal-content transition-all-300 relative left-[-999px] mr-auto flex h-full w-[288px] min-w-[250px] flex-col bg-white">
+                <div class="w-full bg-secondary-color">
+                    <button class="btn-close-modal transition-all-300 absolute top-5 right-5 p-[3px] text-white">
+                        <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                    </button>
+                    <div class="py-12">
+                        <img src="~/Content/images/svg/logo.svg" alt="Besnik." />
+                    </div>
+                </div>
+                <nav class="h-full w-full overflow-auto bg-white">
+                    <ul class="metismenu">
+                        <li class="border-b border-gray-200">
+                            <a class="flex select-none items-center p-2" href="index.html">
+                                <i class="bi bi-house-door mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Home</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200 underlined-animated group relative">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2 "
+                                 aria-expanded="false" role="menu">
+                                <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
+                                <a href="@Url.Action("Login", "Account")" class="font-semibold " style="color: #011638;">Sign In</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="btn-open-modal cursor-pointer p-2" data-target=".wishlist-modal">
+                                <div class="pointer-events-none flex cursor-pointer select-none items-center">
+                                    <i class="bi bi-heart mr-3 flex text-xl text-primary-color"></i>
+                                    <span class="font-semibold">Wishlist</span>
+                                    <span class="badge ml-auto h-[22px] min-w-[22px] px-[6px]">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="btn-open-modal cursor-pointer p-2" data-target=".shopping-cart-modal">
+                                <div class="pointer-events-none flex cursor-pointer select-none items-center">
+                                    <i class="bi bi-cart mr-3 flex text-xl text-primary-color"></i>
+                                    <span class="font-semibold">Shopping Cart</span>
+                                    <span class="badge ml-auto h-[22px] min-w-[22px] px-[6px]">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false" role="menu">
+                                <i class="bi bi-motherboard mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Smarthome</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Robot Cleaner</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Ergonic Chair</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Air Purifier</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Scale</a> grd  12
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false" role="menu">
+                                <i class="bi bi-mouse mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Computer Accessories</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Power Bank</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Laptop Backpacks</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Pen</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Keyboards</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false" role="menu">
+                                <i class="bi bi-pc-display mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Gaming Gear</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Virtual Glasses</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Handheld Console</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Gaming Headphone</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Play Station</a>
+                            </div>
+                        </li>
+
+                        <li class="border-b border-gray-200">
+                            <a class="flex select-none items-center p-2" href="contact-us.html">
+                                <i class="bi bi-telephone mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Contact Us</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--====================:: END ::=====================-->
+
     <header class="header-section relative z-30 shadow-custom-1">
         <div class="hidden bg-secondary-color sm:flex">
             <div class="container mx-auto grid h-full grid-cols-12 px-2 py-[6px] sm:px-8" style="background-color: #011638;">
@@ -99,7 +202,52 @@
                         </div>
                     </div>
                     <div class="group relative hidden lg:flex">
-                        <div class="flex cursor-pointer select-none items-center gap-1">
+                        <div class="flex cursor-pointer select-none items-center gap-1 relative">
+                            @if (Session["info"] != null)
+                            {
+                                <div class="group relative hidden lg:flex" style="width: 115px;">
+                                    <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.9rem;">
+                                        <span class="font-semibold text-white" style="color: #011638;">
+                                            @account.FirstName<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i>
+                                        </span>
+                                    </div>
+                                    <div class="transition-all-300 invisible absolute top-full z-30 w-[120%] pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
+                                        <div class="arrow relative">
+                                            <ul class="overflow-hidden rounded-md bg-white p-[6px] shadow-custom-1">
+                                                <li class="hover:font-semibold">
+                                                    <a href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                        <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                            <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
+                                                            <span>My Account</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="hover:font-semibold">
+                                                    <a href="@Url.Action("ChangePassword", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
+                                                        <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                            <i class="bi bi-key flex text-xl text-primary-color"></i>
+                                                            <span>Change password</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="hover:font-semibold flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                    <i class="bi bi-arrow-right-circle-fill flex text-xl text-primary-color"></i>
+                                                    @Html.ActionLink("Log Out", "Logout", "Account")
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="flex cursor-pointer select-none items-center gap-1">
+                                    <a href="@Url.Action("Login", "Account")" class="font-semibold text-white" style="color: #011638;">Sign In</a>
+                                </div>
+
+                            }
+                        </div>
+                        @*<div class="flex cursor-pointer select-none items-center gap-1">
                             <span class="font-semibold text-white" style="color: #011638;">My account</span>
                             <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-sm text-white group-hover:rotate-180"
                                style="color: #011638;"></i>
@@ -125,7 +273,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>

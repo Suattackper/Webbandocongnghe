@@ -1,0 +1,265 @@
+﻿@model electronics_shop.Models.Account
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@{
+    string dateValue = string.Empty;
+    if (Model != null && Model.CreateAt != null && Model.CreateAt.HasValue)
+    {
+        dateValue = Model.CreateAt.Value.Date.ToString("yyyy/MM/dd");
+    }
+}
+
+@section styles{
+    <link rel="stylesheet" href="~/Content/libraries/nice-select2/nice-select2.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <style>
+        /*======= VALIDATOR =========*/
+        .gap-4 {
+            gap: 1.7rem;
+        }
+
+        .form-group.invalid .form-control {
+            border-color: #f33a58;
+        }
+
+        .form-group.invalid .form-message {
+            color: #f33a58;
+        }
+
+        .form-message {
+            word-break: break-all;
+            font-size: 0.7rem;
+            line-height: 1.5rem;
+            padding: 4px 0 0;
+            display: block;
+            word-break: normal;
+            position: absolute;
+            top: 37px;
+            left: 7px
+        }
+
+        /*==========================*/
+    </style>
+}
+
+<div class="container mx-auto my-5 px-2 sm:px-8">
+    <div class="tabs-container grid grid-cols-12 gap-2">
+
+        @Html.Partial("Dashboard")
+
+        <div class="tabs-content col-span-12 lg:col-span-8">
+            <div class="tab-content active flex h-full flex-col gap-5 rounded bg-white p-5">
+                <span class="block text-xl font-bold">My Account</span>
+
+                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { @id = "form-1", @class = "grid grid-cols-12 gap-2", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.AccountCode)
+                    @Html.HiddenFor(model => model.CreateAt)
+                    @Html.HiddenFor(model => model.FirstName)
+                    @Html.HiddenFor(model => model.LastName)
+                    @Html.HiddenFor(model => model.Email)
+                    @Html.HiddenFor(model => model.PhoneNumber)
+                    @Html.HiddenFor(model => model.Avatar)
+                    @Html.HiddenFor(model => model.Password)
+
+                    @*<div class="mb-4 form-group">
+                            @Html.EditorFor(model => model.AccountCode, new { htmlAttributes = new { @class = "form-control", @id = "account-code", @type = "hidden", @readonly = "readonly" } })
+                        </div>*@
+                    <div class="col-span-12 xs:col-span-6 form-group">
+                        <label class="flex flex-col text-sm">
+                            First name
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "input h-10", @id = "firstName", @placeholder = "Nhan" } })
+                            <span class="form-message"></span>
+                        </label>
+                    </div>
+                    <div class="col-span-12 xs:col-span-6 form-group">
+                        <label class="flex flex-col text-sm">
+                            Last name
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "input h-10", @id = "firstName", @placeholder = "Nguyen Hoang" } })
+                            <span class="form-message"></span>
+                        </label>
+                    </div>
+                    <div class="col-span-12 xs:col-span-6 form-group">
+                        <label class="flex flex-col text-sm">
+                            Telephone
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input input-number h-10", @id = "phone", @placeholder = "0325617812", @type = "number" } })
+                            <span class="form-message"></span>
+                        </label>
+                    </div>
+                    <div class="col-span-12 xs:col-span-6">
+                        <label class="flex flex-col text-sm">
+                            Date attended
+                            @Html.EditorFor(model => model.CreateAt, new { htmlAttributes = new { @class = "input input-number h-10", @id = "attendDate", @Value = dateValue, @placeholder = "yyyy/mm/dd" } })
+
+                        </label>
+                    </div>
+                    <div class="col-span-12 form-group">
+                        <label class="flex flex-col text-sm">
+                            Email
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input h-10", @id = "email", @placeholder = "demo123@gmail.com" } })
+                            <span class="form-message"></span>
+                        </label>
+                    </div>
+                    <div class="col-span-12">
+                        <button class="btn-effect w-full rounded-lg bg-primary-color p-2 font-bold uppercase text-white"
+                                type="submit">
+                            <span class="text-center">Save Changes</span>
+                        </button>
+                    </div>
+                }
+
+                <div class="flex flex-col gap-2">
+                    <a class="btn-open-modal transition-all-300 rounded-lg border bg-slate-100 p-2 hover:bg-slate-200"
+                       href="javascript:void(0)" data-target=".deactivate-account-modal">
+                        <div class="pointer-events-none flex items-center justify-between gap-2">
+                            <div>
+                                <i class="bi bi-person-x-fill"></i>
+                                <span>Deactivate Account</span>
+                            </div>
+                            <i class="bi bi-arrow-right-short flex text-2xl text-primary-color"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="deactivate-account-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
+    <div class="my-10 flex w-full justify-center">
+        <div class="modal-content transition-all-300 relative mx-3 w-[500px] min-w-[250px] scale-0 rounded-lg bg-white px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
+            <button class="btn-close-modal btn-reset-progressbar transition-all-300 absolute top-0 right-0 p-2 sm:top-[-10px] sm:right-[-10px] sm:rounded-lg sm:bg-primary-color sm:text-white sm:hover:bg-primary-hover"
+                    data-target=".step-deactivate">
+                <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex"></i>
+            </button>
+            <span class="mb-5 block text-xl font-bold">Deactivate Account</span>
+            <form class="step-container step-deactivate" action="javascript:void(0)">
+                <div class="progressbar-container mb-4 flex flex-row items-center justify-between gap-2">
+                    <div class="step-number">
+                        <div class="transition-all-300 active flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-current">
+                            <span class="text-lg font-bold">1</span>
+                        </div>
+                    </div>
+                    <div class="progressbar relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                        <div class="transition-all-300 absolute h-full w-0 rounded-full bg-primary-color"></div>
+                    </div>
+                    <div class="step-number">
+                        <div class="transition-all-300 flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-current">
+                            <span class="text-lg font-bold">2</span>
+                        </div>
+                    </div>
+                    <div class="progressbar relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                        <div class="transition-all-300 absolute h-full w-0 rounded-full bg-primary-color"></div>
+                    </div>
+                    <div class="step-number">
+                        <div class="transition-all-300 flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-current">
+                            <span class="text-lg font-bold">3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-content active hidden flex-col gap-2">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Confirm Password</span>
+                        <input class="input" type="password" />
+                    </label>
+                    <a class="btn-next-step btn-effect ml-auto w-max rounded-lg bg-primary-color p-2 px-3 font-bold uppercase text-white"
+                       href="javascript:void(0)">
+                        <span class="text-center">Next</span>
+                    </a>
+                </div>
+                <div class="step-content hidden flex-col gap-2">
+                    <span>Tell us the reason for your decision (Optional)</span>
+                    <div class="h-32">
+                        <textarea class="input h-full resize-none" placeholder="Write your message here..."></textarea>
+                    </div>
+                    <div class="flex justify-between">
+                        <a class="btn-prev-step btn-effect rounded-lg bg-primary-color p-2 px-3 font-bold uppercase text-white"
+                           href="javascript:void(0)">
+                            <span class="text-center">Previous</span>
+                        </a>
+                        <button class="btn-next-step btn-effect rounded-lg bg-primary-color p-2 px-3 font-bold uppercase text-white"
+                                type="submit">
+                            <span class="text-center">Submit</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="step-content hidden flex-col gap-2">
+                    <div class="flex flex-col items-center gap-2 text-center">
+                        <div class="max-h-[200px] max-w-[200px]">
+                            <img class="h-full w-full" src="images/svg/deactivate-account.svg" alt="deactivate-account" />
+                        </div>
+                        <h1 class="text-2xl uppercase text-primary-color">
+                            Delete Account
+                        </h1>
+                        <p>
+                            You have started the process of deleting your account.
+                            <br />
+                            We are sorry you made this decision, you will receive an email
+                            when your account has been fully deleted.
+                        </p>
+                    </div>
+                    <a class="btn-close-modal btn-reset-progressbar btn-effect ml-auto w-max rounded-lg bg-primary-color p-2 px-3 font-bold uppercase text-white"
+                       href="javascript:void(0)" data-target=".step-deactivate">
+                        <span class="text-center">Close</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>  
+
+
+@*<div class="loader fixed z-[999] flex h-screen w-screen items-center justify-center bg-body">
+    <div class="loader-content flex flex-col items-center gap-2">
+        <span class="text-3xl font-semibold text-gray-200">Besnik.</span>
+        <div class="flex h-1 w-40 gap-1 overflow-hidden bg-gray-200">
+            <div class="animation-loader h-full w-20 bg-primary-color"></div>
+        </div>
+    </div>
+</div>*@
+
+@section scriptsJS{
+    <script src="~/Content/libraries/nice-select2/nice-select2.js"></script>
+    <script src="~/Content/libraries/mixitup/mixitup.min.js"></script>
+    <script src="~/Content/js/validator.js"></script>
+    <script>
+        Validator({
+            form: '#form-1',
+            formGroupSelector: '.form-group',
+            errorSelector: '.form-message',
+            rules: [
+                Validator.isRequired('#firstname'),
+                Validator.isRequired('#lastname'),
+                Validator.isPhone('#phone'),
+                Validator.isEmail('#email'),
+            ],
+        });
+    </script>
+
+    <script>
+        const inputImg = document.querySelector("#image");
+        const img = document.querySelector("#imagePreview");
+
+        function defaultBtnActive() {
+            inputImg.change();
+        }
+        inputImg.addEventListener("change", function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    const result = reader.result;
+                    img.src = result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+}

@@ -5,7 +5,7 @@
       <PropertyRef Name="AccountCode" />
     </Key>
     <Property Name="AccountCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="15" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
     <Property Name="Email" Type="varchar" MaxLength="30" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />

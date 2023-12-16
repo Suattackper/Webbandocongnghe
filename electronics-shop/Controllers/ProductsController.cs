@@ -224,10 +224,10 @@ namespace electronics_shop.Controllers
         }
         //add review
         [HttpPost]
-        public ActionResult Review(string ratingvalue, string reviewvalue, string productcode)
+        public ActionResult Review(string ratingvalue, string reviewvalue, string productcode, string accountcode)
         {
             Comment c = new Comment();
-            c.AccountCode = 1;
+            c.AccountCode = int.Parse(accountcode);
             c.ProductCode = productcode;
             c.CommentContent = reviewvalue;
             c.CommentTime = DateTime.Now;

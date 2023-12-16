@@ -1,0 +1,67 @@
+﻿@using electronics_shop.Models
+@model electronics_shop.Models.Account
+@{ Account account = (Account)Session["info"];}
+
+
+<div class="col-span-12 lg:col-span-4">
+    <div class="flex flex-col items-center gap-5 rounded bg-white p-5">
+        <div class="flex flex-col items-center">
+            <div class="relative">
+                <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200 shadow-md">           
+                        <img class="h-full w-full object-cover" id="imagePreview" src="~/Content/images/comments/profile_1.png" alt="profile" />
+                </div>
+            </div>
+            <div class="mt-2 text-center">
+                <span class="block font-bold mb-2">John Doe</span>
+                <label class="cursor-pointer mt-7">
+                    <span class="mt-4 text-base leading-normal px-4 py-2 bg-blue-500 text-white text-sm rounded-full">
+                        Select avatar
+                    </span>
+                    <input type='file' class="hidden" name="uploadFile" id="image" accept="image/jpeg, image/png, image/jpg" onclick="defaultBtnActive()" />
+                </label>
+            </div>
+        </div>
+        <ul class="w-full text-sm">
+            <li class="btn-tabs tab-active-2 transition-all-300 active border-t hover:bg-gray-100">
+                <a class="flex items-center gap-2 px-1 py-2" href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })">
+                    <i class="bi bi-person flex text-3xl text-primary-color"></i>
+                    <span>My Account</span>
+                </a>
+            </li>
+            <li class="btn-tabs tab-active-2 transition-all-300 border-t hover:bg-gray-100">
+                <a class="flex items-center gap-2 px-1 py-2" href="javascript:void(0)">
+                    <i class="bi bi-house-door flex text-3xl text-primary-color"></i>
+                    <span>My Address</span>
+                </a>
+            </li>
+            <li class="btn-tabs tab-active-2 transition-all-300 border-t hover:bg-gray-100">
+                <a class="flex items-center gap-2 px-1 py-2" href="javascript:void(0)">
+                    <i class="bi bi-clipboard flex text-3xl text-primary-color"></i>
+                    <span>My Order</span>
+                </a>
+            </li>
+            <li class="btn-tabs tab-active-2 transition-all-300 border-t hover:bg-gray-100">
+                <a class="flex items-center gap-2 px-1 py-2" href="javascript:void(0)">
+                    <i class="bi bi-credit-card flex text-3xl text-primary-color"></i>
+                    <span>Payment Methods</span>
+                </a>
+            </li>
+            <li class="btn-tabs tab-active-2 transition-all-300 border-t hover:bg-gray-100">
+                <a class="flex items-center px-1 py-2" href="javascript:void(0)">
+                    <div class="flex items-center gap-2">
+                        <i class="bi bi-headset flex text-3xl text-primary-color"></i>
+                        <span>Support Tickets</span>
+                    </div>
+                    <span class="badge ml-auto h-[22px] min-w-[22px] px-[6px]">1</span>
+                </a>
+            </li>
+            <li class="transition-all-300 border-t hover:bg-gray-100">
+                <a class="flex items-center gap-2 px-1 py-2" href="@Url.Action("Logout", "Account")">
+                    <i class="bi bi-box-arrow-left flex text-3xl text-primary-color"></i>
+                    <span>Log out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+

@@ -251,3 +251,6 @@ D:\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CoreCompi
 D:\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CopyComplete
 D:\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
 D:\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.pdb
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml

@@ -656,10 +656,34 @@ const loadTippy = () => {
 };
 
 /* -> iziToast <- */
+//const loadIziToast = () => {
+//  element = document.querySelector(".form-leave-message");
+//  element &&
+//    element.addEventListener("submit", (e) => {
+//      iziToast.show({
+//        message: "Message sent successfully!",
+//        position: "topRight",
+//        color: "rgb(34 197 94 / 70%",
+//        icon: "bi-check-circle-fill",
+//        iconColor: "#fff",
+//        titleColor: "#fff",
+//        messageColor: "#fff",
+//      });
+//    });
 const loadIziToast = () => {
   element = document.querySelector(".form-leave-message");
   element &&
     element.addEventListener("submit", (e) => {
+      // L?y giá tr? c?a tr??ng input có name là 'accountcode'
+      var accountCodeInput = document.getElementsByName('accountcode')[0];
+      
+      // Ki?m tra n?u giá tr? khác null
+      if (accountCodeInput && accountCodeInput.value === 'null') {
+        // N?u giá tr? không ph?i null, không hi?n th? thông báo
+        return;
+      }
+
+      // N?u giá tr? là null, hi?n th? thông báo
       iziToast.show({
         message: "Message sent successfully!",
         position: "topRight",
@@ -670,6 +694,7 @@ const loadIziToast = () => {
         messageColor: "#fff",
       });
     });
+
 
   element = document.querySelector(".resend-code");
   element &&

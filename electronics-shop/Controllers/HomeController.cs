@@ -51,14 +51,14 @@ namespace electronics_shop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Contact(string name, string email, string message)
+        public ActionResult Contact(string name, string email, string message, string accountcode)
         {
             Contact p = new Contact();
             p.FullName = name;
             p.Email = email;
             p.Message = message;
             //sử dụng cookie khi đăng nhập
-            p.AccountCode = 1;
+            p.AccountCode = int.Parse(accountcode);
             db.Contacts.Add(p);
             db.SaveChanges();
             return RedirectToAction("MessageSent", "Account");

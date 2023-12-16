@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.css" />
     <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
 
-    <link rel="stylesheet" href="~/Content/libraries/nice-select2/nice-select2.css" />
-    <link rel="stylesheet" href="~/Content/libraries/rater-js/rater-js.css" />
 
     <link rel="stylesheet" href="~/Content/css/style.css" />
+
+    @RenderSection("styles", required: false)
+
     <title>Besnik. - Electronics store</title>
 </head>
 
@@ -1039,10 +1040,7 @@
     <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
     <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
 
-    <script src="~/Content/unpkg.com/swiper@11.0.4/swiper-bundle.min.js"></script>
-    <script src="~/Content/libraries/nice-select2/nice-select2.js"></script>
-    <script src="~/Content/libraries/rater-js/rater-js.js" defer></script>
-    <script src="~/Content/js/main.js"></script>
+    @RenderSection("scriptsJS", required: false)
 
     <script src="~/Content/js/main.js"></script>
 </body>

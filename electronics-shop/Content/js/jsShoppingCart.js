@@ -6,23 +6,28 @@ $(document).ready(function () {
         e.preventDefault();
         var id = $(this).data('id');
         var quatity = 1;
-        var tQuantity = $('#quantity_value').text();
+        var tQuantity = $('#quantity').val();
         if (tQuantity != '') {
             quatity = parseInt(tQuantity);
         }
 
-        alert(id + " " + quatity);
+        alert(id + " " + tQuantity);
 
         $.ajax({
             url: '/ShoppingCart/AddToCart',
             type: 'POST',
             data: { id: id, quantity: quatity },
             success: function (rs) {
-                if (rs.Success) {
+                if (rs.Success ) {
                     $('#checkout_items').html(rs.Count);
-               
+
 
                     alert(rs.msg);
+                } else {
+                    openLogin();
+                    alert(rs.msg);
+                 
+                    
                 }
             }
         });  
@@ -42,11 +47,7 @@ $(document).ready(function () {
     $('body').on('click', '.btn-wishlist', function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-        const heart_icon = e.target.children[0];
-
-        if (heart_icon.classList.contains("bi-heart")) {
-            heart_icon.classList.replace("bi-heart", "bi-heart-fill");
-            heart_icon.classList.add("text-red-400", "heartscale");
+      
             $.ajax({
                 url: '/WishList/AddToWishList',
                 type: 'POST',
@@ -62,11 +63,7 @@ $(document).ready(function () {
                 }
             });
         });
-        } else {
-            heart_icon.classList.replace("bi-heart-fill", "bi-heart");
-            heart_icon.classList.remove("text-red-400", "heartscale");
-        }
-       
+     
       
 
 
@@ -131,6 +128,27 @@ $(document).ready(function () {
     });
 
 });
+
+
+function openLogin(){
+    $.ajax({
+        url: '/Account/Login',
+        type: 'GET',
+        success: function (response) {
+
+            var modal = $('#login').html(response).modal();
+            modal.on('hidden.bs.modal', function(){
+                modal.remove();
+            });
+            alert("login");
+
+        }
+
+
+
+
+    });
+}
 
 
 function resetTotal(){

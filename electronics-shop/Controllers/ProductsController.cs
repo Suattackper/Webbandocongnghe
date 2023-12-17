@@ -1,16 +1,19 @@
 ﻿using electronics_shop.Models;
 using PagedList;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace electronics_shop.Controllers
 {
     public class ProductsController : Controller
     {
-        ECOMMERCEEntities db = new ECOMMERCEEntities();
+        ECOMMERCE5Entities db = new ECOMMERCE5Entities();
         // GET: Products
         public ActionResult Index()
         {
@@ -19,80 +22,28 @@ namespace electronics_shop.Controllers
         //Trang sp
         public ActionResult Shop(int page = 1, int pagesize = 9)
         {
-         
-          
             ViewBag.view = "Shop";
             ViewBag.danhmuc = "Shop";
             ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db == null)
             {
                 return View("Error");
             }
             //List<Product> data = db.Products.ToList();
-  
-            
-
             List<Product> data = (List<Product>)(from Product in db.Products select Product).ToList();
-            return View(data.ToPagedList(page,pagesize));
+            return View(data.ToPagedList(page, pagesize));
         }
-
-        public ActionResult RenderShoppingCart()
-        {
-            //var shoppingCart = GetShoppingCartData();
-            //if (shoppingCart != null)
-            //{
-            //    ViewBag.ShoppingCart = shoppingCart;
-
-            //}
-            //else
-            //{
-            //    return View("Error");
-            //}
-            ShoppingCart cart = (ShoppingCart)Session["Cart"];
-            if (cart != null)
-            {
-                return PartialView("_RenderShoppingCart",cart.Items);
-            }
-            return PartialView("_RenderShoppingCart");
-        }
-
-    
-
-      
-        public ActionResult RenderActionCart()
-        {
-            ShoppingCart cart = (ShoppingCart)Session["Cart"];
-
-            if (cart != null)
-            {
-             
-                
-
-                return PartialView("_ActionViewCart", cart.Items);
-            }
-
-            return PartialView("_ActionViewCart");
-        }
-
-        private IEnumerable<electronics_shop.Models.ShoppingCartItem> GetShoppingCartData()
-        {
-            if (Session["CartShop"] is List<electronics_shop.Models.ShoppingCartItem> carts)
-            {
-                return carts;
-            }
-            carts = new List<ShoppingCartItem>();
-            Session["CartShop"] = carts;
-            return carts;
-        }
-
-
         //Trang sp loại Smarthome
         public ActionResult Smarthome(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "Smarthome";
             ViewBag.danhmuc = "Smarthome";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -108,7 +59,9 @@ namespace electronics_shop.Controllers
             ViewBag.view = "Accessory";
             ViewBag.danhmuc = "Phụ kiện LapTop - PC";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -122,9 +75,11 @@ namespace electronics_shop.Controllers
         public ActionResult GamingGear(int page = 1, int pagesize = 9)
         {
             ViewBag.view = "GamingGear";
-            ViewBag.danhmuc = "GamingGear";
+            ViewBag.danhmuc = "Gaming Gear";
             ViewBag.Promotion = db.Promotions.ToList();
-            if (db.Products == null || db.Categories == null || db == null)
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
                 return View("Error");
             }
@@ -134,15 +89,6 @@ namespace electronics_shop.Controllers
                                                  select Product).ToList();
             return View("Shop", data.ToPagedList(page, pagesize));
         }
-
-        public dynamic GetViewBag()
-        {
-            return ViewBag;
-        }
-
-
-
-
         //Trang chi tiết sp
         public ActionResult Detail(string id)
         {
@@ -150,17 +96,11 @@ namespace electronics_shop.Controllers
             {
                 return View("Error");
             }
-            //List<Product> sanpham = db.Products.ToList();
-            //ProductDetail data = new ProductDetail();
-            //data.Product = db.Products.FirstOrDefault(p => p.ProductCode == id);
-            //data.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
             Product product = db.Products.FirstOrDefault(p => p.ProductCode == id);
             ViewBag.Product = product;
             ViewBag.Promotion = db.Promotions.FirstOrDefault(p => p.PromotionCode == product.PromotionCode && p.EndDate >= DateTime.Now);
-            List<ProductImg> productImgs = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
-            ViewBag.productImgsList = productImgs;
-            Category category = db.Categories.FirstOrDefault(p => p.CategoryCode == product.CategoryCode);
-            ViewBag.Category = category;
+            ViewBag.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
+            ViewBag.Category = db.Categories.FirstOrDefault(p => p.CategoryCode == product.CategoryCode);
             var comment = db.Comments.Where(p => p.ProductCode == id).ToList();
             ViewBag.Comment = comment;
             var account = db.Accounts.ToList();
@@ -172,7 +112,7 @@ namespace electronics_shop.Controllers
             int rate3 = 0;
             int rate4 = 0;
             int rate5 = 0;
-            if (comment.Count > 0)
+            if (comment.Count>0)
             {
                 foreach (var c in comment)
                 {
@@ -198,6 +138,151 @@ namespace electronics_shop.Controllers
             }
             //return View(data);
             return View(product);
+        }
+        //tìm kiếm sp
+        public ActionResult Search(string s, int page = 1, int pagesize = 9)
+        {
+            ViewBag.Search = s;
+            ViewBag.view = "Search";
+            ViewBag.danhmuc = "Shop";
+            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
+            {
+                return View("Error");
+            }
+            List<Product> data;
+            if (s == "" || s == null)
+            {
+                data = db.Products.ToList();
+            }
+            else
+            {
+                data = db.Products.Where(p => p.ProductName.Contains(s)).ToList();
+            }
+            return View("Shop", data.ToPagedList(page, pagesize));
+        }
+        //lọc sp
+        public ActionResult Fill(string with, string avai, string brand, string min, string max, string search, string view, string danhmuc, int page = 1, int pagesize = 9)
+        {
+            ViewBag.Search = search;
+            ViewBag.view = view;
+            ViewBag.Fill = "Fill";
+            ViewBag.danhmuc = danhmuc;
+            ViewBag.With = with;
+            ViewBag.Avai = avai;
+            ViewBag.brandd = brand;
+            ViewBag.Min = min;
+            ViewBag.Max = max;
+            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Category = db.Categories.ToList();
+            ViewBag.Brand = db.Brands.ToList();
+            if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
+            {
+                return View("Error");
+            }
+            List<Product> data = db.Products.ToList();
+            if (with == "with")
+            {
+                data = data.Where(p => db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now)).ToList();
+            }
+            if (avai == "avai")
+            {
+                data = data.Where(p => p.Quantity > 0).ToList();
+            }
+            if (brand != "ALL")
+            {
+                data = data.Where(p => db.Brands.Any(h => h.BrandCode == p.BrandCode && h.BrandName == brand)).ToList();
+            }
+            if (!string.IsNullOrEmpty(search))
+            {
+                data = data.Where(p => p.ProductName.Contains(search)).ToList();
+            }
+            if (view != "Shop")
+            {
+                data = data.Where(p => db.Categories.Any(h => h.CategoryCode == p.CategoryCode && h.CategoryName == view)).ToList();
+            }
+            if (!string.IsNullOrEmpty(min) && !string.IsNullOrEmpty(max))
+            {
+                decimal Min = decimal.Parse(min);
+                decimal Max = decimal.Parse(max);
+                //data = data.Where(p => p.Price >= Min && p.Price <= Max).ToList();
+                List<Product> d1 = data.Join(db.Promotions, product => product.PromotionCode, promotion => promotion.PromotionCode, (product, promotion) => new { product, promotion })
+                            .Where(x => (x.promotion.EndDate >= DateTime.Now && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || (x.promotion.EndDate < DateTime.Now && x.product.Price >= Min && x.product.Price <= Max))
+                            .Select(x => x.product)
+                            .ToList();
+                List<Product> d2 = data.Where(p => p.Promotion == null && p.Price >= Min && p.Price <= Max).ToList();
+                data = d1.Concat(d2).ToList();
+                //data = data.Join(db.Promotions, product => product.PromotionCode, promotion => promotion.PromotionCode, (product, promotion) => new { product, promotion })
+                //            .Where(x => (x.promotion == null && x.product.Price >= Min && x.product.Price <= Max) || (x.promotion != null && x.promotion.EndDate >= DateTime.Now && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || (x.promotion != null && x.promotion.EndDate < DateTime.Now && x.product.Price >= Min && x.product.Price <= Max))
+                //            .Select(x => x.product)
+                //            .ToList();
+            }
+            data = data.ToList();
+            return View("Shop", data.ToPagedList(page, pagesize));
+        }
+        //add review
+        [HttpPost]
+        public ActionResult Review(string ratingvalue, string reviewvalue, string productcode, string accountcode)
+        {
+            Comment c = new Comment();
+            c.AccountCode = int.Parse(accountcode);
+            c.ProductCode = productcode;
+            c.CommentContent = reviewvalue;
+            c.CommentTime = DateTime.Now;
+            c.Rate = double.Parse(ratingvalue);
+            db.Comments.Add(c);
+            db.SaveChanges();
+            List<Comment> data = db.Comments.Where(p => p.ProductCode == productcode).ToList();
+            double ratep = 0;
+            foreach (var i in data)
+            {
+                ratep = ratep + (double)i.Rate;
+            }
+            ratep = ratep / data.Count;
+            Product product = db.Products.FirstOrDefault(p => p.ProductCode == productcode);
+            product.Rate = ratep;
+            db.SaveChanges();
+            return RedirectToAction("Detail", new { id = productcode });
+        }
+
+        public ActionResult RenderShoppingCart()
+        {
+            //var shoppingCart = GetShoppingCartData();
+            //if (shoppingCart != null)
+            //{
+            //    ViewBag.ShoppingCart = shoppingCart;
+
+            //}
+            //else
+            //{
+            //    return View("Error");
+            //}
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return PartialView("_RenderShoppingCart", cart.Items);
+            }
+            return PartialView("_RenderShoppingCart");
+        }
+
+
+
+
+        public ActionResult RenderActionCart()
+        {
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+
+            if (cart != null)
+            {
+
+
+
+                return PartialView("_ActionViewCart", cart.Items);
+            }
+
+            return PartialView("_ActionViewCart");
         }
     }
 }

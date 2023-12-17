@@ -24,7 +24,7 @@
             <span class="font-bold uppercase text-white">View Shopping Cart</span>
         </a>
         <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-           href="checkout.html">
+           href="@Url.Action("Checkout","ShoppingCart")">
             <span class="font-bold uppercase text-white">Checkout now</span>
         </a>
 
@@ -35,8 +35,15 @@
             <span class="text-lg uppercase">Subtotal:</span>
             <span class="text-lg font-semibold text-primary-color">₫0</span>
         </div>
+        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("Index", "ShoppingCart") ">
+            <span class="font-bold uppercase text-white">View Shopping Cart</span>
+        </a>
+        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("Checkout","ShoppingCart")">
+            <span class="font-bold uppercase text-white">Checkout now</span>
+        </a>
 
-      
     }
 </div>
 

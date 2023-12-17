@@ -1,7 +1,13 @@
 ﻿@model electronics_shop.Models.Product
+@using electronics_shop.Models
+
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Content/libraries/nice-select2/nice-select2.css" />
+    <link rel="stylesheet" href="~/Content/libraries/rater-js/rater-js.css" />
 }
 
 
@@ -173,7 +179,7 @@
                     <div class="flex flex-wrap justify-start gap-5">
                         <div class="quantity inline-flex rounded-lg bg-white shadow">
                             <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                   type="number" value="1" />
+                                   type="number" id="quantity" value="1" />
                             <div class="flex w-5 flex-col justify-between">
                                 <button class="quantity-btn increment text-primary-color" type="button">
                                     <i class="bi bi-caret-up-fill"></i>
@@ -452,17 +458,64 @@
                                                             <span class="text-xs text-slate-400">@item.CommentTime</span>
                                                         </div>
                                                         <div class="flex">
-                                                            <!-- Các ngôi sao và điều kiện đánh giá tương tự như trước -->
+                                                            @if (item.Rate == 0)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 0 && item.Rate <= 1)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 1 && item.Rate <= 2)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 2 && item.Rate <= 3)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else if (item.Rate > 3 && item.Rate <= 4)
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                                <i class="bi bi-star-fill flex text-base text-star"></i>
+                                                            }
                                                         </div>
                                                         <p class="my-2">
                                                             @item.CommentContent
                                                         </p>
-                                                        <div class="flex items-center gap-3">
-                                                            <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
-                                                                <i class="bi bi-pencil-square flex"></i>
-                                                                <span>Edit</span>
-                                                            </div>
-                                                        </div>
+                                                        @*<div class="flex items-center gap-3">
+                                                                <div class="flex cursor-pointer items-center gap-1 text-sm text-slate-500 hover:text-primary-color">
+                                                                    <i class="bi bi-pencil-square flex"></i>
+                                                                    <span>Edit</span>
+                                                                </div>
+                                                            </div>*@
                                                     </div>
                                                 </div>
                                             </div>
@@ -470,6 +523,7 @@
                                     }
                                 }
                             }
+
                         </div>
                     </div>
                 </div>
@@ -704,6 +758,22 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        var accountCodeInput = document.getElementsByName('accountcode')[0];
+        if (accountCodeInput.value === 'null') {
+            alert('Please log in before sending a review.');
+            event.preventDefault(); // Ngăn chặn form từ việc submit
+        }
+    });
+</script>
+
+@section scriptsJS {
+    <script src="~/Content/unpkg.com/swiper@11.0.4/swiper-bundle.min.js"></script>
+    <script src="~/Content/libraries/nice-select2/nice-select2.js"></script>
+    <script src="~/Content/libraries/rater-js/rater-js.js" defer></script>
+    <script src="~/Content/js/main.js"></script>
+}
 
 <!--<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
     <div class="flex h-full w-full">
@@ -740,16 +810,15 @@
             <!--</div>
             </div>
             </div>-->
+@*<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+        <div class="flex h-full w-full">
+            @Html.Action("RenderShoppingCart", "Products")
 
-            @*<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-                    <div class="flex h-full w-full">
-                        @Html.Action("RenderShoppingCart", "Products")
-
-                    </div>
-                </div>*@
+        </div>
+    </div>*@
 
 
-            @*<div>
-                @Html.Action("RenderShoppingCart", "Products")
+@*<div>
+        @Html.Action("RenderShoppingCart", "Products")
 
-            </div>*@
+    </div>*@

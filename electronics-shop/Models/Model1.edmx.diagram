@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d423f22a4284e139a28d3fa9580faec" Name="Diagram1">
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Account" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.AccountAddress" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Brand" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Category" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Comment" Width="1.5" PointX="8.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Contact" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Delivery" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.OrderDetail" Width="1.5" PointX="8.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Order" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Payment" Width="1.5" PointX="0.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Product" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.ProductImg" Width="1.5" PointX="8.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCE5Model.Promotion" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__AccountAd__Accou__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Comment__Account__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Contact__Account__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Orders__AccountC__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Orders__AccountA__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK_Product_Brand" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Product__Categor__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Comment__Product__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK_Orders_DeliveryCode" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__OrderDeta__Produ__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Orders__PaymentC__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Orders__Promotio__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__Product__Promoti__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="ECOMMERCE5Model.FK__ProductIm__Produ__6754599E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

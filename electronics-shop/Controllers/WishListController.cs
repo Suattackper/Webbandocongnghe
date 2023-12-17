@@ -14,7 +14,7 @@ namespace electronics_shop.Controllers
             // GET: Cart
             public ActionResult Index()
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     return View(cart.Items);
@@ -24,7 +24,7 @@ namespace electronics_shop.Controllers
 
             public ActionResult Checkout()
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     return View(cart.Items);
@@ -33,7 +33,7 @@ namespace electronics_shop.Controllers
             }
             public ActionResult Partial_Wish_Cart()
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     return PartialView("_Partial_Wish_Cart", cart.Items);
@@ -44,7 +44,7 @@ namespace electronics_shop.Controllers
             [HttpGet]
             public ActionResult ShowCount()
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     return Json(new { Count = cart.Items.Count }, JsonRequestBehavior.AllowGet);
@@ -57,11 +57,11 @@ namespace electronics_shop.Controllers
             public ActionResult AddToWishList(string id, int quantity)
             {
                 var code = new { Success = false, msg = "", code = -1, Count = 0 };
-                ECOMMERCEEntities db = new ECOMMERCEEntities();
+            ECOMMERCE5Entities db = new ECOMMERCE5Entities();
                 var checkProduct = db.Products.FirstOrDefault(x => x.ProductCode == id);
                 if (checkProduct != null)
                 {
-                WishListCart cart = (WishListCart)Session["Cart"];
+                WishListCart cart = (WishListCart)Session["Wish"];
                     if (cart == null)
                     {
                         cart = new WishListCart();
@@ -90,7 +90,7 @@ namespace electronics_shop.Controllers
                     }
                     item.ToTalPrice = item.Quantity * item.Price;
                     cart.AddToCart(item, quantity);
-                    Session["Cart"] = cart;
+                    Session["Wish"] = cart;
                     code = new { Success = true, msg = "Thêm sản phẩm vào yêu thích thành công", code = 1, Count = cart.Items.Count };
                 }
                 return Json(code);
@@ -101,7 +101,7 @@ namespace electronics_shop.Controllers
             {
                 var code = new { Success = false, msg = "", code = -1, Count = 0 };
 
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     var checkProduct = cart.Items.FirstOrDefault(x => x.ProductId == id);
@@ -120,7 +120,7 @@ namespace electronics_shop.Controllers
             [HttpPost]
             public ActionResult Update(string id, int quantity)
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     cart.UpdateQuantity(id, quantity);
@@ -133,7 +133,7 @@ namespace electronics_shop.Controllers
             [HttpPost]
             public ActionResult DeleteAll()
             {
-            WishListCart cart = (WishListCart)Session["Cart"];
+            WishListCart cart = (WishListCart)Session["Wish"];
                 if (cart != null)
                 {
                     cart.ClearWish();

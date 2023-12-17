@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ECOMMERCEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="ECOMMERCE5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="AccountCode" />
     </Key>
     <Property Name="AccountCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="15" />
+    <Property Name="Password" Type="varchar" MaxLength="255" />
     <Property Name="Email" Type="varchar" MaxLength="30" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
@@ -311,7 +311,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ECOMMERCEModelStoreContainer">
+  <EntityContainer Name="ECOMMERCE5ModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccountAddress" EntityType="Self.AccountAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />

@@ -10,7 +10,7 @@ namespace electronics_shop.Controllers
 {
     public class HomeController : Controller
     {
-        ECOMMERCEEntities db = new ECOMMERCEEntities();
+        ECOMMERCE5Entities db = new ECOMMERCE5Entities();
         public ActionResult Index(/*string id*/)
         {
             //ViewBag.Id = id;

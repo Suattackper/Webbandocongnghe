@@ -1,4 +1,5 @@
 ﻿using electronics_shop.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,47 +52,69 @@ namespace electronics_shop.Controllers
 
         }
 
+
+        public ActionResult toLogin()
+        {
+            if (Session["info"] == null)
+            {
+                return RedirectToAction("login", "Account");
+
+            }
+            return View();
+        }
         [HttpPost]
         public ActionResult AddToCart(string id, int quantity)
         {
             var code = new { Success = false, msg = "", code = -1,Count = 0 };
-            ECOMMERCEEntities db = new ECOMMERCEEntities();
+            var erAc = new { Success = true, msg = "" };
+            ECOMMERCE5Entities db = new ECOMMERCE5Entities();
             var checkProduct = db.Products.FirstOrDefault(x => x.ProductCode == id);
-            if(checkProduct != null)
+          
+            if (Session["info"] == null)
             {
-                ShoppingCart cart = (ShoppingCart)Session["Cart"];
-                if (cart == null)
-                {
-                    cart = new ShoppingCart();
-                }
-                ShoppingCartItem item = new ShoppingCartItem
-                {
-                    ProductId = checkProduct.ProductCode,
-                    ProductName = checkProduct.ProductName,
-                    CategoryName = checkProduct.Category.CategoryName,
-                    Quantity = quantity
-                };
-                if (checkProduct.ProductImgs.FirstOrDefault(x => x.IsDeFault) == null)
-                {
-                    item.ProductImg = checkProduct.ImageProduct;
-                }
-                item.Price = (double)checkProduct.Price;
-                if (checkProduct.PromotionCode != null && checkProduct.Promotion.EndDate >= DateTime.Now)
-                {
-                    item.PromotionPrice = item.Price;
-                    item.Price = (double)(checkProduct.Price - (checkProduct.Price * checkProduct.Promotion.PromotionPercentage) / 100);
-                    
-                }
-                else
-                {
-                    item.PromotionPrice = 0;
-                }
-                item.ToTalPrice = item.Quantity * item.Price;
-                cart.AddToCart(item, quantity);
-                Session["Cart"] = cart;
-                code = new { Success = true, msg = "Thêm sản phẩm vào giỏ hàng thành công", code = 1 ,Count=cart.Items.Count};
+                erAc = new { Success = false, msg = "Vui lòng đăng nhập trước khi mua hàng" };
+                    ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                
+                return Json(erAc);
             }
-            return Json(code);
+            else
+            {
+                if (checkProduct != null)
+                {
+                    ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                    if (cart == null)
+                    {
+                        cart = new ShoppingCart();
+                    }
+                    ShoppingCartItem item = new ShoppingCartItem
+                    {
+                        ProductId = checkProduct.ProductCode,
+                        ProductName = checkProduct.ProductName,
+                        CategoryName = checkProduct.Category.CategoryName,
+                        Quantity = quantity
+                    };
+                    if (checkProduct.ProductImgs.FirstOrDefault(x => x.IsDeFault) == null)
+                    {
+                        item.ProductImg = checkProduct.ImageProduct;
+                    }
+                    item.Price = (double)checkProduct.Price;
+                    if (checkProduct.PromotionCode != null && checkProduct.Promotion.EndDate >= DateTime.Now)
+                    {
+                        item.PromotionPrice = item.Price;
+                        item.Price = (double)(checkProduct.Price - (checkProduct.Price * checkProduct.Promotion.PromotionPercentage) / 100);
+
+                    }
+                    else
+                    {
+                        item.PromotionPrice = 0;
+                    }
+                    item.ToTalPrice = item.Quantity * item.Price;
+                    cart.AddToCart(item, quantity);
+                    Session["Cart"] = cart;
+                    code = new { Success = true, msg = "Thêm sản phẩm vào giỏ hàng thành công", code = 1, Count = cart.Items.Count };
+                }
+                return Json(code);
+            }
         }
 
         [HttpPost]

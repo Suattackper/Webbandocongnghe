@@ -12,7 +12,7 @@ namespace electronics_shop.Controllers
 {
     public class Products1Controller : Controller
     {
-        private ECOMMERCEEntities db = new ECOMMERCEEntities();
+        private ECOMMERCE5Entities db = new ECOMMERCE5Entities();
 
         // GET: Products1
         public ActionResult Index()

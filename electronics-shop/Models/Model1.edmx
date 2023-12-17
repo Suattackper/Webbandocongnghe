@@ -4,13 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ECOMMERCE4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ECOMMERCE5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountCode" />
           </Key>
           <Property Name="AccountCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="15" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
@@ -148,7 +148,7 @@
           <Property Name="PromotionPercentage" Type="int" />
           <Property Name="EndDate" Type="datetime" />
         </EntityType>
-        <Association Name="FK__AccountAd__Accou__571DF1D5">
+        <Association Name="FK__AccountAd__Accou__3A81B327">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="AccountAddress" Type="Self.AccountAddress" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +316,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ECOMMERCE4ModelStoreContainer">
+        <EntityContainer Name="ECOMMERCE5ModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountAddress" EntityType="Self.AccountAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
@@ -330,7 +330,7 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductImg" EntityType="Self.ProductImg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__AccountAd__Accou__571DF1D5" Association="Self.FK__AccountAd__Accou__571DF1D5">
+          <AssociationSet Name="FK__AccountAd__Accou__3A81B327" Association="Self.FK__AccountAd__Accou__3A81B327">
             <End Role="Account" EntitySet="Account" />
             <End Role="AccountAddress" EntitySet="AccountAddress" />
           </AssociationSet>
@@ -391,13 +391,13 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ECOMMERCE4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ECOMMERCE5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountCode" />
           </Key>
           <Property Name="AccountCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -405,7 +405,7 @@
           <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="RequestCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateAt" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="AccountAddresses" Relationship="Self.FK__AccountAd__Accou__571DF1D5" FromRole="Account" ToRole="AccountAddress" />
+          <NavigationProperty Name="AccountAddresses" Relationship="Self.FK__AccountAd__Accou__3A81B327" FromRole="Account" ToRole="AccountAddress" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Account__5DCAEF64" FromRole="Account" ToRole="Comment" />
           <NavigationProperty Name="Contacts" Relationship="Self.FK__Contact__Account__619B8048" FromRole="Account" ToRole="Contact" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountC__5441852A" FromRole="Account" ToRole="Orders" />
@@ -422,7 +422,7 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__AccountAd__Accou__571DF1D5" FromRole="AccountAddress" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__AccountAd__Accou__3A81B327" FromRole="AccountAddress" ToRole="Account" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountA__5535A963" FromRole="AccountAddress" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Brand">
@@ -563,7 +563,7 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Promotio__5629CD9C" FromRole="Promotion" ToRole="Orders" />
           <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__46E78A0C" FromRole="Promotion" ToRole="Product" />
         </EntityType>
-        <Association Name="FK__AccountAd__Accou__571DF1D5">
+        <Association Name="FK__AccountAd__Accou__3A81B327">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="AccountAddress" Type="Self.AccountAddress" Multiplicity="*" />
           <ReferentialConstraint>
@@ -731,7 +731,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ECOMMERCEEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ECOMMERCE5Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountAddresses" EntityType="Self.AccountAddress" />
           <EntitySet Name="Brands" EntityType="Self.Brand" />
@@ -745,7 +745,7 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="ProductImgs" EntityType="Self.ProductImg" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
-          <AssociationSet Name="FK__AccountAd__Accou__571DF1D5" Association="Self.FK__AccountAd__Accou__571DF1D5">
+          <AssociationSet Name="FK__AccountAd__Accou__3A81B327" Association="Self.FK__AccountAd__Accou__3A81B327">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="AccountAddress" EntitySet="AccountAddresses" />
           </AssociationSet>
@@ -807,9 +807,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ECOMMERCE4ModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
+        <EntityContainerMapping StorageEntityContainer="ECOMMERCE5ModelStoreContainer" CdmEntityContainer="ECOMMERCE5Entities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Account">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -824,7 +824,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AccountAddresses">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.AccountAddress">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.AccountAddress">
               <MappingFragment StoreEntitySet="AccountAddress">
                 <ScalarProperty Name="AccountAddressCode" ColumnName="AccountAddressCode" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -838,7 +838,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Brand">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Brand">
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="BrandCode" ColumnName="BrandCode" />
                 <ScalarProperty Name="BrandName" ColumnName="BrandName" />
@@ -847,7 +847,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Category">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -856,7 +856,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Comment">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentCode" ColumnName="CommentCode" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -868,7 +868,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contacts">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Contact">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Contact">
               <MappingFragment StoreEntitySet="Contact">
                 <ScalarProperty Name="ContactCode" ColumnName="ContactCode" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -880,7 +880,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Deliveries">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Delivery">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
                 <ScalarProperty Name="DeliveryCode" ColumnName="DeliveryCode" />
                 <ScalarProperty Name="DeliveryName" ColumnName="DeliveryName" />
@@ -891,7 +891,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.OrderDetail">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
@@ -902,7 +902,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Order">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
                 <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
@@ -919,7 +919,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Payment">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
@@ -929,7 +929,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Product">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -946,7 +946,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductImgs">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.ProductImg">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.ProductImg">
               <MappingFragment StoreEntitySet="ProductImg">
                 <ScalarProperty Name="ProductImgCode" ColumnName="ProductImgCode" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
@@ -955,7 +955,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
-            <EntityTypeMapping TypeName="ECOMMERCE4Model.Promotion">
+            <EntityTypeMapping TypeName="ECOMMERCE5Model.Promotion">
               <MappingFragment StoreEntitySet="Promotion">
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="PromotionPercentage" ColumnName="PromotionPercentage" />

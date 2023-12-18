@@ -4,7 +4,7 @@
 
 
 @{
-    ViewBag.Title = "Checkout";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 
     var tongtien = decimal.Zero;
@@ -41,90 +41,9 @@
 <div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
     <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
           action="#">
-        <div class="col-span-12 lg:col-span-8">
-            <span class="text-lg font-semibold">Billing Details</span>
-            <div class="grid grid-cols-12 gap-5 pt-5">
-                <div class="col-span-12 xs:col-span-6">
-                    <label class="flex flex-col">
-                        <span class="text-sm">First Name</span>
-                        <input class="input" type="text" required />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-6">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Last Name</span>
-                        <input class="input" type="text" required />
-                    </label>
-                </div>
-                <div class="col-span-12">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Email</span>
-                        <input class="input" type="text" required />
-                    </label>
-                </div>
-                <div class="col-span-12">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Company (Optional)</span>
-                        <input class="input" type="text" />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-8">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Address</span>
-                        <input class="input" type="text" required />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-4">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Apt, Suite, etc (Optional)</span>
-                        <input class="input" type="text" />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-6">
-                    <label class="flex flex-col">
-                        <span class="text-sm">City</span>
-                        <input class="input" type="text" required />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-6">
-                    <div class="flex h-full flex-col">
-                        <label class="flex" for="form-country">
-                            <span class="text-sm">Country</span>
-                        </label>
-                        <select class="nice-select country select flex h-full w-full items-center"
-                                id="form-country">
-                            <option value="1">Country 1</option>
-                            <option value="2">Country 2</option>
-                            <option value="3">Country 3</option>
-                            <option value="4">Country 4</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-span-12 xs:col-span-6">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Postal Code</span>
-                        <input class="input input-number" type="number" required />
-                    </label>
-                </div>
-                <div class="col-span-12 xs:col-span-6">
-                    <label class="flex flex-col">
-                        <span class="text-sm">Telephone</span>
-                        <input class="input input-number" type="number" required />
-                    </label>
-                </div>
-                <div class="col-span-12 flex flex-wrap justify-between gap-5">
-                    <a class="transition-all-300 flex items-center gap-2 hover:text-primary-color"
-                       href="@Url.Action("Index","ShoppingCart")">
-                        <i class="bi bi-arrow-return-left flex text-xl"></i>
-                        <span>Return to Shopping Cart</span>
-                    </a>
-                    <button class="btn-effect rounded-lg bg-primary-color p-4 font-bold uppercase text-white"
-                            type="submit">
-                        <span>Continue</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+
+        @Html.Action("RenderInfCus", "Checkout")
+
         <div class="col-span-12 lg:col-span-4">
             @if (Model != null && Model.Any())
             {
@@ -420,65 +339,22 @@
                 <div class="border-b-2 border-gray-200 p-5">
                     <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
                 </div>
-                <button class="btn-close-modal transition-all-300 absolute top-5 right-5 p-[3px] hover:text-slate-400">
+                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
                     <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
                 </button>
             </div>
-            <div class="h-full overflow-auto">
-                <!-- If the shopping cart is empty (replace hidden with flex) -->
-                <div class="hidden flex-col items-center justify-center gap-4 p-5">
-                    <i class="bi bi-cart-x text-8xl text-gray-200"></i>
-                    <p class="font-semibold">There are no products in the cart.</p>
-                    <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                       href="#">
-                        <span class="font-bold uppercase text-white">Go to the store</span>
-                    </a>
-                </div>
-                <!-- -->
-                <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                   href="#">
-                    <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                        <img class="h-full w-full object-cover"
-                             src="images/product/prod-1.jpg"
-                             alt="product" />
-                    </div>
-                    <div class="flex w-full flex-col">
-                        <h6 class="clamp-2 break-all text-lg font-semibold">
-                            Ryzen 5 3600x
-                        </h6>
-                        <div class="flex gap-2">
-                            <div class="flex gap-1 leading-7 text-gray-400">
-                                <span>1</span>
-                                <span>X</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-primary-color">$37.00</span>
-                                <small class="text-xs text-primary-color line-through">$50.00</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                        <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
-                <div class="flex justify-between">
-                    <span class="text-lg uppercase">Subtotal:</span>
-                    <span class="text-lg font-semibold text-primary-color">$37.00</span>
-                </div>
-                <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                   href="shopping-cart.html">
-                    <span class="font-bold uppercase text-white">View Shopping Cart</span>
-                </a>
-                <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                   href="checkout.html">
-                    <span class="font-bold uppercase text-white">Checkout now</span>
-                </a>
-            </div>
+
+
+            @Html.Action("RenderShoppingCart", "Products")
+
+            @Html.Action("RenderActionCart", "Products")
+
+
         </div>
+
     </div>
 </div>
+
 
 <div class="wishlist-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
     <div class="flex h-full w-full">

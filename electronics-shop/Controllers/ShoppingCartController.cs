@@ -21,15 +21,7 @@ namespace electronics_shop.Controllers
             return View();
         }
 
-        public ActionResult Checkout()
-        {
-            ShoppingCart cart = (ShoppingCart)Session["Cart"];
-            if (cart != null)
-            {
-                return View(cart.Items);
-            }
-            return View();
-        }
+      
         public ActionResult Partial_Item_Cart()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];

@@ -7,177 +7,177 @@
 
 @*<form  class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-5"
       action="#">*@
-    <div class="col-span-12 lg:col-span-8">
-        @*Element Responsive*@
+<div class="col-span-12 lg:col-span-8">
+    @*Element Responsive*@
 
-        @if (Model != null && Model.Any())
+    @if (Model != null && Model.Any())
+    {
+        var i = 0;
+        foreach (var item in Model)
         {
-            var i = 0;
-            foreach (var item in Model)
-            {
-                <div class="transition-all-300 flex w-full flex-col gap-2 p-2 hover:bg-gray-100 xs:flex-row lg:hidden">
+            <div class="transition-all-300 flex w-full flex-col gap-2 p-2 hover:bg-gray-100 xs:flex-row lg:hidden">
+                <div class="content flex items-center">
+                    <div class="flex items-center">
+                        <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
+                            <a href="#">
+                                <img class="h-full w-full object-cover"
+                                     src="~/images/cards/mousepad.jpg"
+                                     alt="product" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full flex-col gap-2 sm:flex-row">
+                    <div class="flex w-full flex-col gap-2">
+                        <div class="content">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-light xs:hidden">Product Name</span>
+                                <div>
+                                    <a class="clamp-2 break-all font-bold" href="#">
+                                        @item.ProductName
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-light lg:hidden">Unit Price</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-bold text-primary-color">$@item.Price</span>
+                                    <small class="text-xs text-primary-color line-through">$@item.PromotionPrice</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-light">Subtotal</span>
+                                <span class="font-bold text-primary-color">$@item.ToTalPrice</span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="content flex items-center">
-                        <div class="flex items-center">
-                            <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
-                                <a href="#">
-                                    <img class="h-full w-full object-cover"
-                                         src="~/images/cards/mousepad.jpg"
-                                         alt="product" />
-                                </a>
+                        <div class="flex items-center gap-x-4 gap-y-1">
+                            <div class="flex flex-col">
+                                <span class="text-xs font-light">Quantity</span>
+                                <div class="quantity inline-flex rounded-lg bg-white shadow">
+                                    <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
+                                           type="number"
+                                           value="0" />
+                                    <div class="flex w-5 flex-col justify-between">
+                                        <button class="quantity-btn increment text-primary-color"
+                                                type="button">
+                                            <i class="bi bi-caret-up-fill"></i>
+                                        </button>
+                                        <button class="quantity-btn decrement text-primary-color"
+                                                type="button">
+                                            <i class="bi bi-caret-down-fill"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tippy tippy-remove transition-all-300 cursor-pointer text-slate-400 hover:text-primary-color">
+                                <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
                             </div>
                         </div>
                     </div>
-                    <div class="flex w-full flex-col gap-2 sm:flex-row">
-                        <div class="flex w-full flex-col gap-2">
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light xs:hidden">Product Name</span>
-                                    <div>
-                                        <a class="clamp-2 break-all font-bold" href="#">
-                                            @item.ProductName
-                                        </a>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào. Hãy quay lại <a  style="color:darkblue" href="@Url.Action("Shop","Products")">Trang Sản Phẩm</a> để mua hàng!</p>
+    }
+
+    @*Element Desktop*@
+
+
+    @if (Model != null && Model.Any())
+    {
+        var i = 0;
+
+        foreach (var item in Model)
+        {
+            tongtien += (decimal)(@item.ToTalPrice);
+            <div class="hidden overflow-x-auto lg:block">
+                <table id="trow_@item.ProductId" class="w-full min-w-[800px] text-left">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="p-2">Product Name</th>
+                            <th class="p-2">Unit Price</th>
+                            <th class="p-2">Quantity</th>
+                            <th class="p-2">Subtotal</th>
+                            <th style="text-align: center" class="p-2">Delete</th>
+                            <th style="text-align: center" class="p-2">Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-100">
+                            <td class="p-2">
+                                <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
+                                    <a href="/Products/Detail/@item.ProductId">
+                                        <img width="50" class="h-full w-full object-cover"
+                                             src="@item.ProductImg"
+                                             alt="product" />
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="p-2">
+                                <a style="max-width:100px" class="clamp-2 break-all font-bold" href="/Products/Detail/@item.ProductId">@item.ProductName</a>
+                            </td>
+                            <td class="p-2">
+                                <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.Price)</span>
+                            </td>
+                            <td class="p-2">
+                                <div class="quantity inline-flex rounded-lg bg-white shadow">
+                                    <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
+                                           type="number"
+                                           id="Quantity_@item.ProductId"
+                                           value="@item.Quantity" />
+                                    <div class="flex w-5 flex-col justify-between">
+                                        <button class="quantity-btn increment text-primary-color"
+                                                type="button">
+                                            <i class="bi bi-caret-up-fill"></i>
+                                        </button>
+                                        <button class="quantity-btn decrement text-primary-color"
+                                                type="button">
+                                            <i class="bi bi-caret-down-fill"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light lg:hidden">Unit Price</span>
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-primary-color">$@item.Price</span>
-                                        <small class="text-xs text-primary-color line-through">$@item.PromotionPrice</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light">Subtotal</span>
-                                    <span class="font-bold text-primary-color">$@item.ToTalPrice</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content flex items-center">
-                            <div class="flex items-center gap-x-4 gap-y-1">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light">Quantity</span>
-                                    <div class="quantity inline-flex rounded-lg bg-white shadow">
-                                        <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                               type="number"
-                                               value="0" />
-                                        <div class="flex w-5 flex-col justify-between">
-                                            <button class="quantity-btn increment text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-up-fill"></i>
-                                            </button>
-                                            <button class="quantity-btn decrement text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-down-fill"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tippy tippy-remove transition-all-300 cursor-pointer text-slate-400 hover:text-primary-color">
+                            </td>
+                            <td class="p-2">
+                                <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.ToTalPrice)</span>
+                            </td>
+                            <td style="text-align:center" class="p-2">
+                                <button data-id="@item.ProductId" class="btn_Delete tippy tippy-remove btn-delete transition-all-300 text-slate-400 hover:text-primary-color">
                                     <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-}
-else
-            {
-                <p class="text-center" >Giỏ hàng rỗng</p>
-            }
+                                </button>
 
-        @*Element Desktop*@
+                            </td>
+                            <td style="text-align:center" class="p-2">
+                                <button data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate btn-lg transition-all-300 text-slate-400 hover:text-primary-color ">
+                                    <i class="fa-regular fa-floppy-disk fa-lg"></i>
+                                </button>
+                            </td>
+                        </tr>
 
-
-        @if (Model != null && Model.Any())
-        {
-            var i = 0;
-
-            foreach (var item in Model)
-            {
-                tongtien += (decimal)(@item.ToTalPrice);
-                <div class="hidden overflow-x-auto lg:block">
-                    <table id="trow_@item.ProductId" class="w-full min-w-[800px] text-left">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="p-2">Product Name</th>
-                                <th class="p-2">Unit Price</th>
-                                <th class="p-2">Quantity</th>
-                                <th class="p-2">Subtotal</th>
-                                <th style="text-align: center" class="p-2">Delete</th>
-                                <th style="text-align: center" class="p-2">Update</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="hover:bg-gray-100">
-                                <td class="p-2">
-                                    <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
-                                        <a href="/Products/Detail/@item.ProductId">
-                                            <img width="50" class="h-full w-full object-cover"
-                                                 src="@item.ProductImg"
-                                                 alt="product" />
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="p-2">
-                                    <a style="max-width:100px" class="clamp-2 break-all font-bold" href="/Products/Detail/@item.ProductId">@item.ProductName</a>
-                                </td>
-                                <td class="p-2">
-                                    <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.Price)</span>
-                                </td>
-                                <td class="p-2">
-                                    <div class="quantity inline-flex rounded-lg bg-white shadow">
-                                        <input  class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                               type="number"
-                                               id="Quantity_@item.ProductId"
-                                               value="@item.Quantity" />
-                                        <div class="flex w-5 flex-col justify-between">
-                                            <button class="quantity-btn increment text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-up-fill"></i>
-                                            </button>
-                                            <button class="quantity-btn decrement text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-down-fill"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="p-2">
-                                    <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.ToTalPrice)</span>
-                                </td>
-                                <td style="text-align:center" class="p-2">
-                                    <button  data-id="@item.ProductId" class="btn_Delete tippy tippy-remove btn-delete transition-all-300 text-slate-400 hover:text-primary-color">
-                                        <i  class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
-                                    </button>
-                                 
-                                </td>
-                                <td  style="text-align:center" class="p-2">
-                                    <button data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate btn-lg transition-all-300 text-slate-400 hover:text-primary-color ">
-                                        <i  class="fa-regular fa-floppy-disk fa-lg"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            }
-
-
-        }
-        else
-        {
-            <h3 class="text-center">Giỏ hàng chưa có sản phầm nào</h3>
+                    </tbody>
+                </table>
+            </div>
         }
 
 
+    }
+    else
+    {
+        <h3 class="text-center">Giỏ hàng chưa có sản phầm nào</h3>
+    }
 
-    </div>
+
+
+</div>
 
     <div id="load_data"  class="col-span-12 lg:col-span-4">
         <div class="mb-5">
@@ -242,7 +242,7 @@ else
                 <span class="font-bold uppercase text-white">Discard</span>
             </button>
             <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                    type="submit" href="@Url.Action("Checkout","ShoppingCart")">
+                    type="submit" href="@Url.Action("Index","Checkout")">
               
                 <span class="font-bold uppercase text-white">Continue</span>
             </a>

@@ -417,18 +417,33 @@
                             <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
                                 <img class="h-full w-full object-cover" src="~/Content/images/comments/profile_1.png" alt="profile_logo" />
                             </div>
-                            <form class="form-review flex w-full flex-col gap-2" method="GET">
+                            <form id="contactForm" class="form-review flex w-full flex-col gap-2" action="@Url.Action("Review","Products")" method="post">
                                 <div class="flex items-center gap-2">
-                                    <span class="text-sm uppercase">Your Valoration:</span>
-                                    <div id="rater"></div>
-                                    <input name="ratingvalue" class="rating-value hidden" type="number" value="" />
+                                    <span class="text-sm uppercase" style="color: #0a1638; font-weight: 600;">Your Valoration:</span>
+                                    <div class="rating" id="ratingStars">
+                                        <input type="number" name="ratingvalue" value="" hidden>
+                                        <i class='bi bi-star star' data-value="1" style="--i: 0;"></i>
+                                        <i class='bi bi-star star' data-value="2" style="--i: 1;"></i>
+                                        <i class='bi bi-star star' data-value="3" style="--i: 2;"></i>
+                                        <i class='bi bi-star star' data-value="4" style="--i: 3;"></i>
+                                        <i class='bi bi-star star' data-value="5" style="--i: 4;"></i>
+                                    </div>
                                 </div>
                                 <div class="h-20">
-                                    <textarea name="reviewvalue" class="input resize-none" placeholder="Add a review..."
-                                              required></textarea>
+                                    <textarea name="reviewvalue" class="input resize-none" placeholder="Add a review..." required></textarea>
                                 </div>
+                                @if (Session["info"] != null)
+                                {
+                                    Account account = (Account)Session["info"];
+                                    <input class="input" name="accountcode" type="hidden" value="@account.AccountCode" />
+                                }
+                                else
+                                {
+                                    <input class="input" name="accountcode" type="hidden" value="null" />
+                                }
+                                <input type="hidden" name="productcode" value="@ViewBag.Product.ProductCode" />
                                 <div>
-                                    <button class="btn-effect rounded-lg bg-primary-color p-2 font-bold text-white" type="submit">
+                                    <button id="submitButton" class="btn-effect rounded-lg bg-primary-color p-2 font-bold text-white" type="submit" onclick="return validateRating()">
                                         <span>Post review</span>
                                     </button>
                                 </div>
@@ -743,28 +758,6 @@
 </div>
 
 
-<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-    <div class="flex h-full w-full">
-        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-            <div class="w-full">
-                <div class="border-b-2 border-gray-200 p-5">
-                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                </div>
-                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                </button>
-            </div>
-
-
-            @Html.Action("RenderShoppingCart", "Products")
-
-            @Html.Action("RenderActionCart", "Products")
-
-
-        </div>
-
-    </div>
-</div>
 
 <script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {

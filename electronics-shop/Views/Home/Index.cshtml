@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
 <div class="banners-section container mx-auto my-5 px-2 sm:px-8">
     <div class="grid grid-cols-12 gap-5">
         <div class="swiper-container col-span-12 overflow-hidden rounded-lg md:col-span-8">
@@ -41,7 +40,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Choose your vr and play it!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Shop","Products")"
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Kính thực tế ảo"})"
                        style="color: #fff;">
                         <span>Shop now</span>
                     </a>
@@ -261,28 +260,6 @@
     </div>
 }
 
-<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-    <div class="flex h-full w-full">
-        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-            <div class="w-full">
-                <div class="border-b-2 border-gray-200 p-5">
-                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                </div>
-                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                </button>
-            </div>
-
-
-            @Html.Action("RenderShoppingCart", "Products")
-
-            @Html.Action("RenderActionCart", "Products")
-
-
-        </div>
-
-    </div>
-</div>
 
 <div class="banners-section-2 container mx-auto my-5 px-2 sm:px-8">
     <div class="grid grid-cols-12 gap-5">
@@ -298,7 +275,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Choose the ideal VR for you!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="#">
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Kính thực tế ảo"})">
                         <span>Show more</span>
                     </a>
                 </div>
@@ -316,7 +293,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Smarthome at the best price!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="#">
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Robot hút bụi"})">
                         <span>Show more</span>
                     </a>
                 </div>
@@ -344,7 +321,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Choose your ergonic chair now!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Smarthome","Products")">
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Ghế công thái học"})">
                         <span>Show more</span>
                     </a>
                 </div>
@@ -523,7 +500,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Choose your keyboard now!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Accessory","Products")">
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Bàn phím cơ"})">
                         <span>Show more</span>
                     </a>
                 </div>
@@ -701,7 +678,7 @@
                     <p class="my-5 text-white drop-shadow-md">
                         Choose your game machine now!
                     </p>
-                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("GamingGear","Products")">
+                    <a class="btn-effect inline-block rounded-lg bg-primary-color py-2 px-3 text-white" href="@Url.Action("Search", "Products", new {s = "Máy chơi game"})">
                         <span>Show more</span>
                     </a>
                 </div>

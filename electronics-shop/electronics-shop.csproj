@@ -136,6 +136,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\admin\Controllers\BrandsController.cs" />
+    <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\admin\Controllers\DiscountsController.cs" />
+    <Compile Include="Areas\admin\Controllers\FeedbacksController.cs" />
+    <Compile Include="Areas\admin\Controllers\GenresController.cs" />
+    <Compile Include="Areas\admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\admin\Controllers\ProductsAdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
@@ -187,6 +196,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationModel.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -212,6 +223,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.css" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-brands-400.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-regular-400.svg" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.svg" />
+    <Content Include="Areas\admin\Content\css\PagedList.css" />
+    <Content Include="Areas\admin\Content\css\plugins.bundle.css" />
+    <Content Include="Areas\admin\Content\css\simditor.css" />
+    <Content Include="Areas\admin\Content\css\simditor.js" />
+    <Content Include="Areas\admin\Content\css\style.bundle.css" />
+    <Content Include="Areas\admin\Content\css\vis-timeline.bundle.css" />
+    <Content Include="Areas\admin\Content\js\auth.js" />
+    <Content Include="Areas\admin\Content\js\brands.js" />
+    <Content Include="Areas\admin\Content\js\custom-notifi.js" />
+    <Content Include="Areas\admin\Content\js\discounts.js" />
+    <Content Include="Areas\admin\Content\js\genres.js" />
+    <Content Include="Areas\admin\Content\js\orders.js" />
+    <Content Include="Areas\admin\Content\js\plugins.bundle.js" />
+    <Content Include="Areas\admin\Content\js\products.js" />
+    <Content Include="Areas\admin\Content\js\repry-feedback.js" />
+    <Content Include="Areas\admin\Content\js\scripts.bundle.js" />
+    <Content Include="Areas\admin\Content\js\vis-timeline.bundle.js" />
+    <Content Include="Areas\admin\Content\js\widgets.bundle.js" />
+    <Content Include="Areas\admin\Content\js\widgets.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -446,6 +484,56 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\bootstrap-icons\bootstrap-icons.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\bootstrap-icons\bootstrap-icons.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\fonticons\fonticons.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-brands-400.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-brands-400.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-brands-400.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-brands-400.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-regular-400.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-regular-400.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-regular-400.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-regular-400.woff2" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.eot" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.ttf" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.woff" />
+    <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.woff2" />
+    <Content Include="Areas\admin\Views\Auth\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Auth\Main.cshtml" />
+    <Content Include="Areas\admin\Views\Auth\Trash.cshtml" />
+    <Content Include="Areas\admin\Views\Brands\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Discounts\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Feedbacks\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Genres\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Trash.cshtml" />
+    <Content Include="Areas\admin\Views\ProductsAdmin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\ProductsAdmin\Details.cshtml" />
+    <Content Include="Areas\admin\Views\ProductsAdmin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\ProductsAdmin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\ProductsAdmin\Trash.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_FooterLayout.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_HeaderLayout.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\_MessageAlert.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -496,9 +584,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\admin\Controllers\" />
     <Folder Include="Areas\admin\Data\" />
-    <Folder Include="Areas\admin\Views\Shared\" />
+    <Folder Include="Areas\admin\Views\Base\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\WishList\" />
   </ItemGroup>

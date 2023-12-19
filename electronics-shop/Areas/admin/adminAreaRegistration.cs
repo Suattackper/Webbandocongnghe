@@ -15,10 +15,15 @@ namespace electronics_shop.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "admin_default",
-                "admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Admin_default",
+                "Admin/{controller}/{action}/{id}",
+                new { action = "Index", Controller = "Dashboard", id = UrlParameter.Optional }
             );
+            //context.MapRoute(
+            //    "admin_default",
+            //    "admin/{controller}/{action}/{id}",
+            //    new { action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

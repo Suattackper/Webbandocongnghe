@@ -85,7 +85,7 @@
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Robot Cleaner</a>
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Ergonic Chair</a>
                                 <a class="btn-open-modal ml-10 block p-1" href="#">Air Purifier</a>
-                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Scale</a> grd  12
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Smart Scale</a>
                             </div>
                         </li>
                         <li class="border-b border-gray-200">
@@ -171,7 +171,9 @@
                     </a>
                 </div>
                 <div class="header-search transition-all-300 order-3 col-span-4 mt-[10px] hidden self-center lg:order-2 lg:col-span-6 lg:mt-0 lg:block">
-                    <form class="search" action="@Url.Action("Search","Products")">
+                    @*Comment Url.Action 19/12*@
+
+                    <form class="search" @*action="@Url.Action("Search","Products")"*@>
                         <div class="flex h-[40px] overflow-hidden rounded-[50px] bg-primary-rgba">
                             <input class="search w-full border-none bg-transparent py-[5px] pl-5 text-white placeholder-icon focus:border-none focus:ring-0 focus:ring-transparent" name="s"
                                    type="search" placeholder="Search..." />
@@ -215,7 +217,9 @@
                                 <div class="group relative hidden lg:flex" style="width: 115px;">
                                     <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.9rem;">
                                         <span class="font-semibold text-white" style="color: #011638;">
-                                            @account.FirstName<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i>
+
+                                            @*Thay doi thanh lastname+firstname 19/12*@
+                                            @($"{account.LastName} {account.FirstName}")<i class="bi bi-caret-down-fill flex rotate-0 text-sm text-white group-hover:rotate-180"></i>
                                         </span>
                                     </div>
                                     <div class="transition-all-300 invisible absolute top-full z-30 w-[120%] pt-[10px] opacity-0 group-hover:visible group-hover:opacity-100">
@@ -226,6 +230,16 @@
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
                                                             <span>My Account</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+
+                                                @*Them MyOrder 19/12*@
+                                                <li class="hover:font-semibold">
+                                                    <a href="@Url.Action("MyOrder", "Checkout", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                        <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
+                                                            <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
+                                                            <span>My Order</span>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -290,7 +304,9 @@
             <nav class="container mx-auto px-2 sm:px-8">
                 <ul class="menu flex flex-wrap items-center justify-between py-[10px] text-lg">
                     <li class="underlined-animated group relative">
-                        <a href="@Url.Action("Shop","Products")" class="btn-open flex items-center gap-1 font-semibold">
+
+                        @*Comment đoạn này 19/12*@
+                        <a @*href="@Url.Action("Shop","Products")"*@ class="btn-open flex items-center gap-1 font-semibold">
                             <span>Products</span>
                             <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
                         </a>
@@ -677,10 +693,11 @@
                     </button>
                 </div>
 
+                @*Comment đoạn này 19/12*@
 
-                @Html.Action("RenderShoppingCart", "Products")
+                @*@Html.Action("RenderShoppingCart", "Products")
 
-                @Html.Action("RenderActionCart", "Products")
+                @Html.Action("RenderActionCart", "Products")*@
 
 
             </div>
@@ -699,7 +716,10 @@
                         <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
                     </button>
                 </div>
-                @Html.Action("Partial_Wish_Cart", "WishList")
+
+                @*Comment đoạn này 19/12*@
+                @*@Html.Action("Partial_Wish_Cart", "WishList")*@
+
                 <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 xs:px-5">
                     <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
                        href="wishlist.html">

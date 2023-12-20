@@ -1,20 +1,41 @@
-﻿create database ECOMMERCE
-go
+﻿--create database ECOMMERCE
+--go
 USE ECOMMERCE
 GO
+
+-- QUYỀN
+CREATE TABLE Roles (
+	RoleID int identity(1,1) primary key,
+	RoleName nvarchar(50)
+)
 
 -- TÀI KHOẢN 
 CREATE TABLE Account (
 	AccountCode int identity(1,1) primary key,
-	Password varchar(15) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Password varchar(255) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	PhoneNumber varchar(10) null,
 	FirstName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	Avatar nvarchar(500) null,
+	Avatar image,
 	RequestCode varchar(10) null,
-	CreateAt datetime default getdate() null
-)
+	CreateAt datetime default getdate() null,
+	RoleID int,
+	RegisteredDay DATETIME DEFAULT(GETDATE()),
+	Birthday DATE,
+	AccountStatus BIT
+);
+
+ALTER TABLE Account ADD FOREIGN KEY (RoleID) REFERENCES Roles (RoleID)
+
+--ALTER TABLE Account ADD RoleID int ;
+--ALTER TABLE Account ADD RegisteredDay DATETIME DEFAULT(GETDATE());
+--ALTER TABLE Account ADD Birthday DATE;
+--ALTER TABLE Account ADD AccountStatus BIT;
+--ALTER TABLE Account ADD Avatar IMAGE;
+
+DELETE FROM Account WHERE AccountCode = 13; 
+
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
@@ -58,7 +79,7 @@ CREATE TABLE Product(
 	ProductName nvarchar(50),
 	BrandCode int null,
 	CategoryCode int null,
-	ImageProduct nvarchar(500),
+	ImageProduct image,
 	Price decimal(18,2),
 	PromotionCode char(10) null,
 	-- Số lượng còn lại 
@@ -72,13 +93,18 @@ CREATE TABLE Product(
 	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
 
+ALTER TABLE Product ADD ImageProduct IMAGE;
+
 -- HÌNH ẢNH SẢN PHẨM
 CREATE TABLE ProductImg (
 	ProductImgCode int identity(1,1) primary key,
-	Img nvarchar(500) null,
+	Img image null,
 	ProductCode varchar(15) null,
 	foreign key (ProductCode) references Product(ProductCode)
 )
+
+--ALTER TABLE ProductImg ADD Img IMAGE;
+
 
 -- GIAO HÀNG
 CREATE TABLE Delivery (
@@ -158,6 +184,10 @@ CREATE TABLE Contact (
 )
 
 
+INSERT INTO Roles (RoleName) VALUES (N'Quản lý')
+INSERT INTO Roles (RoleName) VALUES (N'Nhân viên')
+INSERT INTO Roles (RoleName) VALUES (N'Khách hàng')
+
 ---- BẢNG QUẢN LÝ MENU 
 --CREATE TABLE Menu (
 --Code int identity(1,1),
@@ -188,3 +218,6 @@ CREATE TABLE Contact (
 ---- INDEX	
 --CREATE NONCLUSTERED INDEX idx_BrandCode ON Product (BrandCode ASC)
 --CREATE NONCLUSTERED INDEX idx_CategoryCode ON Product (CategoryCode ASC)
+
+
+select * from Account

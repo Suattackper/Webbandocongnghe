@@ -5,3 +5,25 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken() <!--bảo mật -->
+    <!-- Các trường và nút submit -->
+    if (ViewBag.ErrorMessage != null)
+    {
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    }
+
+    <form action="@Url.Action("About", "Home")" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required />
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required />
+
+        <input type="submit" value="Login" />
+    </form>
+}
+

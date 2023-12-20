@@ -1056,6 +1056,10 @@ select {
   margin-top: 0.5rem;
 }
 
+.mt-4 {
+    margin-top: 1rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -1787,6 +1791,11 @@ select {
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
+.bg-blue-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .bg-body {
   background-color: var(--color-body-bg);
 }
@@ -2205,8 +2214,12 @@ select {
   line-height: 1.75rem;
 }
 
+.leading-normal {
+    line-height: 1.5;
+}
+
 .tracking-wide {
-  letter-spacing: 0.025em;
+    letter-spacing: 0.025em;
 }
 
 .text-\[\#0F1B4C\] {

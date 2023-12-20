@@ -156,3 +156,181 @@ D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CoreCo
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CopyComplete
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
+D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\electronics-shop.dll.config
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\electronics-shop.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\electronics-shop.pdb
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csc.exe
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csc.exe.config
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csc.rsp
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csi.exe
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csi.exe.config
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\csi.rsp
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.AppContext.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Console.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.IO.Compression.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Net.Http.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.ValueTuple.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Xml.XPath.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.exe
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.exe.config
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.rsp
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\VBCSCompiler.exe
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Antlr3.Runtime.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\EntityFramework.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Newtonsoft.Json.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\PagedList.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Helpers.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Mvc.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Optimization.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Razor.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Razor.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\WebGrease.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\EntityFramework.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\PagedList.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Helpers.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Mvc.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Optimization.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.Razor.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Razor.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Newtonsoft.Json.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Antlr3.Runtime.pdb
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.AssemblyReference.cache
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CoreCompileInputs.cache
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CopyComplete
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.dll
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.pdb
+C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.dll
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.pdb
+D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\electronics-shop.dll.config
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\electronics-shop.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\electronics-shop.pdb
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csc.exe
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csc.exe.config
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csc.rsp
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csi.exe
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csi.exe.config
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\csi.rsp
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Threading.Tasks.Extensions.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.exe
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.exe.config
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\vbc.rsp
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\VBCSCompiler.exe
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Antlr3.Runtime.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\EntityFramework.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Newtonsoft.Json.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\PagedList.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Helpers.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Mvc.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Optimization.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Razor.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Deployment.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Razor.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\WebGrease.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.pdb
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\EntityFramework.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\EntityFramework.SqlServer.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\PagedList.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\PagedList.Mvc.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Helpers.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Mvc.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Optimization.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.Razor.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Deployment.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\System.Web.WebPages.Razor.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Newtonsoft.Json.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Antlr3.Runtime.pdb
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.AssemblyReference.cache
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CoreCompileInputs.cache
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CopyComplete
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\Microsoft.Managed.Core.CurrentVersions.targets
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Buffers.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Memory.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Numerics.Vectors.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.Owin.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.Owin.Security.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Owin.dll
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.Owin.xml
+C:\Users\alice\source\repos\Webbandocongnghe\electronics-shop\bin\Microsoft.Owin.Security.xml

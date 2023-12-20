@@ -18,6 +18,12 @@ namespace electronics_shop
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+              name: "ShoppingCart",
+              url: "gio-hang",
+              defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },
+              namespaces: new[] {"Bensik.Controllers"}
+          );
         }
     }
 }

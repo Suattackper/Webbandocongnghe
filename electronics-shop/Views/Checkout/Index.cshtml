@@ -1,0 +1,188 @@
+﻿
+@model IEnumerable<electronics_shop.Models.ShoppingCartItem>
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    var tongtien = decimal.Zero;
+
+}
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="shopping-cart.html">Shopping Cart</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 active hover:text-primary-color">
+            <a href="checkout.html">Checkout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="banner-title-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="liner-container my-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+        <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+            Checkout
+        </h1>
+    </div>
+</div>
+
+<div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
+    <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
+          action="#">
+
+        @Html.Action("RenderInfCus", "Checkout")
+
+        <div class="col-span-12 lg:col-span-4">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    tongtien += (decimal)(@item.ToTalPrice);
+
+                    <div class="max-h-60 overflow-auto">
+                        <span class="text-lg font-semibold">Your Cart</span>
+                        <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
+                           href="#">
+                            <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
+                                <img class="h-full w-full object-cover"
+                                     src="@item.ProductImg"
+                                     alt="product" />
+                            </div>
+                            <div class="flex w-full flex-col">
+                                <h6 class="clamp-2 break-all text-lg font-semibold">
+                                    @item.ProductName
+                                </h6>
+                                <div class="flex gap-2">
+                                    <div class="flex gap-1 leading-7 text-gray-400">
+                                        <span>1</span>
+
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="font-bold text-primary-color">@item.Price</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                }
+
+            }
+            else
+            {
+                <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào!</p>
+            }
+
+            <div class="mb-5">
+                <span class="text-lg font-semibold">Discount Coupon</span>
+                <div class="my-3 flex">
+                    <input class="input-rounded-l"
+                           type="text"
+                           placeholder="Your code here" />
+                    <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
+                            type="submit">
+                        <span class="font-bold uppercase text-white">Apply</span>
+                    </button>
+                </div>
+            </div>
+            <div class="rounded-lg border-2 p-4">
+                <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
+                <div class="py-4">
+                    <div class="my-2 flex justify-between">
+
+                        <span>Subtotal:</span>
+                        <span>@string.Format("₫{0:#,0}", tongtien)</span>
+
+                    </div>
+                    <div class="my-2 flex justify-between">
+                        <span>Vat:</span>
+                        @{ var Vat = 22750;
+                            <span>@string.Format("₫{0:#,0}", Vat)</span>
+                        }
+                    </div>
+                    <div class="my-2 flex justify-between">
+                        <span>Shipping:</span>
+                        @{
+                            var ship = 30000;
+                            <span>@string.Format("₫{0:#,0}", ship)</span>
+
+                        }
+                    </div>
+                </div>
+                <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
+                    <span>Total:</span>
+                    @{
+                        decimal TOTAL = decimal.Zero;
+
+                        TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
+
+
+                    }
+                    @if (tongtien != 0)
+                    {
+                        <span>@string.Format("₫{0:#,0}", TOTAL)</span>
+
+                    }
+                    else
+                    {
+                        <span>₫0 </span>
+
+                    }
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+    <div class="flex h-full w-full">
+        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+            <div class="w-full">
+                <div class="border-b-2 border-gray-200 p-5">
+                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                </div>
+                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                </button>
+            </div>
+
+
+            @Html.Action("RenderShoppingCart", "Products")
+
+            @Html.Action("RenderActionCart", "Products")
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- -->
+@*<div class="btn-gotop transition-all-300 invisible fixed bottom-[-999px] right-10 z-50 opacity-0">
+        <div class="transition-all-300 cursor-pointer rounded-lg bg-[rgba(0,0,0,.3)] p-3 hover:bg-primary-color">
+            <i class="bi bi-chevron-compact-up pointer-events-none flex text-2xl text-white"></i>
+        </div>
+    </div>*@
+
+
+

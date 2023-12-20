@@ -8,6 +8,7 @@ using System.Web.Routing;
 
 namespace electronics_shop
 {
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -16,6 +17,16 @@ namespace electronics_shop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            // Global.asax.cs
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine
+            {
+                PartialViewLocationFormats = new string[]
+                {
+        "~/Views/Shared/{0}.cshtml"
+                }
+            });
         }
+
     }
 }

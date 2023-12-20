@@ -17,8 +17,8 @@ namespace electronics_shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Promotion()
         {
-            this.Orders = new HashSet<Order>();
-            this.Products = new HashSet<Product>();
+            this.Orders = new HashSet<Orders>();
+            this.Product = new HashSet<Product>();
         }
     
         public string PromotionCode { get; set; }
@@ -26,8 +26,8 @@ namespace electronics_shop.Models
         public Nullable<System.DateTime> EndDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

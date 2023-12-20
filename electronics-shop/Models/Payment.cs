@@ -17,7 +17,7 @@ namespace electronics_shop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payment()
         {
-            this.Orders = new HashSet<Order>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int PaymentCode { get; set; }
@@ -26,6 +26,6 @@ namespace electronics_shop.Models
         public Nullable<System.DateTime> ExpiryDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

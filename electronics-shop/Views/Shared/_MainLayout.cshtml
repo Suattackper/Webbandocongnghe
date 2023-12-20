@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="~/Content/cdn.jsdelivr.net/npm/bootstrap-icons%401.7.2/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.css" />
     <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />*@
     <link rel="stylesheet" href="~/Content/css/style.css" />
 
     @RenderSection("styles", required: false)
@@ -196,13 +196,17 @@
                         </button>
                     </div>
                     <div class="group-items hidden items-center gap-5 text-white lg:flex">
-                        <div class="relative">
-                            <a class="btn-open-modal" data-target=".wishlist-modal" href="javascript:void(0)">
-                                <i class="bi bi-heart pointer-events-none flex translate-y-1 transform text-[32px] text-white"
-                                   style="color: #011638;"></i>
-                            </a>
-                            <span id="checkout_wishs" class="badge absolute top-0 right-[-6px] h-[15px] min-w-[15px] px-[2px]">0</span>
-                        </div>
+
+                        @*Xóa wishlist 19/12/23 10:03 PM
+                            Thêm hình ảnh avatar cho User*@
+
+                        @*<div class="relative">
+                                <a class="btn-open-modal" data-target=".wishlist-modal" href="javascript:void(0)">
+                                    <i class="bi bi-heart pointer-events-none flex translate-y-1 transform text-[32px] text-white"
+                                       style="color: #011638;"></i>
+                                </a>
+                                <span id="checkout_wishs" class="badge absolute top-0 right-[-6px] h-[15px] min-w-[15px] px-[2px]">0</span>
+                            </div>*@
                         <div class="relative">
                             <a class="btn-open-modal" data-target=".shopping-cart-modal" href="javascript:void(0)">
                                 <i class="bi bi-cart2 pointer-events-none flex text-[35px] text-white" style="color: #011638;"></i>
@@ -216,6 +220,7 @@
                             {
                                 <div class="group relative hidden lg:flex" style="width: 115px;">
                                     <div class="flex cursor-pointer select-none items-center gap-1 font-semibold" style="color: #011638; font-size: 0.9rem;">
+                                        @*<img class="avatar object-cover" src="@Url.Content("" + account.Avatar)" />*@
                                         <span class="font-semibold text-white" style="color: #011638;">
 
                                             @*Thay doi thanh lastname+firstname 19/12*@
@@ -228,7 +233,7 @@
                                                 <li class="hover:font-semibold">
                                                     <a href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
-                                                            <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
+                                                            <i class="bi bi-person-circle flex text-xl text-primary-color"></i>
                                                             <span>My Account</span>
                                                         </div>
                                                     </a>
@@ -238,7 +243,7 @@
                                                 <li class="hover:font-semibold">
                                                     <a href="@Url.Action("MyOrder", "Checkout", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
-                                                            <i class="bi bi-person-badge flex text-xl text-primary-color"></i>
+                                                            <i class="bi bi-bag-check-fill flex text-xl text-primary-color"></i>
                                                             <span>My Order</span>
                                                         </div>
                                                     </a>
@@ -697,7 +702,7 @@
 
                 @*@Html.Action("RenderShoppingCart", "Products")
 
-                @Html.Action("RenderActionCart", "Products")*@
+                    @Html.Action("RenderActionCart", "Products")*@
 
 
             </div>
@@ -730,123 +735,7 @@
         </div>
     </div>
 
-    <div class="entry-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
-        <div class="my-10 flex w-full justify-center">
-            <div class="entry-content modal-content transition-all-300 relative mx-3 w-[500px] min-w-[250px] rounded-lg bg-white px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
-                <button class="btn-close-modal transition-all-300 absolute right-0 top-0 p-2 sm:right-[-10px] sm:top-[-10px] sm:rounded-lg sm:bg-primary-color sm:text-white sm:hover:bg-primary-hover">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex"></i>
-                </button>
-                <div class="tabs-container entry-container">
-                    <ul class="flex justify-between">
-                        <li class="btn-tabs tab-active-1 transition-all-300 active w-full cursor-pointer border bg-gray-200 p-2 text-center text-gray-400">
-                            Login
-                        </li>
-                        <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer border bg-gray-200 p-2 text-center text-gray-400">
-                            Sign Up
-                        </li>
-                    </ul>
-                    <div class="tabs-content border border-t-transparent">
-                        <div class="tab-content invisible absolute w-full p-5 opacity-0">
-                            <div class="my-5">
-                                <img class="mx-auto" src="~/Content/images/svg/logo.svg" alt="Besnik." />
-                            </div>
-                            <form action="#">
-                                <div class="flex flex-col gap-4">
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="text" placeholder="Username or Email" required />
-                                    </div>
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="password" placeholder="Password" required />
-                                    </div>
-                                    <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2"
-                                            type="submit">
-                                        <span class="font-bold uppercase text-white">Login</span>
-                                    </button>
-                                </div>
-                                <div class="my-2 flex flex-wrap items-center justify-between gap-2">
-                                    <label class="flex select-none items-center gap-2">
-                                        <input class="checkbox" type="checkbox" />
-                                        <span class="text-gray-title">Remember</span>
-                                    </label>
-                                    <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Forgot Password?</a>
-                                </div>
-                            </form>
-                            <span class="or text-gray-title flex h-[50px] items-center py-2">
-                                <span class="mx-2 text-sm uppercase">Or</span>
-                            </span>
-                            <div class="flex flex-col flex-wrap justify-center gap-5 sm:flex-row">
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-facebook hover:scale-110">
-                                    <i class="bi bi-facebook flex text-3xl text-white"></i>
-                                </button>
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-twitter hover:scale-110">
-                                    <i class="bi bi-twitter flex text-3xl text-white"></i>
-                                </button>
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-google hover:scale-110">
-                                    <i class="bi bi-google flex text-3xl text-white"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="tab-content invisible absolute w-full bg-white p-5 opacity-0">
-                            <div class="my-5">
-                                <img class="mx-auto" src="~/Content/images/svg/logo.svg" alt="Besnik." />
-                            </div>
-                            <form action="#">
-                                <div class="flex flex-col gap-4">
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="text" placeholder="Name" required />
-                                    </div>
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-envelope absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="text" placeholder="Email" required />
-                                    </div>
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="password" placeholder="Password" required />
-                                    </div>
-                                    <div class="relative flex h-[40px] items-center">
-                                        <i class="bi bi-lock-fill absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                        <input class="input pl-10" type="password" placeholder="Confirm Password" required />
-                                    </div>
-                                    <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2"
-                                            type="submit">
-                                        <span class="font-bold uppercase text-white">Sign Up</span>
-                                    </button>
-                                </div>
-                                <div class="my-2 flex items-center justify-between">
-                                    <label class="flex select-none items-center gap-2">
-                                        <input class="checkbox" type="checkbox" />
-                                        <span class="text-gray-title">
-                                            I agree with all
-                                            <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Terms of Use</a>
-                                            &
-                                            <a class="underlined-animated text-[#3091ff] after:bottom-0" href="#">Privacy Policy</a>.
-                                        </span>
-                                    </label>
-                                </div>
-                            </form>
-                            <span class="or text-gray-title flex h-[50px] items-center py-2">
-                                <span class="mx-2 text-sm uppercase">Or</span>
-                            </span>
-                            <div class="flex flex-col flex-wrap justify-center gap-5 sm:flex-row">
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-facebook hover:scale-110">
-                                    <i class="bi bi-facebook flex text-3xl text-white"></i>
-                                </button>
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-twitter hover:scale-110">
-                                    <i class="bi bi-twitter flex text-3xl text-white"></i>
-                                </button>
-                                <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-google hover:scale-110">
-                                    <i class="bi bi-google flex text-3xl text-white"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @*Xóa class="entry-modal" 19/12/23 10:57 PM*@
 
     <div class="quick-view-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
         <div class="my-10 flex w-full justify-center">
@@ -1000,11 +889,13 @@
         </div>
     </div>
     <!-- -->
+
     <div class="btn-gotop transition-all-300 invisible fixed bottom-[-999px] right-10 z-50 opacity-0">
         <div class="transition-all-300 cursor-pointer rounded-lg bg-[rgba(0,0,0,.3)] p-3 hover:bg-primary-color">
             <i class="bi bi-chevron-compact-up pointer-events-none flex text-2xl text-white"></i>
         </div>
     </div>
+
     <div class="loader fixed z-[999] flex h-screen w-screen items-center justify-center bg-body">
         <div class="loader-content flex flex-col items-center gap-2">
             <span class="text-3xl font-semibold text-gray-200">Besnik.</span>
@@ -1013,18 +904,21 @@
             </div>
         </div>
     </div>
+
+
+    @*Thay đổi màu icon social 19/12/23 10:41 PM*@
     <footer class="footer-section mt-auto w-full bg-[#00abcc] text-gray-400">
         <div class="container mx-auto grid grid-cols-12 px-4 sm:px-8">
             <div class="col-span-12 py-[50px]">
                 <div class="grid grid-cols-12 gap-2">
                     <div class="col-span-12 sm:col-span-6 lg:col-span-4">
                         <div class="pb-6">
-                            <img src="~/Content/images/svg/logo.svg" class="h-[40px]" alt="logo" />
+                            <img src="~/Content/images/svg/logo.svg" class="h-[40px]" alt="Besnik" />
                         </div>
                         <div>
                             <div class="flex items-center gap-[10px] py-2">
                                 <i class="bi bi-envelope-fill flex text-xl text-primary-color"></i>
-                                <a class="break-all" href="#">@Html.Raw("Besnik.@example.com")</a>
+                                <a class="break-all" href="#">besnik&#64;example.com</a>
                             </div>
                             <div class="flex items-center gap-[10px] py-2">
                                 <i class="bi bi-telephone-fill flex text-xl text-primary-color"></i>
@@ -1101,23 +995,23 @@
                             </div>
                         </form>
                         <div class="flex gap-2 py-2">
-                            <div class="relative h-8 w-8 overflow-hidden rounded-full">
-                                <a class="instagram-before flex h-8 w-8 items-center justify-center bg-gray-rgba text-center text-white"
+                            <div class="relative h-8 w-8 overflow-hidden rounded-full" style="background-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                                <a class="instagram-before flex h-8 w-8 items-center justify-center text-center text-white"
                                    href="#">
                                     <i class="bi bi-instagram relative z-[2] flex"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-facebook">
+                            <div class="transition-all-300 h-8 w-8 rounded-full bg-facebook">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-facebook flex text-white"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-twitter">
+                            <div class="transition-all-300 h-8 w-8 rounded-full bg-twitter">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-twitter flex text-white"></i>
                                 </a>
                             </div>
-                            <div class="transition-all-300 h-8 w-8 rounded-full bg-gray-rgba hover:bg-youtube">
+                            <div class="transition-all-300 h-8 w-8 rounded-full" style="background-color: #ff0000;">
                                 <a class="flex h-8 w-8 items-center justify-center" href="#">
                                     <i class="bi bi-youtube flex text-white"></i>
                                 </a>
@@ -1134,6 +1028,13 @@
         </div>
     </footer>
 
+    <script src="~/Content/unpkg.com/popperjs/core.js"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
+
+    @RenderSection("scriptsJS", required: false);
+    <script src="~/Content/js/main.js"></script>
+
     @*<script src="~/Content/unpkg.com/popperjs/core.js"></script>
             <script src="https://unpkg.com/tippy.js@6"></script>
             <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
@@ -1144,7 +1045,7 @@
 
 
         @*<script src="~/unpkg.com/popperjs/core.js"></script>*@
-    <script src="https://unpkg.com/tippy.js@6"></script>
+    @*<script src="https://unpkg.com/tippy.js@6"></script>*@
     @*<script src="~/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>*@
     @*<script src="~/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>*@
     @*<script src="~/libraries/iziToast/iziToast.min.js"></script>*@
@@ -1154,34 +1055,34 @@
     @*<script src="~/libraries/mixitup/mixitup.min.js"></script>*@
     @*<script src="~/unpkg.com/metismenujs@1.4.0/dist/metismenujs.min.js"></script>*@
     @*<script src="~/libraries/iziToast/iziToast.min.js"></script>*@
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
-    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.min.js"></script>
 
 
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
 
-    <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
-    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
-    <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
-    <script src="~/Content/js/validator.js"></script>
-    <script src="~/Content/js/jsShoppingCart.js"></script>
-    <script src="~/Content/js/main.js"></script>
 
-    @RenderSection("scriptsJS", required: false)
+    @*<script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>
+        <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
+        <script src="~/Content/libraries/iziToast/iziToast.min.js"></script>
+        <script src="~/Content/js/validator.js"></script>*@
+    @*<script src="~/Content/js/jsShoppingCart.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
+        <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.min.js"></script>
 
-    <script src="~/Content/js/main.js"></script>
+        <script src="~/Scripts/modernizr-2.8.3.js"></script>*@
+
+    @*RenderSection("scriptsJS", required: false)*@
+    @*<script src="~/Content/js/main.js"></script>*@
 
 </body>
 

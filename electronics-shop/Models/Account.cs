@@ -15,34 +15,36 @@ namespace electronics_shop.Models
     public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-
-        public List<Account> Items { get; set; }
         public Account()
         {
-            this.AccountAddresses = new HashSet<AccountAddress>();
-            this.Comments = new HashSet<Comment>();
-            this.Contacts = new HashSet<Contact>();
-            this.Orders = new HashSet<Order>();
-            this.Items = new List<Account>();
+            this.AccountAddress = new HashSet<AccountAddress>();
+            this.Comment = new HashSet<Comment>();
+            this.Contact = new HashSet<Contact>();
+            this.Orders = new HashSet<Orders>();
         }
     
         public int AccountCode { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Avatar { get; set; }
         public string RequestCode { get; set; }
         public Nullable<System.DateTime> CreateAt { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public byte[] Avatar { get; set; }
+        public Nullable<int> RoleID { get; set; }
+        public Nullable<System.DateTime> RegisteredDay { get; set; }
+        public Nullable<System.DateTime> Birthday { get; set; }
+        public Nullable<bool> AccountStatus { get; set; }
     
+        public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountAddress> AccountAddresses { get; set; }
+        public virtual ICollection<AccountAddress> AccountAddress { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contact> Contacts { get; set; }
+        public virtual ICollection<Contact> Contact { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
     }
 }

@@ -14,19 +14,10 @@ namespace electronics_shop.Models
     
     public partial class Delivery
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Delivery()
-        {
-            this.Orders = new HashSet<Order>();
-        }
-    
         public string DeliveryCode { get; set; }
         public string DeliveryName { get; set; }
         public Nullable<decimal> PriceTotal { get; set; }
         public Nullable<decimal> DeliveryFee { get; set; }
         public Nullable<bool> Status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

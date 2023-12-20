@@ -3,10 +3,6 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-@section styles{
-    <link rel="stylesheet" href="~/Content/unpkg.com/swiper@11.0.4/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="~/Content/libraries/iziToast/iziToast.min.css" />
-}
 
 @if (TempData["msgChangePassword"] != null)
 {
@@ -19,7 +15,7 @@
 }
 @if (TempData["msgChangePasswordFailed"] != null)
 {
-    <div class="bg-red-500 text-white border border-red-600 px-4 py-3 rounded relative" role="alert">
+    <div class="bg-red-600 text-white border border-red-600 px-4 py-3 rounded relative" role="alert">
         <button type="button" class="absolute top-0 right-0 px-4 py-3" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
@@ -29,7 +25,7 @@
 
 @if (TempData["msgEditProfieFailed"] != null)
 {
-    <div class="bg-red-500 text-white border-0 rounded-md p-4 flex items-center" role="alert">
+    <div class="bg-red-600 text-white border-0 rounded-md p-4 flex items-center" role="alert">
         <span class="mr-4">@TempData["msgEditProfieFailed"]</span>
         <button type="button" aria-label="Close">
             <span class="text-white">&times;</span>
@@ -39,7 +35,7 @@
 
 @if (TempData["msgDeleteOrder"] != null)
 {
-    <div class="bg-green-500 text-white border-0 rounded-md p-4 flex items-center" role="alert">
+    <div class="bg-green-600 text-white border-0 rounded-md p-4 flex items-center" role="alert">
         <span class="mr-4">@TempData["msgDeleteOrder"]</span>
         <button type="button" aria-label="Close">
             <span class="text-white">&times;</span>
@@ -2150,14 +2146,14 @@
     </div>
 </div>
 
-<div class="loader fixed z-[999] flex h-screen w-screen items-center justify-center bg-body">
+@*<div class="loader fixed z-[999] flex h-screen w-screen items-center justify-center bg-body">
     <div class="loader-content flex flex-col items-center gap-2">
         <span class="text-3xl font-semibold text-gray-200">Besnik.</span>
         <div class="flex h-1 w-40 gap-1 overflow-hidden bg-gray-200">
             <div class="animation-loader h-full w-20 bg-primary-color"></div>
         </div>
     </div>
-</div>
+</div>*@
 
 @section scriptsJS {
     <script src="~/Content/unpkg.com/swiper%4011.0.4/swiper-bundle.min.js"></script>

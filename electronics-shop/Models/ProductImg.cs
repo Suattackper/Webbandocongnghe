@@ -15,10 +15,9 @@ namespace electronics_shop.Models
     public partial class ProductImg
     {
         public int ProductImgCode { get; set; }
-        public string Img { get; set; }
         public string ProductCode { get; set; }
+        public byte[] Img { get; set; }
     
         public virtual Product Product { get; set; }
-        public bool IsDeFault { get; internal set; }
     }
 }

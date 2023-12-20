@@ -13,10 +13,10 @@ namespace electronics_shop.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ECOMMERCE5Entities : DbContext
+    public partial class ECOMMERCEEntities : DbContext
     {
-        public ECOMMERCE5Entities()
-            : base("name=ECOMMERCE5Entities")
+        public ECOMMERCEEntities()
+            : base("name=ECOMMERCEEntities")
         {
         }
     

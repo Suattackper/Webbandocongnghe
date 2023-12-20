@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ECOMMERCE5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ECOMMERCEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="AccountCode" />
@@ -168,6 +168,8 @@
     <Property Name="PromotionCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="PromotionPercentage" Type="Int32" />
     <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Promotio__5629CD9C" FromRole="Promotion" ToRole="Orders" />
     <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__46E78A0C" FromRole="Promotion" ToRole="Product" />
   </EntityType>
@@ -339,7 +341,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="ECOMMERCE5Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ECOMMERCEEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="AccountAddresses" EntityType="Self.AccountAddress" />
     <EntitySet Name="Brands" EntityType="Self.Brand" />

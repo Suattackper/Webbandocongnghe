@@ -59,7 +59,7 @@ namespace electronics_shop.Controllers
         {
             var code = new { Success = false, msg = "", code = -1,Count = 0 };
             var erAc = new { Success = true, msg = "" };
-            ECOMMERCE5Entities db = new ECOMMERCE5Entities();
+            ECOMMERCEEntities db = new ECOMMERCEEntities();
             var checkProduct = db.Products.FirstOrDefault(x => x.ProductCode == id);
           
             if (Session["info"] == null)

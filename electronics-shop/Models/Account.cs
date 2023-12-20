@@ -15,15 +15,12 @@ namespace electronics_shop.Models
     public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-
-        public List<Account> Items { get; set; }
         public Account()
         {
             this.AccountAddresses = new HashSet<AccountAddress>();
             this.Comments = new HashSet<Comment>();
             this.Contacts = new HashSet<Contact>();
             this.Orders = new HashSet<Order>();
-            this.Items = new List<Account>();
         }
     
         public int AccountCode { get; set; }

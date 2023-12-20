@@ -476,13 +476,6 @@
     <Content Include="Content\cdn.jsdelivr.net\npm\bootstrap-icons%401.7.2\font\fonts\bootstrap-iconsf114.woff" />
     <Content Include="Content\cdn.jsdelivr.net\npm\bootstrap-icons%401.7.2\font\fonts\bootstrap-iconsf114.woff2" />
     <Content Include="Content\images\product\Category-03\Tai nghe Gaming Inzone-01.avif" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\admin\Views\web.config" />
     <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.eot" />
     <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.ttf" />
@@ -534,6 +527,15 @@
     <Content Include="Areas\admin\Views\Shared\_HeaderLayout.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_MainLayout.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_MessageAlert.cshtml" />
+    <Content Include="Areas\admin\Views\Brands\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Discounts\Edit.cshtml" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

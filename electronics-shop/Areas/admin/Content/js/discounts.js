@@ -71,14 +71,20 @@ let idDiscount;
     Object.defineProperty(exports, '__esModule', { value: true });
 })));
 
+//$(".pick-date-date").flatpickr({
+//    "locale": "vn",
+//    enableTime: true,
+//    dateFormat: "d-m-Y",
+//    time_24hr: true,
+//    minDate: "today",
+//    defaultHour: new Date().getHours(),
+//    defaultMinute: new Date().getMinutes()
+//});
 $(".pick-date-date").flatpickr({
     "locale": "vn",
-    enableTime: true,
-    dateFormat: "m-d-Y H:i",
-    time_24hr: true,
-    minDate: "today",
-    defaultHour: new Date().getHours(),
-    defaultMinute: new Date().getMinutes()
+    enableTime: false,
+    dateFormat: "d-m-Y",
+    minDate: "today"
 });
 const createModal = $('#create-modal')
 const editModal = $('#edit-modal')

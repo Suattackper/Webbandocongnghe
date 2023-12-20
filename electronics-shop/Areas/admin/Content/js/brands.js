@@ -101,6 +101,9 @@ $('#create__save').click(function () {
 });
 
 //2. Chỉnh sửa
+$('#edit__open').click(function () {
+    editModal.modal('show');
+});
 var editOpen = function (id, name) {
     editModal.find('#edit__input').val(name);
     editModal.modal('show');
@@ -189,6 +192,9 @@ $('#edit__save').click(function () {
     });
 });
 //3. Xóa 
+//$('#delete__open').click(function () {
+//    editModal.modal('show');
+//});
 var deleteOpen = function (id, name) {
     deleteModal.find('#delete__name').text(name);
     deleteModal.modal('show');

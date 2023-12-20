@@ -13,7 +13,7 @@ namespace electronics_shop.Controllers
     public class AccountController : Controller
     {
         // Kết nối CSDL
-        private ECOMMERCE5Entities db = new ECOMMERCE5Entities();
+        private ECOMMERCEEntities db = new ECOMMERCEEntities();
         // GET: Account
         public ActionResult Index()
         {

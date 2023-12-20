@@ -57,7 +57,7 @@ namespace electronics_shop.Controllers
             public ActionResult AddToWishList(string id, int quantity)
             {
                 var code = new { Success = false, msg = "", code = -1, Count = 0 };
-            ECOMMERCE5Entities db = new ECOMMERCE5Entities();
+            ECOMMERCEEntities db = new ECOMMERCEEntities();
                 var checkProduct = db.Products.FirstOrDefault(x => x.ProductCode == id);
                 if (checkProduct != null)
                 {

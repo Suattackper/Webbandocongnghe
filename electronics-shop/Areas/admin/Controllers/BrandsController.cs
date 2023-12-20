@@ -16,25 +16,25 @@ namespace electronics_shop.Areas.Admin.Controllers
         // GET: Admin/Brands
         public ActionResult Index(int page = 1, int pagesize = 9)
         {
-            if (TempData.ContainsKey("ErrorMessage"))
+            if (TempData.ContainsKey("Error"))
             {
-                ViewBag.ErrorMessage = TempData["ErrorMessage"]; // Đọc giá trị từ TempData
+                ViewBag.Error = TempData["Error"];
             }
             List<Brand> data = db.Brands.ToList();
-            ViewBag.Brand = data; 
+            ViewBag.Brand = data;
             return View(data.ToPagedList(page, pagesize));
         }
         [HttpGet]
         public ActionResult Search(string search, int page = 1, int pagesize = 9)
         {
-            if (TempData.ContainsKey("ErrorMessage"))
+            if (TempData.ContainsKey("Error"))
             {
-                ViewBag.ErrorMessage = TempData["ErrorMessage"]; // Đọc giá trị từ TempData
+                ViewBag.Error = TempData["Error"];
             }
             ViewBag.Search = search;
             List<Brand> data = db.Brands.Where(p => p.BrandName.Contains(search)).ToList();
             ViewBag.Brand = data;
-            return View("Index",data.ToPagedList(page, pagesize));
+            return View("Index", data.ToPagedList(page, pagesize));
         }
         [HttpPost]
         public ActionResult Create(string name, string origin, int page = 1, int pagesize = 9)
@@ -66,37 +66,25 @@ namespace electronics_shop.Areas.Admin.Controllers
         }
         public ActionResult Delete(string id)
         {
-            try
+            int code = int.Parse(id);
+            // Kiểm tra xem có sản phẩm nào liên quan đến thương hiệu không
+            if (db.Products.Any(p => p.BrandCode == code))
             {
-                int code = int.Parse(id);
-                // Kiểm tra xem có sản phẩm nào liên quan đến thương hiệu không
-                if (db.Products.Any(p => p.BrandCode == code))
-                {
-                    // Nếu có sản phẩm liên quan, trả về Json chứa thông báo lỗi
-                    return Json(new { success = false, message = "Không thể xóa thương hiệu vì có sản phẩm liên quan." });
-                }
-                // Nếu không có sản phẩm liên quan, tiến hành xóa thương hiệu
-                Brand brand = db.Brands.FirstOrDefault(p => p.BrandCode == code);
-                if (brand == null)
-                {
-                    // Trường hợp không tìm thấy thương hiệu, trả về Json chứa thông báo lỗi
-                    return Json(new { success = false, message = "Không tìm thấy thương hiệu để xóa." });
-                }
-                db.Brands.Remove(brand);
-                db.SaveChanges();
-                // Trả về Json chứa thông báo thành công (nếu cần)
-                return Json(new { success = true, message = "Thương hiệu đã được xóa thành công." });
+                TempData["Error"] = "Error -- Không thể xóa thương hiệu vì có sản phẩm liên quan!";
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            // Nếu không có sản phẩm liên quan, tiến hành xóa thương hiệu
+            Brand brand = db.Brands.FirstOrDefault(p => p.BrandCode == code);
+            if (brand == null)
             {
-                // Xử lý lỗi và ghi log nếu cần
-                return Json(new { success = false, message = $"Lỗi xóa thương hiệu: {ex.Message}" });
+                // Trường hợp không tìm thấy thương hiệu, trả về Json chứa thông báo lỗi
+                TempData["Error"] = "Error -- Không tìm thấy thương hiệu để xóa!";
+                return RedirectToAction("Index");
             }
-            //int code = int.Parse(id);
-            //Brand brand = db.Brands.FirstOrDefault(p => p.BrandCode == code);
-            //db.Brands.Remove(brand);
-            //db.SaveChanges();
-            //return RedirectToAction("Index");
+            db.Brands.Remove(brand);
+            db.SaveChanges();
+            // Trả về Json chứa thông báo thành công (nếu cần)
+            return RedirectToAction("Index");
         }
     }
 }

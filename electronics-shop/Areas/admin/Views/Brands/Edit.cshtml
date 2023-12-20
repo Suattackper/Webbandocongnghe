@@ -80,7 +80,6 @@
                         <form id="kt_account_profile_details_form" class="form">
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
-
                                 <div class="mb-2">
                                     <span><i class="text-danger">Những mục đánh dấu (*) là bắt buộc </i></span>
                                 </div>
@@ -91,6 +90,7 @@
                                     </div>
                                     <div class="col-lg-8 fv-row">
                                         <div class="form-control form-control-lg form-control-solid disabled">@Model.BrandCode</div>
+                                        <input type="hidden" name="id" value="@Model.BrandCode" />
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -103,7 +103,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" id="product_name" name="name" class="form-control form-control-lg form-control-solid" placeholder="Nhập tên sản phẩm" autocomplete="off" value="@Model.BrandName" required>
+                                        <input type="text" id="product_name" name="name" class="form-control form-control-lg form-control-solid" placeholder="Nhập tên thương hiệu" autocomplete="off" value="@Model.BrandName" required>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -117,7 +117,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" id="product_name" name="origin" class="form-control form-control-lg form-control-solid" placeholder="Nhập tên sản phẩm" autocomplete="off" value="@Model.Origin" required>
+                                        <input type="text" id="product_name" name="origin" class="form-control form-control-lg form-control-solid" placeholder="Nhập nguồn gốc" autocomplete="off" value="@Model.Origin" required>
                                     </div>
                                     <!--end::Col-->
                                 </div>

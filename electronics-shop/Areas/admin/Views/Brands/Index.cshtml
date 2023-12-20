@@ -46,6 +46,10 @@
 <div class="d-flex flex-column-fluid">
     <div class="container  ">
         <div class="card">
+            @if (ViewBag.Error != null)
+            {
+                <p class="text-danger" style="font-style: italic; line-height: 1; font-size: 1rem; ">@ViewBag.Error</p>
+            }
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
@@ -136,7 +140,9 @@
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="javascript:void(0);" onclick="confirmDelete('@item.BrandCode')" class="menu-link px-3">Xóa</a>
+
+                                                    <a href="@Url.Action("Delete","Brands",new { id = item.BrandCode })" class="menu-link px-3">Xóa</a>
+                                                    @*<a href="javascript:void(0);" onclick="confirmDelete('@item.BrandCode')" class="menu-link px-3">Xóa</a>*@
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -377,7 +383,7 @@
 </div>
 
 <link href="~/Areas/Admin/Content/css/PagedList.css" rel="stylesheet" />
-<script>
+<!--<script>
     function confirmDelete(brandCode) {
 
         // Hiển thị hộp thoại xác nhận
@@ -392,9 +398,9 @@
             cancelButtonText: 'Hủy bỏ'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Nếu người dùng xác nhận xóa, thực hiện xóa
+                // Nếu người dùng xác nhận xóa, thực hiện xóa-->
                 @*window.location.href = '@Url.Action("Delete", "Brands")' + '?id=' + brandCode;*@
-                $.ajax({
+                <!--$.ajax({
                     type: 'POST',
                     url: '/Brands/Delete/' + brandCode,
                     success: function (result) {
@@ -434,6 +440,7 @@
                             //    showConfirmButton: false,
                             //    timer: 1500
                             //});
+                            console.log('/Brands/Delete/' + brandCode)
                             const Toast = Swal.mixin({
                                 toast: true,
                                 position: 'top-end',
@@ -465,7 +472,7 @@
             }
         });
     }
-</script>
+</script>-->
 
 @section scripts{
     <script src="~/Areas/Admin/Content/js/brands.js"></script>

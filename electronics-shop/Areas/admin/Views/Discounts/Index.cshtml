@@ -60,6 +60,10 @@
                 <div class="card-title">
                     <!--begin::Search-->
                     <div class="d-flex align-items-center position-relative my-1">
+                        @if (ViewBag.Error != null)
+                        {
+                            <p class="text-danger" style="font-style: italic; line-height: 1; font-size: 1rem; ">@ViewBag.Error</p>
+                        }
                         <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
                         @*<span class="svg-icon svg-icon-1 position-absolute ms-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -125,8 +129,8 @@
                                         <td>@item.PromotionCode</td>
                                         <td style="color: #005ec4;">@item.PromotionPercentage%</td>
                                         <td>@item.Quantity</td>
-                                        <td>@item.StartDate.ToString("HH:mm dd-MM-yyyy")</td>
-                                        <td>@item.EndDate.ToString("HH:mm dd-MM-yyyy")</td>
+                                        <td>@item.StartDate.ToString("dd-MM-yyyy")</td>
+                                        <td>@item.EndDate.ToString("dd-MM-yyyy")</td>
                                         <!--begin::Action=-->
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -143,12 +147,13 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a @*onclick="editOpen(@item.disscount_id, '@item.discount_price', '@item.discount_code', '@item.discount_star', '@item.discount_end',@item.quantity)"*@ class="menu-link px-3">Chỉnh sửa</a>
+                                                    <a href="@Url.Action("Edit","Discounts",new { code = item.PromotionCode })" class="menu-link px-3">Chỉnh sửa</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a @*onclick="deleteOpen(@item.disscount_id,'@item.discount_name')"*@ class="menu-link px-3">Xóa</a>
+                                                    @*<a href="javascript:void(0);" onclick="confirmDelete('@item.PromotionCode')" class="menu-link px-3">Xóa</a>*@
+                                                    <a href="@Url.Action("Delete","Discounts",new { code = item.PromotionCode })" class="menu-link px-3">Xóa</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -222,7 +227,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kt_modal_new_target_form" class="form" action="@Url.Action("Create","Discounts")" method="post" onsubmit="return validateForm()">
+                <form id="kt_modal_new_target_form" class="form" action="@Url.Action("Create","Discounts")" method="post">
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
@@ -237,7 +242,7 @@
                             <span>Code giảm giá</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" name="code" class="form-control form-control-solid" placeholder="Nhập code giảm giá" required>
+                        <input type="text" name="code" id="code" class="form-control form-control-solid" placeholder="Nhập code giảm giá" required>
                         <div class="fv-plugins-message-container invalid-feedback"></div>
                     </div>
                     <!--end::Input group-->
@@ -523,21 +528,84 @@
 <!--end::Modal - Delete-->
 
 <link href="~/Areas/Admin/Content/css/PagedList.css" rel="stylesheet" />
+@*<script>
+    function confirmDelete(brandCode) {
+        console.log(brandCode);
 
-<script>
-    function validateForm() {
-        var startDate = new Date(document.getElementById("startdate").value);
-        var endDate = new Date(document.getElementById("enddate").value);
+        // Hiển thị hộp thoại xác nhận
+        Swal.fire({
+            title: 'Xác nhận xóa',
+            text: 'Bạn có chắc chắn muốn xóa mã giảm giá này không?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy bỏ'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu người dùng xác nhận xóa, thực hiện xóa
+                $.ajax({
+                    type: 'POST',
+                    url: '/Discounts/Delete/' + brandCode,
+                    success: function (result) {
+                        if (result.success) {
+                            // Nếu thành công, hiển thị thông báo thành công (nếu cần)
+                            //alert(result.message);
+                            // Cập nhật giao diện hoặc thực hiện các thao tác khác nếu cần
+                            // Hiển thị thông báo xóa thành công
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Xóa thành công'
+                            })
+                            // Cập nhật giao diện nếu cần
+                            window.location.href = '@Url.Action("Index", "Discounts")';
+                        } else {
+                            console.log('/Discounts/Delete/' + brandCode);
+                            // Nếu không thành công, hiển thị thông báo lỗi
+                            //alert(result.message);
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                                }
+                            })
+                            Toast.fire({
+                                icon: 'error',
+                                title: result.message
+                            })
+                        }
+                    },
+                    error: function () {
+                        // Xử lý lỗi nếu có
+                        //alert('Đã xảy ra lỗi khi gọi action Delete.');
 
-        if (startDate > endDate) {
-            alert("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu");
-            return false;
-        }
-
-        return true;
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Đã xảy ra lỗi khi gọi action Delete.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                });
+            }
+        });
     }
-</script>
-
+</script>*@
 
 @section scripts{
     <script src="~/Areas/Admin/Content/js/discounts.js"></script>

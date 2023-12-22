@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace electronics_shop.Areas.admin
+namespace electronics_shop.Areas.Admin
 {
-    public class adminAreaRegistration : AreaRegistration 
+    public class AdminAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "admin";
+                return "Admin";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "admin_default",
-                "admin/{controller}/{action}/{id}",
+                "Admin_default",
+                "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

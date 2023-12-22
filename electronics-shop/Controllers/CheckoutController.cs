@@ -29,5 +29,7 @@ namespace electronics_shop.Controllers
             }
             return PartialView("_Partial_Inf_Cus");
         }
+
+       
     }
 }

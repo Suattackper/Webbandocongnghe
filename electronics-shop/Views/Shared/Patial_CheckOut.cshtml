@@ -1,0 +1,114 @@
+﻿@model electronics_shop.Models.OrderViewModel
+
+@using (Ajax.BeginForm("CheckOutForm", "ShoppingCart", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "load_data",
+    OnComplete="OnSuccessCO",
+    OnFailure="OnFailure"
+
+}, new { @Id = "myForm" }))
+{
+    @Html.AntiForgeryToken()
+    <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
+          action="#">
+        <div class="col-span-12 lg:col-span-8">
+
+
+
+
+            <span class="text-lg font-semibold">Billing Details</span>
+
+            <div class="grid grid-cols-12 gap-5 pt-5">
+
+                <div class="col-span-12 xs:col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">First Name</span>
+                        <input class="input" name="FirstName" type="text" required />
+                    </label>
+                </div>
+                <div class="col-span-12 xs:col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Last Name</span>
+                        <input class="input" name="LastName" type="text" required />
+                    </label>
+                </div>
+                <div class="col-span-12">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Email</span>
+                        <input class="input" name="Email" type="text" required />
+                    </label>
+                </div>
+                <div class="col-span-12 xs:col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Telephone</span>
+                        <input class="input input-number" name="PhoneNumber" type="number" required />
+                    </label>
+                </div>
+
+
+                <div class="col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Number (Optional)</span>
+                        <input class="input" name="Number" type="text" />
+                    </label>
+                </div>
+                <div class="col-span-12 xs:col-span-12">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Ward</span>
+                        <input class="input" name="Ward" type="text" required />
+                    </label>
+                </div>
+                @*<div class="col-span-12 xs:col-span-8">
+                        <label class="flex flex-col">
+                            <span class="text-sm">Ward</span>
+                            <input class="input" name="Ward" type="text" required />
+                        </label>
+                    </div>*@
+                <div class="col-span-12 xs:col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">District(Optional)</span>
+                        <input class="input" name="District" type="text" />
+                    </label>
+                </div>
+                <div class="col-span-12 xs:col-span-6">
+                    <label class="flex flex-col">
+                        <span class="text-sm">City</span>
+                        <input class="input" name="City" type="text" required />
+                    </label>
+                </div>
+
+
+
+                <div class="col-span-12 flex flex-wrap justify-between gap-5">
+                    <a class="transition-all-300 flex items-center gap-2 hover:text-primary-color"
+                       href="@Url.Action("Index", "ShoppingCart")">
+                        <i class="bi bi-arrow-return-left flex text-xl"></i>
+                        <span>Return to Shopping Cart</span>
+                    </a>
+                    <button class="btn-effect rounded-lg bg-primary-color p-4 font-bold uppercase text-white" type="submit">
+                        <span>Continue</span>
+                    </button>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="col-span-12 lg:col-span-4">
+            @Html.Action("RenderInfCus", "ShoppingCart")
+
+        </div>
+
+    </form>
+}
+

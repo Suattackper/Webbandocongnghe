@@ -62,6 +62,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="SlugGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SlugGenerator.2.0.2\lib\net45\SlugGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -135,7 +138,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiscountsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeedbacksController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenresController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsAdminController.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
@@ -168,6 +181,7 @@
     <Compile Include="Models\Contact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -193,6 +207,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -212,6 +227,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-brands-400.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-regular-400.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-solid-900.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.css" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-brands-400.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-regular-400.svg" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-solid-900.svg" />
+    <Content Include="Areas\Admin\Content\css\PagedList.css" />
+    <Content Include="Areas\Admin\Content\css\plugins.bundle.css" />
+    <Content Include="Areas\Admin\Content\css\simditor.css" />
+    <Content Include="Areas\Admin\Content\css\simditor.js" />
+    <Content Include="Areas\Admin\Content\css\style.bundle.css" />
+    <Content Include="Areas\Admin\Content\css\vis-timeline.bundle.css" />
+    <Content Include="Areas\Admin\Content\js\auth.js" />
+    <Content Include="Areas\Admin\Content\js\brands.js" />
+    <Content Include="Areas\Admin\Content\js\custom-notifi.js" />
+    <Content Include="Areas\Admin\Content\js\discounts.js" />
+    <Content Include="Areas\Admin\Content\js\genres.js" />
+    <Content Include="Areas\Admin\Content\js\orders.js" />
+    <Content Include="Areas\Admin\Content\js\plugins.bundle.js" />
+    <Content Include="Areas\Admin\Content\js\products.js" />
+    <Content Include="Areas\Admin\Content\js\repry-feedback.js" />
+    <Content Include="Areas\Admin\Content\js\scripts.bundle.js" />
+    <Content Include="Areas\Admin\Content\js\vis-timeline.bundle.js" />
+    <Content Include="Areas\Admin\Content\js\widgets.bundle.js" />
+    <Content Include="Areas\Admin\Content\js\widgets.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -401,6 +443,7 @@
     <Content Include="Content\images\svg\purchase-done.svg" />
     <Content Include="Content\images\svg\visa-logo.svg" />
     <Content Include="Content\index.html" />
+    <Content Include="Content\js\categories_custom.js" />
     <Content Include="Content\js\jsShoppingCart.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\validator.js" />
@@ -414,6 +457,8 @@
     <Content Include="Content\libraries\rater-js\star_0.svg" />
     <Content Include="Content\libraries\rater-js\star_1.svg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\templates\send1.html" />
+    <Content Include="Content\templates\send2.html" />
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.css" />
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.js" />
     <Content Include="Content\unpkg.com\popperjs\core.js" />
@@ -445,7 +490,58 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-brands-400.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-brands-400.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-brands-400.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-brands-400.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-regular-400.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-regular-400.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-regular-400.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-regular-400.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-solid-900.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-solid-900.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-solid-900.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\%40fortawesome\fa-solid-900.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\bootstrap-icons\bootstrap-icons.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\bootstrap-icons\bootstrap-icons.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\fonticons\fonticons.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-brands-400.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-brands-400.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-brands-400.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-brands-400.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-regular-400.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-regular-400.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-regular-400.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-regular-400.woff2" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-solid-900.eot" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-solid-900.ttf" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-solid-900.woff" />
+    <Content Include="Areas\Admin\Content\css\fonts\line-awesome\la-solid-900.woff2" />
+    <Content Include="Areas\Admin\Views\Auth\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Main.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Discounts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Feedbacks\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Genres\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductsAdmin\Trash.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_FooterLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_HeaderLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MessageAlert.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Partial_SanPham.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -492,13 +588,15 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
-    <Content Include="Views\Shared\_Partial_Inf_Cus.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\Shared\RenderInfCustomer.cshtml" />
+    <Content Include="Views\Shared\Patial_CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\admin\Controllers\" />
-    <Folder Include="Areas\admin\Data\" />
-    <Folder Include="Areas\admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\WishList\" />
   </ItemGroup>

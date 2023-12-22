@@ -87,7 +87,7 @@
 
         <div class="relative flex h-[40px] items-center form-group">
             <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-            <input class="input pl-10 form-control" id="password" name="password" type="password" placeholder="Password" required />
+            <input class="input pl-10 form-control" id="password" name="password" type="password" placeholder="Password" required   autocomplete="current-password" />
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             <span class="form-message"></span>
         </div>
@@ -95,7 +95,7 @@
         <div class="relative flex h-[40px] items-center form-group">
             <i class="bi bi-lock-fill absolute ml-2 flex text-[24px] text-gray-400"></i>
             <input class="input pl-10 form-control" id="password-confirmation" name="confirmpassword" type="password"
-                   placeholder="Confirm Password" required />
+                   placeholder="Confirm Password" required  autocomplete="current-password"/>
             <span class="form-message"></span>
         </div>
         <div class="my-2 flex items-center justify-between">

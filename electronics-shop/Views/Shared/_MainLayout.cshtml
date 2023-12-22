@@ -21,6 +21,13 @@
 
     @RenderSection("styles", required: false)
 
+    @* thao *@
+    
+    @Scripts.Render("~/bundles/modernizr")
+    <script src = "~/Scripts/jquery-3.4.1.min.js" ></script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
 
     <title>Besnik. - Electronics store</title>
 </head>
@@ -894,6 +901,30 @@
         </div>
     </div>
 
+    <div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+        <div class="flex h-full w-full">
+            <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+                <div class="w-full">
+                    <div class="border-b-2 border-gray-200 p-5">
+                        <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                    </div>
+                    <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                        <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                    </button>
+                </div>
+
+
+                @Html.Action("RenderShoppingCart", "Products")
+
+                @Html.Action("RenderActionCart", "Products")
+
+
+            </div>
+
+        </div>
+    </div>
+
+
     <div class="quick-view-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
         <div class="my-10 flex w-full justify-center">
             <div class="modal-content relative mx-3 w-[900px] min-w-[250px] scale-0 rounded-lg bg-body px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
@@ -1200,11 +1231,11 @@
     @*<script src="~/libraries/mixitup/mixitup.min.js"></script>*@
     @*<script src="~/unpkg.com/metismenujs@1.4.0/dist/metismenujs.min.js"></script>*@
     @*<script src="~/libraries/iziToast/iziToast.min.js"></script>*@
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+
     <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
     <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
     <script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
     <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
@@ -1214,7 +1245,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.min.js"></script>
-
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 
@@ -1226,7 +1258,7 @@
     <script src="~/Content/js/main.js"></script>
 
     @RenderSection("scriptsJS", required: false)
-
+    @RenderSection("scripts", required: false)
     <script src="~/Content/js/main.js"></script>
 
 </body>

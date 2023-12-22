@@ -27,6 +27,9 @@
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Ward" ColumnName="Ward" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -231,7 +231,7 @@ namespace electronics_shop.Controllers
             c.ProductCode = productcode;
             c.CommentContent = reviewvalue;
             c.CommentTime = DateTime.Now;
-            c.Rate = double.Parse(ratingvalue);
+            c.Rate = (byte?)double.Parse(ratingvalue);
             db.Comments.Add(c);
             db.SaveChanges();
             List<Comment> data = db.Comments.Where(p => p.ProductCode == productcode).ToList();
@@ -242,7 +242,7 @@ namespace electronics_shop.Controllers
             }
             ratep = ratep / data.Count;
             Product product = db.Products.FirstOrDefault(p => p.ProductCode == productcode);
-            product.Rate = ratep;
+            product.Rate = (int?)ratep;
             db.SaveChanges();
             return RedirectToAction("Detail", new { id = productcode });
         }

@@ -26,6 +26,9 @@
     <Property Name="Country" Type="nvarchar" MaxLength="50" />
     <Property Name="City" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="District" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ward" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Brand">
     <Key>

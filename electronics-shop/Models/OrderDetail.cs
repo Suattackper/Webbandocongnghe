@@ -11,15 +11,21 @@ namespace electronics_shop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class OrderDetail
     {
+  
         public int OrderCode { get; set; }
+      
+
         public string ProductCode { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> Total { get; set; }
     
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
 }

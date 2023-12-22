@@ -38,11 +38,11 @@
     </div>
 </div>
 
-<div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
-    <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
+<div style="width:1357px" class="checkout-section container mx-auto my-5 px-2 sm:px-8">
+    <form style="width:1357px"  class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
           action="#">
 
-        @Html.Action("RenderInfCus", "Checkout")
+        @Html.Action("RenderInfCus", "ShoppingCart")
 
         <div class="col-span-12 lg:col-span-4">
             @if (Model != null && Model.Any())

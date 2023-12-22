@@ -31,6 +31,9 @@
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ward" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Brand">
           <Key>
@@ -422,6 +425,9 @@
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Account" Relationship="Self.FK__AccountAd__Accou__3A81B327" FromRole="AccountAddress" ToRole="Account" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountA__5535A963" FromRole="AccountAddress" ToRole="Orders" />
         </EntityType>
@@ -834,6 +840,9 @@
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Ward" ColumnName="Ward" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

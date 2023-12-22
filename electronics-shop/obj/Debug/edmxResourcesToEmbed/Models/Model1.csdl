@@ -30,6 +30,9 @@
     <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Account" Relationship="Self.FK__AccountAd__Accou__3A81B327" FromRole="AccountAddress" ToRole="Account" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountA__5535A963" FromRole="AccountAddress" ToRole="Orders" />
   </EntityType>

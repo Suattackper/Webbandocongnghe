@@ -27,13 +27,12 @@ namespace electronics_shop.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string RequestCode { get; set; }
-        public Nullable<System.DateTime> CreateAt { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public byte[] Avatar { get; set; }
+        public string RequestCode { get; set; }
+        public Nullable<System.DateTime> CreateAt { get; set; }
         public Nullable<int> RoleID { get; set; }
-        public Nullable<System.DateTime> RegisteredDay { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
         public Nullable<bool> AccountStatus { get; set; }
     

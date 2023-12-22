@@ -6,8 +6,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
 using System.Net;
+using System.Net.Mail;
+using System.Web.Hosting;
+using electronics_shop.Common;
 
 namespace electronics_shop.Controllers
 {
@@ -188,14 +190,109 @@ namespace electronics_shop.Controllers
             return View();
         }
 
+        //Huynh nhu 21/12 2:59 PM
+
+        //Gửi mail
+        [NonAction]
+        public void SendVerificationLinkEmail(string emailID, string activationCode)
+        {
+            var verifyUrl = "/Account/ResetPassword" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var fromEmail = new MailAddress(EmailConfig.emailID, EmailConfig.emailName);
+            var toEmail = new MailAddress(emailID);
+
+            //có thể thay bằng mật khẩu gmail của bạn
+            var fromEmailPassword = EmailConfig.emailPassword;
+
+            //dùng body mail html , file template nằm trong thư mục "EmailTemplate/Text.cshtml"
+            string body = System.IO.File.ReadAllText(HostingEnvironment.MapPath("~/EmailTemplate/") + "ResetPassword" + ".cshtml"); 
+            string subject = "Update new password";
+
+            //hiển thị nội dung lên form html
+            body = body.Replace("{{viewBag.Confirmlink}}", link);
+
+            //hiển thị nội dung lên form html
+            body = body.Replace("{{viewBag.Confirmlink}}", Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl));
+
+            var smtp = new SmtpClient
+            {
+                Host = EmailConfig.emailHost,
+                Port = 587,
+                //bật ssl
+                EnableSsl = true, 
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+
+        }
+
         public ActionResult ForgotPassword()
         {
-            return View();
+            // Nếu đã đăng nhập rồi sẽ điều hướng sang trang chủ
+            if (Session["info"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(Account account)
+        {
+            
+            try
+            {
+                // kiểm tra email đã trùng với email đăng ký tài khoản chưa, nếu chưa đăng ký sẽ trả về fail
+                var check = db.Account.Where(m => m.Email == account.Email).FirstOrDefault();
+
+                if(check != null)
+                {
+                    // Gửi email reset password
+                    string resetCode = Guid.NewGuid().ToString();
+
+
+                    // gửi code reset đến mail đã nhập ở form quên mật khẩu , kèm code resetpass,  tên tiêu đề gửi
+                    SendVerificationLinkEmail(account.Email, resetCode);
+
+                    string sendmail = account.Email;
+                    //request code phải giống reset code  
+                    account.RequestCode = resetCode;        
+                    
+                    db.SaveChanges();
+
+                    Notification.setNotification5s("Đường dẫn reset password đã được gửi, vui lòng kiểm tra email", "success");
+
+                   
+                } else
+                {
+                    Notification.setNotification1_5s("Email chưa tồn tại trong hệ thống", "error");
+                }
+
+                return View(account);
+            } catch (Exception ex)
+            {
+                TempData["msgChangePasswordFailed"] = "Change failed!" + ex.Message;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         /*===============================*/
 
-        
+
         //Edit profie
         [HttpGet]
         public ActionResult EditProfile(int accountCode)
@@ -296,7 +393,7 @@ namespace electronics_shop.Controllers
                     }
                 }
                 ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", account.RoleID);
-                return RedirectToAction("EditProfile", "Account", new { accountCode = account.AccountCode });
+                return View(account);
 
             } catch (Exception ex)
             {

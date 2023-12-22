@@ -24,6 +24,8 @@ namespace electronics_shop.Models
         public string PromotionCode { get; set; }
         public Nullable<int> PromotionPercentage { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

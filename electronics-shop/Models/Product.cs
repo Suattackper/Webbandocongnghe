@@ -26,13 +26,13 @@ namespace electronics_shop.Models
         public string ProductName { get; set; }
         public Nullable<int> BrandCode { get; set; }
         public Nullable<int> CategoryCode { get; set; }
+        public byte[] ImageProduct { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string PromotionCode { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string Description { get; set; }
         public Nullable<int> ViewCount { get; set; }
         public Nullable<int> Rate { get; set; }
-        public byte[] ImageProduct { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,5 +1,5 @@
-﻿--create database ECOMMERCE
---go
+﻿create database ECOMMERCE
+go
 USE ECOMMERCE
 GO
 
@@ -21,20 +21,11 @@ CREATE TABLE Account (
 	RequestCode varchar(10) null,
 	CreateAt datetime default getdate() null,
 	RoleID int,
-	RegisteredDay DATETIME DEFAULT(GETDATE()),
 	Birthday DATE,
 	AccountStatus BIT
 );
 
 ALTER TABLE Account ADD FOREIGN KEY (RoleID) REFERENCES Roles (RoleID)
-
---ALTER TABLE Account ADD RoleID int ;
---ALTER TABLE Account ADD RegisteredDay DATETIME DEFAULT(GETDATE());
---ALTER TABLE Account ADD Birthday DATE;
---ALTER TABLE Account ADD AccountStatus BIT;
---ALTER TABLE Account ADD Avatar IMAGE;
-
-DELETE FROM Account WHERE AccountCode = 13; 
 
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
@@ -70,8 +61,15 @@ CREATE TABLE Promotion (
 	PromotionCode char(10) primary key,
 	-- Phần trăm khuyến mãi 
 	PromotionPercentage int null,
-	EndDate datetime null
+	EndDate datetime null,
+	StartDate datetime null,
+	Quantity int default 1000 null
 )
+
+-- Nhu: 21/12
+--ALTER TABLE Promotion ADD Quantity int default 1000 null;
+--ALTER TABLE Promotion ADD StartDate datetime null;
+
 
 -- SẢN PHẨM 
 CREATE TABLE Product(
@@ -93,7 +91,6 @@ CREATE TABLE Product(
 	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
 
-ALTER TABLE Product ADD ImageProduct IMAGE;
 
 -- HÌNH ẢNH SẢN PHẨM
 CREATE TABLE ProductImg (
@@ -103,7 +100,6 @@ CREATE TABLE ProductImg (
 	foreign key (ProductCode) references Product(ProductCode)
 )
 
---ALTER TABLE ProductImg ADD Img IMAGE;
 
 
 -- GIAO HÀNG

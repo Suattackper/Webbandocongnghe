@@ -73,7 +73,7 @@
                 <div class="flex flex-col items-center">
                     <div class="relative">
                         <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200 shadow-md">
-                            <img class="h-full w-full object-cover" src="images/comments/profile_1.png" alt="profile" />
+                            <img id="imagePreview" class="h-full w-full object-cover" src="data:image;base64, @System.Convert.ToBase64String(Model.Avatar)" alt="profile" />
                         </div>
                         <!-- <i
                           class="bi bi-camera-fill transition-all-300 absolute top-0 left-0 flex cursor-pointer rounded-full bg-slate-500 p-1 text-white shadow-md hover:bg-slate-400"></i> -->
@@ -86,13 +86,13 @@
                                 Select
                                 Avatar
                             </span>
-                            <input type='file' class="hidden" :multiple="multiple" :accept="accept" />
+                            <input type="file" name="uploadFile" class="hidden" id="image" accept="image/jpeg, image/jpg, image/png" onclick="defaultBtnActive()" />
                         </label>
                     </div>
                 </div>
                 <ul class="w-full text-sm">
                     <li class="btn-tabs tab-active-2 transition-all-300 active border-t hover:bg-gray-100">
-                        <a class="flex items-center gap-2 px-1 py-2" href="javascript:void(0)">
+                        <a class="flex items-center gap-2 px-1 py-2" href="@Url.Action("EditProfile", "Account", new {accountCode = Model.AccountCode})">
                             <i class="bi bi-person flex text-3xl text-primary-color"></i>
                             <span>My Account</span>
                         </a>
@@ -118,40 +118,60 @@
 
             <div class="tab-content active flex h-full flex-col gap-5 rounded bg-white p-5">
                 <span class="block text-xl font-bold">My Account</span>
+                @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { @class = "grid grid-cols-12 gap-2", @id = "form-1", @enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <form class="grid grid-cols-12 gap-2" action="#">
-                    <div class="col-span-12 xs:col-span-6">
+                    @Html.HiddenFor(model => model.AccountCode)
+                    @Html.HiddenFor(model => model.CreateAt)
+                    @Html.HiddenFor(model => model.AccountStatus)
+                    @Html.HiddenFor(model => model.RoleID)
+                    @Html.HiddenFor(model => model.Password)
+
+                    <div class="col-span-12 xs:col-span-6 form-group">
                         <label class="flex flex-col text-sm">
                             First name
                         </label>
-                            <input class="input h-10" type="text" placeholder="John" value="John" required />                       
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "input h-10", @id = "firstname" } })
+                            <span class="form-message"></span>
+                        @*<input class="" type="text" placeholder="John" value="John" required />*@
                     </div>
-                    <div class="col-span-12 xs:col-span-6">
+                    <div class="col-span-12 xs:col-span-6 form-group">
                         <label class="flex flex-col text-sm">
                             Last name
                         </label>
-                            <input class="input h-10" type="text" placeholder="Doe" value="Doe" required />                      
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "input h-10", @id = "lastname" } })
+                        <span class="form-message"></span>
                     </div>
-                    <div class="col-span-12 xs:col-span-6">
+                    <div class="col-span-12 xs:col-span-6 form-group">
                         <label class="flex flex-col text-sm">
                             Telephone
                         </label>
-                            <input class="input input-number h-10" type="number" placeholder="011234567890" value="011234567890"
-                                   required />                       
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input input-number h-10", @id = "phone", @type = "text" } })
+                        @*<input class="input input-number h-10" type="number" placeholder="011234567890" value="011234567890"
+                               required />*@
+                        <span class="form-message"></span>
+
                     </div>
-                    <div class="col-span-12 xs:col-span-6">
+                    <div class="col-span-12 xs:col-span-6 form-group">
                         <label class="flex flex-col text-sm">
                             D.N.I
                         </label>
-                            <input class="input input-number h-10" type="number" placeholder="1234567890" value="1234567890"
-                                   required />                      
+                        <input class="input input-number h-10" type="number" placeholder="" value="1234567890"
+                               required />
+                        <span class="form-message"></span>
+
                     </div>
-                    <div class="col-span-12">
+                    <div class="col-span-12 form-group">
                         <label class="flex flex-col text-sm">
                             Email
                         </label>
-                            <input class="input h-10" type="text" placeholder="johndoe@example.com" value="johndoe@example.com"
-                                   required />
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input h-10", @id = "email", @type = "text" } })
+                        @*<input class="input h-10" type="text" placeholder="johndoe@example.com" value="johndoe@example.com"
+                               required />*@
+                        <span class="form-message"></span>
+
                     </div>
                     <div class="col-span-12 xs:col-span-6">
                         <button class="btn-effect w-full rounded-lg bg-primary-color p-2 font-bold uppercase text-white"
@@ -165,8 +185,7 @@
                             <span class="text-center">Reset</span>
                         </button>
                     </div>
-                </form>
-                
+                }
             </div>
         </div>
     </div>
@@ -177,6 +196,7 @@
 
 @section scriptsJS{
     <script src="~/Content/libraries/nice-select2/nice-select2.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
     <script src="~/Content/libraries/mixitup/mixitup.min.js"></script>
     <script src="~/Content/js/validator.js"></script>
     <script>

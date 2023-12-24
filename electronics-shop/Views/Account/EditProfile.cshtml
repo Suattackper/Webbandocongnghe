@@ -4,6 +4,7 @@
     ViewBag.Title = "EditProfile";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 
+    var currentUser = HttpContext.Current.User;
 }
 
 
@@ -75,9 +76,7 @@
                         <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200 shadow-md">
                             <img id="imagePreview" class="h-full w-full object-cover" src="data:image;base64, @System.Convert.ToBase64String(Model.Avatar)" alt="profile" />
                         </div>
-                        <!-- <i
-                          class="bi bi-camera-fill transition-all-300 absolute top-0 left-0 flex cursor-pointer rounded-full bg-slate-500 p-1 text-white shadow-md hover:bg-slate-400"></i> -->
-
+                       
                     </div>
                     <div class="mt-2 text-center">
                         <span class="block font-bold mb-2">@($"{Model.LastName} {Model.FirstName}")</span>
@@ -174,8 +173,8 @@
 
                     </div>
                     <div class="col-span-12 xs:col-span-6">
-                        <button class="btn-effect w-full rounded-lg bg-primary-color p-2 font-bold uppercase text-white"
-                                type="submit">
+                        <button type="submit" class="btn-effect w-full rounded-lg bg-primary-color p-2 font-bold uppercase text-white"
+                                 id="save-form">
                             <span class="text-center">Save Changes</span>
                         </button>
                     </div>
@@ -232,4 +231,53 @@
             }
         });
     </script>
+
+    @*<script>
+        //Gửi dữ liệu lên server thông qua Ajax:
+        var _userName = $("#firstname").val();
+        var _userName = $("#lastname").val();
+        var _userName = $("#phone").val();
+        var _userName = $("#email").val();
+            $.ajax({
+                type: "Post",
+                url: "/Account/UpdateProfile",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ userName: _userName, phoneNumber: _phoneNumber }),
+                dataType: "json",
+                success: function (result) {
+                    if (result == true) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2500,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Cập nhật thông tin thành công'
+                        })
+                    }
+                    else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Lỗi!'
+                        })
+                    }
+                }
+            });
+    </script>*@
 }

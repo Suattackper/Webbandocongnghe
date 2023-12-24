@@ -34,15 +34,16 @@ namespace electronics_shop.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var check = db.Account.Where(m => m.Email == account.Email && m.PhoneNumber == account.PhoneNumber).FirstOrDefault();
+                    var check = db.Account.Where(m => m.Email == account.Email).FirstOrDefault();
+                    var checkPhone = db.Account.Where(m => m.PhoneNumber == account.PhoneNumber).FirstOrDefault();
 
-                    if (check != null)
+                    if (check != null && checkPhone != null)
                     {
-                        // Kiểm tra email và sdt có trong CSDL 
+                        // Kiểm tra email có trong CSDL 
                         ModelState.AddModelError("", "There was a problem creating your account. " +
-                            "Your email already exists.");
+                            "Your email or phone number have already existed.");
                         return View();
-                    }
+                    } 
                     else
                     {
                         string imagePath = Server.MapPath("~/Content/images/comments/profile_1.png");
@@ -172,7 +173,7 @@ namespace electronics_shop.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Incorrect password!");
-                    return View();
+                    return View(account);
                 }
 
             }
@@ -184,14 +185,9 @@ namespace electronics_shop.Controllers
         }
 
 
-        // Huỳnh Như 20/12/23 3:44 PM
-        public ActionResult ResetPassword()
-        {
-            return View();
-        }
+       
 
         //Huynh nhu 21/12 2:59 PM
-
         //Gửi mail
         [NonAction]
         public void SendVerificationLinkEmail(string emailID, string activationCode)
@@ -236,6 +232,8 @@ namespace electronics_shop.Controllers
 
         }
 
+
+        [HttpGet]
         public ActionResult ForgotPassword()
         {
             // Nếu đã đăng nhập rồi sẽ điều hướng sang trang chủ
@@ -285,9 +283,62 @@ namespace electronics_shop.Controllers
                 return View(account);
             } catch (Exception ex)
             {
-                TempData["msgChangePasswordFailed"] = "Change failed!" + ex.Message;
+                TempData["msgChangePasswordFailed"] = ex.Message;
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        // Huỳnh Như 20/12/23 3:44 PM
+        [HttpGet]
+        public ActionResult ResetPassword(string codeRequest)
+        {
+            try
+            {
+                Account code = db.Account.Where(m => m.RequestCode == codeRequest).FirstOrDefault();
+
+                if (code != null && !User.Identity.IsAuthenticated)
+                {
+                    Account model = new Account();
+                    model.RequestCode = codeRequest;
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            } catch (Exception ex)
+            {
+                TempData["msgChangePasswordFailed"] = "Edit failed!" + ex.Message;
+                return RedirectToAction("Login");
+            }
+        }
+
+
+        //Huynh nhu 23/12 2:33 PM
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(Account account)
+        {
+            var check = db.Account.Where(m => m.RequestCode == account.RequestCode).FirstOrDefault();
+
+            if(check != null)
+            {
+                check.Password = Encryptor.MD5Hash(account.Password);
+
+                //Sau khi đổi mật khẩu thành công, khi quay lại link cũ thì sẽ không đôi được mật khẩu nữa 
+                check.RequestCode = "";
+                check.Update_By = check.Email;
+                check.Update_At = DateTime.Now;
+                check.AccountStatus = true;
+
+                db.SaveChanges();
+
+                Notification.setNotification1_5s("Update new password successfully", "success");
+
+                return RedirectToAction("Login");
+            }
+
+            return View(account);
         }
 
         /*===============================*/

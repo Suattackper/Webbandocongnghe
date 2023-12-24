@@ -143,6 +143,7 @@
     <Compile Include="Areas\admin\Controllers\DiscountsController.cs" />
     <Compile Include="Areas\admin\Controllers\FeedbacksController.cs" />
     <Compile Include="Areas\admin\Controllers\GenresController.cs" />
+    <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\admin\Controllers\ProductsAdminController.cs" />
     <Compile Include="Common\EmailConfig.cs" />
@@ -240,7 +241,17 @@
     <Content Include="Areas\admin\Content\css\simditor.css" />
     <Content Include="Areas\admin\Content\css\simditor.js" />
     <Content Include="Areas\admin\Content\css\style.bundle.css" />
+    <Content Include="Areas\admin\Content\css\style.min.css" />
     <Content Include="Areas\admin\Content\css\vis-timeline.bundle.css" />
+    <Content Include="Areas\admin\Content\images\auth-bg.jpg" />
+    <Content Include="Areas\admin\Content\images\icon.png" />
+    <Content Include="Areas\admin\Content\images\login.jpg" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\popper.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper.min.js" />
     <Content Include="Areas\admin\Content\js\auth.js" />
     <Content Include="Areas\admin\Content\js\brands.js" />
     <Content Include="Areas\admin\Content\js\custom-notifi.js" />
@@ -554,6 +565,8 @@
     <Content Include="Models\Shop.edmx.diagram">
       <DependentUpon>Shop.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\Login\LoginAdmin.cshtml" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\poppper.js.flow" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

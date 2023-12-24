@@ -137,7 +137,7 @@
             formGroupSelector: '.form-group',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#email'),
+                Validator.isEmail('#email'),
                 Validator.isRequired('#password'),
                 Validator.isRequired('#CaptchaInputText'),
             ],

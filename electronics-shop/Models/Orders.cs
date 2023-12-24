@@ -14,6 +14,12 @@ namespace electronics_shop.Models
     
     public partial class Orders
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Orders()
+        {
+            this.OrderDetail = new HashSet<OrderDetail>();
+        }
+    
         public int OrderCode { get; set; }
         public Nullable<int> PaymentCode { get; set; }
         public Nullable<int> AccountCode { get; set; }
@@ -27,6 +33,8 @@ namespace electronics_shop.Models
     
         public virtual Account Account { get; set; }
         public virtual AccountAddress AccountAddress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual Promotion Promotion { get; set; }
     }

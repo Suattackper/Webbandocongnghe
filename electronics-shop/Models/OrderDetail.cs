@@ -20,6 +20,7 @@ namespace electronics_shop.Models
         public Nullable<int> Quantity { get; set; }
         public Nullable<decimal> Total { get; set; }
     
+        public virtual Orders Orders { get; set; }
         public virtual Product Product { get; set; }
     }
 }

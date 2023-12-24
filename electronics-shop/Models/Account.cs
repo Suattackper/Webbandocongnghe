@@ -33,10 +33,10 @@ namespace electronics_shop.Models
         public string RequestCode { get; set; }
         public Nullable<System.DateTime> CreateAt { get; set; }
         public Nullable<int> RoleID { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
         public Nullable<bool> AccountStatus { get; set; }
+        public string Update_By { get; set; }
+        public Nullable<System.DateTime> Update_At { get; set; }
     
-        public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountAddress> AccountAddress { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

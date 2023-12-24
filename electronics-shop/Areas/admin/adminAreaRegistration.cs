@@ -17,7 +17,7 @@ namespace electronics_shop.Areas.admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", Controller = "Dashboard", id = UrlParameter.Optional }
+                new { action = "LoginAdmin", Controller = "LoginAdmin", id = UrlParameter.Optional }
             );
             //context.MapRoute(
             //    "admin_default",

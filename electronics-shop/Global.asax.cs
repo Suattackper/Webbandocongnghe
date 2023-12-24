@@ -17,6 +17,7 @@ namespace electronics_shop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Application["Notification"] = "";
             // Global.asax.cs
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine

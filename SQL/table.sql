@@ -1,5 +1,5 @@
-﻿create database ECOMMERCE
-go
+﻿--create database ECOMMERCE
+--go
 USE ECOMMERCE
 GO
 
@@ -18,15 +18,22 @@ CREATE TABLE Account (
 	FirstName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Avatar image,
-	RequestCode varchar(10) null,
+	-- 23/12/23 Nhu : Sửa độ dài của giá trị 
+	RequestCode nvarchar(512) null,
 	CreateAt datetime default getdate() null,
 	RoleID int,
-	Birthday DATE,
-	AccountStatus BIT
+	AccountStatus BIT,
+	-- Huynh nhu 23/12 2:57 PM: Thêm cột 
+	Update_By nvarchar(256),
+	Update_At datetime default getdate() null
 );
 
-ALTER TABLE Account ADD FOREIGN KEY (RoleID) REFERENCES Roles (RoleID)
-
+--ALTER TABLE Account ADD FOREIGN KEY (RoleID) REFERENCES Roles (RoleID)
+--ALTER TABLE Account ADD Update_By nvarchar(256)
+--ALTER TABLE Account ADD Update_At datetime default getdate() null
+--ALTER TABLE Account ADD CreateAt datetime default getdate() null
+--ALTER TABLE Account ALTER COLUMN RequestCode nvarchar(512)
+--ALTER TABLE Account DROP COLUMN Birthday xóa cột birthday 23/12
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
@@ -86,11 +93,12 @@ CREATE TABLE Product(
 	Description nvarchar(max) null,
 	-- Lượt xem 
 	ViewCount int  default 0,
-	Rate int default 0 null,
+	Rate float,
 	foreign key (CategoryCode) references Category(CategoryCode),
 	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
 
+-- HUYNH NHU
 
 -- HÌNH ẢNH SẢN PHẨM
 CREATE TABLE ProductImg (
@@ -147,7 +155,7 @@ CREATE TABLE Orders(
 
 -- CHI TIẾT ĐẶT HÀNG
 CREATE TABLE OrderDetail (
-	OrderCode int identity(1,1),
+	OrderCode int,
 	ProductCode varchar(15),
 	Price money null,
 	Quantity int null,
@@ -155,6 +163,11 @@ CREATE TABLE OrderDetail (
 	foreign key (ProductCode) references Product(ProductCode),
 	primary key(ProductCode,OrderCode)
 )
+
+
+-- Huynh nhu 22/12 11:08 PM
+
+ALTER TABLE OrderDetail ADD FOREIGN KEY (OrderCode) REFERENCES Orders (OrderCode)
 
 -- COMMENT
 CREATE TABLE Comment (
@@ -204,7 +217,7 @@ INSERT INTO Roles (RoleName) VALUES (N'Khách hàng')
 --ALTER TABLE Orders ADD FOREIGN KEY (PaymentCode) REFERENCES Payment (PaymentCode)
 --ALTER TABLE Orders ADD FOREIGN KEY (PromotionCode) REFERENCES Promotion (PromotionCode)
 --ALTER TABLE Orders ADD FOREIGN KEY (OrderAddressCode) REFERENCES AccountAddress (AccountAddressCode)
---ALTER TABLE OrderDetail ADD FOREIGN KEY (OrderCode) REFERENCES Orders (OrderCode)
+
 --ALTER TABLE OrderDetail ADD FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode)
 --ALTER TABLE Comment ADD FOREIGN KEY (AccountCode) REFERENCES Account (AccountCode)
 --ALTER TABLE Comment ADD FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode)
@@ -214,6 +227,10 @@ INSERT INTO Roles (RoleName) VALUES (N'Khách hàng')
 ---- INDEX	
 --CREATE NONCLUSTERED INDEX idx_BrandCode ON Product (BrandCode ASC)
 --CREATE NONCLUSTERED INDEX idx_CategoryCode ON Product (CategoryCode ASC)
+
+--HUYNH NHU 24/12
+--INSERT INTO Account (Password, Email, PhoneNumber, FirstName, LastName, Avatar, RequestCode, CreateAt, RoleID, AccountStatus,Update_By, Update_At)
+--VALUES ('137b173cf16f2175172615a6fa53a14c', 'NhuAdmin@gmail.com', '0358255617', N'Như', N'Quỳnh', NULL, NULL, '2023-12-25 00:40:11.200', 1, 1, NULL, NULL)
 
 
 select * from Account

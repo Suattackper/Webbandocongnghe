@@ -67,5 +67,14 @@ namespace electronics_shop.Areas.admin.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+
+            return RedirectToAction("LoginAdmin");
+        }
+
     }
 }

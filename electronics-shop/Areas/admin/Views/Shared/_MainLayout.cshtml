@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization;
+@using electronics_shop.Models
+@{ Account account = (Account)Session["InfoAdmin"];} 
+
+<!DOCTYPE html>
 <html lang="vi">
 <!--begin::Head-->
 <head>
@@ -48,7 +52,7 @@
                 <!--begin::Brand-->
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
-                    <a class="fs-1 fw-bolder text-white" href="@Url.Action("Index","Products")">
+                    <a class="fs-1 fw-bolder text-white" href="@Url.Action("BackToHome", "Base")" target="_blank">
                         <img src="~/Content/images/svg/logo.svg" style=" width: 176px; height: auto; border-radius: 2px; object-fit: cover;" />
                     </a>
                     <!--end::Logo-->

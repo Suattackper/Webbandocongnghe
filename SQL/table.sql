@@ -1,20 +1,45 @@
-﻿create database ECOMMERCE
+﻿create database ECOMMERCEadmin
+go
+USE ECOMMERCEadmin
+GO
+
+create database ECOMMERCE
 go
 USE ECOMMERCE
 GO
 
+-- QUYỀN
+CREATE TABLE Roles (
+	RoleID int identity(1,1) primary key,
+	RoleName nvarchar(50)
+)
+
 -- TÀI KHOẢN 
 CREATE TABLE Account (
 	AccountCode int identity(1,1) primary key,
-	Password varchar(15) COLLATE SQL_Latin1_General_CP1_CS_AS null,
+	Password varchar(255) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	PhoneNumber varchar(10) null,
 	FirstName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	LastName nvarchar(50) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	Avatar nvarchar(500) null,
-	RequestCode varchar(10) null,
-	CreateAt datetime default getdate() null
-)
+	Avatar image,
+	-- 23/12/23 Nhu : Sửa độ dài của giá trị 
+	RequestCode nvarchar(512) null,
+	CreateAt datetime default getdate() null,
+	RoleID int,
+	-- Anh Tan 23/12/ 16:18 xóa cột status
+	-- Huynh nhu 23/12 2:57 PM: Thêm cột 
+	Update_By nvarchar(256),
+	-- Anh Tan 23/12/ 16:18 xóa default getdate
+	Update_At datetime
+);
+
+--ALTER TABLE Account ADD FOREIGN KEY (RoleID) REFERENCES Roles (RoleID)
+--ALTER TABLE Account ADD Update_By nvarchar(256)
+--ALTER TABLE Account ADD Update_At datetime default getdate() null
+--ALTER TABLE Account ALTER COLUMN RequestCode nvarchar(512)
+--ALTER TABLE Account DROP COLUMN Birthday xóa cột birthday 23/12
+
 
 -- ĐỊA CHỈ CỦA TÀI KHOẢN
 CREATE TABLE AccountAddress (
@@ -41,8 +66,7 @@ CREATE TABLE Brand(
 -- DANH MỤC - LOẠI HÀNG HÓA 
 CREATE TABLE Category (
 	CategoryCode int identity(1,1) primary key,
-	CategoryName nvarchar(100),
-	Img nvarchar(500)
+	CategoryName nvarchar(100)
 )
 
 -- KHUYẾN MÃI
@@ -50,8 +74,15 @@ CREATE TABLE Promotion (
 	PromotionCode char(10) primary key,
 	-- Phần trăm khuyến mãi 
 	PromotionPercentage int null,
-	EndDate datetime null
+	EndDate datetime null,
+	StartDate datetime null,
+	Quantity int default 1000 null
 )
+
+-- Nhu: 21/12
+--ALTER TABLE Promotion ADD Quantity int default 1000 null;
+--ALTER TABLE Promotion ADD StartDate datetime null;
+
 
 -- SẢN PHẨM 
 CREATE TABLE Product(
@@ -59,7 +90,7 @@ CREATE TABLE Product(
 	ProductName nvarchar(50),
 	BrandCode int null,
 	CategoryCode int null,
-	ImageProduct nvarchar(500),
+	ImageProduct image,
 	Price decimal(18,2),
 	PromotionCode char(10) null,
 	-- Số lượng còn lại 
@@ -68,19 +99,24 @@ CREATE TABLE Product(
 	Description nvarchar(max) null,
 	-- Lượt xem 
 	ViewCount int  default 0,
-	Rate int default 0 null,
+	Rate float,
 	foreign key (CategoryCode) references Category(CategoryCode),
 	foreign key (PromotionCode) references Promotion(PromotionCode),
+	-- Anh Tan 23/12/ 18:10 add khóa ngoại brand
 	foreign key (BrandCode) references Brand(BrandCode)
 )
+
+-- HUYNH NHU
 
 -- HÌNH ẢNH SẢN PHẨM
 CREATE TABLE ProductImg (
 	ProductImgCode int identity(1,1) primary key,
-	Img nvarchar(500) null,
+	Img image null,
 	ProductCode varchar(15) null,
 	foreign key (ProductCode) references Product(ProductCode)
 )
+
+
 
 -- GIAO HÀNG
 CREATE TABLE Delivery (
@@ -108,7 +144,6 @@ CREATE TABLE Orders(
 	OrderCode int identity(1,1) primary key,
 	PaymentCode int null,
 	AccountCode int null,
-	DeliveryCode varchar(10),
 	--Mã giảm giá
 	PromotionCode char(10) null,
 	-- Ngày đặt hàng 
@@ -123,13 +158,12 @@ CREATE TABLE Orders(
 	foreign key (PaymentCode) references Payment(PaymentCode),
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (AccountAddressCode) references AccountAddress(AccountAddressCode),
-	foreign key (PromotionCode) references Promotion(PromotionCode),
-	foreign key (DeliveryCode) references Delivery(DeliveryCode)
+	foreign key (PromotionCode) references Promotion(PromotionCode)
 )
 
 -- CHI TIẾT ĐẶT HÀNG
 CREATE TABLE OrderDetail (
-	OrderCode int identity(1,1),
+	OrderCode int,
 	ProductCode varchar(15),
 	Price money null,
 	Quantity int null,
@@ -137,6 +171,11 @@ CREATE TABLE OrderDetail (
 	foreign key (ProductCode) references Product(ProductCode),
 	primary key(ProductCode,OrderCode)
 )
+
+
+-- Huynh nhu 22/12 11:08 PM
+
+ALTER TABLE OrderDetail ADD FOREIGN KEY (OrderCode) REFERENCES Orders (OrderCode)
 
 -- COMMENT
 CREATE TABLE Comment (
@@ -149,18 +188,25 @@ CREATE TABLE Comment (
 	foreign key (AccountCode) references Account(AccountCode),
 	foreign key (ProductCode) references Product(ProductCode)
 )
+)
 
 -- LIÊN HỆ
 CREATE TABLE Contact (
 	ContactCode int identity(1,1) primary key,
 	FullName varchar(45) COLLATE SQL_Latin1_General_CP1_CS_AS null,
 	Email varchar(30) COLLATE SQL_Latin1_General_CP1_CS_AS null,
-	Phonenumber varchar(10) null,
+	-- Anh Tan 25/12/ 00:13 add ContactDate, status, xóa phonenumber
+	Status bit default 0 null,
+	ContactDate datetime default getdate() null,
 	Message varchar(1000) null,
 	AccountCode int null,
 	foreign key (AccountCode) references Account(AccountCode)
 )
 
+
+INSERT INTO Roles (RoleName) VALUES (N'Quản lý')
+INSERT INTO Roles (RoleName) VALUES (N'Nhân viên')
+INSERT INTO Roles (RoleName) VALUES (N'Khách hàng')
 
 ---- BẢNG QUẢN LÝ MENU 
 --CREATE TABLE Menu (
@@ -182,7 +228,7 @@ CREATE TABLE Contact (
 --ALTER TABLE Orders ADD FOREIGN KEY (PaymentCode) REFERENCES Payment (PaymentCode)
 --ALTER TABLE Orders ADD FOREIGN KEY (PromotionCode) REFERENCES Promotion (PromotionCode)
 --ALTER TABLE Orders ADD FOREIGN KEY (OrderAddressCode) REFERENCES AccountAddress (AccountAddressCode)
---ALTER TABLE OrderDetail ADD FOREIGN KEY (OrderCode) REFERENCES Orders (OrderCode)
+
 --ALTER TABLE OrderDetail ADD FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode)
 --ALTER TABLE Comment ADD FOREIGN KEY (AccountCode) REFERENCES Account (AccountCode)
 --ALTER TABLE Comment ADD FOREIGN KEY (ProductCode) REFERENCES Product (ProductCode)
@@ -192,3 +238,6 @@ CREATE TABLE Contact (
 ---- INDEX	
 --CREATE NONCLUSTERED INDEX idx_BrandCode ON Product (BrandCode ASC)
 --CREATE NONCLUSTERED INDEX idx_CategoryCode ON Product (CategoryCode ASC)
+
+
+select * from Account

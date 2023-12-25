@@ -117,9 +117,14 @@
                             <td class="p-2">
                                 <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
                                     <a href="/Products/Detail/@item.ProductId">
-                                        <img width="50" class="h-full w-full object-cover"
+                                        @{
+                                            byte[] imageData = item.ProductImg;
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" alt="product" width="50" class="h-full w-full object-cover" />
+                                        @*<img width="50" class="h-full w-full object-cover"
                                              src="@item.ProductImg"
-                                             alt="product" />
+                                             alt="product" />*@
                                     </a>
                                 </div>
                             </td>

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Bảng điều khiển";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
 }
@@ -46,23 +45,26 @@
         <!--begin::Row-->
         <div class="row g-5 g-xl-10 mb-xl-10">
             <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-                <!--begin::Card widget 4-->
-                <div class="card card-flush h-md-50 mb-5 mb-xl-10">
-                    <!--begin::Header-->
-                    <div class="card-header pt-5">
-                        <!--begin::Title-->
-                        <div class="card-title d-flex flex-column">
-                            <!--begin::Info-->
-                            <div class="d-flex align-items-center">
-                                <!--begin::Currency-->
-                                <span class="fs-4 fw-bold text-gray-400 me-1 align-self-start">₫</span>
-                                <!--end::Currency-->
-                                <!--begin::Amount-->
-                                <span class="fs-2hx fw-bolder text-dark me-2 lh-1">@*@Order.Where(m => m.oder_date.Month == DateTime.Now.Month && m.oder_date.Year == DateTime.Now.Year).Sum(m => m.total).ToString("#,0", culture.NumberFormat)*@</span>
-                                <!--end::Amount-->
-                                <!--begin::Badge-->
-                                @*@if (totalPriceOrderLastMonth < totalPriceOrderThisMonth)
-                                {*@
+                    <!--begin::Card widget 4-->
+                    <div class="card card-flush h-md-50 mb-5 mb-xl-10">
+                        <!--begin::Header-->
+                        <div class="card-header pt-5">
+                            <!--begin::Title-->
+                            <div class="card-title d-flex flex-column">
+                                <!--begin::Info-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Currency-->
+                                    <span class="fs-4 fw-bold text-gray-400 me-1 align-self-start">₫</span>
+                                    <!--end::Currency-->
+                                    <!--begin::Amount-->
+                                    <span class="fs-2hx fw-bolder text-dark me-2 lh-1">
+                                        @*@orders.Where(p => p.OrderDate.Month == DateTime.Now.Month && p.OrderDate.Year == DateTime.Now.Year).ToList()*@
+                                                                        @*@Order.Where(m => m.oder_date.Month == DateTime.Now.Month && m.oder_date.Year == DateTime.Now.Year).Sum(m => m.total).ToString("#,0", culture.NumberFormat)*@
+                                                                    </span>
+                                    <!--end::Amount-->
+                                    <!--begin::Badge-->
+                                    @*@if (totalPriceOrderLastMonth < totalPriceOrderThisMonth)
+                            {*@
                                     <span class="badge badge-success fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr067.svg-->
                                         <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
@@ -74,9 +76,9 @@
                                         <!--end::Svg Icon-->@*@((percentPriceOrder-1).ToString("0%"))*@
                                     </span>
                                     <!--end::Badge-->
-                                <!--}
-                                else
-                                {-->
+                                    <!--}
+                        else
+                        {-->
                                     <span class="badge badge-danger fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr067.svg-->
                                         <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
@@ -88,68 +90,69 @@
                                         <!--end::Svg Icon-->@*@((1-percentPriceOrder).ToString("0%"))*@
                                     </span>
                                     <!--end::Badge-->
-                                
+
+                                </div>
+                                <!--end::Info-->
+                                <!--begin::Subtitle-->
+                                <span class="text-gray-400 pt-1 fw-bold fs-6">Ước tính doanh thu</span>
+                                <!--end::Subtitle-->
                             </div>
-                            <!--end::Info-->
-                            <!--begin::Subtitle-->
-                            <span class="text-gray-400 pt-1 fw-bold fs-6">Ước tính doanh thu</span>
-                            <!--end::Subtitle-->
+                            <!--end::Title-->
                         </div>
-                        <!--end::Title-->
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Card body-->
-                    <div class="card-body pt-2 pb-4 d-flex align-items-center">
-                        <!--begin::Labels-->
-                        <div class="d-flex flex-column content-justify-center">
-                            @*@foreach (var order in Order)
+                        <!--end::Header-->
+                        <!--begin::Card body-->
+                        <div class="card-body pt-2 pb-4 d-flex align-items-center">
+                            <!--begin::Labels-->
+                            <div class="d-flex flex-column content-justify-center">
+                                @*@foreach (var order in Order)
+                        {
+                            foreach (var orderDetail in OrderDetail)
                             {
-                                foreach (var orderDetail in OrderDetail)
+                                if (orderDetail.order_id == order.order_id && orderDetail.Product.type == 1 && order.oder_date.Month == DateTime.Now.Month && order.oder_date.Year == DateTime.Now.Year)
                                 {
-                                    if (orderDetail.order_id == order.order_id && orderDetail.Product.type == 1 && order.oder_date.Month == DateTime.Now.Month && order.oder_date.Year == DateTime.Now.Year)
-                                    {
-                                        total += order.total;
-                                    }
-
-                                    if (orderDetail.order_id == order.order_id && orderDetail.Product.type == 2 && order.oder_date.Month == DateTime.Now.Month && order.oder_date.Year == DateTime.Now.Year)
-                                    {
-                                        total2 += order.total;
-                                    }
-
+                                    total += order.total;
                                 }
-                            }*@
-                            <!--begin::Label-->
-                            <div class="d-flex fs-6 fw-bold align-items-center">
-                                <!--begin::Bullet-->
-                                <div class="bullet w-8px h-6px rounded-2 bg-danger me-3"></div>
-                                <!--end::Bullet-->
+
+                                if (orderDetail.order_id == order.order_id && orderDetail.Product.type == 2 && order.oder_date.Month == DateTime.Now.Month && order.oder_date.Year == DateTime.Now.Year)
+                                {
+                                    total2 += order.total;
+                                }
+
+                            }
+                        }*@
                                 <!--begin::Label-->
-                                <div class="text-gray-500 pe-1">Laptop</div>
+                                <div class="d-flex fs-6 fw-bold align-items-center">
+                                    <!--begin::Bullet-->
+                                    <div class="bullet w-8px h-6px rounded-2 bg-danger me-3"></div>
+                                    <!--end::Bullet-->
+                                    <!--begin::Label-->
+                                    <div class="text-gray-500 pe-1">Laptop</div>
+                                    <!--end::Label-->
+                                    <!--begin::Stats-->
+                                    <div class="ms-auto fw-boldest text-gray-700 min-w-70px text-end">@*@total.ToString("#,0₫", culture.NumberFormat)*@</div>
+                                    <!--end::Stats-->
+                                </div>
                                 <!--end::Label-->
-                                <!--begin::Stats-->
-                                <div class="ms-auto fw-boldest text-gray-700 min-w-70px text-end">@*@total.ToString("#,0₫", culture.NumberFormat)*@</div>
-                                <!--end::Stats-->
-                            </div>
-                            <!--end::Label-->
-                            <!--begin::Label-->
-                            <div class="d-flex fs-6 fw-bold align-items-center my-3">
-                                <!--begin::Bullet-->
-                                <div class="bullet w-8px h-6px rounded-2 bg-primary me-3"></div>
-                                <!--end::Bullet-->
                                 <!--begin::Label-->
-                                <div class="text-gray-500 pe-1">P.Kiện</div>
+                                <div class="d-flex fs-6 fw-bold align-items-center my-3">
+                                    <!--begin::Bullet-->
+                                    <div class="bullet w-8px h-6px rounded-2 bg-primary me-3"></div>
+                                    <!--end::Bullet-->
+                                    <!--begin::Label-->
+                                    <div class="text-gray-500 pe-1">P.Kiện</div>
+                                    <!--end::Label-->
+                                    <!--begin::Stats-->
+                                    <div class="ms-auto fw-boldest text-gray-700 min-w-70px text-end">@*@total2.ToString("#,0₫", culture.NumberFormat)*@</div>
+                                    <!--end::Stats-->
+                                </div>
                                 <!--end::Label-->
-                                <!--begin::Stats-->
-                                <div class="ms-auto fw-boldest text-gray-700 min-w-70px text-end">@*@total2.ToString("#,0₫", culture.NumberFormat)*@</div>
-                                <!--end::Stats-->
                             </div>
-                            <!--end::Label-->
+                            <!--end::Labels-->
                         </div>
-                        <!--end::Labels-->
+                        <!--end::Card body-->
                     </div>
-                    <!--end::Card body-->
-                </div>
-                <!--end::Card widget 4-->
+                    <!--end::Card widget 4-->
+
                 <!--begin::Card widget 5-->
                 <div class="card card-flush h-md-50 mb-xl-10">
                     <!--begin::Header-->
@@ -164,37 +167,37 @@
                                 </span>
                                 <!--end::Amount-->
                                 @*@if (totalOrderThisMonth < totalOrderLastMonth)
-                                {*@
-                                    <!--begin::Badge-->
+                        {*@
+                                <!--begin::Badge-->
 
-                                    <span class="badge badge-danger fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr068.svg-->
-                                        <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path opacity="0.5" d="M13 14.4V3.00003C13 2.40003 12.6 2.00003 12 2.00003C11.4 2.00003 11 2.40003 11 3.00003V14.4H13Z" fill="black" />
-                                                <path d="M5.7071 16.1071C5.07714 15.4771 5.52331 14.4 6.41421 14.4H17.5858C18.4767 14.4 18.9229 15.4771 18.2929 16.1071L12.7 21.7C12.3 22.1 11.7 22.1 11.3 21.7L5.7071 16.1071Z" fill="black" />
-                                            </svg>
-                                            <!--end::Svg Icon--> <span>@*@((1-percentOrder).ToString("0.0%"))*@</span>
-                                        </span>
+                                <span class="badge badge-danger fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr068.svg-->
+                                    <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.5" d="M13 14.4V3.00003C13 2.40003 12.6 2.00003 12 2.00003C11.4 2.00003 11 2.40003 11 3.00003V14.4H13Z" fill="black" />
+                                            <path d="M5.7071 16.1071C5.07714 15.4771 5.52331 14.4 6.41421 14.4H17.5858C18.4767 14.4 18.9229 15.4771 18.2929 16.1071L12.7 21.7C12.3 22.1 11.7 22.1 11.3 21.7L5.7071 16.1071Z" fill="black" />
+                                        </svg>
+                                        <!--end::Svg Icon--> <span>@*@((1-percentOrder).ToString("0.0%"))*@</span>
                                     </span>
-                                    <!--end::Badge-->
+                                </span>
+                                <!--end::Badge-->
                                 @*}
-                                else
-                                {*@
-                                    <!--begin::Badge-->
-                                    <span class="badge badge-success fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr068.svg-->
-                                        <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
-                                            <!--end::Svg Icon-->
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path opacity="0.5" d="M13 9.59998V21C13 21.6 12.6 22 12 22C11.4 22 11 21.6 11 21V9.59998H13Z" fill="black" />
-                                                <path d="M5.7071 7.89291C5.07714 8.52288 5.52331 9.60002 6.41421 9.60002H17.5858C18.4767 9.60002 18.9229 8.52288 18.2929 7.89291L12.7 2.3C12.3 1.9 11.7 1.9 11.3 2.3L5.7071 7.89291Z" fill="black" />
-                                            </svg>
-                                            <span>@*@((percentOrder-1).ToString("0.0%"))*@</span>
-                                        </span>
+                        else
+                        {*@
+                                <!--begin::Badge-->
+                                <span class="badge badge-success fs-6 lh-1 py-1 px-2 d-flex flex-center" style="height: 22px">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr068.svg-->
+                                    <span class="svg-icon svg-icon-7 svg-icon-white ms-n1">
+                                        <!--end::Svg Icon-->
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.5" d="M13 9.59998V21C13 21.6 12.6 22 12 22C11.4 22 11 21.6 11 21V9.59998H13Z" fill="black" />
+                                            <path d="M5.7071 7.89291C5.07714 8.52288 5.52331 9.60002 6.41421 9.60002H17.5858C18.4767 9.60002 18.9229 8.52288 18.2929 7.89291L12.7 2.3C12.3 1.9 11.7 1.9 11.3 2.3L5.7071 7.89291Z" fill="black" />
+                                        </svg>
+                                        <span>@*@((percentOrder-1).ToString("0.0%"))*@</span>
                                     </span>
-                                    <!--end::Badge-->
-                                
+                                </span>
+                                <!--end::Badge-->
+
                             </div>
                             <!--end::Info-->
                             <!--begin::Subtitle-->
@@ -209,17 +212,17 @@
                         <!--begin::Progress-->
                         <div class="d-flex align-items-center flex-column mt-3 w-100">
                             @*@if (totalOrderThisMonth < totalOrderLastMonth)
-                            {*@
-                                <div class="d-flex justify-content-between w-100 mt-auto mb-2">
-                                    <span class="fw-boldest fs-6 text-dark">
-                                        <span>Còn @*@(totalOrderLastMonth-totalOrderThisMonth)*@ đơn hàng nữa</span>
-                                    </span>
-                                    <span class="fw-bolder fs-6 text-gray-400">@*@percentOrder.ToString("0.0%")*@</span>
-                                </div>
-                                <div class="h-8px mx-3 w-100 bg-light-success rounded">
-                                    <div class="bg-success rounded h-8px" role="progressbar" @*style="width: @percentOrder.ToString("0.0%");"*@ @*aria-valuenow="@percentOrder.ToString("0.0%")"*@ aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            
+                    {*@
+                            <div class="d-flex justify-content-between w-100 mt-auto mb-2">
+                                <span class="fw-boldest fs-6 text-dark">
+                                    <span>Còn @*@(totalOrderLastMonth-totalOrderThisMonth)*@ đơn hàng nữa</span>
+                                </span>
+                                <span class="fw-bolder fs-6 text-gray-400">@*@percentOrder.ToString("0.0%")*@</span>
+                            </div>
+                            <div class="h-8px mx-3 w-100 bg-light-success rounded">
+                                <div class="bg-success rounded h-8px" role="progressbar" @*style="width: @percentOrder.ToString("0.0%");"*@ @*aria-valuenow="@percentOrder.ToString("0.0%")"*@ aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
                         </div>
                         <!--end::Progress-->
                     </div>

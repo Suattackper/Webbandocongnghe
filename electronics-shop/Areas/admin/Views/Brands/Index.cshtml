@@ -46,9 +46,19 @@
 <div class="d-flex flex-column-fluid">
     <div class="container  ">
         <div class="card">
-            @if (ViewBag.Error != null)
+            @*@if (ViewBag.Error != null)
             {
                 <p class="text-danger" style="font-style: italic; line-height: 1; font-size: 1rem; ">@ViewBag.Error</p>
+            }*@
+
+            @if (ViewBag.Error != null)
+            {
+                <<div class="alert alert-success alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @ViewBag.Error
+                </div>
             }
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
@@ -64,7 +74,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form action="@Url.Action("Search","Brands")" method="post">
+                        <form action="@Url.Action("Search","Brands")" method="get">
                             <input type="search" name="search" class="form-control form-control-solid w-250px ps-14" placeholder="Tìm kiếm thương hiệu...">
                         </form>
                     </div>

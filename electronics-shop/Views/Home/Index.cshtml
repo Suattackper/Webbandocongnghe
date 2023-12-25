@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-@if (ViewBag.Offers.Count > 1)
+@if (ViewBag.Offers.Count > 0)
 {
     <div class="offers-section container mx-auto my-5 px-2 sm:px-8">
         <div class="liner-container mt-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
@@ -113,20 +113,20 @@
                     {
                         <div class="swiper-slide h-auto">
                             <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                <div class="absolute right-[10px] top-[10px]">
-                                    <div class="p-[2px]">
+                                <!--<div class="absolute right-[10px] top-[10px]">-->
+                                    @*<div class="p-[2px]">
                                         <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
-                                    <div class="p-[2px]">
+                                    </div>*@
+                                    <!--<div class="p-[2px]">
                                         <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)" data-target=".quick-view-modal">
                                             <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                                 @foreach (var pro in ViewBag.OffersPromotion)
                                 {
                                     if (pro.PromotionCode == item.PromotionCode)
@@ -142,7 +142,15 @@
                                 }
                                 <div class="h-[190px] overflow-hidden rounded-lg">
                                     <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                        @{
+                                            // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
+                                            byte[] imageData = item.ImageProduct; // Thay thế bằng cách lấy dữ liệu thực tế
+
+                                            // Chuyển đổi sang chuỗi Base64
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" alt="@item.ProductName" class="card-object-fit h-full w-full" />
+                                        @*<img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />*@
                                     </a>
                                 </div>
                                 <div class="my-2 flex justify-between">
@@ -334,20 +342,20 @@
                     {
                         <div class="swiper-slide h-auto">
                             <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                <div class="absolute right-[10px] top-[10px]">
-                                    <div class="p-[2px]">
+                                <!--<div class="absolute right-[10px] top-[10px]">-->
+                                    @*<div class="p-[2px]">
                                         <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
-                                    <div class="p-[2px]">
+                                    </div>*@
+                                    <!--<div class="p-[2px]">
                                         <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)" data-target=".quick-view-modal">
                                             <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                                 @foreach (var pro in ViewBag.OffersPromotion)
                                 {
                                     if (pro.PromotionCode == item.PromotionCode)
@@ -363,7 +371,15 @@
                                 }
                                 <div class="h-[190px] overflow-hidden rounded-lg">
                                     <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                        @{
+                                            // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
+                                            byte[] imageData = item.ImageProduct; // Thay thế bằng cách lấy dữ liệu thực tế
+
+                                            // Chuyển đổi sang chuỗi Base64
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" alt="@item.ProductName" class="card-object-fit h-full w-full" />
+                                        @*<img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />*@
                                     </a>
                                 </div>
                                 <div class="my-2 flex justify-between">
@@ -513,20 +529,20 @@
                     {
                         <div class="swiper-slide h-auto">
                             <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                <div class="absolute right-[10px] top-[10px]">
-                                    <div class="p-[2px]">
+                                <!--<div class="absolute right-[10px] top-[10px]">-->
+                                    @*<div class="p-[2px]">
                                         <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
-                                    <div class="p-[2px]">
+                                    </div>*@
+                                    <!--<div class="p-[2px]">
                                         <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)" data-target=".quick-view-modal">
                                             <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                                 @foreach (var pro in ViewBag.OffersPromotion)
                                 {
                                     if (pro.PromotionCode == item.PromotionCode)
@@ -542,7 +558,15 @@
                                 }
                                 <div class="h-[190px] overflow-hidden rounded-lg">
                                     <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                        @{
+                                            // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
+                                            byte[] imageData = item.ImageProduct; // Thay thế bằng cách lấy dữ liệu thực tế
+
+                                            // Chuyển đổi sang chuỗi Base64
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" alt="@item.ProductName" class="card-object-fit h-full w-full" />
+                                        @*<img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />*@
                                     </a>
                                 </div>
                                 <div class="my-2 flex justify-between">
@@ -691,20 +715,20 @@
                     {
                         <div class="swiper-slide h-auto">
                             <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                <div class="absolute right-[10px] top-[10px]">
-                                    <div class="p-[2px]">
+                                <!--<div class="absolute right-[10px] top-[10px]">-->
+                                    @*<div class="p-[2px]">
                                         <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
-                                    <div class="p-[2px]">
+                                    </div>*@
+                                    <!--<div class="p-[2px]">
                                         <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)" data-target=".quick-view-modal">
                                             <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                                 @foreach (var pro in ViewBag.OffersPromotion)
                                 {
                                     if (pro.PromotionCode == item.PromotionCode)
@@ -720,7 +744,15 @@
                                 }
                                 <div class="h-[190px] overflow-hidden rounded-lg">
                                     <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                        @{
+                                            // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
+                                            byte[] imageData = item.ImageProduct; // Thay thế bằng cách lấy dữ liệu thực tế
+
+                                            // Chuyển đổi sang chuỗi Base64
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" alt="@item.ProductName" class="card-object-fit h-full w-full" />
+                                        @*<img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />*@
                                     </a>
                                 </div>
                                 <div class="my-2 flex justify-between">

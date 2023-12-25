@@ -52,7 +52,7 @@
         @Html.AntiForgeryToken()*@
 <!--begin::content-->
 
-<form action="/ProductsAdmin/Create" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("Create","ProductsAdmin")" method="post" enctype="multipart/form-data">
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Toolbar-->
         <div class="toolbar" id="kt_toolbar">
@@ -70,7 +70,7 @@
                     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                         <!--begin::Item-->
                         <li class="breadcrumb-item text-muted">
-                            <a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Sản phẩm</a>
+                            <a href="@Url.Action("Index","ProductsAdmin")" class="text-muted text-hover-primary">Sản phẩm</a>
                         </li>
                         <!--end::Item-->
                         <!--begin::Item-->
@@ -112,30 +112,49 @@
             <div id="kt_content_container" class="container-xxl">
                 <!--begin::Basic info-->
                 <div class="card mb-5 mb-xl-10">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-success alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @ViewBag.Error
+                        </div>
+                    }
                     <!--begin::Content-->
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <!--begin::Form-->
                         <form id="kt_account_profile_details_form" class="form">
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
-                                @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
                                 <div class="mb-2">
                                     <span><i class="text-danger">Những mục đánh dấu (*) là bắt buộc </i></span>
                                 </div>
+                                @*@if (ViewBag.Error != null)
+                                {
+                                    <span><i class="text-danger">@ViewBag.Error </i></span>
+                                }*@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <div class="col-lg-4">
                                         <label for="genre_id" class="col-form-label fw-bold fs-6 required">Danh mục</label>
                                     </div>
                                     <div class="col-lg-8 fv-row">
-                                        <select id="genre_id" name="genre_id" class="form-select form-select-lg form-select-solid fw-bold">
-                                            <option value="">-- Chọn danh mục --</option>
-                                            <option value="1">Danh mục 1</option>
-                                            <option value="2">Danh mục 2</option>
+                                        <select id="genre_id" name="category" class="form-select form-select-lg form-select-solid fw-bold">
+                                            @*<option value="">-- Chọn danh mục --</option>*@
+                                            @foreach (var i in ViewBag.Category)
+                                            {
+                                                if (i.CategoryName == "Accessory")
+                                                {
+                                                    <option value="@i.CategoryCode">Phụ kiện LapTop - PC</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@i.CategoryCode">@i.CategoryName</option>
+                                                }
+                                            }
                                             <!-- Thêm các option cần thiết dựa trên dữ liệu từ ViewBag.ListGenre -->
                                         </select>
-                                        @*@Html.DropDownListFor(model => model.genre_id, (SelectList)ViewBag.ListGenre, "-- Chọn danh mục --", new { @class = "form-select form-select-solid form-select-lg fw-bold" })*@
-                                        @*@Html.ValidationMessageFor(model => model.genre_id, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -145,10 +164,12 @@
                                         <label for="brand_id" class="col-form-label fw-bold fs-6 required">Thương hiệu</label>
                                     </div>
                                     <div class="col-lg-8 fv-row">
-                                        <select id="brand_id" name="brand_id" class="form-select form-select-lg fw-bold">
-                                            <option value="">-- Chọn thương hiệu --</option>
-                                            <option value="1">Brand 1</option>
-                                            <option value="2">Brand 2</option>
+                                        <select id="brand_id" name="brand" class="form-select form-select-lg form-select-solid fw-bold">
+                                            @*<option value="">-- Chọn thương hiệu --</option>*@
+                                            @foreach (var i in ViewBag.Brand)
+                                            {
+                                                <option value="@i.BrandCode">@i.BrandName</option>
+                                            }
                                             <!-- Thêm các option cần thiết tương ứng với dữ liệu của bạn -->
                                         </select>
                                         @*@Html.DropDownListFor(model => model.brand_id, (SelectList)ViewBag.ListBrand, "-- Chọn thương hiệu --", new { @class = "form-select form-select-solid form-select-lg fw-bold" })*@
@@ -162,14 +183,18 @@
                                         <label for="disscount_id" class="col-form-label fw-bold fs-6 required">Chương trình giảm giá</label>
                                     </div>
                                     <div class="col-lg-8 fv-row">
-                                        <select id="disscount_id" name="disscount_id" class="form-select form-select-lg form-select-solid fw-bold">
-                                            <option value="">-- Chọn chương trình giảm giá --</option>
-                                            <option value="1">Discount 1</option>
-                                            <option value="2">Discount 2</option>
+                                        <select id="disscount_id" name="promotion" class="form-select form-select-lg form-select-solid fw-bold">
+                                            @*<option value="">-- Chọn chương trình giảm giá --</option>*@
+                                            <option value="0">Không</option>
+                                            @foreach (var i in ViewBag.Promotion)
+                                            {
+                                                if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now && i.Quantity > 0)
+                                                {
+                                                    <option value="@i.PromotionCode">Giảm @i.PromotionPercentage%</option>
+                                                }
+                                            }
                                             <!-- Thêm các option cần thiết dựa trên dữ liệu từ ViewBag.ListDiscount -->
                                         </select>
-                                        @*@Html.DropDownListFor(model => model.disscount_id, (SelectList)ViewBag.ListDiscount, "-- Chọn chương trình giảm giá --", new { @class = "form-select form-select-solid form-select-lg fw-bold" })*@
-                                        @*@Html.ValidationMessageFor(model => model.disscount_id, "", new { @class = "text-danger" })*@
                                     </div>
                                 </div>
                                 <!--end::Input group-->
@@ -177,18 +202,12 @@
                                 <div class="row mb-6">
                                     <!--begin::Label-->
                                     <div class="col-lg-4">
-                                        <label for="price" class="col-form-label fw-bold fs-6 required">Loại sản phẩm</label>
+                                        <label for="product_name" class="col-form-label fw-bold fs-6 required">Mã sản phẩm</label>
                                     </div>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <select id="type" name="type" class="form-select form-select-lg form-select-solid fw-bold">
-                                            <option value="1">Laptop</option>
-                                            <option value="2">Phụ kiện</option>
-                                        </select>
-                                        @*@Html.DropDownListFor(model => model.type, new[] { new SelectListItem { Value = "1", Text = "Laptop" },
-                                        new SelectListItem { Value = "2", Text = "Phụ kiện" } }, new { @class = "form-select form-select-solid form-select-lg fw-bold" })*@
-                                        @*@Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })*@
+                                        <input type="text" class="form-control form-control-lg form-control-solid" name="code" placeholder="Nhập mã sản phẩm" autocomplete="off" required />
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -202,9 +221,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Nhập tên sản phẩm" autocomplete="off" />
-                                        @*@Html.EditorFor(model => model.product_name, new { htmlAttributes = new { @class = "form-control form-control-lg form-control-solid", placeholder = "Nhập tên sản phẩm", autocomplete = "off" } })
-                                        @Html.ValidationMessageFor(model => model.product_name, "", new { @class = "text-danger" })*@
+                                        <input type="text" class="form-control form-control-lg form-control-solid" name="name" placeholder="Nhập tên sản phẩm" autocomplete="off" required />
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -218,22 +235,8 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="number" class="form-control form-control-lg form-control-solid" id="quantity" name="quantity"
-                                               placeholder="Nhập số lượng" min="0" oninput="validity.valid || (value = '');" autocomplete="off">
-                                        @*@Html.EditorFor(model => model.price, new
-                                        {
-                                            htmlAttributes = new
-                                            {
-                                                @class = "form-control form-control-lg form-control-solid",
-                                                placeholder = "Nhập giá sản phẩm",
-                                                type = "number",
-                                                value = "",
-                                                oninput = "validity.valid || (value = '');",
-                                                autocomplete = "off",
-                                                min = "1"
-                                            }
-                                        })*@
-                                        @*@Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })*@
+                                        <input type="number" class="form-control form-control-lg form-control-solid" id="price" name="price"
+                                               placeholder="Nhập giá bán" min="0" autocomplete="off" required>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -242,103 +245,72 @@
                                 <div class="row mb-6">
                                     <!--begin::Label-->
                                     <div class="col-lg-4">
-                                        <label for="price" class="col-form-label fw-bold fs-6 required">Số lượng</label>
-                                    </div>
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="number" class="form-control form-control-lg form-control-solid" id="quantity" name="quantity" placeholder="Nhập số lượng" min="0" oninput="validity.valid || (value = '');" autocomplete="off">
+                                        <label for="quantity" class="col-form-label fw-bold fs-6 required">Số lượng</label>
                                     </div>
                                     <!--end::Label-->
                                     <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="number" class="form-control form-control-lg form-control-solid" id="quantity" name="quantity" placeholder="Nhập số lượng" min="0" autocomplete="off" required>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <div class="col-lg-4">
+                                        <label for="product_name" class="col-form-label fw-bold fs-6 required">Ảnh chính ( .jpg, .png)</label>
+                                    </div>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="file" title="Chọn ảnh sản phẩm" name="image" accept=" .png, .jpg, .jpeg" @*onchange="kiemTraLoaiAnh(this)"*@ class="form-control form-control-lg form-control-solid" required>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <!--<div class="row mb-6">-->
+                                <!--begin::Label-->
+                                <!--<label class="col-lg-4 col-form-label fw-bold fs-6">
+                    <span>Danh sách ảnh</span>
+                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Cố thể up load nhiều ảnh cùng lúc" aria-label="Cố thể up load nhiều ảnh cùng lúc"></i>
+                </label>-->
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <!--<div class="col-lg-8 fv-row d-flex over">
+                    <div class="append-image d-flex gap-2 flex-wrap">
+                        <div class="form-input col-lg-4">
+                            <label for="file-ip-1">Chọn ảnh</label>
+                            <img alt="img" />
+                            <input type="file" id="file-ip-1" accept=".png,.jpg,jpeg" onchange="showPreview(this)" name="ImageUploadMulti">
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <button id="btn2" type="button" class="btn btn-primary">Thêm</button>
+                    </div>
+                </div>-->
+                                <!--end::Col-->
+                                <!--</div>-->
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <div class="col-lg-4">
+                                        <label for="product_name" class="col-form-label fw-bold fs-6 required">Mô tả sản phẩm</label>
+                                    </div>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="form-group col-lg-8 fv-row">
+                                        <textarea class="form-control" rows="3" name="description" placeholder="Nhập mô tả" style="height: 130px;" required></textarea>
+                                    </div>
                                     @*<div class="col-lg-8 fv-row">
-                                         @Html.EditorFor(model => model.quantity, new
-                                    {
-                                        htmlAttributes = new
-                                        {
-                                            @class = "form-control form-control-lg form-control-solid",
-                                            placeholder = "Nhập số lượng",
-                                            type = "number",
-                                            value = "",
-                                            oninput = "validity.valid || (value = '');",
-                                            autocomplete = "off",
-                                            min = "0"
-
-                                        }
-                                    })*@
-
-                                    @*@Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })*@
+                                        <textarea id="editor2" name="description" class="form-control form-control-lg form-control-solid"></textarea>
+                                    </div>*@
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
+                                <!--end::Input group-->
                             </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <div class="col-lg-4">
-                                    <label for="product_name" class="col-form-label fw-bold fs-6 required">Ảnh Thumbnail</label>
-                                </div>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <input type="file" title="Chọn ảnh sản phẩm" name="@*@Html.NameFor(m=>m.ImageUpload)*@" id="@*@Html.IdFor(m=>m.ImageUpload)*@" accept=".png,.jpg,jpeg" class="form-control form-control-lg form-control-solid">
-                                    @*@Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })*@
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">
-                                    <span>Danh sách ảnh</span>
-                                    <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="" data-bs-original-title="Cố thể up load nhiều ảnh cùng lúc" aria-label="Cố thể up load nhiều ảnh cùng lúc"></i>
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row d-flex over">
-                                    <div class="append-image d-flex gap-2 flex-wrap">
-                                        <div class="form-input col-lg-4">
-                                            <label for="file-ip-1">Chọn ảnh</label>
-                                            <img alt="img" />
-                                            <input type="file" id="file-ip-1" accept=".png,.jpg,jpeg" onchange="showPreview(this)" name="ImageUploadMulti">
-                                        </div>
-                                    </div>
-                                    <div class="ms-3">
-                                        <button id="btn2" type="button" class="btn btn-primary">Thêm</button>
-                                    </div>
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <div class="col-lg-4">
-                                    <label for="product_name" class="col-form-label fw-bold fs-6">Thông số kỹ thuật</label>
-                                </div>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <textarea id="editor1" name="specifications" class="form-control form-control-lg form-control-solid"></textarea>
-                                    @*@Html.ValidationMessageFor(model => model.specifications, "", new { @class = "text-danger" })*@
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row mb-6">
-                                <!--begin::Label-->
-                                <div class="col-lg-4">
-                                    <label for="product_name" class="col-form-label fw-bold fs-6">Mô tả sản phẩm</label>
-                                </div>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8 fv-row">
-                                    <textarea id="editor2" name="description" class="form-control form-control-lg form-control-solid"></textarea>
-                                    @*@Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })*@
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
                             <!--end::Card body-->
                             <!--begin::Actions-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
@@ -388,6 +360,21 @@
                     console.error(error);
                 });
         });
+        //function kiemTraLoaiAnh(input) {
+        //    // Lấy danh sách các loại file được chấp nhận
+        //    var acceptedTypes = input.accept.split(',');
+
+        //    // Lấy định dạng của file người dùng chọn
+        //    var selectedType = input.files[0].type;
+
+        //    // Kiểm tra xem định dạng có thuộc danh sách được chấp nhận không
+        //    if (acceptedTypes.includes(selectedType)) {
+        //        console.log("File hợp lệ");
+        //    } else {
+        //        alert("Vui lòng chọn một file hình ảnh có định dạng JPG hoặc PNG.");
+        //        input.value = ''; // Xóa giá trị file đã chọn để người dùng có thể chọn lại
+        //    }
+        //}
     </script>
 }
 

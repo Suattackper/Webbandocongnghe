@@ -32,7 +32,12 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="swiper-zoom-container">
-                            <img src="@ViewBag.Product.ImageProduct" alt="product" />
+                            @{
+                                byte[] imageData1 = ViewBag.Product.ImageProduct;
+                                string base64String1 = Convert.ToBase64String(imageData1);
+                            }
+                            <img src="data:image/png;base64,@base64String1" alt="product" />
+                            @*<img src="@ViewBag.Product.ImageProduct" alt="product" />*@
                         </div>
                     </div>
                     @if (ViewBag.productImgsList.Count > 0)
@@ -41,7 +46,12 @@
                         {
                             <div class="swiper-slide">
                                 <div class="swiper-zoom-container">
-                                    <img src="@item.Img" alt="product" />
+                                    @{
+                                        byte[] imageData = item.Img;
+                                        string base64String = Convert.ToBase64String(imageData);
+                                    }
+                                    <img src="data:image/png;base64,@base64String" alt="product" />
+                                    @*<img src="@item.Img" alt="product" />*@
                                 </div>
                             </div>
                         }
@@ -57,14 +67,24 @@
             <div class="swiper swiper-thumbs">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide cursor-pointer rounded-lg">
-                        <img src="@ViewBag.Product.ImageProduct" alt="product" />
+                        @{
+                            imageData1 = ViewBag.Product.ImageProduct;
+                            base64String1 = Convert.ToBase64String(imageData1);
+                        }
+                        <img src="data:image/png;base64,@base64String1" alt="product" />
+                        @*<img src="@ViewBag.Product.ImageProduct" alt="product" />*@
                     </div>
                     @if (ViewBag.productImgsList.Count > 0)
                     {
                         foreach (var item in ViewBag.productImgsList)
                         {
                             <div class="swiper-slide cursor-pointer rounded-lg">
-                                <img src="@item.Img" alt="product" />
+                                @{
+                                    byte[] imageData = item.Img;
+                                    string base64String = Convert.ToBase64String(imageData);
+                                }
+                                <img src="data:image/png;base64,@base64String" alt="product" />
+                                @*<img src="@item.Img" alt="product" />*@
                             </div>
                         }
                     }
@@ -203,15 +223,15 @@
                                 <span  class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color: red;padding-top: 20px" >Sản phẩm đã hết hàng</span>
                             }
 
-                            <a class="tippy tippy-wishlist btn-wishlist transition-all-300 flex min-h-[40px] min-w-[40px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary-color p-2 hover:bg-primary-hover"
+                            @*<a class="tippy tippy-wishlist btn-wishlist transition-all-300 flex min-h-[40px] min-w-[40px] cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary-color p-2 hover:bg-primary-hover"
                                href="javascript:void(0)" data-id="@Model.ProductCode">
                                 <i class="bi bi-heart pointer-events-none flex text-white"></i>
-                            </a>
+                            </a>*@
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="my-5 flex flex-col gap-2">
+            @*<div class="my-5 flex flex-col gap-2">
                 <button class="btnOpenCart" type="submit">
                     <a class="btn-open-modal transition-all-300 rounded-lg border bg-slate-100 p-2 hover:bg-slate-200"
                        href="javascript:void(0)" data-target=".calculate-shipping-modal">
@@ -223,9 +243,8 @@
                             <i class="bi bi-arrow-right-short flex text-2xl text-primary-color"></i>
                         </div>
                     </a>
-
                 </button>
-            </div>
+            </div>*@
             <div class="mt-5 border-t border-gray-200 pt-5">
                 <div>
                     <b>Categories: </b>
@@ -573,20 +592,20 @@
                         i++;
                         <div class="swiper-slide h-auto">
                             <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
-                                <div class="absolute right-[10px] top-[10px]">
-                                    <div class="p-[2px]">
+                                <!--<div class="absolute right-[10px] top-[10px]">-->
+                                    @*<div class="p-[2px]">
                                         <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)">
                                             <i class="bi bi-heart pointer-events-none flex text-white"></i>
                                         </a>
-                                    </div>
-                                    <div class="p-[2px]">
+                                    </div>*@
+                                    <!--<div class="p-[2px]">
                                         <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
                                            href="javascript:void(0)" data-target=".quick-view-modal">
                                             <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                                 @foreach (var pro in ViewBag.RelatePromotion)
                                 {
                                     if (pro.PromotionCode == item.PromotionCode)
@@ -602,7 +621,12 @@
                                 }
                                 <div class="h-[190px] overflow-hidden rounded-lg">
                                     <a href="@Url.Action("Detail", "Products", new {id = item.ProductCode})">
-                                        <img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />
+                                        @{
+                                            byte[] imageData = item.ImageProduct;
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String"  alt="@item.ProductName" class="card-object-fit h-full w-full" />
+                                        @*<img class="card-object-fit h-full w-full" src="@item.ImageProduct" alt="@item.ProductName" />*@
                                     </a>
                                 </div>
                                 <div class="my-2 flex justify-between">

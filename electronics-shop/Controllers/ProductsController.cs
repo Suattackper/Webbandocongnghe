@@ -24,7 +24,7 @@ namespace electronics_shop.Controllers
         {
             ViewBag.view = "Shop";
             ViewBag.danhmuc = "Shop";
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db == null)
@@ -40,7 +40,7 @@ namespace electronics_shop.Controllers
         {
             ViewBag.view = "Smarthome";
             ViewBag.danhmuc = "Smarthome";
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
@@ -58,7 +58,7 @@ namespace electronics_shop.Controllers
         {
             ViewBag.view = "Accessory";
             ViewBag.danhmuc = "Phụ kiện LapTop - PC";
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
@@ -76,7 +76,7 @@ namespace electronics_shop.Controllers
         {
             ViewBag.view = "GamingGear";
             ViewBag.danhmuc = "Gaming Gear";
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
@@ -97,8 +97,10 @@ namespace electronics_shop.Controllers
                 return View("Error");
             }
             Product product = db.Products.FirstOrDefault(p => p.ProductCode == id);
+            product.ViewCount = product.ViewCount + 1;
+            db.SaveChanges();
             ViewBag.Product = product;
-            ViewBag.Promotion = db.Promotions.FirstOrDefault(p => p.PromotionCode == product.PromotionCode && p.EndDate >= DateTime.Now);
+            ViewBag.Promotion = db.Promotions.FirstOrDefault(p => p.PromotionCode == product.PromotionCode && p.EndDate >= DateTime.Now && p.StartDate <= DateTime.Now && p.Quantity > 0);
             ViewBag.productImgsList = db.ProductImgs.Where(h => h.ProductCode == id).ToList();
             ViewBag.Category = db.Categories.FirstOrDefault(p => p.CategoryCode == product.CategoryCode);
             var comment = db.Comments.Where(p => p.ProductCode == id).ToList();
@@ -106,7 +108,7 @@ namespace electronics_shop.Controllers
             var account = db.Accounts.ToList();
             ViewBag.Account = account;
             ViewBag.Relate = db.Products.Where(p => p.CategoryCode == product.CategoryCode).ToList();
-            ViewBag.RelatePromotion = db.Promotions.ToList();
+            ViewBag.RelatePromotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             int rate1 = 0;
             int rate2 = 0;
             int rate3 = 0;
@@ -145,7 +147,7 @@ namespace electronics_shop.Controllers
             ViewBag.Search = s;
             ViewBag.view = "Search";
             ViewBag.danhmuc = "Shop";
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
@@ -175,7 +177,7 @@ namespace electronics_shop.Controllers
             ViewBag.brandd = brand;
             ViewBag.Min = min;
             ViewBag.Max = max;
-            ViewBag.Promotion = db.Promotions.ToList();
+            ViewBag.Promotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
@@ -185,7 +187,7 @@ namespace electronics_shop.Controllers
             List<Product> data = db.Products.ToList();
             if (with == "with")
             {
-                data = data.Where(p => db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now)).ToList();
+                data = data.Where(p => db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0)).ToList();
             }
             if (avai == "avai")
             {
@@ -209,7 +211,7 @@ namespace electronics_shop.Controllers
                 decimal Max = decimal.Parse(max);
                 //data = data.Where(p => p.Price >= Min && p.Price <= Max).ToList();
                 List<Product> d1 = data.Join(db.Promotions, product => product.PromotionCode, promotion => promotion.PromotionCode, (product, promotion) => new { product, promotion })
-                            .Where(x => (x.promotion.EndDate >= DateTime.Now && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || (x.promotion.EndDate < DateTime.Now && x.product.Price >= Min && x.product.Price <= Max))
+                            .Where(x => (x.promotion.EndDate >= DateTime.Now && x.promotion.StartDate <= DateTime.Now && x.promotion.Quantity > 0 && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) >= Min && (x.product.Price - x.product.Price * x.promotion.PromotionPercentage / 100) <= Max) || ((x.promotion.EndDate < DateTime.Now || x.promotion.StartDate > DateTime.Now || x.promotion.Quantity <= 0) && x.product.Price >= Min && x.product.Price <= Max))
                             .Select(x => x.product)
                             .ToList();
                 List<Product> d2 = data.Where(p => p.Promotion == null && p.Price >= Min && p.Price <= Max).ToList();

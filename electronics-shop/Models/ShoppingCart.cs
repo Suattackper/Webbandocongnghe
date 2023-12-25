@@ -68,7 +68,7 @@ namespace electronics_shop.Models
         public string ProductId { get; set; }
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
-        public string ProductImg { get; set; }
+        public byte[] ProductImg { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
         public double PromotionPrice { get; set; }

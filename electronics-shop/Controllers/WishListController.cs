@@ -75,7 +75,7 @@ namespace electronics_shop.Controllers
                     };
                     if (checkProduct.ProductImgs.FirstOrDefault(x => x.IsDeFault) == null)
                     {
-                        item.ProductImg = checkProduct.ImageProduct;
+                       // item.ProductImg = checkProduct.ImageProduct;
                     }
                     item.Price = (double)checkProduct.Price;
                     if (checkProduct.PromotionCode != null && checkProduct.Promotion.EndDate >= DateTime.Now)

@@ -26,7 +26,12 @@
                 <a id="trow_@item.ProductId" class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
                    href="#">
                     <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                        <img class="h-full w-full object-cover" src="@item.ProductImg" alt="product" />
+                        @{
+                            byte[] imageData = item.ProductImg;
+                            string base64String = Convert.ToBase64String(imageData);
+                        }
+                        <img src="data:image/png;base64,@base64String" alt="product" class="h-full w-full object-cover" />
+                        @*<img class="h-full w-full object-cover" src="@item.ProductImg" alt="product" />*@
                     </div>
                     <div class="flex w-full flex-col">
                         <h6 class="clamp-2 break-all text-lg font-semibold">

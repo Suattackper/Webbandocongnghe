@@ -52,7 +52,7 @@ namespace electronics_shop.Controllers
                     {
                         account.Password = Encryptor.MD5Hash(account.Password);
                         account.CreateAt = DateTime.Now;
-                        account.Avatar = "/Content/images/comments/profile_1.png";
+                        //account.Avatar = "/Content/images/comments/profile_1.png";
 
                         db.Accounts.Add(account);
                         var result = db.SaveChanges();
@@ -211,7 +211,7 @@ namespace electronics_shop.Controllers
                         var fileName = Path.GetFileName(uploadFile.FileName);
                         var path = Path.Combine(Server.MapPath("~/Content/images/comments/"), fileName);
 
-                        account.Avatar = "/Content/images/comments/" + fileName;
+                        //account.Avatar = "/Content/images/comments/" + fileName;
                         db.Entry(account).State = EntityState.Modified;
 
                         // Lấy đường dẫn ảnh (absolute path - đường dẫn tuyệt đối)
@@ -221,14 +221,14 @@ namespace electronics_shop.Controllers
                         var avatarName = Session["imgPath"].ToString();
 
                         // Kiểm tra ảnh có trùng với avatar của member nào không
-                        var checkAvatar = db.Accounts.Where(m => m.Avatar == avatarName).ToList();
+                        //var checkAvatar = db.Accounts.Where(m => m.Avatar == avatarName).ToList();
 
                         if (db.SaveChanges() > 0)
                         {
                             uploadFile.SaveAs(path);
 
                             // Nếu tồn tại hình trong folder và không member nào có hình này thì xóa ra khỏi folder
-                            if (System.IO.File.Exists(oldImgPath) && checkAvatar.Count < 2)
+                            //if (System.IO.File.Exists(oldImgPath) && checkAvatar.Count < 2)
                             {
                                 System.IO.File.Delete(oldImgPath);
                             }
@@ -242,7 +242,7 @@ namespace electronics_shop.Controllers
                     }
                     else
                     {
-                        account.Avatar = Session["imgPath"].ToString();
+                        //account.Avatar = Session["imgPath"].ToString();
 
                         db.Entry(account).State |= EntityState.Modified;
 

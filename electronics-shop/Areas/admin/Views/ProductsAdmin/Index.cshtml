@@ -1,4 +1,7 @@
-﻿
+﻿@model PagedList.IPagedList<electronics_shop.Models.Product>
+
+@using PagedList.Mvc
+@using PagedList
 @{
     ViewBag.Title = "Danh sách sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
@@ -43,6 +46,15 @@
 <div class="d-flex flex-column-fluid">
     <div class="container">
         <div class="card">
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-success alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @ViewBag.Error
+                </div>
+            }
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
@@ -57,7 +69,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form>
+                        <form action="@Url.Action("Search","ProductsAdmin")" method="get">
                             <input type="search" name="search" class="form-control form-control-solid w-250px ps-14" placeholder="Tìm kiếm sản phẩm...">
                         </form>
                     </div>
@@ -69,17 +81,17 @@
                     <!--begin::Toolbar-->
                     <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                         <!--begin::Filter-->
-                        <a href="@Url.Action("Trash","ProductsAdmin")" class="btn btn-light-danger me-3">
+                        <!--<a href="#" class="btn btn-light-danger me-3">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                            <span class="svg-icon svg-icon-2">
+                            <!--<span class="svg-icon svg-icon-2">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
                                     <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
                                     <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
                                 </svg>
-                            </span>
-                            <!--end::Svg Icon-->Thùng rác (<span id="count-trash">@*@ViewBag.countTrash*@</span>)
-                        </a>
+                            </span>-->
+                            <!--end::Svg Icon--><!--Thùng rác (<span id="count-trash"></span>)
+                        </a>-->
                         <!--end::Filter-->
                         <!--begin::Add Game Account-->
                         <a class="btn btn-primary" href="@Url.Action("Create","ProductsAdmin")">
@@ -110,12 +122,14 @@
                                 <!--begin::Table row-->
                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">ID</th>
-                                    <th class="min-w-300px" tabindex="2" rowspan="1" colspan="1" style="width:300px;">Giá bán</th>
+                                    <th class="min-w-150px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">Tên sản phẩm</th>
+                                    <th class="min-w-50px" tabindex="2" rowspan="1" colspan="1" style="width:300px;">Giá bán</th>
+                                    <th class="min-w-50px" tabindex="2" rowspan="1" colspan="1" style="width:300px;">Số lượng</th>
                                     <th class="min-w-110px" tabindex="3" rowspan="1" colspan="1" style="width:110px;">Ảnh</th>
-                                    <th class="min-w-110px" tabindex="4" rowspan="1" colspan="1" style="width:110px;">Thương hiệu</th>
-                                    <th class="@*sorting*@ min-w-175px" tabindex="5" rowspan="1" colspan="1" style="width:175px;">Danh mục</th>
-                                    <th class="@*sorting*@ min-w-100px" tabindex="5" rowspan="1" colspan="1" style="width:80px;">Lượt Xem</th>
-                                    <th class="min-w-130px" tabindex="6" rowspan="1" colspan="1" style="width:130px;">Giá bán</th>
+                                    <th class="min-w-100px" tabindex="4" rowspan="1" colspan="1" style="width:110px;">Thương hiệu</th>
+                                    <th class="min-w-100px" tabindex="5" rowspan="1" colspan="1" style="width:175px;">Danh mục</th>
+                                    <th class="min-w-50px" tabindex="5" rowspan="1" colspan="1" style="width:175px;">Giá giảm</th>
+                                    <th class="min-w-80px" tabindex="5" rowspan="1" colspan="1" style="width:80px;">Lượt Xem</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" style="width: 130.25px;">Hành động</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -123,39 +137,71 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-bold">
-                                @*@foreach (var item in Model)
-                                {*@
+                                @foreach (var item in Model)
+                                {
                                     <tr id="item_@*@item.product_id*@">
-                                        <td><a href="#!" class="text-gray-600" target="_blank" @*href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"*@> @*@item.product_id*@</a> </td>
-                                        <td>@*@item.product_name*@</td>
+                                        <td><a href="#!" class="text-gray-600" target="_blank">@item.ProductCode</a> </td>
+                                        <td>@item.ProductName</td>
+                                        <td>@string.Format("₫{0:#,0}", item.Price)</td>
+                                        <td>@item.Quantity</td>
                                         <td>
                                             <a href="#!" target="_blank" @*href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.product_name)-@item.product_id"*@>
-                                                <img src="@*@item.Image*@" alt="@*@item.product_id*@" class="w-80px h-80px" style="object-fit:cover;">
+                                                @{
+                                                    // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
+                                                    byte[] imageData = item.ImageProduct; // Thay thế bằng cách lấy dữ liệu thực tế
+
+                                                    // Chuyển đổi sang chuỗi Base64
+                                                    string base64String = Convert.ToBase64String(imageData);
+                                                }
+                                                <img src="data:image/png;base64,@base64String" alt="@item.ProductCode" class="w-80px h-80px" style="object-fit:cover;">
                                             </a>
                                         </td>
-                                        <td>@*@item.brand_name*@</td>
-                                        <td>@*@item.genre_name*@</td>
-                                        <td>@*@item.view*@</td>
-                                        <td>
-                                            @*@if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
-                                            {*@
-                                                <div>
-                                                    <span class="text-secondary"><del>@*@item.price.ToString("#,0₫", culture.NumberFormat)*@</del></span>
-                                                </div>
-                                                <div>
-                                                    <span style="color: #005ec4;">@*@((item.price - item.discount_price).ToString("#,0₫", culture.NumberFormat))*@</span>
-                                                </div>
-                                                @*price2 = (item.price - item.discount_price).ToString("#,0₫", culture.NumberFormat);
-                                                discountPrice2 = item.price.ToString("#,0₫", culture.NumberFormat);*@
-                                            
-                                            //else
-                                            //{
-                                                <div>
-                                                    <span style="color: #005ec4;">@*@item.price.ToString("#,0₫", culture.NumberFormat)*@</span>
-                                                </div>
-                                                @*price2 = item.price.ToString("#,0₫", culture.NumberFormat);*@
-                                            
-                                        </td>
+                                        @foreach (var t in ViewBag.Brand)
+                                        {
+                                            if (t.BrandCode == item.BrandCode)
+                                            {
+                                                <td>@t.BrandName</td>
+                                                break;
+                                            }
+                                        }
+                                        @foreach (var t in ViewBag.Category)
+                                        {
+                                            if (t.CategoryCode == item.CategoryCode)
+                                            {
+                                                if (t.CategoryName == "Accessory")
+                                                {
+                                                    <td>Phụ kiện LapTop - PC</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@t.CategoryName</td>
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        @if (item.PromotionCode == null)
+                                        {
+                                            <td>0%</td>
+                                        }
+                                        else
+                                        {
+                                            foreach (var i in ViewBag.Promotion)
+                                            {
+                                                if (item.PromotionCode == i.PromotionCode)
+                                                {
+                                                    if (i.StartDate <= DateTime.Now && i.EndDate >= DateTime.Now && i.Quantity > 0)
+                                                    {
+                                                        <td>@i.PromotionPercentage%</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>0%</td>
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        <td>@item.ViewCount view</td>
                                         <!--begin::Action=-->
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -172,17 +218,17 @@
                                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                                 <!--begin::Menu item-->
                                                 <!--begin::Menu item-->
-                                                <div class="menu-item px-3">
-                                                    <a href="@Url.Action("Details","ProductsAdmin"@*, new {id = item.product_id}*@)" class="menu-link px-3" data-kt-users-table-filter="delete_row">Xem</a>
-                                                </div>
+                                                @*<div class="menu-item px-3">
+                                                    <a href="" class="menu-link px-3" data-kt-users-table-filter="delete_row">Xem</a>
+                                                </div>*@
                                                 <!--end::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a href="@Url.Action("Edit","ProductsAdmin"@*,new { id = item.product_id }*@)" class="menu-link px-3">Chỉnh sửa</a>
+                                                    <a href="@Url.Action("Edit", "ProductsAdmin", new {code=item.ProductCode})" class="menu-link px-3">Chỉnh sửa</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                                 <!--begin::Menu item-->
                                                 <div class="menu-item px-3">
-                                                    <a @*onclick="deleteOrDisableConfirm(@item.product_id, '@item.product_name', '@price2', '@discountPrice2', '@item.Image')"*@ class="menu-link px-3">Xóa</a>
+                                                    <a href="@Url.Action("Delete", "ProductsAdmin", new {id=item.ProductCode})" class="menu-link px-3">Xóa</a>
                                                 </div>
                                                 <!--end::Menu item-->
                                             </div>
@@ -190,7 +236,7 @@
                                         </td>
                                         <!--end::Action=-->
                                     </tr>
-                                
+                                }
                             </tbody>
                             <!--end::Table body-->
                         </table>
@@ -200,16 +246,32 @@
                         </div>
                         <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                             <div>
-                                @*@Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
-                           {
-                               LinkToPreviousPageFormat = prePageIcon,
-                               LinkToNextPageFormat = nextPageIcon,
-                               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
-                               DisplayLinkToLastPage = PagedListDisplayMode.Never,
-                               DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-                               DisplayLinkToNextPage = PagedListDisplayMode.Always,
-                               MaximumPageNumbersToDisplay = 10
-                           })*@
+                                @if (ViewBag.Search == null || ViewBag.Search == "")
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                                    {
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
+                                else
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Search", new { search = ViewBag.Search, page }), new PagedListRenderOptions
+                                    {
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
                             </div>
                         </div>
                     </div>

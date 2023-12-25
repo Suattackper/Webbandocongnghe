@@ -14,30 +14,30 @@ namespace electronics_shop.Areas.Admin.Controllers
     {
         private ECOMMERCEEntities db = new ECOMMERCEEntities();
         // GET: Admin/Brands
-        public ActionResult Index(int page = 1, int pagesize = 9)
+        public ActionResult Index(int page = 1, int pagesize = 10)
         {
             if (TempData.ContainsKey("Error"))
             {
                 ViewBag.Error = TempData["Error"];
             }
-            List<Brand> data = db.Brands.ToList();
+            List<Brand> data = db.Brands.OrderBy(p => p.BrandCode).ToList();
             ViewBag.Brand = data;
             return View(data.ToPagedList(page, pagesize));
         }
         [HttpGet]
-        public ActionResult Search(string search, int page = 1, int pagesize = 9)
+        public ActionResult Search(string search, int page = 1, int pagesize = 10)
         {
             if (TempData.ContainsKey("Error"))
             {
                 ViewBag.Error = TempData["Error"];
             }
             ViewBag.Search = search;
-            List<Brand> data = db.Brands.Where(p => p.BrandName.Contains(search)).ToList();
+            List<Brand> data = db.Brands.OrderBy(p => p.BrandCode).Where(p => p.BrandName.Contains(search)).ToList();
             ViewBag.Brand = data;
             return View("Index", data.ToPagedList(page, pagesize));
         }
         [HttpPost]
-        public ActionResult Create(string name, string origin, int page = 1, int pagesize = 9)
+        public ActionResult Create(string name, string origin)
         {
             Brand brand = new Brand();
             brand.BrandName = name;
@@ -46,7 +46,7 @@ namespace electronics_shop.Areas.Admin.Controllers
             db.SaveChanges();
             List<Brand> data = db.Brands.ToList();
             ViewBag.Brand = data;
-            return View("Index", data.ToPagedList(page, pagesize));
+            return RedirectToAction("Index");
         }
         public ActionResult Edit(string id)
         {

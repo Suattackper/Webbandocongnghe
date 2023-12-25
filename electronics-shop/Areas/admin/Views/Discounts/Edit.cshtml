@@ -74,6 +74,15 @@
             <div id="kt_content_container" class="container-xxl">
                 <!--begin::Basic info-->
                 <div class="card mb-5 mb-xl-10">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-success alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            @ViewBag.Error
+                        </div>
+                    }
                     <!--begin::Content-->
                     <div id="kt_account_settings_profile_details" class="collapse show">
                         <!--begin::Form-->
@@ -84,10 +93,10 @@
                                 <div class="mb-2">
                                     <span><i class="text-danger">Những mục đánh dấu (*) là bắt buộc </i></span>
                                 </div>
-                                @if (ViewBag.Error != null)
-                                {
-                                    <span><i class="text-danger">@ViewBag.Error </i></span>
-                                }
+                                @*@if (ViewBag.Error != null)
+                    {
+                        <span><i class="text-danger">@ViewBag.Error </i></span>
+                    }*@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <div class="col-lg-4">
@@ -108,7 +117,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" id="product_name" name="percen" class="form-control form-control-lg form-control-solid" placeholder="Nhập mức giảm" autocomplete="off" value="@Model.PromotionPercentage" required>
+                                        <input type="number" id="product_name" name="percen" class="form-control form-control-lg form-control-solid" placeholder="Nhập mức giảm" autocomplete="off" min="1" value="@Model.PromotionPercentage" required>
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -122,7 +131,7 @@
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <input type="text" id="product_name" name="quantity" class="form-control form-control-lg form-control-solid" placeholder="Nhập số lượng" autocomplete="off" value="@Model.Quantity" required>
+                                        <input type="number" id="product_name" name="quantity" class="form-control form-control-lg form-control-solid" placeholder="Nhập số lượng" autocomplete="off" min="1" value="@Model.Quantity" required>
                                     </div>
                                     <!--end::Col-->
                                 </div>

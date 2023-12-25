@@ -12,7 +12,7 @@ namespace electronics_shop.Areas.Admin.Controllers
     {
         private ECOMMERCEEntities db = new ECOMMERCEEntities();
         // GET: Admin/Discounts
-        public ActionResult Index(int page = 1, int pagesize = 9)
+        public ActionResult Index(int page = 1, int pagesize = 10)
         {
             if (TempData.ContainsKey("Error"))
             {
@@ -23,14 +23,24 @@ namespace electronics_shop.Areas.Admin.Controllers
             return View(data.ToPagedList(page, pagesize));
         }
         [HttpPost]
-        public ActionResult Create(string code, string percen, string enddate, string quantity, string startdate, int page = 1, int pagesize = 9)
+        public ActionResult Create(string code, string percen, string enddate, string quantity, string startdate)
         {
             if(db.Promotions.Any(h => h.PromotionCode == code))
             {
                 TempData["Error"] = "Error -- Mã " + code + " đã tồn tại!";
                 return RedirectToAction("Index");
             }
-            if(startdate == "" || startdate == null || enddate == "" || enddate == null)
+            if (int.Parse(percen) <= 0)
+            {
+                TempData["Error"] = "Error -- Mức giảm phải lớn hơn 0!";
+                return RedirectToAction("Index");
+            }
+            if (int.Parse(quantity) <= 0)
+            {
+                TempData["Error"] = "Error -- Số lượng phải lớn hơn 0!";
+                return RedirectToAction("Index");
+            }
+            if (startdate == "" || startdate == null || enddate == "" || enddate == null)
             {
                 TempData["Error"] = "Error -- Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc!";
                 return RedirectToAction("Index");
@@ -51,13 +61,13 @@ namespace electronics_shop.Areas.Admin.Controllers
 
             List<Promotion> data = db.Promotions.ToList();
             ViewBag.Promotion = data;
-            return View("Index", data.ToPagedList(page, pagesize));
+            return RedirectToAction("Index");
         }
         public ActionResult Edit(string code)
         {
             if (TempData.ContainsKey("Error"))
             {
-                ViewBag.ErrorEdit = TempData["Error"];
+                ViewBag.Error = TempData["Error"];
             }
             Promotion brand = db.Promotions.FirstOrDefault(p => p.PromotionCode == code);
             return View(brand);
@@ -65,6 +75,16 @@ namespace electronics_shop.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(string code, string percen, string enddate, string quantity, string startdate)
         {
+            if (int.Parse(percen) <= 0)
+            {
+                TempData["Error"] = "Error -- Mức giảm phải lớn hơn 0!";
+                return RedirectToAction("Edit", new { code = code });
+            }
+            if (int.Parse(quantity) <= 0)
+            {
+                TempData["Error"] = "Error -- Số lượng phải lớn hơn 0!";
+                return RedirectToAction("Edit", new { code = code });
+            }
             if (startdate == "" || startdate == null || enddate == "" || enddate == null)
             {
                 TempData["Error"] = "Error -- Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc!";

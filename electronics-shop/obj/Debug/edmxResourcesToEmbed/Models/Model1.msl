@@ -13,6 +13,8 @@
           <ScalarProperty Name="Avatar" ColumnName="Avatar" />
           <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,7 +46,6 @@
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-          <ScalarProperty Name="Img" ColumnName="Img" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -66,9 +67,10 @@
           <ScalarProperty Name="ContactCode" ColumnName="ContactCode" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
           <ScalarProperty Name="Message" ColumnName="Message" />
           <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ContactDate" ColumnName="ContactDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -101,7 +103,6 @@
           <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
           <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
           <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
-          <ScalarProperty Name="DeliveryCode" ColumnName="DeliveryCode" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="Delivered" ColumnName="Delivered" />
           <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
@@ -152,9 +153,28 @@
         <MappingFragment StoreEntitySet="Promotion">
           <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
           <ScalarProperty Name="PromotionPercentage" ColumnName="PromotionPercentage" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

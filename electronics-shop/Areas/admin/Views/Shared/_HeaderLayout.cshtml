@@ -1,4 +1,4 @@
-﻿
+﻿@using electronics_shop.Models
 <!--begin::Header-->
 <div id="kt_header" style="" class="header align-items-stretch">
     <!--begin::Container-->
@@ -91,7 +91,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link py-3" href="@Url.Action("Index","Orders")">
+                                        <a class="menu-link py-3" href="@Url.Action("Index","Discounts")">
                                             <span class="menu-bullet">
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
@@ -116,22 +116,37 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item here menu-lg-down-accordion me-lg-1">
-                                <span class="menu-link py-3">
-                                    <span class="menu-title">Quản lý tài khoản</span>
-                                    <span class="menu-arrow d-lg-none"></span>
-                                </span>
-                                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px" style="">
-                                    <div class="menu-item">
-                                        <a class="menu-link active py-3" href="@Url.Action("Index","Orders")">
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">Tài khoản</span>
-                                        </a>
+                            @if (Session["info"] != null)
+                            {
+                                Account account = (Account)Session["info"];
+                                if (account.RoleID == 1)
+                                {
+                                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" class="menu-item here menu-lg-down-accordion me-lg-1">
+                                        <span class="menu-link py-3">
+                                            <span class="menu-title">Quản lý tài khoản</span>
+                                            <span class="menu-arrow d-lg-none"></span>
+                                        </span>
+                                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px" style="">
+                                            <div class="menu-item">
+                                                <a class="menu-link active py-3" href="@Url.Action("Index","Auth")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Tài khoản</span>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="menu-link py-3" href="@Url.Action("Index","Contacts")">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Câu hỏi</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                         <!--end::Menu-->
                     </div>

@@ -178,6 +178,14 @@ namespace electronics_shop.Areas.Admin.Controllers
                 return RedirectToAction("Edit", new { code = code });
             }
         }
+        public ActionResult DeleteProductImg(string id, string productcode)
+        {
+            int code = int.Parse(id);
+            ProductImg productimg = db.ProductImgs.FirstOrDefault(p => p.ProductImgCode == code);
+            db.ProductImgs.Remove(productimg);
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { code = productcode });
+        }
         public ActionResult Delete(string id)
         {
             // Kiểm tra xem có đơn hàng nào liên quan đến thương hiệu không

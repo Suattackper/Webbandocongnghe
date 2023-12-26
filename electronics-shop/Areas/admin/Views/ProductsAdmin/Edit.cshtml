@@ -168,18 +168,20 @@
                                             <div class="me-7 mb-4">
                                                 <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                                                     @{
-                                                        // Lấy dữ liệu hình ảnh từ nguồn nào đó (database, file, ...)
-                                                        byte[] imageData1 = i.Img; // Thay thế bằng cách lấy dữ liệu thực tế
-
-                                                        // Chuyển đổi sang chuỗi Base64
+                                                        byte[] imageData1 = i.Img;
                                                         string base64String1 = Convert.ToBase64String(imageData1);
                                                     }
-                                                    <img src="data:image/png;base64,@base64String1" alt="@i.ProductCode" style="object-fit:cover;">
+                                                    <img src="data:image/png;base64,@base64String1" alt="@i.ProductImgCode" style="object-fit:cover;">
                                                     <!--<img--> @*src="@Model.image" alt="@Model.image"*@ <!--style="object-fit:cover;">-->
                                                 </div>
+                                                <div class="d-flex justify-content-end py-6 px-9" style="position: relative;">
+                                                    <a href="@Url.Action("DeleteProductImg", "ProductsAdmin", new {id = i.ProductImgCode, productcode = Model.ProductCode})" class="btn btn-danger" style="position: absolute; position: absolute; top: -101px;">Delete</a>
+                                                </div>
                                             </div>
+                                           
                                         </div>
                                         <!--end::Col-->
+
                                     </div>
                                     <!--begin: Pic-->
                                     

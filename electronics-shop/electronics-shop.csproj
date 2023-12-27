@@ -144,8 +144,10 @@
     <Compile Include="Areas\admin\Controllers\DiscountsController.cs" />
     <Compile Include="Areas\admin\Controllers\FeedbacksController.cs" />
     <Compile Include="Areas\admin\Controllers\GenresController.cs" />
+    <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\admin\Controllers\ProductsAdminController.cs" />
+    <Compile Include="Common\EmailConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\Content\images\auth-bg.jpg" />
     <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-brands-400.svg" />
     <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-regular-400.svg" />
     <Content Include="Areas\admin\Content\css\fonts\%40fortawesome\fa-solid-900.svg" />
@@ -242,7 +245,10 @@
     <Content Include="Areas\admin\Content\css\simditor.css" />
     <Content Include="Areas\admin\Content\css\simditor.js" />
     <Content Include="Areas\admin\Content\css\style.bundle.css" />
+    <Content Include="Areas\admin\Content\css\style.min.css" />
     <Content Include="Areas\admin\Content\css\vis-timeline.bundle.css" />
+    <Content Include="Areas\admin\Content\images\icon.png" />
+    <Content Include="Areas\admin\Content\images\login.jpg" />
     <Content Include="Areas\admin\Content\js\auth.js" />
     <Content Include="Areas\admin\Content\js\brands.js" />
     <Content Include="Areas\admin\Content\js\custom-notifi.js" />
@@ -250,6 +256,12 @@
     <Content Include="Areas\admin\Content\js\genres.js" />
     <Content Include="Areas\admin\Content\js\orders.js" />
     <Content Include="Areas\admin\Content\js\plugins.bundle.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\popper.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper-utils.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper.min.js" />
     <Content Include="Areas\admin\Content\js\products.js" />
     <Content Include="Areas\admin\Content\js\repry-feedback.js" />
     <Content Include="Areas\admin\Content\js\scripts.bundle.js" />
@@ -536,6 +548,9 @@
     <Content Include="Areas\admin\Views\Brands\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Discounts\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Contacts\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Contacts\Reply.cshtml" />
+    <Content Include="Areas\admin\Views\Login\LoginAdmin.cshtml" />
+    <Content Include="Areas\admin\Content\js\popper.js\dist\umd\poppper.js.flow" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -543,7 +558,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\admin\Views\Contacts\Reply.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -586,6 +600,8 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
     <Content Include="Views\Shared\_Partial_Inf_Cus.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

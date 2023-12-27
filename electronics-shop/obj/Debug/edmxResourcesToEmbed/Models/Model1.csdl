@@ -14,7 +14,8 @@
     <Property Name="RequestCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="CreateAt" Type="DateTime" Precision="3" />
     <Property Name="RoleID" Type="Int32" />
-    <Property Name="AccountStatus" Type="Boolean" />
+    <Property Name="Update_By" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Update_At" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Role" Relationship="Self.FK__Account__RoleID__3C69FB99" FromRole="Account" ToRole="Roles" />
     <NavigationProperty Name="AccountAddresses" Relationship="Self.FK__AccountAd__Accou__3F466844" FromRole="Account" ToRole="AccountAddress" />
     <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Account__6383C8BA" FromRole="Account" ToRole="Comment" />
@@ -70,9 +71,9 @@
       <PropertyRef Name="ContactCode" />
     </Key>
     <Property Name="ContactCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FullName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="AccountCode" Type="Int32" />
     <Property Name="Status" Type="Boolean" />
     <Property Name="ContactDate" Type="DateTime" Precision="3" />

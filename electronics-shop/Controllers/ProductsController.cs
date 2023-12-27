@@ -182,6 +182,7 @@ namespace electronics_shop.Controllers
             ViewBag.Brand = db.Brands.ToList();
             if (db.Products == null || db.Categories == null || db == null || db.Promotions == null || db.Brands == null)
             {
+
                 return View("Error");
             }
             List<Product> data = db.Products.ToList();

@@ -14,7 +14,8 @@
           <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-          <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+          <ScalarProperty Name="Update_By" ColumnName="Update_By" />
+          <ScalarProperty Name="Update_At" ColumnName="Update_At" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

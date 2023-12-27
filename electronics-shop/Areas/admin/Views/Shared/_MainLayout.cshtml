@@ -1,4 +1,8 @@
 ﻿@using electronics_shop.Models
+@using System.Web.Optimization;
+@{ Account account = (Account)Session["InfoAdmin"];}
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <!--begin::Head-->
@@ -14,8 +18,8 @@
     <!--end::Fonts-->
     <link href="~/Areas/Admin/Content/css/vis-timeline.bundle.css" rel="stylesheet" />
     <!--end::Page Vendor Stylesheets-->
-    <link href="~/Areas/Admin/Content/css/plugins.bundle.css" rel="stylesheet" />
-    <link href="~/Areas/Admin/Content/css/style.bundle.css" rel="stylesheet" />
+    <link href="~/Areas/admin/Content/css/plugins.bundle.css" rel="stylesheet" />
+    <link href="~/Areas/admin/Content/css/style.bundle.css" rel="stylesheet" />
     <!--end::Global Stylesheets Bundle-->
     <style>
         tr:hover {
@@ -49,7 +53,7 @@
                 <!--begin::Brand-->
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
-                    <a class="fs-1 fw-bolder text-white" href="@Url.Action("Index","Products")">
+                    <a class="fs-1 fw-bolder text-white" href="@Url.Action("BackToHome","Base")" target="_blank">
                         <img src="~/Content/images/svg/logo.svg" style=" width: 176px; height: auto; border-radius: 2px; object-fit: cover;" />
                     </a>
                     <!--end::Logo-->
@@ -157,28 +161,28 @@
                                 </a>
                             </div>
                             <!--<div class="menu-item">
-    <a class="menu-link @*@(ViewContext.RouteData.Values["Controller"].ToString() == "Genres" ? "active" : "")*@"
-       href="@*@Url.Action("Index","Genres")*@">
-        <span class="menu-icon">-->
+                            <a class="menu-link @*@(ViewContext.RouteData.Values["Controller"].ToString() == "Genres" ? "active" : "")*@"
+                               href="@*@Url.Action("Index","Genres")*@">
+                                <span class="menu-icon">-->
                             <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
                             <!--<span class="svg-icon svg-icon-2">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="24"
-             height="24"
-             viewBox="0 0 24 24"
-             fill="none">
-            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z"
-                  fill="black" />
-            <path opacity="0.3"
-                  d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z"
-                  fill="black" />
-        </svg>
-    </span>-->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="24"
+                                     height="24"
+                                     viewBox="0 0 24 24"
+                                     fill="none">
+                                    <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z"
+                                          fill="black" />
+                                    <path opacity="0.3"
+                                          d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z"
+                                          fill="black" />
+                                </svg>
+                            </span>-->
                             <!--end::Svg Icon-->
                             <!--</span>
-            <span class="menu-title">Danh mục sản phẩm</span>
-        </a>
-    </div>-->
+                                    <span class="menu-title">Danh mục sản phẩm</span>
+                                </a>
+                            </div>-->
                             <div class="menu-item">
                                 <a class="menu-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Feedbacks" ? "active" : "")"
                                    href="@Url.Action("Index","Feedbacks")">
@@ -235,10 +239,8 @@
                                     <span class="menu-title">Danh sách đơn hàng</span>
                                 </a>
                             </div>
-                            @if (Session["info"] != null)
-                            {
-                                Account account = (Account)Session["info"];
-                                if (account.RoleID == 1)
+                           
+                                @if (account.RoleID == 1)
                                 {
                                     <!--XỬ lý phân quyền ở đây-->
                                     <div class="menu-item">
@@ -267,15 +269,15 @@
                                     <a class="menu-link @*@(ViewContext.RouteData.Values["Controller"].ToString() == "LoginHistory" ? "active" : "")*@"
                                        href="">
                                         <span class="menu-icon">-->
-                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                            <!--<span class="svg-icon svg-icon-2">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                    <!--<span class="svg-icon svg-icon-2">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="0.3" d="M6 22H4V3C4 2.4 4.4 2 5 2C5.6 2 6 2.4 6 3V22Z" fill="black" />
                                             <path d="M18 14H4V4H18C18.8 4 19.2 4.9 18.7 5.5L16 9L18.8 12.5C19.3 13.1 18.8 14 18 14Z" fill="black" />
                                         </svg>
                                     </span>-->
-                                                            <!--end::Svg Icon-->
-                                                            <!--</span>
+                                    <!--end::Svg Icon-->
+                                    <!--</span>
                                             <span class="menu-title">Lịch sử đăng nhập</span>
                                         </a>
                                     </div>-->
@@ -296,7 +298,7 @@
                                         </a>
                                     </div>
                                 }
-                            }
+                            
                         </div>
                         <!--end::Menu-->
                     </div>
@@ -843,12 +845,12 @@
     <!--end::Scrolltop-->
     <!--begin::Javascript-->
     @*<script>
-        var hostUrl = "assets/";
-    </script>*@
+            var hostUrl = "assets/";
+        </script>*@
     <!--begin::Global Javascript Bundle(used by all pages)-->
-    <script src="~/Areas/Admin/Content/js/plugins.bundle.js"></script>
-    <script src="~/Areas/Admin/Content/js/scripts.bundle.js"></script>
-    <script src="~/Areas/Admin/Content/js/custom-notifi.js"></script>
+    <script src="~/Areas/admin/Content/js/plugins.bundle.js"></script>
+    <script src="~/Areas/admin/Content/js/scripts.bundle.js"></script>
+    <script src="~/Areas/admin/Content/js/custom-notifi.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 <!--end::Body-->

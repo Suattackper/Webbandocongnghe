@@ -19,7 +19,8 @@
           <Property Name="RequestCode" Type="varchar" MaxLength="10" />
           <Property Name="CreateAt" Type="datetime" />
           <Property Name="RoleID" Type="int" />
-          <Property Name="AccountStatus" Type="bit" />
+          <Property Name="Update_By" Type="nvarchar" MaxLength="256" />
+          <Property Name="Update_At" Type="datetime" />
         </EntityType>
         <EntityType Name="AccountAddress">
           <Key>
@@ -65,9 +66,9 @@
             <PropertyRef Name="ContactCode" />
           </Key>
           <Property Name="ContactCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FullName" Type="varchar" MaxLength="45" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
-          <Property Name="Message" Type="varchar" MaxLength="1000" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1000" />
           <Property Name="AccountCode" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="ContactDate" Type="datetime" />
@@ -428,7 +429,8 @@
           <Property Name="RequestCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateAt" Type="DateTime" Precision="3" />
           <Property Name="RoleID" Type="Int32" />
-          <Property Name="AccountStatus" Type="Boolean" />
+          <Property Name="Update_By" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Update_At" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Role" Relationship="Self.FK__Account__RoleID__3C69FB99" FromRole="Account" ToRole="Roles" />
           <NavigationProperty Name="AccountAddresses" Relationship="Self.FK__AccountAd__Accou__3F466844" FromRole="Account" ToRole="AccountAddress" />
           <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Account__6383C8BA" FromRole="Account" ToRole="Comment" />
@@ -484,9 +486,9 @@
             <PropertyRef Name="ContactCode" />
           </Key>
           <Property Name="ContactCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FullName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="AccountCode" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="ContactDate" Type="DateTime" Precision="3" />
@@ -865,7 +867,8 @@
                 <ScalarProperty Name="RequestCode" ColumnName="RequestCode" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+                <ScalarProperty Name="Update_By" ColumnName="Update_By" />
+                <ScalarProperty Name="Update_At" ColumnName="Update_At" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

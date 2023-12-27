@@ -33,7 +33,8 @@ namespace electronics_shop.Models
         public string RequestCode { get; set; }
         public Nullable<System.DateTime> CreateAt { get; set; }
         public Nullable<int> RoleID { get; set; }
-        public Nullable<bool> AccountStatus { get; set; }
+        public string Update_By { get; set; }
+        public Nullable<System.DateTime> Update_At { get; set; }
     
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

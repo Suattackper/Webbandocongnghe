@@ -121,6 +121,7 @@
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Quyền</th>
                                     @*<th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Trạng thái</th>*@
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Ngày tạo</th>
+                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Pass update by</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" style="width: 130.25px;">Hành động</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -169,6 +170,7 @@
                                             <td>Hoạt động</td>
                                         }*@
                                         <td>@item.CreateAt</td>
+                                        <td>@item.Update_At - @item.Update_By</td>
                                         <!--begin::Action=-->
                                         <td class="text-end">
                                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">

@@ -1,4 +1,4 @@
-﻿
+﻿@model electronics_shop.Models.Order
 @{
     ViewBag.Title = "Thông tin đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
@@ -89,7 +89,7 @@
                                 <!--begin::Card header-->
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <h2>Thông tin đơn hàng (#@*@Model.order_id*@)</h2>
+                                        <h2>Thông tin đơn hàng (#@Model.OrderCode)</h2>
                                     </div>
                                 </div>
                                 <!--end::Card header-->
@@ -114,7 +114,7 @@
                                                             <!--end::Svg Icon-->Ngày đặt
                                                         </div>
                                                     </td>
-                                                    <td class="fw-bolder text-end">@*@Model.oder_date.ToString("HH:mm dd/MM/yyyy")*@</td>
+                                                    <td class="fw-bolder text-end">@(Model.OrderDate != null ? Model.OrderDate.Value.ToString(" dd-MM-yyyy") : "")</td>
                                                 </tr>
                                                 <!--end::Date-->
                                                 <!--begin::Payment method-->
@@ -133,7 +133,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="fw-bolder text-end">
-                                                        @*@Model.Payment.payment_name*@
+                                                        @(Model.Payment.PaymentCode == 1 ? "Thanh Toán Khi Nhận Hàng (COD)" : "Thanh Toán Trực Tuyến")
                                                     </td>
                                                 </tr>
                                                 <!--end::Payment method-->
@@ -151,7 +151,7 @@
                                                             <!--end::Svg Icon-->Đơn vị giao hàng
                                                         </div>
                                                     </td>
-                                                    <td class="fw-bolder text-end">@*@Model.Delivery.delivery_name*@</td>
+                                                    <td class="fw-bolder text-end">@*@Model.Delivery.DeliveryName*@ Giao hàng nhanh</td>
                                                 </tr>
                                                 <!--end::Date-->
                                             </tbody>
@@ -197,7 +197,7 @@
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <!--begin:: Avatar -->
                                                             <div class="symbol symbol-circle symbol-25px overflow-hidden me-3">
-                                                                <a href="@Url.Action("Details","Auth"@*,new {id = Model.account_id }*@)">
+                                                                <a href="@Url.Action("Details","Auth",new {id = Model.AccountCode })">
                                                                     <div class="symbol-label">
                                                                         <img src="~/Content/images/comments/profile_1.png" @*src="@(Model.Account.Avatar == null? noImage: Model.Account.Avatar)"*@ alt="Dan Wilson" class="w-100" />
                                                                     </div>
@@ -205,7 +205,7 @@
                                                             </div>
                                                             <!--end::Avatar-->
                                                             <!--begin::Name-->
-                                                            <a href="@Url.Action("Details","Auth"@*,new {id = Model.account_id }*@)" class="text-gray-600 text-hover-primary">@*@Model.OrderAddress.orderUsername*@</a>
+                                                            <a href="@Url.Action("Details","Auth",new {id = Model.AccountCode })" class="text-gray-600 text-hover-primary">@Model.Account.FirstName  @Model.Account.LastName</a>
                                                             <!--end::Name-->
                                                         </div>
                                                     </td>
@@ -226,7 +226,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="fw-bolder text-end">
-                                                        <a href="@Url.Action("Details","Auth"@*,new {id = Model.account_id }*@)" class="text-gray-600 text-hover-primary">@*@Model.Account.Email*@</a>
+                                                        <a href="@Url.Action("Details","Auth",new {id = Model.AccountCode })" class="text-gray-600 text-hover-primary">@Model.Account.Email</a>
                                                     </td>
                                                 </tr>
                                                 <!--end::Payment method-->
@@ -244,7 +244,7 @@
                                                             <!--end::Svg Icon-->Số điện thoại
                                                         </div>
                                                     </td>
-                                                    <td class="fw-bolder text-end">@*@Model.OrderAddress.orderPhonenumber*@</td>
+                                                    <td class="fw-bolder text-end">@Model.Account.PhoneNumber</td>
                                                 </tr>
                                                 <!--end::Date-->
                                             </tbody>
@@ -280,10 +280,10 @@
                                             </div>
                                             <!--end::Card header-->
                                             <div class="card-body pt-0">
-                                                @*@Model.OrderAddress.content,*@
-                                                <br>@*@Model.OrderAddress.Wards.type @Model.OrderAddress.Wards.ward_name,*@
-                                                <br>@*@Model.OrderAddress.Districts.type @Model.OrderAddress.Districts.district_name,*@
-                                                <br>@*@Model.OrderAddress.Provinces.province_name.*@
+                                                @Model.AccountAddress.Number,
+                                                <br>@Model.AccountAddress.Ward ,
+                                                <br>@Model.AccountAddress.District,
+                                                <br>@Model.AccountAddress.City.
                                             </div>
                                         </div>
                                         <!--end::Shipping address-->
@@ -293,7 +293,7 @@
                                         <!--begin::Card header-->
                                         <div class="card-header">
                                             <div class="card-title">
-                                                <h2>Đơn hàng #@*@Model.order_id*@</h2>
+                                                <h2>Đơn hàng #@Model.OrderCode</h2>
                                             </div>
                                         </div>
                                         <!--end::Card header-->
@@ -301,85 +301,7 @@
                                         <div class="card-body pt-0">
                                             <div class="table-responsive">
                                                 <!--begin::Table-->
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                                    <!--begin::Table head-->
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th class="min-w-175px">Sản phẩm</th>
-                                                            <th class="min-w-100px text-end">Số lượng</th>
-                                                            <th class="min-w-100px text-end">Đơn giá</th>
-                                                            <th class="min-w-100px text-end">Thành tiền</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!--end::Table head-->
-                                                    <!--begin::Table body-->
-                                                    <tbody class="fw-bold text-gray-600">
-                                                        @*@foreach (var item in listProduct)
-                                                        {*@
-                                                            <!--begin::Products-->
-                                                            <tr>
-                                                                <!--begin::Product-->
-                                                                <td>
-                                                                    <div class="d-flex align-items-center">
-                                                                        <!--begin::Thumbnail-->
-                                                                        <a href="#!" target="_blank" @*href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.Product.product_name)-@item.Product.product_id"*@ class="symbol symbol-50px">
-                                                                            <span class="symbol-label" style="background-image:url();"></span>
-                                                                        </a>
-                                                                        <!--end::Thumbnail-->
-                                                                        <!--begin::Title-->
-                                                                        <div class="ms-5">
-                                                                            <a href="#!" target="_blank" @*href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.Product.product_name)-@item.Product.product_id"*@ class="fw-bolder text-gray-600 text-hover-primary">@*@item.Product.product_name*@</a>
-                                                                        </div>
-                                                                        <!--end::Title-->
-                                                                    </div>
-                                                                </td>
-                                                                <!--end::Product-->
-                                                                <!--begin::Quantity-->
-                                                                <td class="text-end">@*@item.quantity*@</td>
-                                                                <!--end::Quantity-->
-                                                                <!--begin::Price-->
-                                                                <td class="text-end">
-                                                                    @*@item.price.ToString("#,0₫", culture.NumberFormat)*@
-                                                                </td>
-                                                                <!--end::Price-->
-                                                                <!--begin::Total-->
-                                                                <td class="text-end">
-                                                                    @*@{
-                                                                        total += item.quantity * item.price;
-                                                                        double total2 = item.quantity * item.price;
-                                                                        <span>@total2.ToString("#,0₫", culture.NumberFormat)</span>
-                                                                    }*@
-                                                                </td>
-                                                                <!--end::Total-->
-                                                            </tr>
-                                                        
-                                                        <!--begin::Subtotal-->
-                                                        <tr>
-                                                            <td colspan="3" class="text-end">Tạm tính</td>
-                                                            <td class="text-end">@*@total.ToString("#,0₫", culture.NumberFormat)*@</td>
-                                                        </tr>
-                                                        <!--end::Subtotal-->
-                                                        <!--begin::VAT-->
-                                                        <tr>
-                                                            <td colspan="3" class="text-end">Giảm giá</td>
-                                                            <td class="text-end">@*@((total + 30000 - Model.total).ToString("#,0₫", culture.NumberFormat))*@</td>
-                                                        </tr>
-                                                        <!--end::VAT-->
-                                                        <!--begin::Shipping-->
-                                                        <tr>
-                                                            <td colspan="3" class="text-end">Phí vận chuyển</td>
-                                                            <td class="text-end">30.000₫</td>
-                                                        </tr>
-                                                        <!--end::Shipping-->
-                                                        <!--begin::Grand total-->
-                                                        <tr>
-                                                            <td colspan="3" class="fs-3 text-dark text-end">Tổng cộng</td>
-                                                            <td class="text-danger fs-3 fw-boldest text-end">@*@Model.total.ToString("#,0₫", culture.NumberFormat)*@</td>
-                                                        </tr>
-                                                        <!--end::Grand total-->
-                                                    </tbody>
-                                                    <!--end::Table head-->
-                                                </table>
+                                                @Html.Action("Partial_SanPham", "Orders", new { id = Model.OrderCode})
                                                 <!--end::Table-->
                                             </div>
                                         </div>
@@ -405,64 +327,10 @@
                                         <!--end::Card header-->
                                         <!--begin::Card body-->
                                         <div class="card-body pt-0">
-                                            <div class="table-responsive">
-                                                <!--begin::Table-->
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                                    <!--begin::Table head-->
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th class="min-w-50px">ID</th>
-                                                            <th class="min-w-120px">Ngày đặt</th>
-                                                            <th class="min-w-120px">Trị giá đơn hàng</th>
-                                                            <th class="min-w-120px">Trạng thái đơn hàng</th>
-                                                            <th class="min-w-150px">Ghi chú</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!--end::Table head-->
-                                                    <!--begin::Table body-->
-                                                    <tbody class="fw-bold text-gray-600">
-                                                        @*@foreach (var item in orderHistory)
-                                                        {*@
-                                                            <tr>
-                                                                <td><a target="_blank" href="@Url.Action("Details","Orders"@*,new {id=item.order_id}*@)" class="text-dark">@*@item.order_id*@</a></td>
-                                                                <!--begin::Date-->
-                                                                <td>@*@item.oder_date.ToString("HH:mm dd-MM-yyyy")*@</td>
-                                                                <!--end::Date-->
-                                                                <!--begin::Total-->
-                                                                <td>@*@item.total.ToString("#,0₫", culture.NumberFormat)*@</td>
-                                                                <!--end::Total-->
-                                                                <!--begin::Status-->
-                                                                <td>
-                                                                    <!--begin::Badges-->
-                                                                    @*@if (item.status == "1")
-                                                                    {*@
-                                                                        <div class="badge badge-light-warning">chờ xử lý</div>
-                                                                    @*}
-                                                                    else if (item.status == "2")
-                                                                    {*@
-                                                                        <div class="badge badge-light-info">Đang xử lý</div>
-                                                                    @*}
-                                                                    else if (item.status == "3")
-                                                                    {*@
-                                                                        <div class="badge badge-light-success">Hoàn thành</div>
-                                                                    @*}
-                                                                    else
-                                                                    {*@
-                                                                        <div class="badge badge-light-danger">Bị hủy</div>
-                                                                    
-                                                                    <!--end::Badges-->
-                                                                </td>
-                                                                <!--end::Status-->
-                                                                <!--begin::Customer Notified-->
-                                                                <td>@*@(item.order_note == ""?"Không":item.order_note)*@</td>
-                                                                <!--end::Customer Notified-->
-                                                            </tr>
-                                                        
-                                                    </tbody>
-                                                    <!--end::Table head-->
-                                                </table>
-                                                <!--end::Table-->
-                                            </div>
+
+                                            @Html.Action("Partial_History_Order", "Orders", new {id=Model.AccountCode})
+
+
                                         </div>
                                         <!--end::Card body-->
                                     </div>

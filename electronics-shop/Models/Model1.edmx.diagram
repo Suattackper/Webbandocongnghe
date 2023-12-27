@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="62379ae382434445b1bf5bb775214f40" Name="Diagram1">
-        <EntityTypeShape EntityType="ECOMMERCEModel.Account" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.AccountAddress" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Brand" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Category" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Comment" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Contact" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Delivery" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.OrderDetail" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Order" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Payment" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Product" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.ProductImg" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Promotion" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.Role" Width="1.5" PointX="3.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ECOMMERCEModel.sysdiagram" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="691ad166887d47d8936e8f79c566da96" Name="Diagram1">
+        <EntityTypeShape EntityType="ECOMMERCEModel.Account" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.AccountAddress" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Brand" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Category" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Comment" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Contact" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Delivery" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.OrderDetail" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Order" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Payment" Width="1.5" PointX="0.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Product" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.ProductImg" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Promotion" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.Role" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ECOMMERCEModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ECOMMERCEModel.FK__Account__RoleID__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="ECOMMERCEModel.FK__AccountAd__Accou__3F466844" ManuallyRouted="false" />
         <AssociationConnector Association="ECOMMERCEModel.FK__Comment__Account__6383C8BA" ManuallyRouted="false" />

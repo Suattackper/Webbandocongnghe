@@ -30,6 +30,7 @@ namespace electronics_shop.Models
         public Nullable<decimal> OrderTotal { get; set; }
         public string OrderNote { get; set; }
         public Nullable<int> AccountAddressCode { get; set; }
+        public string DeliveryCode { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual AccountAddress AccountAddress { get; set; }

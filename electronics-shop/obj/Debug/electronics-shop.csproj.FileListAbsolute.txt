@@ -257,3 +257,4 @@ C:\Users\Xuan Thao\Desktop\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml
 D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.dll
 D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.pdb
 D:\c#\Webbandocongnghe\electronics-shop\bin\CaptchaMvc.xml
+D:\c#\Webbandocongnghe\electronics-shop\bin\SlugGenerator.dll

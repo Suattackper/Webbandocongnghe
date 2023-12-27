@@ -30,6 +30,9 @@
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Ward" ColumnName="Ward" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -110,6 +113,7 @@
           <ScalarProperty Name="OrderTotal" ColumnName="OrderTotal" />
           <ScalarProperty Name="OrderNote" ColumnName="OrderNote" />
           <ScalarProperty Name="AccountAddressCode" ColumnName="AccountAddressCode" />
+          <ScalarProperty Name="DeliveryCode" ColumnName="DeliveryCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

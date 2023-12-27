@@ -29,6 +29,9 @@
     <Property Name="Country" Type="nvarchar" MaxLength="50" />
     <Property Name="City" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="District" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ward" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Brand">
     <Key>
@@ -103,6 +106,7 @@
     <Property Name="OrderTotal" Type="money" />
     <Property Name="OrderNote" Type="nvarchar" MaxLength="100" />
     <Property Name="AccountAddressCode" Type="int" />
+    <Property Name="DeliveryCode" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Payment">
     <Key>

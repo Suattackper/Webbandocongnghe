@@ -1,4 +1,5 @@
-﻿
+﻿@model PagedList.IPagedList<electronics_shop.Models.Order>
+    @using PagedList.Mvc;
 @{
     ViewBag.Title = "Danh sách đơn hàng";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
@@ -58,7 +59,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form>
+                        <form action="@Url.Action("Search","Orders") " method="get">
                             <input type="search" name="search" class="form-control form-control-solid w-250px ps-14" placeholder="Tìm kiếm đơn hàng...">
                         </form>
                     </div>
@@ -98,10 +99,11 @@
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">ID</th>
+                                    <th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">#</th>
+                                    <th class="min-w-50px" tabindex="2" arowspan="1" colspan="1" style="width:50px;">ID</th>
                                     <th class="min-w-110px" tabindex="2" rowspan="1" colspan="1" style="width:110px;">Họ tên</th>
                                     <th class="min-w-70px" tabindex="5" rowspan="1" colspan="1" style="width:80px;">Số điện thoại</th>
-                                    <th class="min-w-275px" tabindex="5" rowspan="1" colspan="1" style="width:280px;">Trạng thái</th>
+                                    <th class="min-w-275px text-center" tabindex="5" rowspan="1" colspan="1" style="width:200px; ">Trạng thái</th>
                                     <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Tổng đơn hàng</th>
                                     <th class="min-w-100px" tabindex="5" rowspan="1" colspan="1" style="width:105px;">Ngày đặt</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" style="width: 130.25px;">Hành động</th>
@@ -111,21 +113,35 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-bold">
-                                @*@foreach (var item in Model)
-                                    {*@
+                                @if(Model!=null && Model.Any()) {
+                                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+
+                                    foreach (var item in Model)
+                                    {
                                 <tr class="odd" id="item_@*@item.order_id*@">
-                                    <td>@*@item.order_id*@ </td>
-                                    <td> @*@item.OrderAddress.orderUsername*@ </td>
-                                    <td> @*@item.OrderAddress.orderPhonenumber*@ </td>
+                                    <td>@i</td>
+                                    <td>@item.OrderCode </td>
+                                    <td> @item.Account.FirstName @item.Account.LastName </td>
+                                    <td> @item.Account.PhoneNumber </td>
                                     <td>
-                                        <div class="d-flex gap-2">
-                                            <a @*class="btn @(item.status == "1"? "btn-warning" :"btn-light-warning")"*@ id="waiting_btn_@*@item.order_id*@">Chờ xử lý</a>
-                                            <a @*onclick="onProcessOpen(@item.order_id)"*@ id="on_process_btn_@*@item.order_id*@" class="btn-info" @*class="btn-info @(item.status == "2"? "btn-info" :"btn-light-info") "*@>Đang xử lý</a>
-                                            <a @*@(item.status == "3" ? "" : "btn-light-success")*@ @*onclick="CompletedOpen(@item.order_id)"*@ id="comlpleted_btn_@*@item.order_id*@" class="btn-success" @*class="btn @(item.status == "3"? "btn-success" :"btn-light-success")"*@>Hoàn thành</a>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a class="btn @( item.PaymentCode ==2? "btn-light-success" :"btn-light-danger") id="waiting_btn_@*@item.order_id*@"> @(item.PaymentCode ==2 ?"Đã Thanh Toán":"Chưa thanh toán")</a>
+                                            @if (item.PaymentCode == 1)
+                                            {
+                                                <a class="btn btn-light-danger"> Đang Giao Hàng </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn @(item.Delivered == false  ?"btn-light-danger":"btn-light-success" ) "> @(item.Delivered == false ? "Đang Giao Hàng":"Giao Thành Công")  </a>
+                                            }
+
+
                                         </div>
                                     </td>
-                                    <td>@*@item.total.ToString("#,0₫", culture.NumberFormat)*@</td>
-                                    <td>@*@item.oder_date.ToString("HH:mm dd-MM-yyyy")*@</td>
+                                    <td>@string.Format("₫{0:#,0}", item.OrderTotal)</td>
+                                    
+                                    <td>@(item.OrderDate != null ? item.OrderDate.Value.ToString(" dd-MM-yyyy") : "")</td>
+                                    
                                     <!--begin::Action=-->
                                     <td class="text-end">
                                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -142,20 +158,26 @@
                                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a href="@Url.Action("Details","Orders"@*,new { id = item.order_id}*@) " class="menu-link px-3">Chi tiết</a>
+                                                <a href="@Url.Action("Details", "Orders",new { id = item.OrderCode}) " class="menu-link px-3">Chi tiết</a>
+                                            </div>
+                                            <div class="menu-item px-3">
+                                                <a data-id="@item.OrderCode" class=" btnCapNhat menu-link px-3">Cập Nhật</a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
                                             <div class="menu-item px-3">
-                                                <a @*onclick="cancleOpen(@item.order_id)"*@ class="menu-link px-3">Hủy đơn hàng</a>
+                                                <a onclick="cancleOpen(@item.OrderCode)" class="menu-link px-3">Hủy đơn hàng</a>
                                             </div>
+
                                             <!--end::Menu item-->
                                         </div>
                                         <!--end::Menu-->
                                     </td>
                                     <!--end::Action=-->
                                 </tr>
-
+                                        i++;
+                                    }
+                                }
                             </tbody>
                             <!--end::Table body-->
                         </table>
@@ -165,16 +187,16 @@
                         </div>
                         <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                             <div>
-                                @*@Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
-                                    {
-                                        LinkToPreviousPageFormat = prePageIcon,
-                                        LinkToNextPageFormat = nextPageIcon,
-                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
-                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
-                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
-                                        MaximumPageNumbersToDisplay = 10
-                                    })*@
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
+                           {
+                               //LinkToPreviousPageFormat = prePageIcon,
+                               //LinkToNextPageFormat = nextPageIcon,
+                               DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                               DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                               DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                               DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                               MaximumPageNumbersToDisplay = 10
+                           })
                             </div>
                         </div>
                     </div>
@@ -215,7 +237,7 @@
                     <!--begin::Heading-->
                     <div class="mb-9 text-center">
                         <!--begin::Title-->
-                        <span id="icon">(icon chứa tại đây)</span>
+                        <span id="icon"><i style="font-size: 65px;color:yellow" class="bi bi-info-circle-fill"></i></span>
                         <!--end::Title-->
                     </div>
                     <!--end::Heading-->
@@ -226,14 +248,43 @@
                     <!--end::Label-->
                     <!--begin::Label-->
                     <div class="mb-15 fw-bold text-center">
-                        <div class="fs-4" style="color: #565656;">Chuyển đơn hàng <span id="update__id" class="text-primary">(Id đơn hàng)</span> sang <span id="update__status" class="text-primary">(Trạng thái đơn hàng)</span>? Quá trình này không thể hoàn tác.</div>
+                        @*<div class="fs-4" style="color: #565656;">Chuyển đơn hàng <span id="update__id" class="text-primary">(Id đơn hàng)</span> sang <span id="update__status" class="text-primary">(Trạng thái đơn hàng)</span>? Quá trình này không thể hoàn tác.</div>*@
+                        <input type="hidden"  id="txtOrderId" value="1" />
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select class="form-control" id="ddTrangThai">
+                                <option value="1">
+                                    Chưa Thanh Toán
+                                </option>
+                                <option value="2">
+                                    Đã Thanh Toán
+                                </option>
+
+                            </select>
+                           
+
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái giao hàng</label>
+                            <select class="form-control" id="ddTrangThaiGiaoHang">
+                                <option value="false">
+                                    Đang Giao Hàng
+                                </option>
+                                <option value="true">
+                                    Giao Hàng Thành Công
+                                </option>
+
+                            </select>
+                            <input type="hidden" id="txtOrderId2" value="false" />
+
+                        </div>
                     </div>
                     <!--end::Label-->
                     <!--end::Price-->
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="button" class="btn btn-light me-3 dimis-modal">Hủy bỏ</button>
-                        <button type="button" id="update__submit" class="btn btn-danger">Xác nhận</button>
+                        <button type="button" class="btn btn-light me-3 dimis-modal">Đóng</button>
+                        <button type="button" id="update__submit" class="btn btn-danger btnLuu">Lưu</button>
                     </div>
                     <!--end::Actions-->
                 </form>
@@ -368,8 +419,94 @@
 <!--end::Modal - Delete-->
 
 
+
+
 <link href="~/Areas/Admin/Content/css/PagedList.css" rel="stylesheet" />
 
 @section scripts{
     <script src="~/Areas/Admin/Content/js/orders.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('body').on('click', '.btnCapNhat', function (){
+                var id = $(this).data("id");
+                $("#txtOrderId").val(id);
+                $("#txtOrderId2").val(id);
+                $('#update-order-modal').modal('show');
+
+            });
+        });
+        $(document).ready(function () {
+            $('body').on('click', '.btnLuu', function () {
+                var id = $('#txtOrderId').val();
+                var tt = $('#ddTrangThai').val();
+                var gh = $('#ddTrangThaiGiaoHang').val().toLowerCase();
+                if (tt !== '2' && gh!=='false' ) {
+                    iziToast.error({
+                        title: 'Lỗi',
+                        message: 'Đơn hàng chưa thanh toán, không thể cập nhật giao hàng thành công',
+                        icon: 'bi bi-check-circle-fill',  
+                        position: 'topCenter',
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                        backgroundColor: "rgba(247, 0, 92, 0.9)" 
+                    });
+                    return;
+                    
+                }
+                $.ajax({
+                    url: '/Admin/Orders/UpdateTT',
+                    type: 'POST',
+                    data: { id: id, trangthai: tt , giaohang:gh },
+                    success: function (res) {
+                        if (res.Success) {
+
+                            location.reload();
+                            iziToast.success({
+                                title: 'Thành Công  ',
+                                message: 'Cập nhật trạng thái thành công',
+                                position: 'topCenter',
+                                iconColor: "#fff",
+                                titleColor: "#fff",
+                                messageColor: "#fff",
+                                backgroundColor: "rgba(58, 240, 61, 0.9)",
+
+
+                            });
+                        }
+                    }
+                });
+            });
+        });
+        const loadIziToast = () => {
+            element = document.querySelector(".form-leave-message");
+            element &&
+                element.addEventListener("submit", (e) => {
+                    iziToast.show({
+                        message: "Message sent successfully!",
+                        position: "topRight",
+                        color: "rgb(34 197 94 / 70%",
+                        icon: "bi-check-circle-fill",
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                    });
+                });
+
+            element = document.querySelector(".resend-code");
+            element &&
+                element.addEventListener("click", (e) => {
+                    iziToast.show({
+                        message: "The code has been resent",
+                        position: "topRight",
+                        color: "rgb(34 197 94 / 70%",
+                        icon: "bi-check-circle-fill",
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                    });
+                });
+        };
+
+    </script>
 }

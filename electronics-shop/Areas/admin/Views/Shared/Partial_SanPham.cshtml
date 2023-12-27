@@ -1,0 +1,115 @@
+﻿@model IEnumerable<electronics_shop.Models.OrderDetail>
+@if (Model != null && Model.Any())
+{
+    <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+        <!--begin::Table head-->
+        <thead>
+            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                <th class="min-w-175px">Sản phẩm</th>
+                <th class="min-w-100px text-end">Số lượng</th>
+                <th class="min-w-100px text-end">Đơn giá</th>
+                <th class="min-w-100px text-end">Thành tiền</th>
+            </tr>
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody class="fw-bold text-gray-600">
+            @{
+                var total = decimal.Zero;
+                double total2 = 0;
+                var giamgia = decimal.Zero;
+                var tamtinh = decimal.Zero;
+            }
+            @foreach (var item in Model)
+            {
+                <!--begin::Products-->
+                <tr>
+                    <!--begin::Product-->
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <!--begin::Thumbnail-->
+                            <a href="#!" target="_blank" href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.Product.ProductName)-@item.Product.ProductCode" class="symbol symbol-50px">
+                                @{
+                                    byte[] imageData = item.Product.ImageProduct;
+                                    string base64String = Convert.ToBase64String(imageData);
+                                }
+                                <img src="data:image/png;base64,@base64String" class="symbol-label" alt="product" />
+                                @*<span class="symbol-label">
+                                </span>*@
+                                @*<span class="symbol-label" style="background-image:url('@item.Product.ImageProduct')"></span>*@
+                                @*<span class="symbol-label" style="background-image:url('@item.Product.ProductImgs')"></span>*@
+                                @*<span class="symbol-label" style="background-image: url('@item.Product.ImageProduct'); display: inline-block; width: 50px; height: 50px;"></span*@
+
+                            </a>
+                            <!--end::Thumbnail-->
+                            <!--begin::Title-->
+                            <div class="ms-5">
+                                <a href="#!" target="_blank" href="~/@SlugGenerator.SlugGenerator.GenerateSlug(item.Product.ProductName)-@item.Product.ProductCode" class="fw-bolder text-gray-600 text-hover-primary">@item.Product.ProductName</a>
+                            </div>
+                            <!--end::Title-->
+                        </div>
+                    </td>
+                    <!--end::Product-->
+                    <!--begin::Quantity-->
+                    <td class="text-end">@item.Quantity</td>
+                    <!--end::Quantity-->
+                    <!--begin::Price-->
+                    <td class="text-end">
+                        @string.Format("₫{0:#,0}", item.Price)
+                    </td>
+                    <!--end::Price-->
+                    <!--begin::Total-->
+
+                    <td class="text-end">
+                        @{
+                            total += (decimal)(item.Total);
+                            total2 = (double)(item.Quantity * item.Price);
+                            tamtinh += (decimal)(item.Quantity * item.Price); 
+                            <span>@string.Format("₫{0:#,0}", total2)</span>
+                        }
+                    </td>
+                    <!--end::Total-->
+                </tr>
+
+            }
+
+            <!--begin::Subtotal-->
+            <tr>
+                <td colspan="3" class="text-end">Tạm tính</td>
+                <td class="text-end">@string.Format("₫{0:#,0}", tamtinh)</td>
+            </tr>
+            <!--end::Subtotal-->
+            <!--begin::VAT-->
+            <tr>
+                <td colspan="3" class="text-end">Giảm giá</td>
+                @{ 
+                    giamgia = (decimal)tamtinh- (decimal)ViewBag.Tong+30000;
+                }
+                <td class="text-end">@string.Format("₫{0:#,0}",giamgia) </td>
+            </tr>
+            <!--end::VAT-->
+            <!--begin::Shipping-->
+            <tr>
+                <td colspan="3" class="text-end">Phí vận chuyển</td>
+                <td class="text-end">30.000₫</td>
+            </tr>
+            <!--end::Shipping-->
+            <!--begin::Grand total-->
+            <tr>
+                <td colspan="3" class="fs-3 text-dark text-end">Tổng cộng</td>
+                <td class="text-danger fs-3 fw-boldest text-end">@string.Format("₫{0:#,0}", (decimal)ViewBag.Tong)</td>
+            </tr>
+            <!--end::Grand total-->
+
+
+
+
+        </tbody>
+        <!--end::Table head-->
+    </table>
+
+}
+else { 
+                            <p>Null</p>
+                            }
+       

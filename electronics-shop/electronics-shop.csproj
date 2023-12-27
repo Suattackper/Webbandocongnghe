@@ -62,6 +62,9 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="SlugGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SlugGenerator.2.0.2\lib\net45\SlugGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -147,6 +150,7 @@
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\admin\Controllers\ProductsAdminController.cs" />
+    <Compile Include="Common\Common.cs" />
     <Compile Include="Common\EmailConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -179,6 +183,8 @@
     <Compile Include="Models\Contact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerViewModel.cs" />
+    <Compile Include="Models\DatabaseGeneratedAttributedAttribute.cs" />
     <Compile Include="Models\Delivery.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -206,6 +212,7 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -457,6 +464,7 @@
     <Content Include="Content\images\svg\purchase-done.svg" />
     <Content Include="Content\images\svg\visa-logo.svg" />
     <Content Include="Content\index.html" />
+    <Content Include="Content\js\categories_custom.js" />
     <Content Include="Content\js\jsShoppingCart.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\validator.js" />
@@ -470,6 +478,8 @@
     <Content Include="Content\libraries\rater-js\star_0.svg" />
     <Content Include="Content\libraries\rater-js\star_1.svg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\templates\send1.html" />
+    <Content Include="Content\templates\send2.html" />
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.css" />
     <Content Include="Content\unpkg.com\metismenujs%401.4.0\dist\metismenujs.min.js" />
     <Content Include="Content\unpkg.com\popperjs\core.js" />
@@ -533,9 +543,6 @@
     <Content Include="Areas\admin\Views\Discounts\Index.cshtml" />
     <Content Include="Areas\admin\Views\Feedbacks\Index.cshtml" />
     <Content Include="Areas\admin\Views\Genres\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Orders\Details.cshtml" />
-    <Content Include="Areas\admin\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\admin\Views\Orders\Trash.cshtml" />
     <Content Include="Areas\admin\Views\ProductsAdmin\Create.cshtml" />
     <Content Include="Areas\admin\Views\ProductsAdmin\Details.cshtml" />
     <Content Include="Areas\admin\Views\ProductsAdmin\Edit.cshtml" />
@@ -551,6 +558,10 @@
     <Content Include="Areas\admin\Views\Contacts\Reply.cshtml" />
     <Content Include="Areas\admin\Views\Login\LoginAdmin.cshtml" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\umd\poppper.js.flow" />
+    <Content Include="Areas\admin\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Partial_History_Order.cshtml" />
+    <Content Include="Areas\admin\Views\Orders\Trash.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -558,6 +569,8 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\Shared\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\Partial_SanPham.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -578,30 +591,36 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_MainLayout.cshtml" />
     <Content Include="Views\Products\Shop.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\Account\MessageSent.cshtml" />
     <Content Include="Views\Base\YourAction.cshtml" />
-    <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
-    <Content Include="Views\Shared\_ActionViewCart.cshtml" />
-    <Content Include="Views\Shared\_Partial_Item_Cart.cshtml" />
-    <Content Include="Views\Shared\_Partial_Wish_Cart.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\Dashboard.cshtml" />
     <Content Include="Views\Account\EditProfile.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
-    <Content Include="Views\Shared\_Partial_Inf_Cus.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\RenderInfCus.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Patial_CheckOut.cshtml" />
+    <Content Include="Views\Shared\RenderInfCustomer.cshtml" />
+    <Content Include="Views\Shared\_ActionViewCart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_MainLayout.cshtml" />
+    <Content Include="Views\Shared\_Partial_Inf_Cus.cshtml" />
+    <Content Include="Views\Shared\_Partial_Item_Cart.cshtml" />
+    <Content Include="Views\Shared\_Partial_Wish_Cart.cshtml" />
+    <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
+    <Content Include="Views\Account\Partial_History_Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

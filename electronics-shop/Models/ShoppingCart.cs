@@ -8,7 +8,9 @@ namespace electronics_shop.Models
 {
     public class ShoppingCart
     {
+        ECOMMERCEEntities db = new ECOMMERCEEntities();
         public List<ShoppingCartItem> Items { get; set; }
+        //public string promotioncode { get; set; }
         public ShoppingCart()
         {
             this.Items = new List<ShoppingCartItem>();
@@ -25,6 +27,7 @@ namespace electronics_shop.Models
             }
             else
             {
+
                 Items.Add(item);
             }
         }
@@ -42,10 +45,12 @@ namespace electronics_shop.Models
         public void UpdateQuantity(string id, int quantity)
         {
             var checkExits = Items.SingleOrDefault(x => x.ProductId == id);
+           
             if(checkExits!=null)
             {
                 checkExits.Quantity = quantity;
                 checkExits.ToTalPrice = checkExits.Price * checkExits.Quantity;
+               
             }
         }
         public double GetTotalPrice()
@@ -60,6 +65,19 @@ namespace electronics_shop.Models
         public void ClearCart()
         {
             Items.Clear();
+            
+        }
+
+        public void getQuan(int quantity, string id)
+        {
+            var product = db.Products.FirstOrDefault(x => x.ProductCode == id);
+            var checkExits = Items.SingleOrDefault(x => x.ProductId == id);
+
+            if (checkExits != null)
+            {
+                product.Quantity = product.Quantity - checkExits.Quantity;
+            }
+                
         }
     }
 

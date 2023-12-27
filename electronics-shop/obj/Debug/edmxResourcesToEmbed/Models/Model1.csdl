@@ -34,6 +34,9 @@
     <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ward" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Account" Relationship="Self.FK__AccountAd__Accou__3F466844" FromRole="AccountAddress" ToRole="Account" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__AccountA__5AEE82B9" FromRole="AccountAddress" ToRole="Orders" />
   </EntityType>
@@ -116,6 +119,7 @@
     <Property Name="OrderTotal" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="OrderNote" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="AccountAddressCode" Type="Int32" />
+    <Property Name="DeliveryCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="Account" Relationship="Self.FK__Orders__AccountC__59FA5E80" FromRole="Orders" ToRole="Account" />
     <NavigationProperty Name="AccountAddress" Relationship="Self.FK__Orders__AccountA__5AEE82B9" FromRole="Orders" ToRole="AccountAddress" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__75A278F5" FromRole="Orders" ToRole="OrderDetail" />

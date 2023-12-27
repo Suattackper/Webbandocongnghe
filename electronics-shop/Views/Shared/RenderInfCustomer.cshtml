@@ -1,0 +1,214 @@
+﻿
+@model IEnumerable<electronics_shop.Models.ShoppingCartItem>
+@{
+    var tongtien = decimal.Zero;
+}
+
+
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        tongtien += (decimal)(@item.ToTalPrice);
+
+        <div class="max-h-60 overflow-auto">
+            <span class="text-lg font-semibold">Your Cart</span>
+            <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
+               href="@Url.Action("Detail", "Products", new { id = item.ProductId})">
+                <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
+                    @{
+                        byte[] imageData = item.ProductImg;
+                        string base64String = Convert.ToBase64String(imageData);
+                    }
+                    <img src="data:image/png;base64,@base64String" class="h-full w-full object-cover" alt="product" />
+                    @*<img class="h-full w-full object-cover"
+                         src="@item.ProductImg"
+                         alt="product" />*@
+                </div>
+                <div class="flex w-full flex-col">
+                    <h6 class="clamp-2 break-all text-lg font-semibold">
+                        @item.ProductName
+                    </h6>
+                    <div class="flex gap-2">
+                        <div class="flex gap-1 leading-7 text-gray-400">
+                            <span>1</span>
+
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-bold text-primary-color">@item.Price</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    }
+
+}
+else
+{
+    <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào!</p>
+}
+
+<div id="load_data" class="col-span-12 lg:col-span-4">
+    @*<form action="@Url.Action("CheckOutPromotion","ShoppingCart")" method="post">*@
+    <div class="mb-5">
+        <span class="text-lg font-semibold">Discount Coupon</span>
+        <div class="my-3 flex">
+            @if (ViewBag.promotioncode != null)
+            {
+                string promotioncode = ViewBag.promotioncode.PromotionCode;
+                <input class="input-rounded-l"
+                       type="text"
+                       placeholder="Your code here" name="promotioncode" value="@ViewBag.promotioncode.PromotionCode" />
+            }
+            else
+            {
+                <input class="input-rounded-l"
+                       type="text"
+                       placeholder="Your code here" name="promotioncode" />
+            }
+            <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
+                    type="submit">
+                <span class="font-bold uppercase text-white">Apply</span>
+            </button>
+
+        </div>
+
+    </div>
+    @*</form>*@
+    <div class="rounded-lg border-2 p-4">
+        <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
+
+        <div class="py-4">
+            <div class="my-2 flex justify-between">
+                <span>Subtotal:</span>
+                <span>@string.Format("₫{0:#,0}", tongtien)</span>
+            </div>
+            <div class="my-2 flex justify-between">
+                <span>Vat:</span>
+                @{ var Vat = 22750;
+                    <span>@string.Format("₫{0:#,0}", Vat)</span>
+                }
+            </div>
+            <div class="my-2 flex justify-between">
+                <span>Shipping:</span>
+                @{
+                    var ship = 30000;
+                    <span>@string.Format("₫{0:#,0}", ship)</span>
+
+                }
+            </div>
+        </div>
+        <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
+            <span>Total:</span>
+            @{
+                decimal TOTAL = decimal.Zero;
+                if (ViewBag.promotioncode != null)
+                {
+                    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)((decimal)tongtien - (decimal)tongtien * ViewBag.promotioncode.PromotionPercentage / 100);
+                }
+                else
+                {
+                    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
+                }
+            }
+            @if (tongtien != 0)
+            {
+                <span>@string.Format("₫{0:#,0}", TOTAL)</span>
+
+            }
+            else
+            {
+                <span>₫0 </span>
+
+            }
+        </div>
+        @*}*@
+        @*<div style="display:flex ; ">
+            <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                    type="submit">
+                <span class="font-bold uppercase text-white">Discard</span>
+            </button>
+            <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+               type="" href="@Url.Action("CheckOut","ShoppingCart")">
+                <span class="font-bold uppercase text-white">Continue</span>
+            </a>
+        </div>*@
+    </div>
+    @*<a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
+           href="@Url.Action("Checkout","ShoppingCart")">
+            <i class="bi bi-arrow-repeat flex text-xl"></i>
+            <span>Update Cart</span>
+        </a>*@
+    <a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
+       href="@Url.Action("Shop","Products")">
+        <i class="bi bi-cart-plus flex text-xl"></i>
+        <span>Add more products</span>
+    </a>
+</div>
+
+
+
+@*<div class="mb-5">
+        <span class="text-lg font-semibold">Discount Coupon</span>
+        <div class="my-3 flex">
+            <input class="input-rounded-l"
+                   type="text"
+                   placeholder="Your code here" />
+            <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
+                    type="submit">
+                <span class="font-bold uppercase text-white">Apply</span>
+            </button>
+        </div>
+    </div>
+    <div class="rounded-lg border-2 p-4">
+        <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
+        <div class="py-4">
+            <div class="my-2 flex justify-between">
+
+                <span>Subtotal:</span>
+                <span>@string.Format("₫{0:#,0}", tongtien)</span>
+
+            </div>
+            <div class="my-2 flex justify-between">
+                <span>Vat:</span>
+                @{ var Vat = 22750;
+                    <span>@string.Format("₫{0:#,0}", Vat)</span>
+                }
+            </div>
+            <div class="my-2 flex justify-between">
+                <span>Shipping:</span>
+                @{
+                    var ship = 30000;
+                    <span>@string.Format("₫{0:#,0}", ship)</span>
+
+                }
+            </div>
+        </div>
+        <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
+            <span>Total:</span>
+            @{
+                decimal TOTAL = decimal.Zero;
+
+                TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
+
+
+            }
+            @if (tongtien != 0)
+            {
+                <span>@string.Format("₫{0:#,0}", TOTAL)</span>
+
+            }
+            else
+            {
+                <span>₫0 </span>
+
+            }
+        </div>
+
+
+    </div>*@
+
+

@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
     showCount();
-  
+
     $('body').on('click', '.btnAddToCart', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
@@ -11,28 +11,49 @@ $(document).ready(function () {
             quatity = parseInt(tQuantity);
         }
 
-        alert(id + " " + tQuantity);
+        //alert(id + " " + tQuantity);
 
         $.ajax({
             url: '/ShoppingCart/AddToCart',
             type: 'POST',
             data: { id: id, quantity: quatity },
             success: function (rs) {
-                if (rs.Success ) {
+                if (rs.Success) {
                     $('#checkout_items').html(rs.Count);
+                    iziToast.success({
+                        title: 'Thành Công  ',
+                        message: rs.msg,
+                        position: 'topCenter',
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                        backgroundColor: "rgba(58, 240, 61, 0.9)",
 
 
-                    alert(rs.msg);
+                    });
+
+                    /* alert(rs.msg);*/
                 } else {
-                    openLogin();
-                    alert(rs.msg);
-                 
-                    
+                    iziToast.error({
+                        title: 'Lỗi',
+                        message: rs.msg,
+                        icon: 'bi bi-check-circle-fill',
+                        position: 'topCenter',
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                        backgroundColor: "rgba(247, 0, 92, 0.9)"
+                    });
+                    return;
+                    /*  openLogin();*/
+                    /* alert(rs.msg);*/
+
+
                 }
             }
-        });  
+        });
 
-    
+
     });
 
     $('body').on('click', '.btnUpdate', function (e) {
@@ -47,24 +68,24 @@ $(document).ready(function () {
     $('body').on('click', '.btn-wishlist', function (e) {
         e.preventDefault();
         var id = $(this).data("id");
-      
-            $.ajax({
-                url: '/WishList/AddToWishList',
-                type: 'POST',
-                data: { id: id },
-                success: function (rs) {
-                    if (rs.Success) {
-                        $('#checkout_wishs').html(rs.Count);
+
+        $.ajax({
+            url: '/WishList/AddToWishList',
+            type: 'POST',
+            data: { id: id },
+            success: function (rs) {
+                if (rs.Success) {
+                    $('#checkout_wishs').html(rs.Count);
 
 
-                        alert(rs.msg);
-                        alert('thêm vào wishlist thành công' + id);
-                    }
+                    alert(rs.msg);
+                    alert('thêm vào wishlist thành công' + id);
                 }
-            });
+            }
         });
-     
-      
+    });
+
+
 
 
     $('body').on('click', '.btnOpenWish', function (e) {
@@ -97,7 +118,7 @@ $(document).ready(function () {
     $('body').on('click', '.btn-open-modal', function (e) {
         e.preventDefault();
         reset();
-        resetTotal();   
+        resetTotal();
     });
     $('body').on('click', '.btn_Delete', function (e) {
         e.preventDefault()
@@ -113,7 +134,7 @@ $(document).ready(function () {
                         $('#checkout_items').html(rs.Count);
                         $('#trow_' + id).remove();
 
-              
+
                         LoadCart();
                         reset();
                         resetTotal();
@@ -130,14 +151,14 @@ $(document).ready(function () {
 });
 
 
-function openLogin(){
+function openLogin() {
     $.ajax({
         url: '/Account/Login',
         type: 'GET',
         success: function (response) {
 
             var modal = $('#login').html(response).modal();
-            modal.on('hidden.bs.modal', function(){
+            modal.on('hidden.bs.modal', function () {
                 modal.remove();
             });
             alert("login");
@@ -151,14 +172,14 @@ function openLogin(){
 }
 
 
-function resetTotal(){
+function resetTotal() {
     $.ajax({
         url: '/Products/RenderActionCart',
         type: 'GET',
         success: function (partialView) {
-           
+
             $('#partialViewAction').html(partialView);
-            
+
         },
 
         error: function () {
@@ -176,7 +197,7 @@ function reset() {
         success: function (partialView) {
 
             $('#partialViewContainer').html(partialView);
-            
+
         },
 
         error: function () {
@@ -200,7 +221,7 @@ function showCount() {
         url: '/ShoppingCart/ShowCount',
         type: 'GET',
         success: function (rs) {
-                $('#checkout_items').html(rs.Count);
+            $('#checkout_items').html(rs.Count);
         }
     });
     $.ajax({
@@ -304,11 +325,11 @@ function DeleteAll() {
 }
 
 //update
-function Update(id,quantity) {
+function Update(id, quantity) {
     $.ajax({
         url: '/ShoppingCart/Update',
         type: 'POST',
-        data: { id: id, quantity:quantity },
+        data: { id: id, quantity: quantity },
         success: function (rs) {
             if (rs.Success) {
                 LoadCart();
@@ -326,9 +347,9 @@ function LoadCart() {
         url: '/ShoppingCart/Partial_Item_Cart',
         type: 'GET',
         success: function (rs) {
-            
-                $('#load_data').html(rs);
-            
+
+            $('#load_data').html(rs);
+
         }
     });
 }

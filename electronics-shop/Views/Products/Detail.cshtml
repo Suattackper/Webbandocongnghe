@@ -492,7 +492,12 @@
                                             <div class="my-4">
                                                 <div class="flex gap-5">
                                                     <div class="hidden h-14 w-14 min-w-[3.5rem] overflow-hidden rounded-full shadow-md sm:block">
-                                                        <img class="h-full w-full object-cover" src="@ac.Avatar" alt="Avatar" />
+                                                        @{
+                                                            byte[] imageData = ac.Avatar;
+                                                            string base64String = Convert.ToBase64String(imageData);
+                                                        }
+                                                        <img src="data:image/png;base64,@base64String" class="h-full w-full object-cover" alt="Avatar" />
+                                                        @*<img class="h-full w-full object-cover" src="@ac.Avatar" alt="Avatar" />*@
                                                     </div>
                                                     <div>
                                                         <div class="flex items-center gap-2">

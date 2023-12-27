@@ -130,7 +130,7 @@ namespace electronics_shop.Controllers
                     }
                     else
                     {
-
+                        Session["UserId"] = check.AccountCode;
                         Session["info"] = check;
                         return RedirectToAction("Index", "Home");
                     }
@@ -405,6 +405,13 @@ namespace electronics_shop.Controllers
 
             return View(account);
         }
+
+        public ActionResult Partial_History_Order(int id)
+        {
+            var item = db.Orders.Where(x => x.AccountCode == id).ToList();
+            return PartialView(item);
+        }
+
 
         /*===============================*/
         // Huỳnh Như 19/12/23 11:50 PM

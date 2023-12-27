@@ -6,8 +6,9 @@
 
 
 
-@if (Model != null && Model.Any())
+@if (Model != null && Model.Any() && ViewBag.total != null)
 {
+    
     foreach (var item in Model)
     {
         tongtien += (decimal)(@item.ToTalPrice);
@@ -99,15 +100,15 @@ else
         <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
             <span>Total:</span>
             @{
-                decimal TOTAL = decimal.Zero;
-                if (ViewBag.promotioncode != null)
-                {
-                    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)((decimal)tongtien - (decimal)tongtien * ViewBag.promotioncode.PromotionPercentage / 100);
-                }
-                else
-                {
-                    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
-                }
+                decimal TOTAL = ViewBag.total;
+                //if (ViewBag.promotioncode != null)
+                //{
+                //    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)((decimal)tongtien - (decimal)tongtien * ViewBag.promotioncode.PromotionPercentage / 100);
+                //}
+                //else
+                //{
+                //    TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
+                //}
             }
             @if (tongtien != 0)
             {
@@ -122,15 +123,15 @@ else
         </div>
         @*}*@
         @*<div style="display:flex ; ">
-            <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                    type="submit">
-                <span class="font-bold uppercase text-white">Discard</span>
-            </button>
-            <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-               type="" href="@Url.Action("CheckOut","ShoppingCart")">
-                <span class="font-bold uppercase text-white">Continue</span>
-            </a>
-        </div>*@
+                <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                        type="submit">
+                    <span class="font-bold uppercase text-white">Discard</span>
+                </button>
+                <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                   type="" href="@Url.Action("CheckOut","ShoppingCart")">
+                    <span class="font-bold uppercase text-white">Continue</span>
+                </a>
+            </div>*@
     </div>
     @*<a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
            href="@Url.Action("Checkout","ShoppingCart")">
@@ -146,64 +147,6 @@ else
 
 
 
-@*<div class="mb-5">
-        <span class="text-lg font-semibold">Discount Coupon</span>
-        <div class="my-3 flex">
-            <input class="input-rounded-l"
-                   type="text"
-                   placeholder="Your code here" />
-            <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
-                    type="submit">
-                <span class="font-bold uppercase text-white">Apply</span>
-            </button>
-        </div>
-    </div>
-    <div class="rounded-lg border-2 p-4">
-        <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
-        <div class="py-4">
-            <div class="my-2 flex justify-between">
 
-                <span>Subtotal:</span>
-                <span>@string.Format("₫{0:#,0}", tongtien)</span>
-
-            </div>
-            <div class="my-2 flex justify-between">
-                <span>Vat:</span>
-                @{ var Vat = 22750;
-                    <span>@string.Format("₫{0:#,0}", Vat)</span>
-                }
-            </div>
-            <div class="my-2 flex justify-between">
-                <span>Shipping:</span>
-                @{
-                    var ship = 30000;
-                    <span>@string.Format("₫{0:#,0}", ship)</span>
-
-                }
-            </div>
-        </div>
-        <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
-            <span>Total:</span>
-            @{
-                decimal TOTAL = decimal.Zero;
-
-                TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
-
-
-            }
-            @if (tongtien != 0)
-            {
-                <span>@string.Format("₫{0:#,0}", TOTAL)</span>
-
-            }
-            else
-            {
-                <span>₫0 </span>
-
-            }
-        </div>
-
-
-    </div>*@
 
 

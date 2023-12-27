@@ -42,348 +42,362 @@
     </div>
 
     <form id="load_data" class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-5"
-          action="#">
-
-        @Html.Action("Partial_Item_Cart", "ShoppingCart")
-
-    </form>
-
-    <!--<form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-5"
-          action="#">
-        <div class="col-span-12 lg:col-span-8">-->
-    @*Element Responsive*@
-
-    @*@if (Model != null && Model.Any())
-        {
-            var i = 0;
-            foreach (var item in Model)
+          action="@Url.Action("CheckOutPromotion","ShoppingCart")" method="post">
+        @*@if (ViewBag.promotioncode != null)
             {
-                <div class="transition-all-300 flex w-full flex-col gap-2 p-2 hover:bg-gray-100 xs:flex-row lg:hidden">
-                    <div class="content flex items-center">
-                        <div class="flex items-center">
-                            <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
-                                <a href="#">
-                                    <img class="h-full w-full object-cover"
-                                         src="~/images/cards/mousepad.jpg"
-                                         alt="product" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full flex-col gap-2 sm:flex-row">
-                        <div class="flex w-full flex-col gap-2">
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light xs:hidden">Product Name</span>
-                                    <div>
-                                        <a class="clamp-2 break-all font-bold" href="#">
-                                            @item.ProductName
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light lg:hidden">Unit Price</span>
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-primary-color">$@item.Price</span>
-                                        <small class="text-xs text-primary-color line-through">$@item.PromotionPrice</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light">Subtotal</span>
-                                    <span class="font-bold text-primary-color">$@item.ToTalPrice</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content flex items-center">
-                            <div class="flex items-center gap-x-4 gap-y-1">
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-light">Quantity</span>
-                                    <div class="quantity inline-flex rounded-lg bg-white shadow">
-                                        <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                               type="number"
-                                               value="0" />
-                                        <div class="flex w-5 flex-col justify-between">
-                                            <button class="quantity-btn increment text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-up-fill"></i>
-                                            </button>
-                                            <button class="quantity-btn decrement text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-down-fill"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tippy tippy-remove transition-all-300 cursor-pointer text-slate-400 hover:text-primary-color">
-                                    <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Action("Partial_Item_Cart", "ShoppingCart", new { promotioncode = ViewBag.promotioncode })
             }
-        }*@
-
-    @*Element Desktop*@
-
-
-    @*@if (Model != null && Model.Any())
-        {
-            var i = 0;
-
-            foreach (var item in Model)
+            else
             {
-                tongtien += (decimal)(@item.ToTalPrice);
-                <div class="hidden overflow-x-auto lg:block">
-                    <table id="trow_@item.ProductId" class="w-full min-w-[800px] text-left">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th class="p-2">Product Name</th>
-                                <th class="p-2">Unit Price</th>
-                                <th class="p-2">Quantity</th>
-                                <th class="p-2">Subtotal</th>
-                                <th class="p-2">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="hover:bg-gray-100">
-                                <td class="p-2">
+                @Html.Action("Partial_Item_Cart", "ShoppingCart", new { promotioncode = "" })
+            }*@
+        @*@Html.Action("Partial_Item_Cart", "ShoppingCart")
+
+            @{
+                var tongtien = decimal.Zero;
+            }*@
+
+        @*<form  class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-5"
+            action="#">*@
+        <div class="col-span-12 lg:col-span-8">
+            @*Element Responsive*@
+            @if (Session["info"] != null)
+            {
+                if (Model != null && Model.Any())
+                {
+                    var i = 0;
+                    foreach (var item in Model)
+                    {
+                        <div class="transition-all-300 flex w-full flex-col gap-2 p-2 hover:bg-gray-100 xs:flex-row lg:hidden">
+                            <div class="content flex items-center">
+                                <div class="flex items-center">
                                     <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
-                                        <a href="/Products/Detail/@item.ProductId">
-                                            <img width="50" class="h-full w-full object-cover"
-                                                 src="@item.ProductImg"
+                                        <a href="#">
+                                            <img class="h-full w-full object-cover"
+                                                 src="~/images/cards/mousepad.jpg"
                                                  alt="product" />
                                         </a>
                                     </div>
-                                </td>
-                                <td class="p-2">
-                                    <a style="max-width:100px"  class="clamp-2 break-all font-bold" href="/Products/Detail/@item.ProductId">@item.ProductName</a>
-                                </td>
-                                <td class="p-2">
-                                    <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.Price)</span>
-                                </td>
-                                <td class="p-2">
-                                    <div class="quantity inline-flex rounded-lg bg-white shadow">
-                                        <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
-                                               type="number"
-                                               id="Quantity_@item.ProductId"
-                                               value="@item.Quantity" />
-                                        <div class="flex w-5 flex-col justify-between">
-                                            <button class="quantity-btn increment text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-up-fill"></i>
-                                            </button>
-                                            <button class="quantity-btn decrement text-primary-color"
-                                                    type="button">
-                                                <i class="bi bi-caret-down-fill"></i>
-                                            </button>
+                                </div>
+                            </div>
+                            <div class="flex w-full flex-col gap-2 sm:flex-row">
+                                <div class="flex w-full flex-col gap-2">
+                                    <div class="content">
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light xs:hidden">Product Name</span>
+                                            <div>
+                                                <a class="clamp-2 break-all font-bold" href="#">
+                                                    @item.ProductName
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </td>
-                                <td class="p-2">
-                                    <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.ToTalPrice)</span>
-                                </td>
-                                <td class="p-2">
-                                    <button data-id="@item.ProductId" class="btn_Delete tippy tippy-remove btn-delete transition-all-300 text-slate-400 hover:text-primary-color">
-                                        <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-success btnUpdate btn-lg transition-all-300 text-slate-400 hover:text-primary-color ">
-                                        <i class="fa-regular fa-floppy-disk fa-lg"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                    <div class="content">
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light lg:hidden">Unit Price</span>
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-bold text-primary-color">$@item.Price</span>
+                                                <small class="text-xs text-primary-color line-through">$@item.PromotionPrice</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light">Subtotal</span>
+                                            <span class="font-bold text-primary-color">$@item.ToTalPrice</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content flex items-center">
+                                    <div class="flex items-center gap-x-4 gap-y-1">
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light">Quantity</span>
+                                            <div class="quantity inline-flex rounded-lg bg-white shadow">
+                                                <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
+                                                       type="number"
+                                                       value="0" />
+                                                <div class="flex w-5 flex-col justify-between">
+                                                    <button class="quantity-btn increment text-primary-color"
+                                                            type="button">
+                                                        <i class="bi bi-caret-up-fill"></i>
+                                                    </button>
+                                                    <button class="quantity-btn decrement text-primary-color"
+                                                            type="button">
+                                                        <i class="bi bi-caret-down-fill"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tippy tippy-remove transition-all-300 cursor-pointer text-slate-400 hover:text-primary-color">
+                                            <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào. Hãy quay lại <a style="color:darkblue" href="@Url.Action("Shop","Products")">Trang Sản Phẩm</a> để mua hàng!</p>
+                }
+            }
+            else
+            {
+                <div style="text-align:center;display:flex;flex-direction:column;align-items: center; justify-content:center">
+                    <p class="text-center">Vui lòng đăng nhập để thực hiện mua hàng</p>
 
-                        </tbody>
-                    </table>
+
+
+                    <a class="btn-effect transition-all-300 my-5 flex w-\[30px\] items-center justify-center rounded-xl bg-primary-color p-2"
+                       href="@Url.Action("Login", "Account")">
+
+                        <span class="font-bold uppercase text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4" />
+                            </svg> Đăng nhập ngay
+                        </span>
+                    </a>
                 </div>
+
+            }
+            @*Element Desktop*@
+
+
+            @if (Model != null && Model.Any())
+            {
+                var i = 0;
+
+                foreach (var item in Model)
+                {
+                    tongtien += (decimal)(@item.ToTalPrice);
+                    <div class="hidden overflow-x-auto lg:block">
+                        <table id="trow_@item.ProductId" class="w-full min-w-[800px] text-left">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th class="p-2">Product Name</th>
+                                    <th class="p-2">Unit Price</th>
+                                    <th class="p-2">Quantity</th>
+                                    <th class="p-2">Subtotal</th>
+                                    <th style="text-align: center" class="p-2">Delete</th>
+                                    <th style="text-align: center" class="p-2">Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-100">
+                                    <td class="p-2">
+                                        <div class="h-[100px] w-[100px] min-w-[100px] overflow-hidden rounded-lg border">
+                                            <a href="/Products/Detail/@item.ProductId">
+                                                <img width="50" class="h-full w-full object-cover"
+                                                     src="@item.ProductImg"
+                                                     alt="product" />
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="p-2">
+                                        <a style="max-width:100px" class="clamp-2 break-all font-bold" href="/Products/Detail/@item.ProductId">@item.ProductName</a>
+                                    </td>
+                                    <td class="p-2">
+                                        <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.Price)</span>
+                                    </td>
+                                    <td class="p-2">
+                                        <div class="quantity inline-flex rounded-lg bg-white shadow">
+                                            <input class="quantity-value input-number w-12 border-none bg-transparent p-1 text-center text-lg text-gray-400 focus:border-none focus:ring-0"
+                                                   type="number"
+                                                   id="Quantity_@item.ProductId"
+                                                   value="@item.Quantity" />
+                                            <div class="flex w-5 flex-col justify-between">
+                                                <button class="quantity-btn increment text-primary-color"
+                                                        type="button">
+                                                    <i class="bi bi-caret-up-fill"></i>
+                                                </button>
+                                                <button class="quantity-btn decrement text-primary-color"
+                                                        type="button">
+                                                    <i class="bi bi-caret-down-fill"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="p-2">
+                                        <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.ToTalPrice)</span>
+                                    </td>
+                                    <td style="text-align:center" class="p-2">
+                                        <button data-id="@item.ProductId" class="btn_Delete tippy tippy-remove btn-delete transition-all-300 text-slate-400 hover:text-primary-color">
+                                            <i class="bi bi-trash-fill pointer-events-none inline text-xl"></i>
+                                        </button>
+
+                                    </td>
+                                    <td style="text-align:center" class="p-2">
+                                        <button data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate btn-lg transition-all-300 text-slate-400 hover:text-primary-color ">
+                                            <i class="fa-regular fa-floppy-disk fa-lg"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <h3 class="text-center">Giỏ hàng chưa có sản phầm nào</h3>
             }
 
 
-        }
-        else
-        {
-            <h3 class="text-center">Giỏ hàng chưa có sản phầm nào</h3>
-        }*@
 
+        </div>
 
+        <div id="load_data" class="col-span-12 lg:col-span-4">
+            @*<form action="@Url.Action("CheckOutPromotion","ShoppingCart")" method="post">*@
+           
+            <div class="mb-5">
+                <span class="text-lg font-semibold">Discount Coupon</span>
+                <div>
+                    @if (ViewBag.promotioncode != null)
+                    {
 
-    @*</div>
+                        <div style="color: white; background-color: limegreen; font-size: 15px; text-align: center; border:1px solid; border-radius: 1px ">Đã áp dụng mã giảm giá thành công!</div>
+                    }
+                    else
+                    {
+                        if (ViewBag.error != null)
+                        {
 
-            <div class="col-span-12 lg:col-span-4">
-                <div class="mb-5">
-                    <span class="text-lg font-semibold">Discount Coupon</span>
-                    <div class="my-3 flex">
+                            <div style="color: white;background-color:orangered; font-size: 15px; text-align: center; border-radius:1px ">Mã giảm giá không hợp lệ!</div>
+                        }
+
+                    }
+                </div>
+                <div class="my-3 flex">
+                    @if (ViewBag.promotioncode != null)
+                    {
+                        string promotioncode = ViewBag.promotioncode.PromotionCode;
                         <input class="input-rounded-l"
                                type="text"
-                               placeholder="Your code here" />
-                        <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
-                                type="submit">
-                            <span class="font-bold uppercase text-white">Apply</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="rounded-lg border-2 p-4">
-                    <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
-                    @if (Model != null && Model.Any())
-                        {
-                    foreach (var item in Model)
+                               placeholder="Your code here" name="promotioncode" value="@ViewBag.promotioncode.PromotionCode" />
+                    }
+                    else
                     {
-                    @total = total + (float)(@item.ToTalPrice);
-
-                    <div class="py-4">
-                        <div class="my-2 flex justify-between">
-                            <span>Subtotal:</span>
-                            <span>@string.Format("₫{0:#,0}", tongtien)</span>
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <span>Vat:</span>
-                            @{ var Vat = 22750;
-                            <span>@string.Format("₫{0:#,0}", Vat)</span>
-                                }
-                        </div>
-                        <div class="my-2 flex justify-between">
-                            <span>Shipping:</span>
-                            @{
-                                var ship = 30000;
-                                <span>@string.Format("₫{0:#,0}", ship)</span>
-
-                            }
-                        </div>
-                    </div>
-                    <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
-                        <span>Total:</span>
-                        @{
-                            decimal TOTAL = decimal.Zero;
-
-                            TOTAL = (decimal)TOTAL + (decimal)(Vat) + (decimal)ship + (decimal)tongtien;
-
-
-                        }
-                        @if (tongtien != 0)
+                        if (Session["error"] != null)
                         {
-                            <span>@string.Format("₫{0:#,0}", TOTAL)</span>
-
+                            <input class="input-rounded-l"
+                                   type="text"
+                                   placeholder="Your code here" name="promotioncode" /><br />
+                            <span style="color:red;">Mã giảm giá không hợp lệ!</span>
+                            Session.Remove("error");
                         }
                         else
                         {
-                    <span>₫0 </span>
+                            <input class="input-rounded-l"
+                                   type="text"
+                                   placeholder="Your code here" name="promotioncode" />
+                        }
+                    }
+                    <button class="btn-view-shopping-cart btn-effect transition-all-300 flex min-w-max items-center justify-center rounded-r-lg bg-primary-color px-3"
+                            type="submit">
+                        <span class="font-bold uppercase text-white">Apply</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+            @*</form>*@
+            <div class="rounded-lg border-2 p-4">
+                <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
+
+                <div class="py-4">
+                    <div class="my-2 flex justify-between">
+                        <span>Subtotal:</span>
+                        <span>@string.Format("₫{0:#,0}", tongtien)</span>
+                    </div>
+                   
+                    <div class="my-2 flex justify-between">
+                        <span>Shipping:</span>
+                        @{
+                            var ship = 30000;
+                            <span>@string.Format("₫{0:#,0}", ship)</span>
 
                         }
                     </div>
-                    }
-                    <button class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                            type="submit">
-                        <span class="font-bold uppercase text-white">Continue</span>
-                    </button>
                 </div>
-                <a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
-                   href="shopping-cart.html">
-                    <i class="bi bi-arrow-repeat flex text-xl"></i>
-                    <span>Update Cart</span>
-                </a>
-                <a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
-                   href="shopping-cart.html">
-                    <i class="bi bi-cart-plus flex text-xl"></i>
-                    <span>Add more products</span>
-                </a>
-            </div>
+                <div class="flex justify-between border-t-2 border-gray-200 py-4 text-xl font-bold uppercase">
+                    <span>Total:</span>
+                    @{
+                        decimal TOTAL = decimal.Zero;
+                        string ma = "";
+                        if (ViewBag.promotioncode != null)
+                        {
+                            TOTAL = (decimal)TOTAL  + (decimal)ship + (decimal)((decimal)tongtien - (decimal)tongtien * ViewBag.promotioncode.PromotionPercentage / 100);
+                            ma = ViewBag.promotioncode.PromotionCode;
+                        }
+                        else
+                        {
 
-        </form>*@
+                            TOTAL = (decimal)TOTAL+ (decimal)ship + (decimal)tongtien;
+                        }
+                    }
+                    @if (tongtien != 0)
+                    {
+                        if (ViewBag.promotioncode != null)
+                        {
+                            <span>@string.Format("₫{0:#,0}", TOTAL)</span> 
+                            @*<div style="color: red;font-size:8px;">(đã áp dụng mã giảm giá)</div>*@
+                        }
+                        else
+                        {
+                            if (ViewBag.error != null)
+                            {
+                                <span>@string.Format("₫{0:#,0}", TOTAL)</span>
+                                @*<br /><br />
+                            <div style="color:red;font-size:9px;">Mã giảm giá không hợp lệ!</div>*@
+                            }
+                            else
+                            {
+                                <span>@string.Format("₫{0:#,0}", TOTAL)</span>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <span>₫0 </span>
+                    }
+
+                </div>
+
+                @*}*@
+                <div style="display:flex ; ">
+                    <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                            type="submit">
+                        <span class="font-bold uppercase text-white">Discard </span>
+                    </button>
+                    <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                       type="" href="@Url.Action("CheckOut","ShoppingCart", new {total = TOTAL, promotion = ma})">
+                        <span class="font-bold uppercase text-white">Continue</span>
+                    </a>
+                </div>
+            </div>
+            @*<a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
+           href="@Url.Action("Checkout","ShoppingCart")">
+            <i class="bi bi-arrow-repeat flex text-xl"></i>
+            <span>Update Cart</span>
+        </a>*@
+            <a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
+               href="@Url.Action("Shop","Products")">
+                <i class="bi bi-cart-plus flex text-xl"></i>
+                <span>Add more products</span>
+            </a>
+        </div>
+
+    </form>
+
+
 </div>
 
-<!--<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-    <div class="flex h-full w-full">
-        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-            <div class="w-full">
-                <div class="border-b-2 border-gray-200 p-5">
-                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                </div>
-                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                </button>
-            </div>
-            <div class="h-full overflow-auto">
-                <!-- If the shopping cart is empty (replace hidden with flex) -->
-<!--<div class="hidden flex-col items-center justify-center gap-4 p-5">
-    <i class="bi bi-cart-x text-8xl text-gray-200"></i>
-    <p class="font-semibold">There are no products in the cart.</p>
-    <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-       href="#">
-        <span class="font-bold uppercase text-white">Go to the store</span>
-    </a>
-</div>-->
-@*@if (Model != null && Model.Any())
-        {
-            <h3 class="text-center"> sản phẩm nào!</h3>
 
-            foreach (var item in Model)
-            {
-                <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                   href="#">
-                    <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                        <img class="h-full w-full object-cover" src="~/@item.ProductImg*" alt="product" />-->
-                    </div>
-                    <div class="flex w-full flex-col">
-                        <h6 class="clamp-2 break-all text-lg font-semibold">
-                            @item.ProductName
-                        </h6>
-                        <div class="flex gap-2">
-                            <div class="flex gap-1 leading-7 text-gray-400">
-                                <span>@item.Quantity</span>
-
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-primary-color">$@item.Price</span>
-                                <small class="text-xs text-primary-color line-through">$50.00</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                        <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                    </div>
-                </a>
-            }
-        }
-        else
-        {
-            <h3 class="text-center">Bạn chưa thêm sản phẩm nào!</h3>
-        }
-    </div>*@
-
-@*<div class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
-        @if (Model != null && Model.Any())
-        {
-
-            foreach (var item in Model)
-            {
-                <div class="flex justify-between">
-                    <span class="text-lg uppercase">Subtotal:</span>
-                    <span class="text-lg font-semibold text-primary-color">$2000</span>
-                </div>
-            }
-        }
-        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-           href="@Url.Action("Index", "ShoppingCart") ">
-            <span class="font-bold uppercase text-white">View Shopping Cart</span>
-        </a>
-        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-           href="checkout.html">
-            <span class="font-bold uppercase text-white">Checkout now</span>
-        </a>
-    </div>*@
-
-
-@*</div>
-        </div>
-    </div>-->*@
-
-
-@*Modals*@
 <div class="menu-mob modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
     <div class="flex h-full w-full">
         <div class="modal-content transition-all-300 relative left-[-999px] mr-auto flex h-full w-[288px] min-w-[250px] flex-col bg-white">
@@ -568,292 +582,14 @@
 </div>
 
 
-<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-    <div class="flex h-full w-full">
-        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-            <div class="w-full">
-                <div class="border-b-2 border-gray-200 p-5">
-                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                </div>
-                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                </button>
-            </div>
-
-
-            @Html.Action("RenderShoppingCart", "Products")
-
-            @Html.Action("RenderActionCart", "Products")
-
-
-        </div>
-
-    </div>
-</div>
+<
 
 
 
-@*<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-        <div class="flex h-full w-full">
-            <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-                <div class="w-full">
-                    <div class="border-b-2 border-gray-200 p-5">
-                        <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
-                    </div>
-                    <button class="btn-close-modal transition-all-300 absolute top-5 right-5 p-[3px] hover:text-slate-400">
-                        <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                    </button>
-                </div>
-                <div class="h-full overflow-auto">
-                    If the shopping cart is empty (replace hidden with flex)
-                    <div class="hidden flex-col items-center justify-center gap-4 p-5">
-                        <i class="bi bi-cart-x text-8xl text-gray-200"></i>
-                        <p class="font-semibold">There are no products in the cart.</p>
-                        <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                           href="#">
-                            <span class="font-bold uppercase text-white">Go to the store</span>
-                        </a>
-                    </div>
 
-                    <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                       href="#">
-                        <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                            <img class="h-full w-full object-cover"
-                                 src="images/product/prod-1.jpg"
-                                 alt="product" />
-                        </div>
-                        <div class="flex w-full flex-col">
-                            <h6 class="clamp-2 break-all text-lg font-semibold">
-                                Ryzen 5 3600x
-                            </h6>
-                            <div class="flex gap-2">
-                                <div class="flex gap-1 leading-7 text-gray-400">
-                                    <span>1</span>
-                                    <span>X</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-bold text-primary-color">$37.00</span>
-                                    <small class="text-xs text-primary-color line-through">$50.00</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                            <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                        </div>
-                    </a>
-                </div>
-                <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
-                    <div class="flex justify-between">
-                        <span class="text-lg uppercase">Subtotal:</span>
-                        <span class="text-lg font-semibold text-primary-color">$37.00</span>
-                    </div>
-                    <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                       href="shopping-cart.html">
-                        <span class="font-bold uppercase text-white">View Shopping Cart</span>
-                    </a>
-                    <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                       href="checkout.html">
-                        <span class="font-bold uppercase text-white">Checkout now</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
-<div class="wishlist-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
-    <div class="flex h-full w-full">
-        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
-            <div class="w-full">
-                <div class="border-b-2 border-gray-200 p-5">
-                    <h3 class="text-xl font-bold uppercase">Wishlist</h3>
-                </div>
-                <button class="btn-close-modal transition-all-300 absolute top-5 right-5 p-[3px] hover:text-slate-400">
-                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
-                </button>
-            </div>
-            <div class="h-full overflow-auto">
-                If the wishlist is empty (replace hidden with flex)
-                <div class="hidden flex-col items-center justify-center gap-4 p-5">
-                    <i class="bi bi-heart text-8xl text-gray-200"></i>
-                    <p class="font-semibold">
-                        There are no products in the wishlist.
-                    </p>
-                    <a class="btn-effect transition-all-300 flex items-center justify-center gap-2 rounded-lg bg-primary-color p-2"
-                       href="#">
-                        <span class="font-bold uppercase text-white">Go to the store</span>
-                    </a>
-                </div>
-                <a class="transition-all-300 flex h-[100px] w-full items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100"
-                   href="#">
-                    <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
-                        <img class="h-full w-full object-cover"
-                             src="images/product/prod-1.jpg"
-                             alt="product" />
-                    </div>
 
-                    <div class="flex w-full flex-col">
-                        <h6 class="clamp-2 break-all text-lg font-semibold">
-                            Ryzen 5 3600x
-                        </h6>
-                        <div class="flex items-center gap-2">
-                            <span class="font-bold text-primary-color">$37.00</span>
-                            <small class="text-xs text-primary-color line-through">$50.00</small>
-                        </div>
-                    </div>
 
-                    <div class="transition-all-300 flex text-slate-400 hover:text-primary-color">
-                        <i class="bi bi-trash-fill pointer-events-none text-2xl"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="mt-auto border-t-2 border-gray-200 bg-white px-1 xs:px-5">
-                <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                   href="wishlist.html">
-                    <span class="font-bold uppercase text-white">View Wishlist</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-@*<div class="entry-modal modal transition-all-300 invisible fixed inset-0 z-50 flex h-full w-full flex-col items-center justify-start overflow-auto bg-overlay opacity-0">
-    <div class="my-10 flex w-full justify-center">
-        <div class="entry-content modal-content transition-all-300 relative mx-3 w-[500px] min-w-[250px] rounded-lg bg-white px-3 pb-3 pt-7 xs:px-5 xs:pb-5 md:m-5">
-            <button class="btn-close-modal transition-all-300 absolute top-0 right-0 p-2 sm:top-[-10px] sm:right-[-10px] sm:rounded-lg sm:bg-primary-color sm:text-white sm:hover:bg-primary-hover">
-                <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex"></i>
-            </button>
-            <div class="tabs-container entry-container">
-                <ul class="flex justify-between">
-                    <li class="btn-tabs tab-active-1 transition-all-300 active w-full cursor-pointer border bg-gray-200 p-2 text-center text-gray-400">
-                        Login
-                    </li>
-                    <li class="btn-tabs tab-active-1 transition-all-300 w-full cursor-pointer border bg-gray-200 p-2 text-center text-gray-400">
-                        Sign Up
-                    </li>
-                </ul>
-                <div class="tabs-content border border-t-transparent">
-                    <div class="tab-content invisible absolute w-full p-5 opacity-0">
-                        <div class="my-5">
-                            <img class="mx-auto" src="images/logo2.png" alt="logo" />
-                        </div>
-                        <form action="#">
-                            <div class="flex flex-col gap-4">
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="text"
-                                           placeholder="Username or Email"
-                                           required />
-                                </div>
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="password"
-                                           placeholder="Password"
-                                           required />
-                                </div>
-                                <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2"
-                                        type="submit">
-                                    <span class="font-bold uppercase text-white">Login</span>
-                                </button>
-                            </div>
-                            <div class="my-2 flex flex-wrap items-center justify-between gap-2">
-                                <label class="flex select-none items-center gap-2">
-                                    <input class="checkbox" type="checkbox" />
-                                    <span class="text-gray-title">Remember</span>
-                                </label>
-                                <a class="underlined-animated text-[#3091ff] after:bottom-0"
-                                   href="#">Forgot Password?</a>
-                            </div>
-                        </form>
-                        <span class="or text-gray-title flex h-[50px] items-center py-2">
-                            <span class="mx-2 text-sm uppercase">Or</span>
-                        </span>
-                        <div class="flex flex-col flex-wrap justify-center gap-5 sm:flex-row">
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-facebook hover:scale-110">
-                                <i class="bi bi-facebook flex text-3xl text-white"></i>
-                            </button>
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-twitter hover:scale-110">
-                                <i class="bi bi-twitter flex text-3xl text-white"></i>
-                            </button>
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-google hover:scale-110">
-                                <i class="bi bi-google flex text-3xl text-white"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="tab-content invisible absolute w-full bg-white p-5 opacity-0">
-                        <div class="my-5">
-                            <img class="mx-auto" src="images/logo2.png" alt="logo" />
-                        </div>
-                        <form action="#">
-                            <div class="flex flex-col gap-4">
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-person absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="text"
-                                           placeholder="Name"
-                                           required />
-                                </div>
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-envelope absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="text"
-                                           placeholder="Email"
-                                           required />
-                                </div>
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-lock absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="password"
-                                           placeholder="Password"
-                                           required />
-                                </div>
-                                <div class="relative flex h-[40px] items-center">
-                                    <i class="bi bi-lock-fill absolute ml-2 flex text-[24px] text-gray-400"></i>
-                                    <input class="input pl-10"
-                                           type="password"
-                                           placeholder="Confirm Password"
-                                           required />
-                                </div>
-                                <button class="btn-effect transition-all-300 h-full w-full rounded-lg bg-primary-color p-2"
-                                        type="submit">
-                                    <span class="font-bold uppercase text-white">Sign Up</span>
-                                </button>
-                            </div>
-                            <div class="my-2 flex items-center justify-between">
-                                <label class="flex select-none items-center gap-2">
-                                    <input class="checkbox" type="checkbox" />
-                                    <span class="text-gray-title">
-                                        I agree with all
-                                        <a class="underlined-animated text-[#3091ff] after:bottom-0"
-                                           href="#">Terms of Use</a>
-                                        &
-                                        <a class="underlined-animated text-[#3091ff] after:bottom-0"
-                                           href="#">Privacy Policy</a>.
-                                    </span>
-                                </label>
-                            </div>
-                        </form>
-                        <span class="or text-gray-title flex h-[50px] items-center py-2">
-                            <span class="mx-2 text-sm uppercase">Or</span>
-                        </span>
-                        <div class="flex flex-col flex-wrap justify-center gap-5 sm:flex-row">
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-facebook hover:scale-110">
-                                <i class="bi bi-facebook flex text-3xl text-white"></i>
-                            </button>
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-twitter hover:scale-110">
-                                <i class="bi bi-twitter flex text-3xl text-white"></i>
-                            </button>
-                            <button class="transition-all-300 flex h-[50px] min-w-[100px] items-center justify-center rounded-lg bg-google hover:scale-110">
-                                <i class="bi bi-google flex text-3xl text-white"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
 
 
 <div class="btn-gotop transition-all-300 invisible fixed bottom-[-999px] right-10 z-50 opacity-0">

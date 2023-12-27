@@ -23,10 +23,10 @@
            href="@Url.Action("Index", "ShoppingCart") ">
             <span class="font-bold uppercase text-white">View Shopping Cart</span>
         </a>
-        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+        @*<a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
            href="@Url.Action("CheckOut","ShoppingCart")">
             <span class="font-bold uppercase text-white">Checkout now</span>
-        </a>
+        </a>*@
 
     }
     else
@@ -39,10 +39,10 @@
            href="@Url.Action("Index", "ShoppingCart") ">
             <span class="font-bold uppercase text-white">View Shopping Cart</span>
         </a>
-        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-           href="@Url.Action("CheckOut","ShoppingCart")">
+        @*<a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("CheckOut","ShoppingCart", new {total = ViewBag.total})">
             <span class="font-bold uppercase text-white">Checkout now</span>
-        </a>
+        </a>*@
 
     }
 </div>

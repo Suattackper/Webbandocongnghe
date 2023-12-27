@@ -1,7 +1,9 @@
-﻿
+﻿@model electronics_shop.Models.Order
 @{
     ViewBag.Title = "CheckOutSuccess";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
+    
+
 }
 <div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
     <ul class="flex flex-wrap items-center gap-1">
@@ -34,10 +36,20 @@
 <div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
     @if (Session["info"] != null)
     {
+        if (ViewBag.TypePayment == 1)
+        {
+            <div id="show_success">
+                <h2 class="text-center">Bạn đã đặt hàng thành công</h2>
+            </div>
+        }else if(ViewBag.TypePayment == 2)
+                {
+                    <h2 class="text-center text-blue-600" >Thanh toán momo</h2>
+                }
+    else
+                {
+                    <h2> khong duoc</h2>
+                }
 
-        <div id="show_success">
-            <h2>Bạn đã thanh toán thành công</h2>
-        </div>
     }
     else
     {

@@ -115,7 +115,7 @@ namespace electronics_shop.Controllers
                     }
                     else
                     {
-
+                        Session["UserId"] = check.AccountCode;
                         Session["info"] = check;
                         return RedirectToAction("Index", "Home");
                     }

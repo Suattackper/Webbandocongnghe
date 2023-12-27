@@ -15,6 +15,8 @@
     <!--end::Page Vendor Stylesheets-->
     <link href="~/Areas/Admin/Content/css/plugins.bundle.css" rel="stylesheet" />
     <link href="~/Areas/Admin/Content/css/style.bundle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+
     <!--end::Global Stylesheets Bundle-->
     <style>
         tr:hover {
@@ -834,12 +836,13 @@
     <!--end::Scrolltop-->
     <!--begin::Javascript-->
     @*<script>
-        var hostUrl = "assets/";
-    </script>*@
+            var hostUrl = "assets/";
+        </script>*@
     <!--begin::Global Javascript Bundle(used by all pages)-->
     <script src="~/Areas/Admin/Content/js/plugins.bundle.js"></script>
     <script src="~/Areas/Admin/Content/js/scripts.bundle.js"></script>
     <script src="~/Areas/Admin/Content/js/custom-notifi.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 <!--end::Body-->

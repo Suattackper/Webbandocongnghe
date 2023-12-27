@@ -1,11 +1,12 @@
-﻿@model electronics_shop.Models.OrderViewModel
+﻿
+
 
 @using (Ajax.BeginForm("CheckOutForm", "ShoppingCart", new AjaxOptions
 {
     HttpMethod = "POST",
     UpdateTargetId = "load_data",
-    OnComplete="OnSuccessCO",
-    OnFailure="OnFailure"
+    OnComplete = "OnSuccessCO",
+    OnFailure = "OnFailure"
 
 }, new { @Id = "myForm" }))
 {
@@ -14,9 +15,6 @@
           action="#">
         <div class="col-span-12 lg:col-span-8">
 
-
-
-
             <span class="text-lg font-semibold">Billing Details</span>
 
             <div class="grid grid-cols-12 gap-5 pt-5">
@@ -24,25 +22,25 @@
                 <div class="col-span-12 xs:col-span-6">
                     <label class="flex flex-col">
                         <span class="text-sm">First Name</span>
-                        <input class="input" name="FirstName" type="text" required />
+                        <input class="input" name="FirstName" placeholder="@ViewBag.FirstName" type="text" readonly />
                     </label>
                 </div>
                 <div class="col-span-12 xs:col-span-6">
                     <label class="flex flex-col">
                         <span class="text-sm">Last Name</span>
-                        <input class="input" name="LastName" type="text" required />
+                        <input class="input" name="LastName" value="@ViewBag.LastName" type="text" readonly />
                     </label>
                 </div>
                 <div class="col-span-12">
                     <label class="flex flex-col">
                         <span class="text-sm">Email</span>
-                        <input class="input" name="Email" type="text" required />
+                        <input class="input" name="Email" value="@ViewBag.Email" type="text" readonly />
                     </label>
                 </div>
                 <div class="col-span-12 xs:col-span-6">
                     <label class="flex flex-col">
                         <span class="text-sm">Telephone</span>
-                        <input class="input input-number" name="PhoneNumber" type="number" required />
+                        <input class="input input-number" name="PhoneNumber" value="@ViewBag.Phone" type="number" readonly />
                     </label>
                 </div>
 
@@ -77,6 +75,15 @@
                         <input class="input" name="City" type="text" required />
                     </label>
                 </div>
+                <div class="col-span-12 xs:col-span-12">
+                    <label class="flex flex-col">
+                        <span class="text-sm">Phương Thức Thanh Toán</span>
+                        <select class="input" name="TypePayment" type="" required>
+                            <option value="1" style="text-align:center">Thanh Toán Khi Nhận Hàng (COD)</option>
+                            <option value="2" style="text-align:center">Thanh toán qua ứng dụng MOMO</option>
+                        </select>
+                    </label>
+                </div>
 
 
 
@@ -92,23 +99,16 @@
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-
-
         </div>
 
         <div class="col-span-12 lg:col-span-4">
-            @Html.Action("RenderInfCus", "ShoppingCart")
+            @*@Html.Action("RenderInfCus", "ShoppingCart", new { total = ViewBag.total })*@
 
         </div>
 
     </form>
 }
+
+
+
 

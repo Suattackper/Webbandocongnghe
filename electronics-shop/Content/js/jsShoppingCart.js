@@ -11,7 +11,7 @@ $(document).ready(function () {
             quatity = parseInt(tQuantity);
         }
 
-        alert(id + " " + tQuantity);
+        //alert(id + " " + tQuantity);
 
         $.ajax({
             url: '/ShoppingCart/AddToCart',
@@ -20,12 +20,33 @@ $(document).ready(function () {
             success: function (rs) {
                 if (rs.Success ) {
                     $('#checkout_items').html(rs.Count);
+                    iziToast.success({
+                        title: 'Thành Công  ',
+                        message: rs.msg,
+                        position: 'topCenter',
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                        backgroundColor: "rgba(58, 240, 61, 0.9)",
 
 
-                    alert(rs.msg);
+                    });
+
+                   /* alert(rs.msg);*/
                 } else {
-                    openLogin();
-                    alert(rs.msg);
+                    iziToast.error({
+                        title: 'Lỗi',
+                        message: rs.msg,
+                        icon: 'bi bi-check-circle-fill',
+                        position: 'topCenter',
+                        iconColor: "#fff",
+                        titleColor: "#fff",
+                        messageColor: "#fff",
+                        backgroundColor: "rgba(247, 0, 92, 0.9)"
+                    });
+                    return;
+                  /*  openLogin();*/
+                   /* alert(rs.msg);*/
                  
                     
                 }

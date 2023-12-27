@@ -15,5 +15,6 @@ namespace electronics_shop.Models
         public string Ward { get; set; }
         public string District { get; set; }
         public string Number { get; set; }
+        public int TypePayment { get; set; }
     }
 }

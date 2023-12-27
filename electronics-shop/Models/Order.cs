@@ -14,10 +14,6 @@ namespace electronics_shop.Models
     
     public partial class Order
     {
-        public Order()
-        {
-            this.orderDetails = new HashSet<OrderDetail>();
-        }
         public int OrderCode { get; set; }
         public Nullable<int> PaymentCode { get; set; }
         public Nullable<int> AccountCode { get; set; }
@@ -35,7 +31,5 @@ namespace electronics_shop.Models
         public virtual Delivery Delivery { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual Promotion Promotion { get; set; }
-
-        public virtual ICollection<OrderDetail> orderDetails { get; set; }
     }
 }

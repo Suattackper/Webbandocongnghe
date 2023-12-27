@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ECOMMERCE5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ECOMMERCE6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="AccountCode" />
@@ -95,12 +95,12 @@
       <PropertyRef Name="OrderCode" />
       <PropertyRef Name="ProductCode" />
     </Key>
-    <Property Name="OrderCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderCode" Type="Int32" Nullable="false" />
     <Property Name="ProductCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__59063A47" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__5AEE82B9" FromRole="OrderDetail" ToRole="Product" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -151,7 +151,7 @@
     <NavigationProperty Name="Brand" Relationship="Self.FK_Product_Brand" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__45F365D3" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__5EBF139D" FromRole="Product" ToRole="Comment" />
-    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__59063A47" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__5AEE82B9" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="Promotion" Relationship="Self.FK__Product__Promoti__46E78A0C" FromRole="Product" ToRole="Promotion" />
     <NavigationProperty Name="ProductImgs" Relationship="Self.FK__ProductIm__Produ__6754599E" FromRole="Product" ToRole="ProductImg" />
   </EntityType>
@@ -171,8 +171,20 @@
     <Property Name="PromotionCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="PromotionPercentage" Type="Int32" />
     <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Promotio__5629CD9C" FromRole="Promotion" ToRole="Orders" />
     <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__46E78A0C" FromRole="Promotion" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK__AccountAd__Accou__3A81B327">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
@@ -282,7 +294,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__Produ__59063A47">
+  <Association Name="FK__OrderDeta__Produ__5AEE82B9">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -356,6 +368,7 @@
     <EntitySet Name="Products" EntityType="Self.Product" />
     <EntitySet Name="ProductImgs" EntityType="Self.ProductImg" />
     <EntitySet Name="Promotions" EntityType="Self.Promotion" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK__AccountAd__Accou__3A81B327" Association="Self.FK__AccountAd__Accou__3A81B327">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="AccountAddress" EntitySet="AccountAddresses" />
@@ -392,7 +405,7 @@
       <End Role="Delivery" EntitySet="Deliveries" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__Produ__59063A47" Association="Self.FK__OrderDeta__Produ__59063A47">
+    <AssociationSet Name="FK__OrderDeta__Produ__5AEE82B9" Association="Self.FK__OrderDeta__Produ__5AEE82B9">
       <End Role="Product" EntitySet="Products" />
       <End Role="OrderDetail" EntitySet="OrderDetails" />
     </AssociationSet>

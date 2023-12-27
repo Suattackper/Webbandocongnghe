@@ -133,7 +133,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="fw-bolder text-end">
-                                                        @*@Model.Payment.payment_name*@
+                                                        @(Model.Payment.PaymentCode == 1 ? "Thanh Toán Khi Nhận Hàng (COD)" : "Thanh Toán Trực Tuyến")
                                                     </td>
                                                 </tr>
                                                 <!--end::Payment method-->
@@ -151,7 +151,7 @@
                                                             <!--end::Svg Icon-->Đơn vị giao hàng
                                                         </div>
                                                     </td>
-                                                    <td class="fw-bolder text-end">@*@Model.Delivery.delivery_name*@</td>
+                                                    <td class="fw-bolder text-end">@Model.Delivery.DeliveryName</td>
                                                 </tr>
                                                 <!--end::Date-->
                                             </tbody>
@@ -301,7 +301,7 @@
                                         <div class="card-body pt-0">
                                             <div class="table-responsive">
                                                 <!--begin::Table-->
-                                                @Html.Action("Partial_SanPham", "Orders", new {id=Model.OrderCode})
+                                                @Html.Action("Partial_SanPham", "Orders", new { id = Model.OrderCode})
                                                 <!--end::Table-->
                                             </div>
                                         </div>
@@ -327,64 +327,10 @@
                                         <!--end::Card header-->
                                         <!--begin::Card body-->
                                         <div class="card-body pt-0">
-                                            <div class="table-responsive">
-                                                <!--begin::Table-->
-                                                <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                                    <!--begin::Table head-->
-                                                    <thead>
-                                                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                            <th class="min-w-50px">ID</th>
-                                                            <th class="min-w-120px">Ngày đặt</th>
-                                                            <th class="min-w-120px">Trị giá đơn hàng</th>
-                                                            <th class="min-w-120px">Trạng thái đơn hàng</th>
-                                                            <th class="min-w-150px">Ghi chú</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!--end::Table head-->
-                                                    <!--begin::Table body-->
-                                                    <tbody class="fw-bold text-gray-600">
-                                                        @*@foreach (var item in orderHistory)
-                                                        {*@
-                                                            <tr>
-                                                                <td><a target="_blank" href="@Url.Action("Details","Orders"@*,new {id=item.order_id}*@)" class="text-dark">@*@item.order_id*@</a></td>
-                                                                <!--begin::Date-->
-                                                                <td>@*@item.oder_date.ToString("HH:mm dd-MM-yyyy")*@</td>
-                                                                <!--end::Date-->
-                                                                <!--begin::Total-->
-                                                                <td>@*@item.total.ToString("#,0₫", culture.NumberFormat)*@</td>
-                                                                <!--end::Total-->
-                                                                <!--begin::Status-->
-                                                                <td>
-                                                                    <!--begin::Badges-->
-                                                                    @*@if (item.status == "1")
-                                                                    {*@
-                                                                        <div class="badge badge-light-warning">chờ xử lý</div>
-                                                                    @*}
-                                                                    else if (item.status == "2")
-                                                                    {*@
-                                                                        <div class="badge badge-light-info">Đang xử lý</div>
-                                                                    @*}
-                                                                    else if (item.status == "3")
-                                                                    {*@
-                                                                        <div class="badge badge-light-success">Hoàn thành</div>
-                                                                    @*}
-                                                                    else
-                                                                    {*@
-                                                                        <div class="badge badge-light-danger">Bị hủy</div>
-                                                                    
-                                                                    <!--end::Badges-->
-                                                                </td>
-                                                                <!--end::Status-->
-                                                                <!--begin::Customer Notified-->
-                                                                <td>@*@(item.order_note == ""?"Không":item.order_note)*@</td>
-                                                                <!--end::Customer Notified-->
-                                                            </tr>
-                                                        
-                                                    </tbody>
-                                                    <!--end::Table head-->
-                                                </table>
-                                                <!--end::Table-->
-                                            </div>
+
+                                            @Html.Action("Partial_History_Order", "Orders", new {id=Model.AccountCode})
+
+
                                         </div>
                                         <!--end::Card body-->
                                     </div>

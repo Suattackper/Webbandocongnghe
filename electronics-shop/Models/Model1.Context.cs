@@ -17,7 +17,7 @@ namespace electronics_shop.Models
     {
         public ECOMMERCE5Entities()
             : base("name=ECOMMERCE5Entities")
-        {
+         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -38,5 +38,6 @@ namespace electronics_shop.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductImg> ProductImgs { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

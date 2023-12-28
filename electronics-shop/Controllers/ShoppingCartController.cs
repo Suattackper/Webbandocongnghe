@@ -316,39 +316,36 @@ namespace electronics_shop.Controllers
 
 
                     }
-
-
-                    contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number + " " + order.AccountAddress.Ward + " " + order.AccountAddress.District + " " + order.AccountAddress.City);
+                    contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number + ", " + order.AccountAddress.Ward + ", " + order.AccountAddress.District + ", " + order.AccountAddress.City);
                     contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.OrderDate.ToString());
                     contentCustomer = contentCustomer.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
                     contentCustomer = contentCustomer.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
                     contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
-                    //electronics_shop.Common.Common.SendMail("BenzikShop", "Đơn hàng #" + order.OrderCode, contentCustomer.ToString(), req.Email);
 
-                    string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
-                    contentAdmin = contentAdmin.Replace("{{MaDon}}", order.OrderCode.ToString());
-                    contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                    if (Session["info"] != null)
-                    {
-                        int userID = (int)Session["UserID"];
-                        var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
-                        contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", account.FirstName + " " + account.LastName);
-                        contentAdmin = contentAdmin.Replace("{{Phone}}", account.PhoneNumber);
-                        contentAdmin = contentAdmin.Replace("{{Email}}", account.Email);
+                    electronics_shop.Common.Common.SendMail("Beszik.", "Đơn hàng #" + order.OrderCode, contentCustomer.ToString(), req.Email);
 
-                    }
+                    //string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
+                    //contentAdmin = contentAdmin.Replace("{{MaDon}}", order.OrderCode.ToString());
+                    //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
+                    //if (Session["info"] != null)
+                    //{
+                    //    int userID = (int)Session["UserID"];
+                    //    var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
+                    //    contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", account.FirstName + " " + account.LastName);
+                    //    contentAdmin = contentAdmin.Replace("{{Phone}}", account.PhoneNumber);
+                    //    contentAdmin = contentAdmin.Replace("{{Email}}", account.Email);
 
-
-                    contentAdmin = contentAdmin.Replace("{{SoNha+Phuong}}", order.AccountAddress.Number + " " + order.AccountAddress.Ward);
-                    contentAdmin = contentAdmin.Replace("{{Tinh}}", order.AccountAddress.District);
-                    contentAdmin = contentAdmin.Replace("{{ThanhPho}}", order.AccountAddress.City);
-                    contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number);
-                    contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.OrderDate.ToString());
-                    contentAdmin = contentAdmin.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
-                    contentAdmin = contentAdmin.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
-                    contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                    //electronics_shop.Common.Common.SendMail("BenzikShop", "Đơn hàng mới #" + order.OrderCode, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-                    //code = new { Success = true, Code = 1 };
+                    //}
+                    //contentAdmin = contentAdmin.Replace("{{SoNha+Phuong}}", order.AccountAddress.Number + " " + order.AccountAddress.Ward);
+                    //contentAdmin = contentAdmin.Replace("{{Tinh}}", order.AccountAddress.District);
+                    //contentAdmin = contentAdmin.Replace("{{ThanhPho}}", order.AccountAddress.City);
+                    //contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number);
+                    //contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.OrderDate.ToString());
+                    //contentAdmin = contentAdmin.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
+                    //contentAdmin = contentAdmin.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
+                    //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
+                    //electronics_shop.Common.Common.SendMail("Beszik.", "Đơn hàng mới #" + order.OrderCode, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
+                    code = new { Success = true, Code = 1 };
                     cart.ClearCart();
                     return RedirectToAction("CheckOutSuccess");
                 }

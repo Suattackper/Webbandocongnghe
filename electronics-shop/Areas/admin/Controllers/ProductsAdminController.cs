@@ -118,7 +118,7 @@ namespace electronics_shop.Areas.Admin.Controllers
             ViewBag.Brand = db.Brands.ToList();
             ViewBag.Category = db.Categories.ToList();
             ViewBag.Promotion = db.Promotions.ToList();
-            ViewBag.ProductImg = db.ProductImgs.ToList();
+            ViewBag.ProductImg = db.ProductImgs.Where(h => h.ProductCode == code).ToList();
             Product p = db.Products.FirstOrDefault(h => h.ProductCode == code);
             return View(p);
         }

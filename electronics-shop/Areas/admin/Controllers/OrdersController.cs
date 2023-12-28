@@ -56,7 +56,7 @@ namespace electronics_shop.Areas.Admin.Controllers
                 ViewBag.Error = TempData["Error"];
             }
             ViewBag.Search = search;
-            List<Order> data = db.Orders.OrderBy(x => x.OrderCode).Where(x => x.Account.PhoneNumber.Contains(search)).ToList();
+            List<Order> data = db.Orders.OrderByDescending(x => x.OrderCode).Join(db.Accounts, x => x.AccountCode, y => y.AccountCode, (x, y) => new { x, y }).Where( x => x.y.PhoneNumber.Contains(search) || (x.y.FirstName + " " + x.y.LastName).Contains(search)).Select(x => x.x).ToList();
             ViewBag.Order = data;
             return View("Index", data.ToPagedList(page, pageSize));
         }

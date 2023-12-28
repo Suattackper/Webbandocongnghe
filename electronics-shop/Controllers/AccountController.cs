@@ -12,6 +12,10 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using electronics_shop.Common;
+using System.Drawing.Drawing2D;
+using System.Web.Services.Description;
+using System.Text;
+using System.Security.Principal;
 
 namespace electronics_shop.Controllers
 {
@@ -297,20 +301,137 @@ namespace electronics_shop.Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult ForgotPassword()
+        //[HttpGet]
+        //public ActionResult ForgotPassword()
+        //{
+        //    // Nếu đã đăng nhập rồi sẽ điều hướng sang trang chủ
+        //    if (Session["info"] != null)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+        public ActionResult ForgotPassword1()
         {
-            // Nếu đã đăng nhập rồi sẽ điều hướng sang trang chủ
-            if (Session["info"] != null)
+            if (TempData.ContainsKey("error"))
             {
-                return RedirectToAction("Index", "Home");
+                ViewBag.e = TempData["error"];
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
+        [HttpPost]
+        public ActionResult ForgotPassword1(string email)
+        {
+            TempData["error"] = email;
+            Account a = db.Accounts.FirstOrDefault(p => p.Email == email);
+            if (a != null)
+            {
+                return RedirectToAction("ForgotPassword2", new { email = email });
+            }
+            else return View("ErrorForgotPassword");
+            //else return RedirectToAction("ForgotPassword1");
 
+        }
+        public ActionResult ForgotPassword2( string email)
+        {
+            ViewBag.Email = email;
+            Account a = db.Accounts.FirstOrDefault(p => p.Email == email);
+            if(a != null)
+            {
+                // Tạo đối tượng Random
+                Random random = new Random();
+                // Tạo số nguyên ngẫu nhiên có 4 chữ số
+                int code = random.Next(1000, 10000);
+                //Lưu csdl
+                a.RequestCode = code.ToString();
+                db.SaveChanges();
+                //xử lý gửi mail ở đây
+                // Thông tin tài khoản email
+                string fromEmail = "baitoan88@gmail.com";
+                string password = "tkea vcgz hdvj rjmw";
+                // Địa chỉ người nhận
+                string toEmail = email;
+                // Tạo đối tượng MailMessage
+                MailMessage mail = new MailMessage(fromEmail, toEmail);
+                // Tiêu đề và nội dung email
+                mail.Subject = "Besnik. send Code!";
+                mail.Body = $"Xin chào, cảm ơn bạn đã sử dụng web Besnik của chúng tôi! \n {code} là code lấy lại mật khẩu của bạn, có hiệu lực trong 15 phút!";
+                // Cấu hình đối tượng SmtpClient
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                smtpClient.Port = 587; // Port thường là 587 cho SMTP over TLS (SSL)
+                smtpClient.Credentials = new NetworkCredential(fromEmail, password);
+                smtpClient.EnableSsl = true;
+                // Gửi email
+                smtpClient.Send(mail);
+                //ViewBag.success = "Email sent successfully!";
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword2(string email, string so1, string so2, string so3, string so4)
+        {
+            string code = so1 + so2 + so3 + so4;
+            Account a = db.Accounts.FirstOrDefault(p => p.Email == email);
+            if (a != null)
+            {
+                if(a.RequestCode == code)
+                {
+                    // Tạo đối tượng Random
+                    Random random = new Random();
+                    // Phạm vi ký tự chữ cái
+                    const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                    // Phạm vi số
+                    const string numbers = "0123456789";
+                    // Phạm vi ký tự đặc biệt
+                    const string specialCharacters = "!@#$%^&*()_+[]{}|;:'\",.<>?/";
+                    // Kết hợp tất cả các ký tự
+                    string allCharacters = alphabet + numbers + specialCharacters;
+                    // Tạo chuỗi ngẫu nhiên
+                    StringBuilder randomString = new StringBuilder();
+                    int length = 8; // Độ dài của chuỗi ngẫu nhiên (có thể điều chỉnh)
+                    for (int i = 0; i < length; i++)
+                    {
+                        // Chọn một ký tự ngẫu nhiên từ allCharacters
+                        char randomChar = allCharacters[random.Next(allCharacters.Length)];
+                        // Thêm ký tự vào chuỗi ngẫu nhiên
+                        randomString.Append(randomChar);
+                    }
+                    // luu csdl
+                    a.Password = Encryptor.MD5Hash(randomString.ToString());
+                    a.RequestCode = "";
+                    db.SaveChanges();
+                    //xử lý gửi mail ở đây
+                    // Thông tin tài khoản email
+                    string fromEmail = "baitoan88@gmail.com";
+                    string password = "tkea vcgz hdvj rjmw";
+                    // Địa chỉ người nhận
+                    string toEmail = email;
+                    // Tạo đối tượng MailMessage
+                    MailMessage mail = new MailMessage(fromEmail, toEmail);
+                    // Tiêu đề và nội dung email
+                    mail.Subject = "Besnik. send new password!";
+                    mail.Body = $"Xin chào, cảm ơn bạn đã sử dụng web Besnik của chúng tôi! \n {randomString} là mật khẩu mới của bạn!";
+                    // Cấu hình đối tượng SmtpClient
+                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                    smtpClient.Port = 587; // Port thường là 587 cho SMTP over TLS (SSL)
+                    smtpClient.Credentials = new NetworkCredential(fromEmail, password);
+                    smtpClient.EnableSsl = true;
+                    // Gửi email
+                    smtpClient.Send(mail);
+                    //ViewBag.success = "Email sent successfully!";
+                    return RedirectToAction("ForgotPassword3");
+                }
+            }
+            return View("ErrorForgotPassword");
+        }
+        public ActionResult ForgotPassword3()
+        {
+
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(Account account)

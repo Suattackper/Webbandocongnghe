@@ -13,6 +13,7 @@ namespace electronics_shop.Controllers
         ECOMMERCEEntities db = new ECOMMERCEEntities();
         public ActionResult Index(/*string id*/)
         {
+            
             //ViewBag.Id = id;
             ViewBag.Offers = db.Products.Where(p => p.PromotionCode != null && p.Quantity > 0 && db.Promotions.Any(h => h.PromotionCode == p.PromotionCode && h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0)).Take(8).ToList();
             ViewBag.OffersPromotion = db.Promotions.Where(h => h.EndDate >= DateTime.Now && h.StartDate <= DateTime.Now && h.Quantity > 0).ToList();

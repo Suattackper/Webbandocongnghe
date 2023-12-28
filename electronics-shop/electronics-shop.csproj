@@ -604,7 +604,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
@@ -621,6 +620,10 @@
     <Content Include="Views\Shared\_Partial_Wish_Cart.cshtml" />
     <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
     <Content Include="Views\Account\Partial_History_Order.cshtml" />
+    <Content Include="Views\Account\ForgotPassword1.cshtml" />
+    <Content Include="Views\Account\ForgotPassword2.cshtml" />
+    <Content Include="Views\Account\ForgotPassword3.cshtml" />
+    <Content Include="Views\Shared\ErrorForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,6 +3,8 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -34,6 +36,10 @@ namespace electronics_shop.Areas.admin.Controllers
         }
         public ActionResult Reply(string id)
         {
+            if (TempData.ContainsKey("Error"))
+            {
+                ViewBag.Error = TempData["Error"];
+            }
             int code = int.Parse(id);
             Contact brand = db.Contacts.FirstOrDefault(p => p.ContactCode == code);
             return View(brand);
@@ -46,10 +52,38 @@ namespace electronics_shop.Areas.admin.Controllers
             brand.Status = true;
             db.SaveChanges();
             //xử lý gửi mail ở đây
+            // Thông tin tài khoản email
+            string fromEmail = "baitoan88@gmail.com";
+            string password = "tkea vcgz hdvj rjmw";
 
+            // Địa chỉ người nhận
+            string toEmail = brand.Email;
 
+            // Tạo đối tượng MailMessage
+            MailMessage mail = new MailMessage(fromEmail, toEmail);
 
-            return RedirectToAction("Index");
+            // Tiêu đề và nội dung email
+            mail.Subject = "Besnik. reply to question!";
+            mail.Body = $"Xin chào {brand.FullName}, cảm ơn bạn đã sử dụng web Besnik của chúng tôi! \nChúng tôi đã nhận câu hỏi của bạn vào lúc {brand.ContactDate}: \n\t- {brand.Message}\nĐây là câu trả lời của chúng tôi gửi đến bạn:\n\t- {message}\nHi vọng rằng vấn đề của bạn đã được giải quyết!";
+
+            // Cấu hình đối tượng SmtpClient
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = 587; // Port thường là 587 cho SMTP over TLS (SSL)
+            smtpClient.Credentials = new NetworkCredential(fromEmail, password);
+            smtpClient.EnableSsl = true;
+
+            try
+            {
+                // Gửi email
+                smtpClient.Send(mail);
+                //ViewBag.success = "Email sent successfully!";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error -- " + ex.Message + "!";
+                return RedirectToAction("Reply", new {id = id});
+            }
         }
         public ActionResult Delete(string id)
         {

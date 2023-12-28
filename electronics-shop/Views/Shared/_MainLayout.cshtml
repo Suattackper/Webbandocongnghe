@@ -233,7 +233,7 @@
                                         <div class="arrow relative">
                                             <ul class="overflow-hidden rounded-md bg-white p-[6px] shadow-custom-1">
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                    <a href="@Url.Action("EditProfile", "Account", new { accountCode = account.AccountCode })" @*class="btn-open-modal"*@ data-tab="0" @*data-target=".entry-modal"*@>
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-person-circle flex text-xl text-primary-color"></i>
                                                             <span>My Account</span>
@@ -243,7 +243,7 @@
 
                                                 @*Them MyOrder 19/12*@
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("MyOrder", "Checkout", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                    <a href="@Url.Action("MyOrder", "Checkout", new { accountCode = account.AccountCode })" @*class="btn-open-modal"*@ data-tab="0" @*data-target=".entry-modal"*@>
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-bag-check-fill flex text-xl text-primary-color"></i>
                                                             <span>My Order</span>
@@ -251,7 +251,7 @@
                                                     </a>
                                                 </li>
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("ChangePassword", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="1" data-target=".entry-modal">
+                                                    <a href="@Url.Action("ChangePassword", "Account", new { accountCode = account.AccountCode })" @*class="btn-open-modal"*@ data-tab="1" @*data-target=".entry-modal"*@>
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-key flex text-xl text-primary-color"></i>
                                                             <span>Change password</span>
@@ -1016,10 +1016,10 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 
-    <!--<script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>-->
+    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
 
     <!--lỗi ở đây-->
-    <!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>

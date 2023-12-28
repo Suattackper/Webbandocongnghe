@@ -150,6 +150,8 @@
                                     </div>
                                 }
                             }
+
+
                         </div>
                         <!--end::Menu-->
                     </div>
@@ -1530,7 +1532,9 @@
                 <!--begin::User menu-->
                 <div class="d-flex align-items-center ms-1 ms-lg-3"
                      id="kt_header_user_menu_toggle">
-                        @if (account.RoleID == 1 || account.RoleID == 2)
+                    @if (Session["InfoAdmin"] != null)
+                    {
+                        if (account.RoleID == 1 || account.RoleID == 2)
                         {
                             <div class="cursor-pointer symbol symbol-30px symbol-md-40px"
                                  data-kt-menu-trigger="click"
@@ -1564,42 +1568,44 @@
                                 <!--end::Menu item-->
                                 <!--begin::Menu separator-->
                                 <div class="separator my-2"></div>
-                                
+
                                 <div class="menu-item px-5 my-1">
                                     <a href="@Url.Action("BackToHome","Base")"
                                        class="menu-link px-5" target="_blank">Về trang chủ</a>
                                 </div>
-                                
+
                                 @*<div class="menu-item px-5 my-1">
-                                    <a href="@Url.Action("ViewProfile","Base")"
-                                       class="menu-link px-5">Thiết lập tài khoản</a>
-                                </div>*@
-                              
-                                <div class="menu-item px-5">
-                                    <a href="@Url.Action("Logout","Base")"
-                                       class="menu-link px-5">Đăng xuất</a>
-                                </div>
-                               
-                                @*<div class="separator my-2"></div>
+                        <a href="@Url.Action("ViewProfile","Base")"
+                           class="menu-link px-5">Thiết lập tài khoản</a>
+                    </div>*@
 
                                 <div class="menu-item px-5">
-                                    <div class="menu-content px-5">
-                                        <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
-                                               for="kt_user_menu_dark_mode_toggle">
-                                            <input class="form-check-input w-30px h-20px"
-                                                   type="checkbox"
-                                                   value="1"
-                                                   name="mode"
-                                                   id="kt_user_menu_dark_mode_toggle"
-                                                   data-kt-url="../../demo1/dist/index.html" />
-                                            <span class="pulse-ring ms-n1"></span>
-                                            <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                        </label>
-                                    </div>
-                                </div>*@
+                                    <a href="@Url.Action("LoginAdmin","Login")"
+                                       class="menu-link px-5">Đăng xuất</a>
+                                </div>
+
+                                @*<div class="separator my-2"></div>
+
+                    <div class="menu-item px-5">
+                        <div class="menu-content px-5">
+                            <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
+                                   for="kt_user_menu_dark_mode_toggle">
+                                <input class="form-check-input w-30px h-20px"
+                                       type="checkbox"
+                                       value="1"
+                                       name="mode"
+                                       id="kt_user_menu_dark_mode_toggle"
+                                       data-kt-url="../../demo1/dist/index.html" />
+                                <span class="pulse-ring ms-n1"></span>
+                                <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
+                            </label>
+                        </div>
+                    </div>*@
 
                             </div>
                         }
+                    }
+
 
                 </div>
 

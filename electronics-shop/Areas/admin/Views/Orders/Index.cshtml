@@ -60,32 +60,32 @@
                         </span>
                         <!--end::Svg Icon-->
                         <form action="@Url.Action("Search","Orders") " method="get">
-                            <input type="search" name="search" class="form-control form-control-solid w-250px ps-14" placeholder="Tìm kiếm đơn hàng...">
+                            <input type="search" name="search" class="form-control form-control-solid w-350px ps-14" placeholder="Tìm kiếm đơn hàng(name, sđt)">
                         </form>
                     </div>
                     <!--end::Search-->
                 </div>
                 <!--begin::Card title-->
                 <!--begin::Card toolbar-->
-                <div class="card-toolbar">
+                <!--<div class="card-toolbar">
                     <!--begin::Toolbar-->
-                    <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                    <!--<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">-->
                         <!--begin::Filter-->
-                        <a href="@Url.Action("Trash","Orders")" class="btn btn-light-danger me-3">
+                        <!--<a href="@Url.Action("Trash","Orders")" class="btn btn-light-danger me-3">-->
                             <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                            <span class="svg-icon svg-icon-2">
+                            <!--<span class="svg-icon svg-icon-2">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
                                     <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
                                     <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
                                 </svg>
-                            </span>
-                            <!--end::Svg Icon-->Thùng rác (<span id="count-trash">@*@ViewBag.countTrash*@</span>)
+                            </span>-->
+                            <!--end::Svg Icon--><!--Thùng rác (<span id="count-trash">@*@ViewBag.countTrash*@</span>)
                         </a>
                         <!--end::Filter-->
-                    </div>
+                    <!--</div>-->
                     <!--end::Toolbar-->
-                </div>
+                <!--</div>-->
                 <!--end::Card toolbar-->
             </div>
             <!--end::Card header-->
@@ -99,7 +99,7 @@
                             <thead>
                                 <!--begin::Table row-->
                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">#</th>
+                                    @*<th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">#</th>*@
                                     <th class="min-w-50px" tabindex="2" arowspan="1" colspan="1" style="width:50px;">ID</th>
                                     <th class="min-w-110px" tabindex="2" rowspan="1" colspan="1" style="width:110px;">Họ tên</th>
                                     <th class="min-w-70px" tabindex="5" rowspan="1" colspan="1" style="width:80px;">Số điện thoại</th>
@@ -114,12 +114,12 @@
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-bold">
                                 @if(Model!=null && Model.Any()) {
-                                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+                                    //var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
 
                                     foreach (var item in Model)
                                     {
                                 <tr class="odd" id="item_@*@item.order_id*@">
-                                    <td>@i</td>
+                                    @*<td>@i</td>*@
                                     <td>@item.OrderCode </td>
                                     <td> @item.Account.FirstName @item.Account.LastName </td>
                                     <td> @item.Account.PhoneNumber </td>
@@ -175,7 +175,7 @@
                                     </td>
                                     <!--end::Action=-->
                                 </tr>
-                                        i++;
+                                        //i++;
                                     }
                                 }
                             </tbody>
@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                             <div>
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
+                                @*@Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
                            {
                                //LinkToPreviousPageFormat = prePageIcon,
                                //LinkToNextPageFormat = nextPageIcon,
@@ -196,7 +196,33 @@
                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
                                MaximumPageNumbersToDisplay = 10
-                           })
+                           })*@
+                                @if (ViewBag.Search == null || ViewBag.Search == "")
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+                                    {
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
+                                else
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Search", new { search = ViewBag.Search, page }), new PagedListRenderOptions
+                                    {
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
                             </div>
                         </div>
                     </div>

@@ -16,5 +16,6 @@ namespace electronics_shop.Models
         public string District { get; set; }
         public string Number { get; set; }
         public int TypePayment { get; set; }
+        public int TypePaymentVN { get; set; }
     }
 }

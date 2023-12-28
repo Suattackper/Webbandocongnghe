@@ -1,4 +1,6 @@
-﻿
+﻿// checkout.js
+
+
 $(document).ready(function () {
     showCount();
 
@@ -62,6 +64,29 @@ $(document).ready(function () {
         var quantity = $('#Quantity_' + id).val();
         Update(id, quantity);
         alert('thay đổi thành công');
+    });
+
+
+    $("#myForm").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: "/ShoppingCart/CheckOutForm",
+            data: $("#myForm").serialize(),
+            success: function (res) {
+                if (res.Success) {
+                    if (res.Code == 1) {
+                        window.location.href = "/ShoppingCart/CheckOutSuccess";
+                    } else {
+                        window.location.href = res.Url;
+                    }
+                }
+            },
+            error: function (err) {
+                console.error("Error:", err);
+            }
+        });
     });
 
     // wishlist

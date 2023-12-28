@@ -100,7 +100,7 @@
     <Property Name="PaymentCode" Type="int" />
     <Property Name="AccountCode" Type="int" />
     <Property Name="PromotionCode" Type="char" MaxLength="10" />
-    <Property Name="OrderDate" Type="date" />
+    <Property Name="OrderDate" Type="datetime" />
     <Property Name="Delivered" Type="bit" />
     <Property Name="DeliveryDate" Type="date" />
     <Property Name="OrderTotal" Type="money" />

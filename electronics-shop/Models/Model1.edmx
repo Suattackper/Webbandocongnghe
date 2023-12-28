@@ -105,7 +105,7 @@
           <Property Name="PaymentCode" Type="int" />
           <Property Name="AccountCode" Type="int" />
           <Property Name="PromotionCode" Type="char" MaxLength="10" />
-          <Property Name="OrderDate" Type="date" />
+          <Property Name="OrderDate" Type="datetime" />
           <Property Name="Delivered" Type="bit" />
           <Property Name="DeliveryDate" Type="date" />
           <Property Name="OrderTotal" Type="money" />
@@ -532,7 +532,7 @@
           <Property Name="PaymentCode" Type="Int32" />
           <Property Name="AccountCode" Type="Int32" />
           <Property Name="PromotionCode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="Delivered" Type="Boolean" />
           <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
           <Property Name="OrderTotal" Type="Decimal" Precision="19" Scale="4" />

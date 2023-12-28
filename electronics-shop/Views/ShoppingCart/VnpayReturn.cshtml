@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "VnpayReturn";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="shopping-cart.html">Shopping Cart</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 active hover:text-primary-color">
+            <a href="checkout.html">Checkout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="banner-title-section container mx-auto my-5 px-2 sm:px-8">
+    @if (ViewBag.ThanhToanThanhCong != null)
+    {
+        <div class="liner-container my-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+            <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+                Thanh Toán Thành Công
+            </h1>
+
+        </div>
+        <div  style=" display: flex; justify-content: center; align-items: center;  text-align: center;">
+            <table>
+                <tr>
+                    <td  class=" text-center mb-[-2px] inline-block pb-3  font-semibold">Bạn đã thanh toán thành công <a  style="text-decoration-style:initial;color:darkblue;" >@ViewBag.Id</a></td>
+                </tr>
+                <tr>
+                    <td> @ViewBag.ThanhToanThanhCong</td>
+                </tr>
+                
+                <tr>
+                    <td>  @ViewBag.MaGiaoDich</td>
+                </tr>
+                <tr> <td> @ViewBag.NganHang</td></tr>
+                <tr></tr>
+            
+                <tr><td style="padding: 20px;" ><a class=" border-t-2 border-primary-color font-semibold" style="background-color: #ccc; transition: background-color 0.3s ease;" href="@Url.Action("Shop","Products")">Trờ về Trang Chủ</a></td></tr>
+            </table>
+          
+        </div>
+     
+    }
+    else
+    {
+        <<div class="liner-container my-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+            <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+                Thanh Toán Thất Bại. Xin Vui Lòng Thử Lại.
+            </h1>
+
+        </div>
+    }
+
+</div>
+

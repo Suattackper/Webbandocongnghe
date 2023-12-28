@@ -205,6 +205,27 @@ namespace electronics_shop.Controllers
         }
 
 
+        public ActionResult MyOrder(int accountCode)
+        {
+            list<Order> item = db.Orders.Where(x => x.AccountCode == accountCode).ToList();
+            List<OrderDetail> list = db.OrderDetails.Where(accountCode).t;
+            if (Session["UserId"] != null)
+            {
+                    int userID = (int)Session["UserId"];
+                ViewBag.idAC = userID;
+            }
+            return View(list);
+        }
+        public ActionResult Partial_Inf_Acc(int accountCode)
+        {
+            if (TempData.ContainsKey("Error"))
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            Account account = db.Accounts.Find(accountCode);
+            Session["imgPath"] = account.Avatar;
+            return PartialView("Partial_Inf_Acc", account);
+        }
         //Edit profie
         [HttpGet]
         public ActionResult EditProfile(int accountCode)

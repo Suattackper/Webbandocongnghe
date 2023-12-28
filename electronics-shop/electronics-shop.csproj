@@ -154,6 +154,7 @@
     <Compile Include="Common\EmailConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\OnlineCheckoutController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Models\Payment.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payment\VnPayLibrary.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -231,9 +233,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\WishListCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -562,6 +561,8 @@
     <Content Include="Areas\admin\Views\Orders\Index.cshtml" />
     <Content Include="Areas\admin\Views\Orders\Partial_History_Order.cshtml" />
     <Content Include="Areas\admin\Views\Orders\Trash.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\Details.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\Partial_SanPham.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -569,8 +570,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\admin\Views\Shared\Details.cshtml" />
-    <Content Include="Areas\admin\Views\Shared\Partial_SanPham.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -621,12 +620,16 @@
     <Content Include="Views\Shared\_Partial_Wish_Cart.cshtml" />
     <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
     <Content Include="Views\Account\Partial_History_Order.cshtml" />
+    <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
+    <Content Include="Views\Account\MyOrder.cshtml" />
+    <Content Include="Views\Shared\Partial_Inf_Acc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\admin\Data\" />
     <Folder Include="Areas\admin\Views\Base\" />
     <Folder Include="Views\Cart\" />
+    <Folder Include="Views\OnlineCheckout\" />
     <Folder Include="Views\WishList\" />
   </ItemGroup>
   <ItemGroup>

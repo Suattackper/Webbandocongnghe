@@ -60,11 +60,11 @@ namespace electronics_shop.Areas.Admin.Controllers
             ViewBag.Order = data;
             return View("Index", data.ToPagedList(page, pageSize));
         }
-        //public ActionResult Partial_History_Order(int id)
-        //{
-        //    var item = db.Orders.Where(x => x.AccountCode == id).ToList();
-        //    return PartialView(item);
-        //}
+        public ActionResult Partial_History_Order(int id)
+        {
+            var item = db.Orders.Where(x => x.AccountCode == id).ToList();
+            return PartialView(item);
+        }
 
         [HttpPost]
         public ActionResult CancleOrder(int id)

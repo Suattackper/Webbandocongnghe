@@ -1,4 +1,4 @@
-﻿@model electronics_shop.Models.Order
+﻿@model electronics_shop.Models.OrderViewModel
 @{
     ViewBag.Title = "CheckOutSuccess";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -36,7 +36,7 @@
 <div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
     @if (Session["info"] != null)
     {
-        if (ViewBag.TypePayment == 1)
+        @*if (ViewBag.TypePayment == 1)
         {
             <div id="show_success">
                 <h2 class="text-center">Bạn đã đặt hàng thành công</h2>
@@ -44,11 +44,12 @@
         }else if(ViewBag.TypePayment == 2)
                 {
                     <h2 class="text-center text-blue-600" >Thanh toán momo</h2>
-                }
-    else
-                {
+            <a href="@Url.Action("PaymentMoMo","Checkout")">momo</a>
+        }
+        else
+        {
                     <h2> khong duoc</h2>
-                }
+                }*@
 
     }
     else

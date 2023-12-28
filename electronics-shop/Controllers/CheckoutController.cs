@@ -1,4 +1,6 @@
 ﻿using electronics_shop.Models;
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,16 @@ namespace electronics_shop.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
+        ECOMMERCEEntities db = new ECOMMERCEEntities();
         public ActionResult Index()
         {
-                ShoppingCart cart = (ShoppingCart)Session["Cart"];
-                if (cart != null)
-                {
-                    return View(cart.Items);
-                }
-                return View();
-         }
+            ShoppingCart cart = (ShoppingCart)Session["Cart"];
+            if (cart != null)
+            {
+                return View(cart.Items);
+            }
+            return View();
+        }
         public ActionResult RenderInfCus()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -29,5 +32,6 @@ namespace electronics_shop.Controllers
             }
             return PartialView("_Partial_Inf_Cus");
         }
-    }
+        //[HttpPost]*/
+    } 
 }

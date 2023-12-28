@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.EnterpriseServices.CompensatingResourceManager;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+using VNPAY_CS_ASPX;
 
 namespace electronics_shop.Controllers
 {
@@ -118,10 +121,11 @@ namespace electronics_shop.Controllers
         //thanh toán thành công
         public ActionResult CheckOutSuccess()
         {
-            Order item = new Order();
+            OrderViewModel item = new OrderViewModel();
 
+            ViewBag.TypePayment = TempData["type"];
 
-            return View(item);
+            return View();
         }
 
         public ActionResult RenderInfCus(decimal total)
@@ -148,12 +152,70 @@ namespace electronics_shop.Controllers
             return View();
         }
 
+        public ActionResult VnpayReturn()
+        {
+            if (Request.QueryString.Count > 0)
+            {
+                string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"]; //Chuoi bi mat
+                var vnpayData = Request.QueryString;
+                VnPayLibrary vnpay = new VnPayLibrary();
+
+                foreach (string s in vnpayData)
+                {
+                    //get all querystring data
+                    if (!string.IsNullOrEmpty(s) && s.StartsWith("vnp_"))
+                    {
+                        vnpay.AddResponseData(s, vnpayData[s]);
+                    }
+                }
+                long orderId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
+                long vnpayTranId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
+                string vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
+                string vnp_TransactionStatus = vnpay.GetResponseData("vnp_TransactionStatus");
+                String vnp_SecureHash = Request.QueryString["vnp_SecureHash"];
+                String TerminalID = Request.QueryString["vnp_TmnCode"];
+                long vnp_Amount = Convert.ToInt64(vnpay.GetResponseData("vnp_Amount")) / 100;
+                String bankCode = Request.QueryString["vnp_BankCode"];
+
+                bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret);
+                if (checkSignature)
+                {
+                    if (vnp_ResponseCode == "00" && vnp_TransactionStatus == "00")
+                    {
+                        var itemOrder = db.Orders.FirstOrDefault(x => x.OrderCode == orderId);
+                        if (itemOrder != null)
+                        {
+                            itemOrder.PaymentCode = 2;
+                            db.Orders.Attach(itemOrder);
+                            db.Entry(itemOrder).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        //Thanh toan thanh cong
+                        ViewBag.InnerText = "Giao dịch được thực hiện thành công. Cảm ơn quý khách đã sử dụng dịch vụ";
+                        //log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
+                    }
+                    else
+                    {
+                        //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
+                        ViewBag.InnerText = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
+                        //log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId, vnpayTranId, vnp_ResponseCode);
+                    }
+                    //displayTmnCode.InnerText = "Mã Website (Terminal ID):" + TerminalID;
+                    ViewBag.Id = "Mã giao dịch thanh toán:" + orderId.ToString();
+                    ViewBag.MaGiaoDich = "Mã giao dịch tại VNPAY:" + vnpayTranId.ToString();
+                    ViewBag.ThanhToanThanhCong = "Số tiền thanh toán (VND):" + vnp_Amount.ToString();
+                    ViewBag.NganHang = "ngân hàng thanh toán:" + bankCode;
+                }
+            }
+
+                return View();
+        }
 
         public ActionResult Patial_CheckOut(decimal total)
         {
             if (Session["info"] != null)
             {
-                int userID = (int)Session["UserId"];
+                int userID = (int)Session["UserId"];    
                 var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
 
                 ViewBag.FirstName = account.FirstName;
@@ -169,7 +231,7 @@ namespace electronics_shop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CheckOutForm(OrderViewModel req, string total, string promotion)
         {
-            var code = new { Success = false, Code = -1 };
+            var code = new { Success = false, Code = -1, Url= "" };
 
 
             if (ModelState.IsValid)
@@ -216,10 +278,10 @@ namespace electronics_shop.Controllers
                     order.AccountAddress.District = req.District;
                     order.AccountAddress.Ward = req.Ward;
                     order.AccountAddress.City = req.City;
-
+                    TempData["type"] = req.TypePayment;
                     order.AccountCode = (int)Session["UserId"]; // chỗ này nhập accountcode đã có trong csdl của m, hoặc truyên fvaof khi đăng nhập thành công
                     order.AccountAddressCode = order.AccountAddressCode;  // chỗ này tạo đại 1 accountaddress trong csdl r nhập accountaddresscode vào
-                    order.PaymentCode = req.TypePayment;
+                    order.PaymentCode = 1;
                     // chỗ này tạo đại 1 payment trong csdl r nhập PaymentCode vào
                     order.OrderDate = DateTime.Now;
                     order.OrderTotal = decimal.Parse(total); //(decimal?)cart.Items.Sum(x => (x.Price * x.Quantity));   // chỗ này nhập tổng bill vào
@@ -229,7 +291,6 @@ namespace electronics_shop.Controllers
                     //db.SaveChanges();
                     db.Orders.Add(order);
                     db.SaveChanges();
-                    ViewBag.TypePayment = order.PaymentCode;
                     //lấy mã ordercode
                     Order ordercode = db.Orders.OrderByDescending(o => o.OrderCode).FirstOrDefault();
 
@@ -348,12 +409,71 @@ namespace electronics_shop.Controllers
                     contentAdmin = contentAdmin.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
                     contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
                     //electronics_shop.Common.Common.SendMail("BenzikShop", "Đơn hàng mới #" + order.OrderCode, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-                    //code = new { Success = true, Code = 1 };
+                 
                     cart.ClearCart();
-                    return RedirectToAction("CheckOutSuccess");
+                    code = new { Success = true, Code = req.TypePayment, Url = "" };
+                    if(req.TypePayment==2)
+                    {
+                        var url = UrlPayment(req.TypePaymentVN, order.OrderCode);
+                        code = new { Success = true, Code = req.TypePayment, Url = url };
+                      
+
+                    }
+                    //return RedirectToAction("CheckOutSuccess");
                 }
             }
             return Json(code);
+        }
+
+        //thanh toan vnpay
+        public string UrlPayment(int TypePaymentVN, int orderCode)
+        {
+            var urlPayment = "";
+            var order = db.Orders.FirstOrDefault(x => x.OrderCode == orderCode);
+            //Get Config Info
+            string vnp_Returnurl = ConfigurationManager.AppSettings["vnp_Returnurl"]; //URL nhan ket qua tra ve 
+            string vnp_Url = ConfigurationManager.AppSettings["vnp_Url"]; //URL thanh toan cua VNPAY 
+            string vnp_TmnCode = ConfigurationManager.AppSettings["vnp_TmnCode"]; //Ma định danh merchant kết nối (Terminal Id)
+            string vnp_HashSecret = ConfigurationManager.AppSettings["vnp_HashSecret"]; //Secret Key
+
+         
+
+            //Build URL for VNPAY
+            VnPayLibrary vnpay = new VnPayLibrary();
+            var Price = (long)order.OrderTotal * 100;
+            vnpay.AddRequestData("vnp_Version", VnPayLibrary.VERSION);
+            vnpay.AddRequestData("vnp_Command", "pay");
+            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+            vnpay.AddRequestData("vnp_Amount", Price.ToString()); //Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 100,000 VND (một trăm nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 10000000
+            if (TypePaymentVN == 1)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "VNPAYQR");
+            }
+            else if (TypePaymentVN == 2)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "VNBANK");
+            }
+            else if (TypePaymentVN == 3)
+            {
+                vnpay.AddRequestData("vnp_BankCode", "INTCARD");
+            }
+
+            vnpay.AddRequestData("vnp_CreateDate", order.OrderDate.Value.ToString("yyyyMMddHHmmss"));
+            vnpay.AddRequestData("vnp_CurrCode", "VND");
+            vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress());
+            vnpay.AddRequestData("vnp_Locale", "vn");
+            vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang:" + order.OrderCode);
+            vnpay.AddRequestData("vnp_OrderType", "other"); //default value: other
+
+            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+            vnpay.AddRequestData("vnp_TxnRef", order.OrderCode.ToString()); // Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
+
+            //Add Params of 2.1.0 Version
+            //Billing
+
+          urlPayment = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+
+            return urlPayment;
         }
 
         [HttpPost]

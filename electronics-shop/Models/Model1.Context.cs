@@ -39,6 +39,5 @@ namespace electronics_shop.Models
         public virtual DbSet<ProductImg> ProductImgs { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

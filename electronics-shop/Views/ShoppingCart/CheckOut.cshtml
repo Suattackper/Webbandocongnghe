@@ -1,6 +1,6 @@
 ﻿@model electronics_shop.Models.OrderViewModel
 @using electronics_shop.Models
-@{ 
+@{
     electronics_shop.Models.ShoppingCart l = (ShoppingCart)Session["Cart"];
     List<ShoppingCartItem> list = l.Items;
 }
@@ -56,10 +56,26 @@
                 HttpMethod = "POST",
                 UpdateTargetId = "load_data",
                 OnComplete = "OnSuccessCO",
-                OnFailure = "OnFailure"
+                OnFailure = "OnFailure",
+                OnBegin = "OnBeginCO"
 
             }, new { @Id = "myForm" }))
             {
+                @*<script>
+                    function OnBeginCO() {
+                        $('#load_send').html('<h2>Đang gửi....</h2>');
+                    }
+                    function OnSuccessCO(res) {
+                        if (res.Success) {
+                            if (res.Code == 1) {
+                                window.location.href = "/ShoppingCart/CheckOutSuccess";
+                            }
+                            else {
+                                window.location.href = res.Url;
+                            }
+                        }
+                    }
+                </script>*@
                 @Html.AntiForgeryToken()
                 <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
                       action="#">
@@ -108,11 +124,11 @@
                                 </label>
                             </div>
                             @*<div class="col-span-12 xs:col-span-8">
-            <label class="flex flex-col">
-                <span class="text-sm">Ward</span>
-                <input class="input" name="Ward" type="text" required />
-            </label>
-        </div>*@
+                                    <label class="flex flex-col">
+                                        <span class="text-sm">Ward</span>
+                                        <input class="input" name="Ward" type="text" required />
+                                    </label>
+                                </div>*@
                             <div class="col-span-12 xs:col-span-6">
                                 <label class="flex flex-col">
                                     <span class="text-sm">District(Optional)</span>
@@ -127,14 +143,28 @@
                             </div>
                             <div class="col-span-12 xs:col-span-12">
                                 <label class="flex flex-col">
-                                    <span class="text-sm">Phương Thức Thanh Toán</span>
-                                    <select class="input" name="TypePayment" type="" required>
-                                        <option value="1" style="text-align:center">Thanh Toán Khi Nhận Hàng (COD)</option>
-                                        <option value="2" style="text-align:center">Thanh toán qua ứng dụng MOMO</option>
+                                    <span class="text-sm">Hình Thức Thanh Toán</span>
+                                    <select class="input" name="TypePayment" type="" id="drTypePayment">
+                                        <option name="COD" value="1" selected style="text-align:center">Thanh Toán Khi Nhận Hàng (COD)</option>
+                                        <option name="MOMO" value="2" style="text-align:center">Thanh toán trực tuyến</option>
                                     </select>
                                 </label>
                             </div>
+                            <div class="col-span-12 xs:col-span-12" id="load_form_payment" style="display:none;">
 
+                                <h4 class="text-lg font-semibold">   Chọn Phương Thức Thanh Toán</h4>
+                                <h5 class="font-semibold"> Thanh Toán Trực Tiếp Qua VNPAY</h5>
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="0" checked /> Cổng Thanh Toán VNPAY</label>
+                                <h5 class="font-semibold">   Phương Thức Khác: </h5>
+
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="1" /> Thanh toán qua ứng dụng hỗ trợ hỗ trợ VNPAYQR </label><br />
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="2" /> ATM-Tài khoản ngân hàng nội địa</label><br />
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="3" /> Thanh toán qua thẻ quốc tế</label><br />
+
+
+                            </div>
+
+                            
 
 
                             <div class="col-span-12 flex flex-wrap justify-between gap-5">
@@ -177,8 +207,8 @@
                                             }
                                             <img src="data:image/png;base64,@base64String" class="h-full w-full object-cover" alt="product" />
                                             @*<img class="h-full w-full object-cover"
-                                                 src="@item.ProductImg"
-                                                 alt="product" />*@
+                                                src="@item.ProductImg"
+                                                alt="product" />*@
                                         </div>
                                         <div class="flex w-full flex-col">
                                             <h6 class="clamp-2 break-all text-lg font-semibold">
@@ -202,12 +232,12 @@
                         }
                         else
                         {
-                        <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào!</p>
+                            <p class="text-center">Giỏ hàng của bạn chưa có sản phẩm nào!</p>
                         }
 
                         <div id="load_data" class="col-span-12 lg:col-span-4">
                             @*<form action="@Url.Action("CheckOutPromotion","ShoppingCart")" method="post">*@
-                          
+
                             @*</form>*@
                             <div class="rounded-lg border-2 p-4">
                                 <span class="mb-10 inline-block text-center text-lg font-bold">Summary of your purchase:</span>
@@ -217,7 +247,7 @@
                                         <span>Subtotal:</span>
                                         <span>@string.Format("₫{0:#,0}", tongtien)</span>
                                     </div>
-                                 
+
                                     <div class="my-2 flex justify-between">
                                         <span>Shipping:</span>
                                         @{
@@ -253,21 +283,21 @@
                                 </div>
                                 @*}*@
                                 @*<div style="display:flex ; ">
-                    <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                            type="submit">
-                        <span class="font-bold uppercase text-white">Discard</span>
-                    </button>
-                    <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
-                       type="" href="@Url.Action("CheckOut","ShoppingCart")">
-                        <span class="font-bold uppercase text-white">Continue</span>
-                    </a>
-                </div>*@
+                                        <button style="width: 40%; background-color: darkred; transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='darkred'" onmouseout="this.style.backgroundColor='red'" class=" btnDeleteAll btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                                                type="submit">
+                                            <span class="font-bold uppercase text-white">Discard</span>
+                                        </button>
+                                        <a style="width:60%; background-color:darkgreen" class="btn-view-shopping-cart btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                                           type="" href="@Url.Action("CheckOut","ShoppingCart")">
+                                            <span class="font-bold uppercase text-white">Continue</span>
+                                        </a>
+                                    </div>*@
                             </div>
                             @*<a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
-               href="@Url.Action("Checkout","ShoppingCart")">
-                <i class="bi bi-arrow-repeat flex text-xl"></i>
-                <span>Update Cart</span>
-            </a>*@
+                                   href="@Url.Action("Checkout","ShoppingCart")">
+                                    <i class="bi bi-arrow-repeat flex text-xl"></i>
+                                    <span>Update Cart</span>
+                                </a>*@
                             <a class="transition-all-300 my-5 flex items-center justify-center gap-2 hover:text-primary-color"
                                href="@Url.Action("Shop","Products")">
                                 <i class="bi bi-cart-plus flex text-xl"></i>
@@ -340,6 +370,8 @@
 
 
 @section scripts{
+    @*<script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>*@
 
     <script>
         function OnFailure(rs) {
@@ -348,45 +380,52 @@
             }
         }
         $(document).ready(function () {
-            $('#myForm').validate({
-                rules: {
-                    'FirstName': {
-                        required: true
-                    },
-                    'LastName': {
-                        required: true
-                    },
-                    'Email': {
-                        required: true
-                    },
-                    'PhoneNumber': {
-                        required: true
-                    },
-                    'Number': {
-                        required: true
-                    },
-                    'Ward': {
-                        required: true
-                    },
-                    'District': {
-                        required: true
-                    },
-                    'City': {
-                        required: true
-                    }
-                },
-                messages: {
-                    'FirstName': 'Không được để trống trường này',
-                    'LastName': 'Không được để trống trường này',
-                    'Email': 'Không được để trống trường này',
-                    'PhoneNumber': 'Không được để trống trường này',
-                    'Number': 'Không được để trống trường này',
-                    'Ward': 'Không được để trống trường này',
-                    'District': 'Không được để trống trường này',
-                    'City': 'Không được để trống trường này'
+            $('body').on('change', '#drTypePayment', function () {
+                var type = $(this).val();
+                $('#load_form_payment').hide();
+                if (type == 2) {
+                    $('#load_form_payment').show();
                 }
             });
-        });
+        //    $('#myForm').validate({
+        //        rules: {
+        //            'FirstName': {
+        //                required: true
+        //            },
+        //            'LastName': {
+        //                required: true
+        //            },
+        //            'Email': {
+        //                required: true
+        //            },
+        //            'PhoneNumber': {
+        //                required: true
+        //            },
+        //            'Number': {
+        //                required: true
+        //            },
+        //            'Ward': {
+        //                required: true
+        //            },
+        //            'District': {
+        //                required: true
+        //            },
+        //            'City': {
+        //                required: true
+        //            }
+        //        },
+        //        messages: {
+        //            'FirstName': 'Không được để trống trường này',
+        //            'LastName': 'Không được để trống trường này',
+        //            'Email': 'Không được để trống trường này',
+        //            'PhoneNumber': 'Không được để trống trường này',
+        //            'Number': 'Không được để trống trường này',
+        //            'Ward': 'Không được để trống trường này',
+        //            'District': 'Không được để trống trường này',
+        //            'City': 'Không được để trống trường này'
+        //        }
+        //    });
+        //});
 
 
     </script>

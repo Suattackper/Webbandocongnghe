@@ -1,0 +1,157 @@
+﻿@model IEnumerable<electronics_shop.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "MyOrder";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>MyOrder</h2>
+
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="@Url.Action("Index", "Home")">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="@Url.Action("EditProfile", "Account")">My Account</a>
+        </li>
+
+    </ul>
+</div>
+
+<div class="container mx-auto my-5 px-2 sm:px-8">
+    <div class="tabs-container grid grid-cols-12 gap-2">
+        <div class="col-span-12 lg:col-span-4">
+            @Html.Action("Partial_Inf_Acc", "Account", new { accountCode = ViewBag.idAC });
+        </div>
+
+        <div class="tabs-content col-span-12 lg:col-span-8">
+
+            <div class="tab-content flex h-full flex-col gap-5 rounded bg-white p-5">
+                <span class="block text-xl font-bold">My Orders</span>
+                <div class="flex flex-wrap justify-between gap-5">
+                    <form class="search" action="#">
+                        <div class="flex h-[40px] overflow-hidden rounded-[50px] bg-gray-100">
+                            <input class="search w-full border-none bg-transparent py-[5px] pl-5 text-slate-600 focus:border-none focus:ring-0 focus:ring-transparent"
+                                   type="search"
+                                   placeholder="Search..." />
+                            <button class="btn-search px-3 text-slate-600" type="submit">
+                                <i class="bi bi-search flex text-xl"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <ul class="order-mix flex flex-wrap">
+                        <li class="control relative cursor-pointer rounded py-2 px-3"
+                            data-filter=".mix-main">
+                            <span>All</span>
+                        </li>
+                        <li class="control relative flex cursor-pointer items-center gap-2 rounded py-2 px-3"
+                            data-filter=".mix-processing">
+                            <i class="bi bi-clock-history text-yellow-300"></i>
+                            <span>Processing</span>
+                        </li>
+                        <li class="control relative flex cursor-pointer items-center gap-2 rounded py-2 px-3"
+                            data-filter=".mix-completed">
+                            <i class="bi bi-check-circle text-green-300"></i>
+                            <span>Completed</span>
+                        </li>
+                        <li class="control relative flex cursor-pointer items-center gap-2 rounded py-2 px-3"
+                            data-filter=".mix-cancelled">
+                            <i class="bi bi-x-circle text-red-300"></i>
+                            <span>Cancelled </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mix-elements mix-all grid grid-cols-12">
+                    @foreach (var item in Model)
+                    {
+                        <div class="mix mix-main mix-processing col-span-12">
+                            <a class="btn-open-modal transition-all-300 relative block p-4 hover:bg-gray-100"
+                               href="javascript:void(0)"
+                               data-target=".order-details-modal">
+                                <div class="pointer-events-none flex flex-col gap-5 sm:flex-row">
+                                    <div class="relative">
+                                        <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border bg-white">
+                                            <img class="h-full w-full object-cover"
+                                                 src="images/product/prod-1.jpg"
+                                                 alt="product" />
+                                        </div>
+                                        <div class="absolute -top-2 -right-2 h-[30px] w-[30px] min-w-[30px] overflow-hidden rounded-lg border bg-white">
+                                            <img class="h-full w-full object-cover"
+                                                 src="images/cards/mousepad.jpg"
+                                                 alt="product" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col justify-between">
+                                        <span class="clamp-2 break-all text-lg font-semibold">
+                                            @item.Product.ProductName
+                                            @*<span>, Mousepad Hyperx Fury S Pro Speed </span>*@
+                                        </span>
+                                        <div class="my-1 flex items-center gap-1 text-xs">
+                                            <i class="bi bi-clock flex"></i>
+                                            <span>@item.Order.OrderDate.Value.ToString("dd-MM-yyyy")</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light">Transaction. ID</span>
+                                            <span class="text-sm font-semibold">#@item.ProductCode</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto flex flex-col sm:ml-auto">
+                                        <span class="whitespace-nowrap text-xs font-light">Total Payment</span>
+                                        <span class="text-sm font-semibold">@item.Total</span>
+                                    </div>
+                                    <span class="absolute top-0 right-0 m-2 rounded-xl bg-yellow-200 py-px px-2 text-sm text-yellow-500">
+                                        Processing
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                    @*<div class="mix mix-main mix-completed col-span-12">
+                            <a class="btn-open-modal transition-all-300 relative block p-4 hover:bg-gray-100"
+                               href="javascript:void(0)"
+                               data-target=".order-details-modal">
+                                <div class="pointer-events-none flex flex-col gap-5 sm:flex-row">
+                                    <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
+                                        <img class="h-full w-full object-cover"
+                                             src="images/product/prod-1.jpg"
+                                             alt="product" />
+                                    </div>
+                                    <div class="flex flex-col justify-between">
+                                        <span class="clamp-2 break-all text-lg font-semibold">Ryzen 5 3600x</span>
+                                        <div class="my-1 flex items-center gap-1 text-xs">
+                                            <i class="bi bi-clock flex"></i>
+                                            <span>08/01/2022</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-light">Transaction. ID</span>
+                                            <span class="text-sm font-semibold">#1998ARG</span>
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto flex flex-col sm:ml-auto">
+                                        <span class="whitespace-nowrap text-xs font-light">Total Payment</span>
+                                        <span class="text-sm font-semibold">$37.00</span>
+                                    </div>
+                                    <span class="absolute top-0 right-0 m-2 rounded-xl bg-green-200 py-px px-2 text-sm text-green-500">
+                                        Completed
+                                    </span>
+                                </div>
+                            </a>
+                        </div>*@
+
+                </div>
+                <button class="transition-all-300 mx-auto rounded border bg-gray-100 py-2 px-3 hover:bg-gray-200">
+                    Show More
+                </button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>

@@ -243,7 +243,7 @@
 
                                                 @*Them MyOrder 19/12*@
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("MyOrder", "Checkout", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                    <a href="@Url.Action("MyOrder", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-bag-check-fill flex text-xl text-primary-color"></i>
                                                             <span>My Order</span>
@@ -1004,9 +1004,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.min.js"></script>*@
     @*<script src="https://unpkg.com/tippy.js@6"></script>*@
+
     <script src="~/Scripts/jquery-3.4.1.intellisense.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @RenderSection("scripts", required: false)
 
     <script src="~/Scripts/jquery-3.4.1.slim.js"></script>
     <script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
@@ -1016,10 +1018,9 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 
-    <!--<script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>-->
-
+    <script src="~/Content/unpkg.com/metismenujs%401.4.0/dist/metismenujs.min.js"></script>
     <!--lỗi ở đây-->
-    <!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+    @*<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>*@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tippy.js/2.5.4/tippy.all.js"></script>
@@ -1038,7 +1039,6 @@
     <script src="~/Content/js/main.js"></script>
 
     @*@RenderSection("scriptsJS", required: false)*@
-    @RenderSection("scripts", required: false)
     @*<script src="~/Content/js/main.js"></script>*@
 
 

@@ -243,7 +243,7 @@
 
                                                 @*Them MyOrder 19/12*@
                                                 <li class="hover:font-semibold">
-                                                    <a href="@Url.Action("MyOrder", "Account", new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
+                                                    <a href="@Url.Action("MyOrder", "Account",new { accountCode = account.AccountCode })" class="btn-open-modal" data-tab="0" data-target=".entry-modal">
                                                         <div class="pointer-events-none flex items-center gap-2 p-1" style="font-size: 0.7rem;">
                                                             <i class="bi bi-bag-check-fill flex text-xl text-primary-color"></i>
                                                             <span>My Order</span>
@@ -417,6 +417,13 @@
                             <i class="bi bi-caret-down-fill transition-all-300 flex rotate-0 text-xs text-primary-color group-hover:rotate-180"></i>
                         </a>
                     </li>
+
+
+
+
+
+
+
                     @*<li class="underlined-animated group">
                             <a href="#" class="flex items-center gap-1">
                                 <span>Pages</span>
@@ -515,7 +522,15 @@
 
 
     @RenderBody()
+
+    @*modals myorder*@
+
+    
+
+
+
     <!-- Modals -->
+
     <div class="menu-mob modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
         <div class="flex h-full w-full">
             <div class="modal-content transition-all-300 relative left-[-999px] mr-auto flex h-full w-[288px] min-w-[250px] flex-col bg-white">

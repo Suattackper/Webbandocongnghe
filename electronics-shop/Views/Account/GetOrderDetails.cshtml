@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<IEnumerable<electronics_shop.Models.OrderDetail>>
+@using PagedList.Mvc;
+
+@if (Model != null && Model.Any())
+{
+    // Initialize account code with a default value
+    int accountCode = 0;
+
+    // Loop through the OrderDetails to get the accountCode
+    foreach (var orderDetail in Model.SelectMany(x => x))
+    {
+        // Capture the accountCode from the first OrderDetail
+        accountCode = (int)orderDetail.Order.AccountCode;
+        break; // Stop the loop after the first iteration
+    }
+
+    <div class="container mx-auto my-5 px-2 sm:px-8">
+        <div class="tabs-container grid grid-cols-12 gap-2">
+            <div class="col-span-12 lg:col-span-4">
+                @if (Model != null)
+                {
+                    <!-- Render account information using a partial view -->
+                    @Html.Action("Partial_Inf_Acc", "Account", new { accountCode = accountCode });
+                }
+            </div>
+
+            <div class="tabs-content col-span-12 lg:col-span-8">
+                <div class="tab-content active flex h-full flex-col gap-5 rounded bg-white p-5">
+                    <span class="block text-xl font-bold">My Orders</span>
+
+                    <!-- Search form -->
+                    <div class="flex flex-wrap justify-between gap-5">
+                        <form class="search" action="#">
+                            <!-- ... (your search form HTML) ... -->
+                        </form>
+                        <!-- Order status filters -->
+                        <ul class="order-mix flex flex-wrap">
+                            <!-- ... (your order status filters HTML) ... -->
+                        </ul>
+                    </div>
+
+                    <!-- Order details section -->
+                    <div class="mix-elements mix-all grid grid-cols-12">
+                        <div class="mix mix-main mix-processing col-span-12">
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var group in Model.GroupBy(x => x.oOrderCode))
+                                {
+                                    var orderCode = group.Key;
+
+                                    <!-- Render each order in the group -->
+                                    <a class="btn-open-modal transition-all-300 relative block p-4 hover:bg-gray-100"
+                                       href="javascript:void(0)"
+                                       data-target=".order-details-modal">
+                                        <div class="pointer-events-none flex flex-col gap-5 sm:flex-row">
+                                            @foreach (var item in group)
+                                            {
+                                                <!-- Render each product in the order -->
+                                                <span class="clamp-2 break-all text-lg font-semibold">
+                                                    <span> @item.Product.ProductName, </span>
+                                                </span>
+                                            }
+
+                                            <!-- Display order information -->
+                                            <div class="my-1 flex items-center gap-1 text-xs">
+                                                <i class="bi bi-clock flex"></i>
+                                                <span>@group.First().Order.OrderDate.Value.ToString("dd-MM-yyyy")</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="text-xs font-light">Transaction. ID</span>
+                                                <span class="text-sm font-semibold">#@orderCode</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <!-- Display a message if there are no orders -->
+                                <p class="text-center font-semibold">Bạn chưa có đơn hàng nào</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("GetOrderDetails", new { accountCode = accountCode, page }))
+        </div>
+    </div>
+}

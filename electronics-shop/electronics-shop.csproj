@@ -621,8 +621,11 @@
     <Content Include="Views\Shared\_RenderShoppingCart.cshtml" />
     <Content Include="Views\Account\Partial_History_Order.cshtml" />
     <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
-    <Content Include="Views\Account\MyOrder.cshtml" />
     <Content Include="Views\Shared\Partial_Inf_Acc.cshtml" />
+    <Content Include="Views\Account\MyOrder.cshtml" />
+    <Content Include="Views\Account\GetOrderDetails.cshtml" />
+    <Content Include="Views\Account\Partial_Order_Details.cshtml" />
+    <Content Include="Views\Account\ok.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -379,3 +379,18 @@ function LoadCart() {
     });
 }
 
+var currentPage = 1;
+
+function loadMore() {
+    currentPage++;
+    var url = '@Url.Action("GetOrderDetails", new { accountCode = Model.First().Order.AccountCode })?page=' + currentPage;
+
+    $.get(url, function (data) {
+        $('#orderDetailsContainer').append(data);
+    });
+}
+
+// Example button click to load more
+$('#showMoreButton').on('click', function () {
+    loadMore();
+});

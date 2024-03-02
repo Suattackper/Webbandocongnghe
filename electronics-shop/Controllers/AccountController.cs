@@ -16,6 +16,7 @@ using System.Drawing.Drawing2D;
 using System.Web.Services.Description;
 using System.Text;
 using System.Security.Principal;
+using PagedList;
 
 namespace electronics_shop.Controllers
 {
@@ -721,7 +722,62 @@ namespace electronics_shop.Controllers
             var item = db.Orders.Where(x => x.AccountCode == id).ToList();
             return PartialView(item);
         }
+        public ActionResult Partial_Order_Details(int id)
+        {
 
+            var item = db.Orders.Find(id);
+            List<OrderDetail> list = db.OrderDetails.Where(p => p.OrderCode == id).ToList();
+            ViewBag.orderdetail = list;
+
+            return View(item);
+        }
+
+
+        public ActionResult ok(int ordercode)
+        {
+
+            List<OrderDetail> list = db.OrderDetails.Where(x => x.OrderCode == ordercode).ToList();
+
+
+
+            return View(list);
+        }
+
+
+        public ActionResult GetOrderDetails(int accountCode, int page = 1, int pageSize = 4)
+        {
+            var orderDetails = db.OrderDetails
+                .Where(x => x.Order.AccountCode == accountCode)
+                .OrderBy(x => x.OrderCode)
+                .ToPagedList(page, pageSize);
+
+            return PartialView("_OrderDetailsPartial", orderDetails);
+        }
+
+        public ActionResult MyOrder(int accountCode)
+        {
+            if (Session["UserId"] != null)
+            {
+                int userID = (int)Session["UserId"];
+                ViewBag.UserId = userID;
+            }
+            List<Order> order = db.Orders.Where(x => x.AccountCode == accountCode).ToList();
+            ViewBag.Order = order;
+            List<OrderDetail> list = db.OrderDetails.Where(x => x.Order.AccountCode == accountCode).ToList();
+            Account account = db.Accounts.Find(accountCode);
+            Session["imgPath"] = account.Avatar;
+            return View(list);
+        }
+        public ActionResult Partial_Inf_Acc(int accountCode)
+        {
+            if (TempData.ContainsKey("Error"))
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            Account account = db.Accounts.Find(accountCode);
+            Session["imgPath"] = account.Avatar;
+            return PartialView("Partial_Inf_Acc", account);
+        }
 
         /*===============================*/
         // Huỳnh Như 19/12/23 11:50 PM

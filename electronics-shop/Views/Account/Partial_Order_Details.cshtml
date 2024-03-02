@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewBag.Title = "Partial_Order_Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+
+
+@model electronics_shop.Models.Order
+
+
+
+
+@if (Model != null)
+{
+   
+  
+           
+                <div style="padding:60px" class="flex flex-col gap-5">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="block text-xl font-bold">Order Details</span>
+                        <span class="font-semibold">(#@Model.OrderCode)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm text-slate-400"><i class="bi bi-calendar3 mr-1"></i>@Model.OrderDate</span>
+                        </div>
+                    </div>
+                    @if (Model.PaymentCode == 1)
+                    {
+                        <div class="rounded-lg bg-white p-2 sm:p-5">
+                            <span class="block pb-4 font-semibold">Order Status</span>
+                            <div class="progressbar-container delivery-status mx-auto flex w-4/5 items-center justify-between gap-2 pb-5">
+                                <div class="step-number relative flex justify-center">
+                                    <div class="transition-all-300 active flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-current">
+                                        <i class="bi bi-clipboard-check flex"></i>
+                                    </div>
+                                    <span class="absolute bottom-[-25px] hidden whitespace-nowrap text-sm sm:block">Đã Đặt</span>
+                                </div>
+                                <div class="progressbar relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                                    <div class="transition-all-300 absolute h-full w-full rounded-full bg-green-500"></div>
+                                </div>
+
+                                <div class="step-number relative flex justify-center">
+                                    <div class="transition-all-300 flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-current">
+                                        <i class="bi bi-check flex"></i>
+                                        <span class="absolute bottom-[-25px] hidden whitespace-nowrap text-sm sm:block"> Hoàn Thành</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="rounded-lg bg-white p-2 sm:p-5">
+                            <span class="block pb-4 font-semibold">Order Status</span>
+                            <div class="progressbar-container delivery-status mx-auto flex w-4/5 items-center justify-between gap-2 pb-5">
+                                <div class="step-number relative flex justify-center">
+                                    <div class="transition-all-300 active flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-current">
+                                        <i class="bi bi-clipboard-check flex"></i>
+                                    </div>
+                                    <span class="absolute bottom-[-25px] hidden whitespace-nowrap text-sm sm:block">Đã Đặt</span>
+                                </div>
+                                <div class="progressbar relative h-2 w-full overflow-hidden rounded-full bg-gray-200">
+                                    <div class="transition-all-300 absolute h-full w-full rounded-full bg-green-500"></div>
+                                </div>
+
+                                <div class="step-number relative flex justify-center">
+                                    <div class="transition-all-300 active flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-current">
+                                        <i class="bi bi-check flex"></i>
+                                        <span class="absolute bottom-[-25px] hidden whitespace-nowrap text-sm sm:block">Hoàn Thành</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="rounded-lg bg-white p-2 sm:p-5">
+                        <span class="block pb-4 font-semibold">Destination</span>
+                        <span>
+                            @Model.AccountAddress.City , @Model.AccountAddress.District, @Model.AccountAddress.Ward ,@Model.AccountAddress.Number
+                        </span>
+
+
+                    </div>
+                    <!-- Phần hiển thị danh sách sản phẩm -->
+                    <div class="rounded-lg bg-white p-2 sm:p-5">
+                        <span class="block pb-4 font-semibold">Sản Phẩm</span>
+                        <div class="max-h-[300px] overflow-auto">
+                            @{ decimal tamtinh = decimal.Zero;
+                                decimal giamgia = decimal.Zero;
+                                    }
+                            @foreach (var item in ViewBag.orderdetail)
+                            {
+                                <a class="flex w-full flex-col items-center justify-between gap-5 bg-white p-2 hover:bg-gray-100 sm:flex-row"
+                                   href="#">
+                                    <div class="h-[80px] w-[80px] min-w-[80px] overflow-hidden rounded-lg border">
+                                        @{
+                                            byte[] imageData = item.Product.ImageProduct;
+                                            string base64String = Convert.ToBase64String(imageData);
+                                        }
+                                        <img src="data:image/png;base64,@base64String" class="h-full w-full object-cove" alt="Product" />
+                                        @*<img class="h-full w-full object-cover"
+                    src="images/product/prod-1.jpg"
+                    alt="product" />*@
+                                    </div>
+                                    <div class="flex w-full flex-col">
+                                        <h6 class="clamp-2 break-all text-lg font-semibold">
+                                            @item.Product.ProductName
+                                        </h6>
+                                        <div class="flex gap-2">
+                                            <div class="flex items-center">
+                                                <span class="font-bold text-primary-color">@string.Format("₫{0:#,0}", item.Price)</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm">
+                                            <span class="font-bold">Tổng:</span>
+                                            <span>@string.Format("₫{0:#,0}", item.Price * item.Quantity)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                                    tamtinh += (decimal)(item.Quantity * item.Price);
+
+                                     //giamgia = (decimal)tamtinh - (decimal)ViewBag.Tong + 30000;
+                                
+                            }
+                        </div>
+                    </div>
+                
+                    <!-- Phần hiển thị Tổng Thanh Toán -->
+                    <div class="rounded-lg bg-white p-2 sm:p-5">
+                        <span class="block pb-4 font-semibold">Tổng Thanh Toán</span>
+                        <div class="flex flex-wrap items-center justify-between py-1">
+                            <span>Tổng giá trị đơn hàng:</span>
+                            <span>@string.Format("₫{0:#,0}", Model.OrderTotal)</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between py-1">
+                            <span>Phí vận chuyển:</span>
+                            <span>@string.Format("₫{0:#,0}", 30000)</span>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between py-1">
+                            <span>Giảm giá:</span>
+                            <span>@string.Format("₫{0:#,0}", Model.OrderTotal - tamtinh - 30000)</span>
+                           
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between py-1 font-bold">
+                            <span>Tổng thanh toán:</span>
+                            <span>@string.Format("₫{0:#,0}", Model.OrderTotal)</span>
+                        </div>
+                    </div>
+
+                    <a class="btn-close-modal btn-effect ml-auto w-max rounded-lg bg-primary-color p-2 px-3 font-bold uppercase text-white"
+                       href="@Url.Action("MyOrder", "Account", new {accountCode= Model.AccountCode})">
+                        <span class="text-center">Quay Lại</span>
+                    </a>
+                </div>
+          
+      
+
+
+}
+
+
+
+
+
+

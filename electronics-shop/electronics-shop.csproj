@@ -1200,6 +1200,7 @@
     <Content Include="Areas\admin\Content\js\popper.js\dist\popper.min.js" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper-utils.min.js" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper.min.js" />
+    <Content Include="Areas\admin\Content\js\popper.js\orders.js" />
     <Content Include="Areas\admin\Content\js\products.js" />
     <Content Include="Areas\admin\Content\js\repry-feedback.js" />
     <Content Include="Areas\admin\Content\js\scripts.bundle.js" />
@@ -1632,6 +1633,9 @@
     <Content Include="Views\Account\ForgotPassword3.cshtml" />
     <Content Include="Views\Shared\ErrorForgotPassword.cshtml" />
     <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
+    <Content Include="Views\Account\MyOrder.cshtml" />
+    <Content Include="Views\Account\Partial_Order_Details.cshtml" />
+    <Content Include="Views\Shared\Partial_Inf_Acc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

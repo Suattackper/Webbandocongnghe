@@ -803,10 +803,20 @@ namespace electronics_shop.Controllers
 
         public ActionResult GoogleLogin()
         {
+            //string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
+            //string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
+
+            //string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope=openid%20email&approval_prompt=force&access_type=offline", redirectUri, clientId);
+
+            //return Redirect(googleUrl);
+
             string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
             string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
 
-            string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope=openid%20email&approval_prompt=force&access_type=offline", redirectUri, clientId);
+            // Thêm các phạm vi truy cập cần thiết vào đây
+            string scope = "openid email profile"; // Thêm 'profile' để yêu cầu thông tin tên, họ của người dùng
+
+            string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope={2}&approval_prompt=force&access_type=offline", redirectUri, clientId, scope);
 
             return Redirect(googleUrl);
         }
@@ -841,23 +851,23 @@ namespace electronics_shop.Controllers
             var accessToken = tokenData["access_token"];
             var userInfoClient = new HttpClient();
             userInfoClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var userInfoResponse = await userInfoClient.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
+            var userInfoResponse = await userInfoClient.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
             var userInfoResponseContent = await userInfoResponse.Content.ReadAsStringAsync();
             var userInfo = JsonConvert.DeserializeObject<dynamic>(userInfoResponseContent);
 
-            // Lưu thông tin người dùng vào Session hoặc cơ sở dữ liệu
-            //Session["GoogleUserId"] = userInfo.id;
-            //Session["GoogleEmail"] = userInfo.email;
-            //Session["GoogleName"] = userInfo.name;
-            // Lưu các thông tin khác tùy ý
-
-            // Chuyển hướng người dùng đến trang chủ của ứng dụng
-            //return RedirectToAction("Index", "Home");
-
             Account account = new Account();
             //account.FirstName = userInfo.name;
-            account.FirstName = userInfo.email;
+            account.FirstName = userInfo.given_name; // Tên đệm của người dùng
+            account.LastName = userInfo.family_name; // Họ của người dùng
             account.Email = userInfo.email;
+
+            //var userId = userInfo.sub; // ID duy nhất của người dùng
+            //var fullName = userInfo.name; // Tên đầy đủ của người dùng
+            //var firstName = userInfo.given_name; // Tên đệm của người dùng
+            //var lastName = userInfo.family_name; // Họ của người dùng
+            //var email = userInfo.email; // Địa chỉ email của người dùng
+            //var pictureUrl = userInfo.picture; // URL hình ảnh đại diện của người dùng
+            //var locale = userInfo.locale; // Ngôn ngữ của người dùng
 
 
             var checkMail = db.Accounts.Where(m => m.Email == account.Email).FirstOrDefault();

@@ -17,6 +17,14 @@ using System.Web.Services.Description;
 using System.Text;
 using System.Security.Principal;
 using PagedList;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Configuration;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using IdentityModel.Client;
+using System.Web.Helpers;
 
 namespace electronics_shop.Controllers
 {
@@ -777,6 +785,112 @@ namespace electronics_shop.Controllers
             Account account = db.Accounts.Find(accountCode);
             Session["imgPath"] = account.Avatar;
             return PartialView("Partial_Inf_Acc", account);
+        }
+
+
+
+
+
+
+
+
+
+        //gg
+
+
+
+
+
+        public ActionResult GoogleLogin()
+        {
+            string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
+            string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
+
+            string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope=openid%20email&approval_prompt=force&access_type=offline", redirectUri, clientId);
+
+            return Redirect(googleUrl);
+        }
+        public async Task<ActionResult> GoogleLoginCallback(string code)
+        {
+
+            //return RedirectToAction("Index","Home");
+            // Xử lý mã code và lấy thông tin người dùng từ Google
+            // Sau đó, lưu thông tin người dùng vào Session hoặc cơ sở dữ liệu
+            // và chuyển hướng người dùng đến trang chủ của ứng dụng
+
+            // Xử lý mã code và lấy thông tin truy cập từ Google
+            string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
+            string clientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"];
+            string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
+
+            var tokenRequestParameters = new Dictionary<string, string>
+            {
+                { "code", code },
+                { "client_id", clientId },
+                { "client_secret", clientSecret },
+                { "redirect_uri", redirectUri },
+                { "grant_type", "authorization_code" }
+            };
+
+            var tokenClient = new HttpClient();
+            var tokenResponse = await tokenClient.PostAsync("https://oauth2.googleapis.com/token", new FormUrlEncodedContent(tokenRequestParameters));
+            var tokenResponseContent = await tokenResponse.Content.ReadAsStringAsync();
+            var tokenData = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenResponseContent);
+
+            // Sử dụng token truy cập để lấy thông tin người dùng từ Google API
+            var accessToken = tokenData["access_token"];
+            var userInfoClient = new HttpClient();
+            userInfoClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            var userInfoResponse = await userInfoClient.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
+            var userInfoResponseContent = await userInfoResponse.Content.ReadAsStringAsync();
+            var userInfo = JsonConvert.DeserializeObject<dynamic>(userInfoResponseContent);
+
+            // Lưu thông tin người dùng vào Session hoặc cơ sở dữ liệu
+            //Session["GoogleUserId"] = userInfo.id;
+            //Session["GoogleEmail"] = userInfo.email;
+            //Session["GoogleName"] = userInfo.name;
+            // Lưu các thông tin khác tùy ý
+
+            // Chuyển hướng người dùng đến trang chủ của ứng dụng
+            //return RedirectToAction("Index", "Home");
+
+            Account account = new Account();
+            //account.FirstName = userInfo.name;
+            account.FirstName = userInfo.email;
+            account.Email = userInfo.email;
+
+
+            var checkMail = db.Accounts.Where(m => m.Email == account.Email).FirstOrDefault();
+            //var checkPhone = db.Accounts.Where(m => m.PhoneNumber == account.PhoneNumber).FirstOrDefault();
+
+            if (checkMail != null)
+            {
+                // Kiểm tra email và sdt có trong CSDL
+                Session["info"] = checkMail;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+
+                string imagePath = Server.MapPath("~/Content/images/comments/profile_1.png");
+                byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
+
+                account.RoleID = 3;
+                //account.AccountStatus = true;
+                //account.Password = Encryptor.MD5Hash(account.Password);
+                account.CreateAt = DateTime.Now;
+                account.Avatar = imageBytes;
+
+                account.Update_By = account.Email;
+                account.Update_At = DateTime.Now;
+
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                var check = db.Accounts.SingleOrDefault(m => m.Email == account.Email);
+                Session["info"] = check;
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         /*===============================*/

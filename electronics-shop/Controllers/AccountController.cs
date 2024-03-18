@@ -902,108 +902,85 @@ namespace electronics_shop.Controllers
             }
 
         }
+        public ActionResult FacebookLogin()
+        {
+            string appId = ConfigurationManager.AppSettings["FacebookAppId"];
+            string redirectUri = Url.Action("FacebookLoginCallback", "Account", null, Request.Url.Scheme);
 
-        /*===============================*/
-        // Huỳnh Như 19/12/23 11:50 PM
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditProfile(Account account, HttpPostedFileBase uploadFile)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            if (uploadFile != null)
-        //            {
-        //                var fileName = Path.GetFileName(uploadFile.FileName);
+            // Xác định các phạm vi truy cập mà bạn muốn yêu cầu
+            string scope = "email public_profile";
 
-        //                var path = Path.Combine(Server.MapPath("~/Content/images/comments/"), fileName);
+            string facebookUrl = string.Format("https://www.facebook.com/v12.0/dialog/oauth?client_id={0}&redirect_uri={1}&response_type=code&scope={2}", appId, redirectUri, scope);
+            //Chuyển hướng người dùng đến trang xác nhận đăng nhập
+            return Redirect(facebookUrl);
+        }
+        public async Task<ActionResult> FacebookLoginCallback(string code)
+        {
+            string appId = ConfigurationManager.AppSettings["FacebookAppId"];
+            string appSecret = ConfigurationManager.AppSettings["FacebookAppSecret"];
+            string redirectUri = Url.Action("FacebookLoginCallback", "Account", null, Request.Url.Scheme);
 
-        //                // Convert hình ảnh thành byte array và lưu vào cơ sở dữ liệu
-        //                using (var binaryReader = new BinaryReader(uploadFile.InputStream))
-        //                {
-        //                    account.Avatar = binaryReader.ReadBytes(uploadFile.ContentLength);
-        //                }
+            //Tạo một dictionary tokenRequestParameters chứa các thông tin cần thiết cho yêu cầu mã truy cập từ Facebook.
+            var tokenRequestParameters = new Dictionary<string, string>
+            {
+                { "code", code },
+                { "client_id", appId },
+                { "client_secret", appSecret },
+                { "redirect_uri", redirectUri }
+            };
 
-        //                // Cập nhật đường dẫn hình ảnh mới cho thành viên
-        //                db.Entry(account).State = EntityState.Modified;
+            var tokenClient = new HttpClient();
+            var tokenResponse = await tokenClient.GetAsync("https://graph.facebook.com/v12.0/oauth/access_token?" + string.Join("&", tokenRequestParameters.Select(x => $"{x.Key}={x.Value}")));
+            var tokenResponseContent = await tokenResponse.Content.ReadAsStringAsync();
+            var tokenData = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenResponseContent);
 
+            string accessToken = tokenData["access_token"];
 
-        //                // Lấy đường dẫn hình ảnh cũ và xóa nếu không còn được sử dụng
-        //                string oldImgPath = Request.MapPath(Session["imgPath"].ToString()); // Lấy đường dẫn ảnh (absolute path)
+            // Sử dụng accessToken để gọi API Facebook để lấy thông tin người dùng
+            var userInfoClient = new HttpClient();
+            //var userInfoResponse = await userInfoClient.GetAsync($"https://graph.facebook.com/me?fields=id,name,email&access_token={accessToken}");
+            var userInfoResponse = await userInfoClient.GetAsync($"https://graph.facebook.com/me?fields=id,name,email,first_name,last_name&access_token={accessToken}");
 
-        //                var avatarName = Session["imgPath"].ToString(); // Lấy đường dẫn ảnh (relative path)
+            var userInfoResponseContent = await userInfoResponse.Content.ReadAsStringAsync();
+            var userInfo = JsonConvert.DeserializeObject<dynamic>(userInfoResponseContent);
 
-        //                // Chuyển đổi sang bytes
-
-        //                byte[] imgBytes = System.IO.File.ReadAllBytes(avatarName);
-
-        //                // Kiểm tra ảnh có trùng với avatar của member nào không
-        //                var checkAvatar = db.Accounts.Where(model => model.Avatar == imgBytes).ToList();
-
-
-        //                // nếu checkavatar là null hoặc không có phần tử nào được tìm thấy trong truy vấn
-        //                if (checkAvatar == null)
-        //                {
-        //                    // lưu trữ hình ảnh mới vào cơ sở dữ liệu
-        //                    fileName = Path.GetFileName(uploadFile.FileName);
-        //                    path = Path.Combine(Server.MapPath("~/Content/images/comments/"), fileName);
-
-        //                    using (var binaryReader = new BinaryReader(uploadFile.InputStream))
-        //                    {
-        //                        account.Avatar = binaryReader.ReadBytes(uploadFile.ContentLength);
-        //                    }
-
-        //                    db.Entry(account).State = EntityState.Modified;
-        //                    db.SaveChanges();
-        //                }
+            // Xử lý thông tin người dùng và lưu vào Session hoặc cơ sở dữ liệu
+            Account account = new Account();
+            account.FirstName = userInfo.first_name; // Tên đệm của người dùng
+            account.LastName = userInfo.last_name; // Họ của người dùng
+            account.Email = userInfo.email;
 
 
+            var checkMail = db.Accounts.Where(m => m.Email == account.Email).FirstOrDefault();
+            //var checkPhone = db.Accounts.Where(m => m.PhoneNumber == account.PhoneNumber).FirstOrDefault();
 
-        //                if (db.SaveChanges() > 0)
-        //                {
-        //                    uploadFile.SaveAs(path);
-        //                    if (System.IO.File.Exists(oldImgPath) && checkAvatar.Count < 2) // Nếu tồn tại hình trong folder và không member nào có hình này thì xóa ra khỏi folder
-        //                    {
-        //                        System.IO.File.Delete(oldImgPath);
-        //                    }
-        //                    // Lấy thông tin mới cập nhập lưu vào session
-        //                    var info = db.Accounts.Where(model => model.AccountCode == account.AccountCode).SingleOrDefault();
-        //                    Session["info"] = info;
-        //                    return RedirectToAction("Index", "Home");
-        //                }
-        //            }
-        //            else
-        //            {
-        //                if (Session["imgPath"] != null)
-        //                {
-        //                    string imagePath = Session["imgPath"].ToString();
-        //                    byte[] imageBytes = System.IO.File.ReadAllBytes(Server.MapPath(imagePath));
-        //                    account.Avatar = imageBytes;
-        //                    // Tiếp tục xử lý logic của bạn
-        //                }
+            if (checkMail != null)
+            {
+                // Kiểm tra email và sdt có trong CSDL
+                Session["info"] = checkMail;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
 
-        //                db.Entry(account).State = EntityState.Modified;
+                string imagePath = Server.MapPath("~/Content/images/comments/profile_1.png");
+                byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
 
-        //                if (db.SaveChanges() > 0)
-        //                {
-        //                    // Lấy thông tin mới cập nhập lưu vào session
-        //                    var info = db.Accounts.Where(model => model.AccountCode == account.AccountCode).SingleOrDefault();
-        //                    Session["info"] = info;
-        //                    return RedirectToAction("Index", "Home");
-        //                }
-        //            }
-        //        }
-        //        ViewBag.RoleID = new SelectList(db.Roles, "RoleID", "RoleName", account.RoleID);
-        //        return View(account);
+                account.RoleID = 3;
+                //account.AccountStatus = true;
+                //account.Password = Encryptor.MD5Hash(account.Password);
+                account.CreateAt = DateTime.Now;
+                account.Avatar = imageBytes;
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["msgEditProfieFailed"] = "Edit failed! " + ex.Message;
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //}
+                account.Update_By = account.Email;
+                account.Update_At = DateTime.Now;
 
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                var check = db.Accounts.SingleOrDefault(m => m.Email == account.Email);
+                Session["info"] = check;
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

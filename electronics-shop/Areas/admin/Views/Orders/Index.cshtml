@@ -125,10 +125,10 @@
                                     <td> @item.Account.PhoneNumber </td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a class="btn @( item.PaymentCode ==2? "btn-light-success" :"btn-light-danger") id="waiting_btn_@*@item.order_id*@"> @(item.PaymentCode ==2 ?"Đã Thanh Toán":"Chưa thanh toán")</a>
+                                            <a class="btn @( item.PaymentCode ==2? "btn-light-success" :"btn-light-danger") id="waiting_btn_@*@item.order_id*@ trangthai"> @(item.PaymentCode ==2 ?"Đã Thanh Toán":"Chưa thanh toán")</a>
                                             @if (item.PaymentCode == 1)
                                             {
-                                                <a class="btn btn-light-danger"> Đang Giao Hàng </a>
+                                                <a class="btn btn-light-danger tinhtrang"> Đang Giao Hàng </a>
                                             }
                                             else
                                             {
@@ -455,6 +455,7 @@
         $(document).ready(function (){
             $('body').on('click', '.btnCapNhat', function (){
                 var id = $(this).data("id");
+
                 $("#txtOrderId").val(id);
                 $("#txtOrderId2").val(id);
                 $('#update-order-modal').modal('show');
@@ -467,17 +468,31 @@
                 var tt = $('#ddTrangThai').val();
                 var gh = $('#ddTrangThaiGiaoHang').val().toLowerCase();
                 if (tt !== '2' && gh!=='false' ) {
-                    iziToast.error({
-                        title: 'Lỗi',
-                        message: 'Đơn hàng chưa thanh toán, không thể cập nhật giao hàng thành công',
-                        icon: 'bi bi-check-circle-fill',  
-                        position: 'topCenter',
-                        iconColor: "#fff",
-                        titleColor: "#fff",
-                        messageColor: "#fff",
-                        backgroundColor: "rgba(247, 0, 92, 0.9)" 
+                    //iziToast.error({
+                    //    title: 'Lỗi',
+                    //    message: 'Đơn hàng chưa thanh toán, không thể cập nhật giao hàng thành công',
+                    //    icon: 'bi bi-check-circle-fill',  
+                    //    position: 'topCenter',
+                    //    iconColor: "#fff",
+                    //    titleColor: "#fff",
+                    //    messageColor: "#fff",
+                    //    backgroundColor: "rgba(247, 0, 92, 0.9)" 
                         
-                    });
+                    //});
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Đơn hàng chưa thanh toán, không thể cập nhật giao hàng thành công'
+                    })
                     return;
                     
                 }
@@ -489,17 +504,31 @@
                         if (res.Success) {
 
                             location.reload();
-                            iziToast.success({
-                                title: 'Thành Công  ',
-                                message: 'Cập nhật trạng thái thành công',
-                                position: 'topCenter',
-                                iconColor: "#fff",
-                                titleColor: "#fff",
-                                messageColor: "#fff",
-                                backgroundColor: "rgba(58, 240, 61, 0.9)",
+                            //iziToast.success({
+                            //    title: 'Thành Công  ',
+                            //    message: 'Cập nhật trạng thái thành công',
+                            //    position: 'topCenter',
+                            //    iconColor: "#fff",
+                            //    titleColor: "#fff",
+                            //    messageColor: "#fff",
+                            //    backgroundColor: "rgba(58, 240, 61, 0.9)",
 
 
-                            });
+                            //});
+                            //const Toast = Swal.mixin({
+                            //    toast: true,
+                            //    position: 'top-end',
+                            //    showConfirmButton: false,
+                            //    timer: 1000,
+                            //    didOpen: (toast) => {
+                            //        toast.addEventListener('mouseenter', Swal.stopTimer)
+                            //        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            //    }
+                            //})
+                            //Toast.fire({
+                            //    icon: 'success',
+                            //    title: 'Cập nhật trạng thái thành công'
+                            //})
                         }
                     }
                 });

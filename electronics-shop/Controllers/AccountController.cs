@@ -743,11 +743,7 @@ namespace electronics_shop.Controllers
 
         public ActionResult ok(int ordercode)
         {
-
             List<OrderDetail> list = db.OrderDetails.Where(x => x.OrderCode == ordercode).ToList();
-
-
-
             return View(list);
         }
 
@@ -787,52 +783,24 @@ namespace electronics_shop.Controllers
             return PartialView("Partial_Inf_Acc", account);
         }
 
-
-
-
-
-
-
-
-
-        //gg
-
-
-
-
-
         public ActionResult GoogleLogin()
         {
-            //string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
-            //string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
-
-            //string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope=openid%20email&approval_prompt=force&access_type=offline", redirectUri, clientId);
-
-            //return Redirect(googleUrl);
-
             string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
+            // tạo ra URL
             string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
-
             // Thêm các phạm vi truy cập cần thiết vào đây
-            string scope = "openid email profile"; // Thêm 'profile' để yêu cầu thông tin tên, họ của người dùng
-
+            string scope = "openid email profile";
             string googleUrl = string.Format("https://accounts.google.com/o/oauth2/auth?redirect_uri={0}&response_type=code&client_id={1}&scope={2}&approval_prompt=force&access_type=offline", redirectUri, clientId, scope);
-
             return Redirect(googleUrl);
         }
         public async Task<ActionResult> GoogleLoginCallback(string code)
         {
-
-            //return RedirectToAction("Index","Home");
-            // Xử lý mã code và lấy thông tin người dùng từ Google
-            // Sau đó, lưu thông tin người dùng vào Session hoặc cơ sở dữ liệu
-            // và chuyển hướng người dùng đến trang chủ của ứng dụng
-
-            // Xử lý mã code và lấy thông tin truy cập từ Google
+            //Lấy thông tin truy cập từ Google
             string clientId = ConfigurationManager.AppSettings["GoogleClientId"];
             string clientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"];
             string redirectUri = Url.Action("GoogleLoginCallback", "Account", null, Request.Url.Scheme);
 
+            //Tạo một dictionary tokenRequestParameters chứa các thông tin cần thiết cho yêu cầu mã truy cập từ Google.
             var tokenRequestParameters = new Dictionary<string, string>
             {
                 { "code", code },
@@ -844,34 +812,28 @@ namespace electronics_shop.Controllers
 
             var tokenClient = new HttpClient();
             var tokenResponse = await tokenClient.PostAsync("https://oauth2.googleapis.com/token", new FormUrlEncodedContent(tokenRequestParameters));
+            //đọc nội dung của phản hồi dưới dạng một chuỗi
             var tokenResponseContent = await tokenResponse.Content.ReadAsStringAsync();
+            //phân tích chuỗi JSON phản hồi từ Google thành một đối tượng Dictionary chứa thông tin về access token và các thông tin liên quan
             var tokenData = JsonConvert.DeserializeObject<Dictionary<string, string>>(tokenResponseContent);
 
             // Sử dụng token truy cập để lấy thông tin người dùng từ Google API
             var accessToken = tokenData["access_token"];
             var userInfoClient = new HttpClient();
             userInfoClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            // gửi một yêu cầu GET đến https://www.googleapis.com/oauth2/v3/userinfo của Google API để lấy thông tin người dùng
             var userInfoResponse = await userInfoClient.GetAsync("https://www.googleapis.com/oauth2/v3/userinfo");
+            //đọc nội dung của phản hồi dưới dạng một chuỗi
             var userInfoResponseContent = await userInfoResponse.Content.ReadAsStringAsync();
+            //phân tích chuỗi JSON của nội dung phản hồi thành một đối tượng dynamic chứa thông tin về người dùng từ Google API
             var userInfo = JsonConvert.DeserializeObject<dynamic>(userInfoResponseContent);
 
             Account account = new Account();
-            //account.FirstName = userInfo.name;
             account.FirstName = userInfo.given_name; // Tên đệm của người dùng
-            account.LastName = userInfo.family_name; // Họ của người dùng
+            account.LastName = userInfo.family_name; // Họ của người dùngaaa23
             account.Email = userInfo.email;
 
-            //var userId = userInfo.sub; // ID duy nhất của người dùng
-            //var fullName = userInfo.name; // Tên đầy đủ của người dùng
-            //var firstName = userInfo.given_name; // Tên đệm của người dùng
-            //var lastName = userInfo.family_name; // Họ của người dùng
-            //var email = userInfo.email; // Địa chỉ email của người dùng
-            //var pictureUrl = userInfo.picture; // URL hình ảnh đại diện của người dùng
-            //var locale = userInfo.locale; // Ngôn ngữ của người dùng
-
-
             var checkMail = db.Accounts.Where(m => m.Email == account.Email).FirstOrDefault();
-            //var checkPhone = db.Accounts.Where(m => m.PhoneNumber == account.PhoneNumber).FirstOrDefault();
 
             if (checkMail != null)
             {
@@ -881,16 +843,12 @@ namespace electronics_shop.Controllers
             }
             else
             {
-
                 string imagePath = Server.MapPath("~/Content/images/comments/profile_1.png");
                 byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
 
                 account.RoleID = 3;
-                //account.AccountStatus = true;
-                //account.Password = Encryptor.MD5Hash(account.Password);
                 account.CreateAt = DateTime.Now;
                 account.Avatar = imageBytes;
-
                 account.Update_By = account.Email;
                 account.Update_At = DateTime.Now;
 
@@ -938,7 +896,6 @@ namespace electronics_shop.Controllers
 
             // Sử dụng accessToken để gọi API Facebook để lấy thông tin người dùng
             var userInfoClient = new HttpClient();
-            //var userInfoResponse = await userInfoClient.GetAsync($"https://graph.facebook.com/me?fields=id,name,email&access_token={accessToken}");
             var userInfoResponse = await userInfoClient.GetAsync($"https://graph.facebook.com/me?fields=id,name,email,first_name,last_name&access_token={accessToken}");
 
             var userInfoResponseContent = await userInfoResponse.Content.ReadAsStringAsync();
@@ -962,16 +919,12 @@ namespace electronics_shop.Controllers
             }
             else
             {
-
                 string imagePath = Server.MapPath("~/Content/images/comments/profile_1.png");
                 byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
 
                 account.RoleID = 3;
-                //account.AccountStatus = true;
-                //account.Password = Encryptor.MD5Hash(account.Password);
                 account.CreateAt = DateTime.Now;
                 account.Avatar = imageBytes;
-
                 account.Update_By = account.Email;
                 account.Update_At = DateTime.Now;
 

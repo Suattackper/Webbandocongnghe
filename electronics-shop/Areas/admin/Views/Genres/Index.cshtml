@@ -1,4 +1,7 @@
-﻿
+﻿@model PagedList.IPagedList<electronics_shop.Models.Category>
+
+@using PagedList.Mvc
+@using PagedList
 @{
     ViewBag.Title = "Danh mục sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
@@ -48,6 +51,15 @@
 <div class="d-flex flex-column-fluid">
     <div class="container  ">
         <div class="card">
+            @if (ViewBag.Error != null)
+            {
+                <<div class="alert alert-success alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @ViewBag.Error
+                </div>
+            }
             <!--begin::Card header-->
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
@@ -62,7 +74,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <form>
+                        <form action="@Url.Action("Search","Genres")" method="get">
                             <input type="search" name="search" class="form-control form-control-solid w-250px ps-14" placeholder="Tìm kiếm danh mục...">
                         </form>
                     </div>
@@ -103,10 +115,6 @@
                                 <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                                     <th class="min-w-50px" tabindex="1" arowspan="1" colspan="1" style="width:50px;">ID</th>
                                     <th class="min-w-150px" tabindex="2" rowspan="1" colspan="1" style="width:150px;">Tên danh mục</th>
-                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:100px;">Người tạo</th>
-                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Người cập nhật</th>
-                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Ngày tạo</th>
-                                    <th class="min-w-125px" tabindex="5" rowspan="1" colspan="1" style="width:120px;">Ngày Cập nhật</th>
                                     <th class="text-end min-w-100px sorting_disabled" rowspan="1" colspan="1" style="width: 130.25px;">Hành động</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -114,46 +122,42 @@
                             <!--end::Table head-->
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-bold">
-                                @*@foreach (var item in Model)
-                                    {*@
-                                <tr class="odd" id="item_@*@item.genre_id*@">
-                                    <td>@*@item.genre_id*@ </td>
-                                    <td>@*@item.genre_name*@</td>
-                                    <td>@*@item.create_by*@</td>
-                                    <td>@*@item.update_by*@</td>
-                                    <td>@*@item.create_at.ToString("HH:mm dd-MM-yyyy")*@</td>
-                                    <td>@*@item.update_at.ToString("HH:mm dd-MM-yyyy")*@</td>
-                                    <!--begin::Action=-->
-                                    <td class="text-end">
-                                        <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            Hành động
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
-                                            <span class="svg-icon svg-icon-5 m-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                        </a>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a @*onclick="editOpen(@item.genre_id, '@item.genre_name')"*@ class="menu-link px-3">Chỉnh sửa</a>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="odd" id="item_@*@item.genre_id*@">
+                                        <td>@item.CategoryCode </td>
+                                        <td>@item.CategoryName</td>
+                                        <!--begin::Action=-->
+                                        <td class="text-end">
+                                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                                Hành động
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                <span class="svg-icon svg-icon-5 m-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black"></path>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </a>
+                                            <!--begin::Menu-->
+                                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <a href="@Url.Action("Edit","Genres",new { id = item.CategoryCode })" class="menu-link px-3">Chỉnh sửa</a>
+                                                </div>
+                                                <!--end::Menu item-->
+                                                <!--begin::Menu item-->
+                                                <div class="menu-item px-3">
+                                                    <a href="@Url.Action("Delete","Genres",new { id = item.CategoryCode })" class="menu-link px-3">Xóa</a>
+                                                </div>
+                                                <!--end::Menu item-->
                                             </div>
-                                            <!--end::Menu item-->
-                                            <!--begin::Menu item-->
-                                            <div class="menu-item px-3">
-                                                <a @*onclick="deleteOpen(@item.genre_id,'@item.genre_name')"*@ class="menu-link px-3">Xóa</a>
-                                            </div>
-                                            <!--end::Menu item-->
-                                        </div>
-                                        <!--end::Menu-->
-                                    </td>
-                                    <!--end::Action=-->
-                                </tr>
-                                @*}*@
-                            </tbody>
+                                            <!--end::Menu-->
+                                        </td>
+                                        <!--end::Action=-->
+                                    </tr>
+                                 }
+                                </tbody>
                             <!--end::Table body-->
                         </table>
                     </div>
@@ -162,16 +166,32 @@
                         </div>
                         <div class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
                             <div>
-                                @*@Html.PagedListPager(Model, page => Url.Action("Index", new { search = @ViewBag.search, page }), new PagedListRenderOptions
+                                @if (ViewBag.Search == null || ViewBag.Search == "")
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
                                     {
-                                        LinkToPreviousPageFormat = prePageIcon,
-                                        LinkToNextPageFormat = nextPageIcon,
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
                                         DisplayLinkToFirstPage = PagedListDisplayMode.Never,
                                         DisplayLinkToLastPage = PagedListDisplayMode.Never,
                                         DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
                                         DisplayLinkToNextPage = PagedListDisplayMode.Always,
-                                        MaximumPageNumbersToDisplay = 10
-                                    })*@
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
+                                else
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("Search", new { search = ViewBag.Search, page }), new PagedListRenderOptions
+                                    {
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                                        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 10,
+                                        EllipsesFormat = "..."
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
@@ -208,7 +228,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kt_modal_new_target_form" class="form" action="#">
+                <form id="kt_modal_new_target_form" class="form" action="@Url.Action("Create","Genres")" method="post">
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
@@ -220,17 +240,17 @@
                     <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Tên loại</span>
+                            <span class="required">Tên danh mục</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" id="create__input" class="form-control form-control-solid" placeholder="Nhập tên">
+                        <input type="text" name="name" id="create__input" class="form-control form-control-solid" placeholder="Nhập tên">
                         <div class="fv-plugins-message-container invalid-feedback"></div>
                     </div>
                     <!--end::Input group-->
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="button" class="btn btn-light me-3 dimis-modal">Hủy bỏ</button>
-                        <button type="button" id="create__save" class="btn btn-primary">Lưu</button>
+                        <button type="submit" @*id="create__save"*@ class="btn btn-primary">Lưu</button>
                     </div>
                     <!--end::Actions-->
                 </form>

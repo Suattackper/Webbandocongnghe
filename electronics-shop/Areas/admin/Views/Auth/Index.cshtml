@@ -151,7 +151,8 @@
                                                 }
                                             </a>
                                         </td>
-                                        <td>@item.FirstName @item.LastName</td>
+                                        <!-- NHU 16/04/24 16:04 PM -->
+                                        <td><a href="@Url.Action("Details", "Auth")" class="text-gray-700">@item.FirstName @item.LastName</a></td>
                                         <td>@item.Email</td>
                                         <td>@item.PhoneNumber</td>
                                         @foreach (var i in ViewBag.Role)

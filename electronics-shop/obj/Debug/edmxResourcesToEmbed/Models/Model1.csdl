@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ECOMMERCEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ECOMMERCEadminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="AccountCode" />
@@ -54,7 +54,7 @@
     </Key>
     <Property Name="CategoryCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__4BAC3F29" FromRole="Category" ToRole="Product" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__76969D2E" FromRole="Category" ToRole="Product" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -67,7 +67,7 @@
     <Property Name="CommentTime" Type="DateTime" Precision="0" />
     <Property Name="Rate" Type="Double" />
     <NavigationProperty Name="Account" Relationship="Self.FK__Comment__Account__6383C8BA" FromRole="Comment" ToRole="Account" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__Comment__Product__6477ECF3" FromRole="Comment" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Comment__Product__6EF57B66" FromRole="Comment" ToRole="Product" />
   </EntityType>
   <EntityType Name="Contact">
     <Key>
@@ -151,11 +151,11 @@
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ViewCount" Type="Int32" />
     <Property Name="Rate" Type="Double" />
-    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__4BAC3F29" FromRole="Product" ToRole="Category" />
-    <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__6477ECF3" FromRole="Product" ToRole="Comment" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__76969D2E" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__6EF57B66" FromRole="Product" ToRole="Comment" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__5EBF139D" FromRole="Product" ToRole="OrderDetail" />
-    <NavigationProperty Name="Promotion" Relationship="Self.FK__Product__Promoti__4CA06362" FromRole="Product" ToRole="Promotion" />
-    <NavigationProperty Name="ProductImgs" Relationship="Self.FK__ProductIm__Produ__4F7CD00D" FromRole="Product" ToRole="ProductImg" />
+    <NavigationProperty Name="Promotion" Relationship="Self.FK__Product__Promoti__778AC167" FromRole="Product" ToRole="Promotion" />
+    <NavigationProperty Name="ProductImgs" Relationship="Self.FK__ProductIm__Produ__787EE5A0" FromRole="Product" ToRole="ProductImg" />
   </EntityType>
   <EntityType Name="ProductImg">
     <Key>
@@ -164,7 +164,7 @@
     <Property Name="ProductImgCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Img" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="ProductCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__4F7CD00D" FromRole="ProductImg" ToRole="Product" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__787EE5A0" FromRole="ProductImg" ToRole="Product" />
   </EntityType>
   <EntityType Name="Promotion">
     <Key>
@@ -176,7 +176,7 @@
     <Property Name="StartDate" Type="DateTime" Precision="3" />
     <Property Name="EndDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Promotio__5BE2A6F2" FromRole="Promotion" ToRole="Orders" />
-    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__4CA06362" FromRole="Promotion" ToRole="Product" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__778AC167" FromRole="Promotion" ToRole="Product" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -185,16 +185,6 @@
     <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__RoleID__3C69FB99" FromRole="Roles" ToRole="Account" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK__Account__RoleID__3C69FB99">
     <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
@@ -268,7 +258,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__Categor__4BAC3F29">
+  <Association Name="FK__Product__Categor__76969D2E">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -280,7 +270,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Comment__Product__6477ECF3">
+  <Association Name="FK__Comment__Product__6EF57B66">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
     <ReferentialConstraint>
@@ -340,7 +330,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__Promoti__4CA06362">
+  <Association Name="FK__Product__Promoti__778AC167">
     <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -352,7 +342,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductIm__Produ__4F7CD00D">
+  <Association Name="FK__ProductIm__Produ__787EE5A0">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="ProductImg" Type="Self.ProductImg" Multiplicity="*" />
     <ReferentialConstraint>
@@ -379,7 +369,6 @@
     <EntitySet Name="ProductImgs" EntityType="Self.ProductImg" />
     <EntitySet Name="Promotions" EntityType="Self.Promotion" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK__Account__RoleID__3C69FB99" Association="Self.FK__Account__RoleID__3C69FB99">
       <End Role="Roles" EntitySet="Roles" />
       <End Role="Account" EntitySet="Accounts" />
@@ -404,11 +393,11 @@
       <End Role="AccountAddress" EntitySet="AccountAddresses" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Product__Categor__4BAC3F29" Association="Self.FK__Product__Categor__4BAC3F29">
+    <AssociationSet Name="FK__Product__Categor__76969D2E" Association="Self.FK__Product__Categor__76969D2E">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Comment__Product__6477ECF3" Association="Self.FK__Comment__Product__6477ECF3">
+    <AssociationSet Name="FK__Comment__Product__6EF57B66" Association="Self.FK__Comment__Product__6EF57B66">
       <End Role="Product" EntitySet="Products" />
       <End Role="Comment" EntitySet="Comments" />
     </AssociationSet>
@@ -428,11 +417,11 @@
       <End Role="Promotion" EntitySet="Promotions" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Product__Promoti__4CA06362" Association="Self.FK__Product__Promoti__4CA06362">
+    <AssociationSet Name="FK__Product__Promoti__778AC167" Association="Self.FK__Product__Promoti__778AC167">
       <End Role="Promotion" EntitySet="Promotions" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductIm__Produ__4F7CD00D" Association="Self.FK__ProductIm__Produ__4F7CD00D">
+    <AssociationSet Name="FK__ProductIm__Produ__787EE5A0" Association="Self.FK__ProductIm__Produ__787EE5A0">
       <End Role="Product" EntitySet="Products" />
       <End Role="ProductImg" EntitySet="ProductImgs" />
     </AssociationSet>

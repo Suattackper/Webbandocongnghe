@@ -362,9 +362,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\WishListCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -805,6 +802,7 @@
     <Content Include="Areas\admin\Contentt\assets\libs\raphael\license.txt" />
     <Content Include="Areas\admin\Contentt\assets\libs\raphael\raphael.min.js" />
     <Content Include="Areas\admin\Contentt\assets\libs\raphael\raphael.no-deps.min.js" />
+    <Content Include="Areas\admin\Content\css\ebazar.style.min.css" />
     <Content Include="Areas\admin\Contentt\images\auth-bg.jpg" />
     <Content Include="Areas\admin\Contentt\css\fonts\%40fortawesome\fa-brands-400.svg" />
     <Content Include="Areas\admin\Contentt\css\fonts\%40fortawesome\fa-regular-400.svg" />
@@ -832,6 +830,10 @@
     <Content Include="Areas\admin\Contentt\js\genres.js" />
     <Content Include="Areas\admin\Contentt\js\orders.js" />
     <Content Include="Areas\admin\Contentt\js\plugins.bundle.js" />
+    <Content Include="Areas\admin\Content\js\plugins\apexcharts.bundle.js" />
+    <Content Include="Areas\admin\Content\js\plugins\dataTables.bundle.js" />
+    <Content Include="Areas\admin\Content\js\plugins\datatables\dataTables.bootstrap5.min.css" />
+    <Content Include="Areas\admin\Content\js\plugins\datatables\responsive.dataTables.min.css" />
     <Content Include="Areas\admin\Contentt\js\popper.js\dist\esm\popper-utils.min.js" />
     <Content Include="Areas\admin\Contentt\js\popper.js\dist\esm\popper.min.js" />
     <Content Include="Areas\admin\Contentt\js\popper.js\dist\popper-utils.min.js" />
@@ -1324,6 +1326,7 @@
     <Content Include="Areas\admin\Content\js\pages\morris\morris-data.js" />
     <Content Include="Areas\admin\Content\js\pages\morris\morris-data.min.js" />
     <Content Include="Areas\admin\Content\js\plugins.bundle.js" />
+    <Content Include="Areas\admin\Content\js\plugins\libscripts.bundle.js" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper-utils.min.js" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\esm\popper.min.js" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\popper-utils.min.js" />
@@ -1332,6 +1335,7 @@
     <Content Include="Areas\admin\Content\js\popper.js\dist\umd\popper.min.js" />
     <Content Include="Areas\admin\Content\js\popper.js\orders.js" />
     <Content Include="Areas\admin\Content\js\products.js" />
+    <Content Include="Areas\admin\Content\js\profile.js" />
     <Content Include="Areas\admin\Content\js\repry-feedback.js" />
     <Content Include="Areas\admin\Content\js\scripts.bundle.js" />
     <Content Include="Areas\admin\Content\js\vis-timeline.bundle.js" />
@@ -1709,6 +1713,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\Auth\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

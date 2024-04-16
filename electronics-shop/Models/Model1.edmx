@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ECOMMERCEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ECOMMERCEadminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountCode" />
@@ -163,16 +163,6 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <Association Name="FK__Account__RoleID__3C69FB99">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -209,7 +199,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Comment__Product__6477ECF3">
+        <Association Name="FK__Comment__Product__6EF57B66">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +295,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Categor__4BAC3F29">
+        <Association Name="FK__Product__Categor__76969D2E">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -317,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Promoti__4CA06362">
+        <Association Name="FK__Product__Promoti__778AC167">
           <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -329,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__4F7CD00D">
+        <Association Name="FK__ProductIm__Produ__787EE5A0">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ProductImg" Type="Self.ProductImg" Multiplicity="*" />
           <ReferentialConstraint>
@@ -341,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ECOMMERCEModelStoreContainer">
+        <EntityContainer Name="ECOMMERCEadminModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountAddress" EntityType="Self.AccountAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
@@ -356,7 +346,6 @@
           <EntitySet Name="ProductImg" EntityType="Self.ProductImg" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Account__RoleID__3C69FB99" Association="Self.FK__Account__RoleID__3C69FB99">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Account" EntitySet="Account" />
@@ -369,7 +358,7 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comment__Product__6477ECF3" Association="Self.FK__Comment__Product__6477ECF3">
+          <AssociationSet Name="FK__Comment__Product__6EF57B66" Association="Self.FK__Comment__Product__6EF57B66">
             <End Role="Product" EntitySet="Product" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
@@ -401,15 +390,15 @@
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Categor__4BAC3F29" Association="Self.FK__Product__Categor__4BAC3F29">
+          <AssociationSet Name="FK__Product__Categor__76969D2E" Association="Self.FK__Product__Categor__76969D2E">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Promoti__4CA06362" Association="Self.FK__Product__Promoti__4CA06362">
+          <AssociationSet Name="FK__Product__Promoti__778AC167" Association="Self.FK__Product__Promoti__778AC167">
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__4F7CD00D" Association="Self.FK__ProductIm__Produ__4F7CD00D">
+          <AssociationSet Name="FK__ProductIm__Produ__787EE5A0" Association="Self.FK__ProductIm__Produ__787EE5A0">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductImg" EntitySet="ProductImg" />
           </AssociationSet>
@@ -418,7 +407,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ECOMMERCEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ECOMMERCEadminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountCode" />
@@ -473,7 +462,7 @@
           </Key>
           <Property Name="CategoryCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__4BAC3F29" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__76969D2E" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -486,7 +475,7 @@
           <Property Name="CommentTime" Type="DateTime" Precision="0" />
           <Property Name="Rate" Type="Double" />
           <NavigationProperty Name="Account" Relationship="Self.FK__Comment__Account__6383C8BA" FromRole="Comment" ToRole="Account" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__Comment__Product__6477ECF3" FromRole="Comment" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Comment__Product__6EF57B66" FromRole="Comment" ToRole="Product" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -570,11 +559,11 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ViewCount" Type="Int32" />
           <Property Name="Rate" Type="Double" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__4BAC3F29" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__6477ECF3" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__76969D2E" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__Product__6EF57B66" FromRole="Product" ToRole="Comment" />
           <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__5EBF139D" FromRole="Product" ToRole="OrderDetail" />
-          <NavigationProperty Name="Promotion" Relationship="Self.FK__Product__Promoti__4CA06362" FromRole="Product" ToRole="Promotion" />
-          <NavigationProperty Name="ProductImgs" Relationship="Self.FK__ProductIm__Produ__4F7CD00D" FromRole="Product" ToRole="ProductImg" />
+          <NavigationProperty Name="Promotion" Relationship="Self.FK__Product__Promoti__778AC167" FromRole="Product" ToRole="Promotion" />
+          <NavigationProperty Name="ProductImgs" Relationship="Self.FK__ProductIm__Produ__787EE5A0" FromRole="Product" ToRole="ProductImg" />
         </EntityType>
         <EntityType Name="ProductImg">
           <Key>
@@ -583,7 +572,7 @@
           <Property Name="ProductImgCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Img" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__4F7CD00D" FromRole="ProductImg" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__787EE5A0" FromRole="ProductImg" ToRole="Product" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -595,7 +584,7 @@
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Promotio__5BE2A6F2" FromRole="Promotion" ToRole="Orders" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__4CA06362" FromRole="Promotion" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Promoti__778AC167" FromRole="Promotion" ToRole="Product" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -604,16 +593,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__RoleID__3C69FB99" FromRole="Roles" ToRole="Account" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK__Account__RoleID__3C69FB99">
           <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
@@ -687,7 +666,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Categor__4BAC3F29">
+        <Association Name="FK__Product__Categor__76969D2E">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -699,7 +678,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Comment__Product__6477ECF3">
+        <Association Name="FK__Comment__Product__6EF57B66">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -759,7 +738,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Promoti__4CA06362">
+        <Association Name="FK__Product__Promoti__778AC167">
           <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -771,7 +750,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__4F7CD00D">
+        <Association Name="FK__ProductIm__Produ__787EE5A0">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="ProductImg" Type="Self.ProductImg" Multiplicity="*" />
           <ReferentialConstraint>
@@ -798,7 +777,6 @@
           <EntitySet Name="ProductImgs" EntityType="Self.ProductImg" />
           <EntitySet Name="Promotions" EntityType="Self.Promotion" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <AssociationSet Name="FK__Account__RoleID__3C69FB99" Association="Self.FK__Account__RoleID__3C69FB99">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Account" EntitySet="Accounts" />
@@ -823,11 +801,11 @@
             <End Role="AccountAddress" EntitySet="AccountAddresses" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Categor__4BAC3F29" Association="Self.FK__Product__Categor__4BAC3F29">
+          <AssociationSet Name="FK__Product__Categor__76969D2E" Association="Self.FK__Product__Categor__76969D2E">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__Comment__Product__6477ECF3" Association="Self.FK__Comment__Product__6477ECF3">
+          <AssociationSet Name="FK__Comment__Product__6EF57B66" Association="Self.FK__Comment__Product__6EF57B66">
             <End Role="Product" EntitySet="Products" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
@@ -847,11 +825,11 @@
             <End Role="Promotion" EntitySet="Promotions" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Promoti__4CA06362" Association="Self.FK__Product__Promoti__4CA06362">
+          <AssociationSet Name="FK__Product__Promoti__778AC167" Association="Self.FK__Product__Promoti__778AC167">
             <End Role="Promotion" EntitySet="Promotions" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__4F7CD00D" Association="Self.FK__ProductIm__Produ__4F7CD00D">
+          <AssociationSet Name="FK__ProductIm__Produ__787EE5A0" Association="Self.FK__ProductIm__Produ__787EE5A0">
             <End Role="Product" EntitySet="Products" />
             <End Role="ProductImg" EntitySet="ProductImgs" />
           </AssociationSet>
@@ -861,9 +839,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ECOMMERCEModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
+        <EntityContainerMapping StorageEntityContainer="ECOMMERCEadminModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Account">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -881,7 +859,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AccountAddresses">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.AccountAddress">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.AccountAddress">
               <MappingFragment StoreEntitySet="AccountAddress">
                 <ScalarProperty Name="AccountAddressCode" ColumnName="AccountAddressCode" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -898,7 +876,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Brand">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Brand">
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="BrandCode" ColumnName="BrandCode" />
                 <ScalarProperty Name="BrandName" ColumnName="BrandName" />
@@ -907,7 +885,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Category">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -915,7 +893,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comments">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Comment">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentCode" ColumnName="CommentCode" />
                 <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -927,7 +905,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contacts">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Contact">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Contact">
               <MappingFragment StoreEntitySet="Contact">
                 <ScalarProperty Name="ContactCode" ColumnName="ContactCode" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -940,7 +918,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Deliveries">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Delivery">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
                 <ScalarProperty Name="DeliveryCode" ColumnName="DeliveryCode" />
                 <ScalarProperty Name="DeliveryName" ColumnName="DeliveryName" />
@@ -951,7 +929,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.OrderDetail">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
@@ -962,7 +940,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Order">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Order">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
                 <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
@@ -979,7 +957,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Payment">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
                 <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
@@ -989,7 +967,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Product">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -1006,7 +984,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductImgs">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.ProductImg">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.ProductImg">
               <MappingFragment StoreEntitySet="ProductImg">
                 <ScalarProperty Name="ProductImgCode" ColumnName="ProductImgCode" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
@@ -1015,7 +993,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Promotion">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Promotion">
               <MappingFragment StoreEntitySet="Promotion">
                 <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
                 <ScalarProperty Name="PromotionPercentage" ColumnName="PromotionPercentage" />
@@ -1026,21 +1004,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.Role">
+            <EntityTypeMapping TypeName="ECOMMERCEadminModel.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ECOMMERCEModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

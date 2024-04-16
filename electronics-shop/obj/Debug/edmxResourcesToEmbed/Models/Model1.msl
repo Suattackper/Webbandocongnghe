@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ECOMMERCEadminModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
+  <EntityContainerMapping StorageEntityContainer="ECOMMERCEModelStoreContainer" CdmEntityContainer="ECOMMERCEEntities">
     <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Account">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Account">
         <MappingFragment StoreEntitySet="Account">
           <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AccountAddresses">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.AccountAddress">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.AccountAddress">
         <MappingFragment StoreEntitySet="AccountAddress">
           <ScalarProperty Name="AccountAddressCode" ColumnName="AccountAddressCode" />
           <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -37,7 +37,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Brands">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Brand">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Brand">
         <MappingFragment StoreEntitySet="Brand">
           <ScalarProperty Name="BrandCode" ColumnName="BrandCode" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
@@ -46,7 +46,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Categories">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Category">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Category">
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
           <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
@@ -54,7 +54,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Comment">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
           <ScalarProperty Name="CommentCode" ColumnName="CommentCode" />
           <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
@@ -66,7 +66,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contacts">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Contact">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Contact">
         <MappingFragment StoreEntitySet="Contact">
           <ScalarProperty Name="ContactCode" ColumnName="ContactCode" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -79,7 +79,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Deliveries">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Delivery">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Delivery">
         <MappingFragment StoreEntitySet="Delivery">
           <ScalarProperty Name="DeliveryCode" ColumnName="DeliveryCode" />
           <ScalarProperty Name="DeliveryName" ColumnName="DeliveryName" />
@@ -90,7 +90,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.OrderDetail">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
           <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
@@ -101,7 +101,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Order">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Order">
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
           <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
@@ -118,7 +118,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Payments">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Payment">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
           <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
           <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
@@ -128,7 +128,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Product">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Product">
         <MappingFragment StoreEntitySet="Product">
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -145,7 +145,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductImgs">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.ProductImg">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.ProductImg">
         <MappingFragment StoreEntitySet="ProductImg">
           <ScalarProperty Name="ProductImgCode" ColumnName="ProductImgCode" />
           <ScalarProperty Name="Img" ColumnName="Img" />
@@ -154,7 +154,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Promotions">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Promotion">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Promotion">
         <MappingFragment StoreEntitySet="Promotion">
           <ScalarProperty Name="PromotionCode" ColumnName="PromotionCode" />
           <ScalarProperty Name="PromotionPercentage" ColumnName="PromotionPercentage" />
@@ -165,10 +165,21 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Roles">
-      <EntityTypeMapping TypeName="ECOMMERCEadminModel.Role">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.Role">
         <MappingFragment StoreEntitySet="Roles">
           <ScalarProperty Name="RoleID" ColumnName="RoleID" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ECOMMERCEModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

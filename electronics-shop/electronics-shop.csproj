@@ -362,6 +362,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WishListCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1706,6 +1709,7 @@
     <Content Include="Areas\admin\Content\css\fonts\line-awesome\la-solid-900.woff2" />
     <Content Include="Areas\admin\Content\js\pages\datatable\data.json" />
     <Content Include="Areas\admin\Content\js\popper.js\dist\umd\poppper.js.flow" />
+    <Content Include="Areas\admin\Views\Auth\Details.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -1713,7 +1717,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\admin\Views\Auth\Details.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

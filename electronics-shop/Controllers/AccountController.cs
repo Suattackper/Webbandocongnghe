@@ -770,6 +770,7 @@ namespace electronics_shop.Controllers
             List<OrderDetail> list = db.OrderDetails.Where(x => x.Order.AccountCode == accountCode).ToList();
             Account account = db.Accounts.Find(accountCode);
             Session["imgPath"] = account.Avatar;
+            ViewBag.Account = account;
             return View(list);
         }
         public ActionResult Partial_Inf_Acc(int accountCode)

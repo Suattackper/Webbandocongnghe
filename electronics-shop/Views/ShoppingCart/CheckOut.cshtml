@@ -79,108 +79,6 @@
                 @Html.AntiForgeryToken()
                 <form class="grid grid-cols-12 gap-5 rounded-lg bg-white p-2 xs:p-8"
                       action="#">
-                    <div class="col-span-12 lg:col-span-8">
-
-                        <span class="text-lg font-semibold">Billing Details</span>
-
-                        <div class="grid grid-cols-12 gap-5 pt-5">
-
-                            <div class="col-span-12 xs:col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">First Name</span>
-                                    <input class="input" name="FirstName" placeholder="@ViewBag.FirstName" type="text" readonly />
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Last Name</span>
-                                    <input class="input" name="LastName" value="@ViewBag.LastName" type="text" readonly />
-                                </label>
-                            </div>
-                            <div class="col-span-12">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Email</span>
-                                    <input class="input" name="Email" value="@ViewBag.Email" type="text" readonly />
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Telephone</span>
-                                    <input class="input input-number" name="PhoneNumber" value="@ViewBag.Phone" type="number" readonly />
-                                </label>
-                            </div>
-                            <input type="hidden" name="total" value="@ViewBag.total" />
-                            <input type="hidden" name="promotion" value="@ViewBag.promotion" />
-                            <div class="col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Number (Optional)</span>
-                                    <input class="input" name="Number" type="text" />
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-12">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Ward</span>
-                                    <input class="input" name="Ward" type="text" required />
-                                </label>
-                            </div>
-                            @*<div class="col-span-12 xs:col-span-8">
-                                    <label class="flex flex-col">
-                                        <span class="text-sm">Ward</span>
-                                        <input class="input" name="Ward" type="text" required />
-                                    </label>
-                                </div>*@
-                            <div class="col-span-12 xs:col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">District(Optional)</span>
-                                    <input class="input" name="District" type="text" />
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-6">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">City</span>
-                                    <input class="input" name="City" type="text" required />
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-12">
-                                <label class="flex flex-col">
-                                    <span class="text-sm">Hình Thức Thanh Toán</span>
-                                    <select class="input" name="TypePayment" type="" id="drTypePayment">
-                                        <option name="COD" value="1" selected style="text-align:center">Thanh Toán Khi Nhận Hàng (COD)</option>
-                                        <option name="MOMO" value="2" style="text-align:center">Thanh toán trực tuyến</option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div class="col-span-12 xs:col-span-12" id="load_form_payment" style="display:none;">
-
-                                <h4 class="text-lg font-semibold">   Chọn Phương Thức Thanh Toán</h4>
-                                <h5 class="font-semibold"> Thanh Toán Trực Tiếp Qua VNPAY</h5>
-                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="0" checked /> Cổng Thanh Toán VNPAY</label>
-                                <h5 class="font-semibold">   Phương Thức Khác: </h5>
-
-                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="1" /> Thanh toán qua ứng dụng hỗ trợ hỗ trợ VNPAYQR </label><br />
-                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="2" /> ATM-Tài khoản ngân hàng nội địa</label><br />
-                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="3" /> Thanh toán qua thẻ quốc tế</label><br />
-
-
-                            </div>
-
-
-
-
-                            <div class="col-span-12 flex flex-wrap justify-between gap-5">
-                                <a class="transition-all-300 flex items-center gap-2 hover:text-primary-color"
-                                   href="@Url.Action("Index", "ShoppingCart")">
-                                    <i class="bi bi-arrow-return-left flex text-xl"></i>
-                                    <span>Return to Shopping Cart</span>
-                                </a>
-                                <button class="btn-effect rounded-lg bg-primary-color p-4 font-bold uppercase text-white" type="submit">
-                                    <span>Continue</span>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
                     <div class="col-span-12 lg:col-span-4">
                         @*@Html.Action("RenderInfCus", "ShoppingCart", new { total = ViewBag.total })*@
                         @{
@@ -308,6 +206,109 @@
 
 
                     </div>
+                    <div class="col-span-12 lg:col-span-8">
+
+                        <span class="text-lg font-semibold">Billing Details</span>
+
+                        <div class="grid grid-cols-12 gap-5 pt-5">
+
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">First Name</span>
+                                    <input class="input" name="FirstName" placeholder="@ViewBag.FirstName" type="text" readonly />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Last Name</span>
+                                    <input class="input" name="LastName" value="@ViewBag.LastName" type="text" readonly />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Email</span>
+                                    <input class="input" name="Email" value="@ViewBag.Email" type="text" readonly />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Telephone</span>
+                                    <input class="input input-number" name="PhoneNumber" value="@ViewBag.Phone" type="number" readonly />
+                                </label>
+                            </div>
+                            <input type="hidden" name="total" value="@ViewBag.total" />
+                            <input type="hidden" name="promotion" value="@ViewBag.promotion" />
+                            <div class="col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Number - Street Name</span>
+                                    <input class="input" name="Number" type="text" />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Ward</span>
+                                    <input class="input" name="Ward" type="text" required />
+                                </label>
+                            </div>
+                            @*<div class="col-span-12 xs:col-span-8">
+                                    <label class="flex flex-col">
+                                        <span class="text-sm">Ward</span>
+                                        <input class="input" name="Ward" type="text" required />
+                                    </label>
+                                </div>*@
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">District(Optional)</span>
+                                    <input class="input" name="District" type="text" />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-6">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">City</span>
+                                    <input class="input" name="City" type="text" required />
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-12">
+                                <label class="flex flex-col">
+                                    <span class="text-sm">Hình Thức Thanh Toán</span>
+                                    <select class="input" name="TypePayment" type="" id="drTypePayment">
+                                        <option name="COD" value="1" selected style="text-align:center">Thanh Toán Khi Nhận Hàng (COD)</option>
+                                        <option name="MOMO" value="2" style="text-align:center">Thanh toán trực tuyến</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="col-span-12 xs:col-span-12" id="load_form_payment" style="display:none;">
+
+                                <h4 class="text-lg font-semibold">   Chọn Phương Thức Thanh Toán</h4>
+                                <h5 class="font-semibold"> Thanh Toán Trực Tiếp Qua VNPAY</h5>
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="0" checked /> Cổng Thanh Toán VNPAY</label>
+                                <h5 class="font-semibold">   Phương Thức Khác: </h5>
+
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="1" /> Thanh toán qua ứng dụng hỗ trợ hỗ trợ VNPAYQR </label><br />
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="2" /> ATM-Tài khoản ngân hàng nội địa</label><br />
+                                <label style="margin-left:4px;"><input type="radio" name="TypePaymentVN" value="3" /> Thanh toán qua thẻ quốc tế</label><br />
+
+
+                            </div>
+
+
+
+
+                            <div class="col-span-12 flex flex-wrap justify-between gap-5">
+                                <a class="transition-all-300 flex items-center gap-2 hover:text-primary-color"
+                                   href="@Url.Action("Index", "ShoppingCart")">
+                                    <i class="bi bi-arrow-return-left flex text-xl"></i>
+                                    <span>Return to Shopping Cart</span>
+                                </a>
+                                <button class="btn-effect rounded-lg bg-primary-color p-4 font-bold uppercase text-white" type="submit">
+                                    <span>Continue</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    
 
                 </form>
             }

@@ -35,9 +35,84 @@ namespace electronics_shop.Areas.Admin.Controllers
             return View("Index", data.ToPagedList(page, pagesize));
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int code)
         {
-            return View();
+            int monthNow = DateTime.Now.Month;
+
+            if (TempData.ContainsKey("Error"))
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            Account data = db.Accounts.FirstOrDefault(p => p.AccountCode == code);
+            ViewBag.Role = db.Roles.ToList();
+            ViewBag.Address = db.AccountAddresses.Where(a => a.AccountCode == code);
+            List<Order> orderlist = db.Orders.Where(a => a.AccountCode == code).ToList();
+            ViewBag.Order = orderlist;
+
+            var count = db.Orders.Count(a => a.AccountCode == code);
+            var count2 = db.Comments.Count(a => a.AccountCode == code);
+            ViewBag.count = count;
+            ViewBag.count2 = count2;
+            decimal? Total = 0;
+            //List<Order> orderlist = db.Orders.Where(a => a.AccountCode == code).ToList();
+            foreach (var item in orderlist)
+            {
+                Total = Total + item.OrderTotal;
+            }
+            ViewBag.total = Total;
+            //int targetMonth = DateTime.Now.Month; // December
+            int targetMonth = DateTime.Now.Month; // December
+
+            if (ViewBag.Order != null)
+            {
+                decimal? avgMonth = db.Orders
+             .Where(a => a.AccountCode == code &&
+                         a.OrderDate.HasValue &&
+                         a.OrderDate.Value.Month == targetMonth)
+             .Sum(a => a.OrderTotal);
+
+                ViewBag.avg = avgMonth;
+            }
+
+            decimal? catesmarthome = 0;
+            decimal? categaminggear = 0;
+            decimal? catephukien = 0;
+            decimal? other = 0;
+            foreach (var item in orderlist)
+            {
+                List<OrderDetail> orderdetaillist = db.OrderDetails.Where(p => p.OrderCode == item.OrderCode).ToList();
+                foreach (var i in orderdetaillist)
+                {
+                    Product product = db.Products.FirstOrDefault(p => p.ProductCode == i.ProductCode);
+                    if (product.CategoryCode == 1) catesmarthome = catesmarthome + i.Total;
+                    else if (product.CategoryCode == 2) catephukien = catephukien + i.Total;
+                    else if (product.CategoryCode == 3) categaminggear = categaminggear + i.Total;
+                    else other = other + i.Total;
+                }
+            }
+            ViewBag.catesmarthome = catesmarthome;
+            ViewBag.categaminggear = categaminggear;
+            ViewBag.catephukien = catephukien;
+            ViewBag.other = other;
+
+
+            ViewBag.cate = db.Categories.ToList();
+
+
+            return View(data);
+
+        }
+        public ActionResult Partial_ChiTietSanPham(int acCode)
+        {
+
+            List<Order> item = db.Orders.Where(p => p.AccountCode == acCode).ToList();
+
+
+
+
+            return PartialView(item);
+
+
         }
 
         public ActionResult Main()

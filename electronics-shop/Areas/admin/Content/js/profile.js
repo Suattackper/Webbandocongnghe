@@ -1,12 +1,19 @@
 if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
 }
-$(function() {
+var element = document.getElementById("apex-circle-gradient");
+console.log(element);
+var data = element.getAttribute("data-ok");
 
-    "use strict"; 
+var parsedValue = parseInt(data);
+
+
+$(function () {
+
+    "use strict";
 
     // circle gradient
-     $(document).ready(function() {
+    $(document).ready(function () {
         var options = {
             chart: {
                 height: 250,
@@ -15,12 +22,12 @@ $(function() {
                     show: false
                 }
             },
-            colors:  ['var(--chart-color1)'],
+            colors: ['var(--chart-color1)'],
             plotOptions: {
                 radialBar: {
                     startAngle: -135,
                     endAngle: 225,
-                        hollow: {
+                    hollow: {
                         margin: 0,
                         size: '70%',
                         background: '#fff',
@@ -59,7 +66,7 @@ $(function() {
                             fontSize: '17px'
                         },
                         value: {
-                            formatter: function(val) {
+                            formatter: function (val) {
                                 return parseInt(val);
                             },
                             color: '#111',
@@ -82,11 +89,12 @@ $(function() {
                     stops: [0, 100]
                 }
             },
-            series: [75],
+
+            series: [parsedValue],
             stroke: {
                 lineCap: 'round'
             },
-            labels: ['Exp Spend'],
+            labels: ['Exp Of Month'],
         }
 
         var chart = new ApexCharts(
@@ -94,10 +102,10 @@ $(function() {
             options
         );
 
-        chart.render();    
+        chart.render();
     });
-    
-        
+
+
 });
 
 

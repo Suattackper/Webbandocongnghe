@@ -1718,6 +1718,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\admin\Views\Genres\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Auth\Partial_ChiTietSanPham.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

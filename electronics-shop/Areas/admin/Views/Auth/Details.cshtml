@@ -1,4 +1,6 @@
 ﻿
+@model electronics_shop.Models.Account
+
 @{
     ViewBag.Title = "Thông tin sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
@@ -49,301 +51,482 @@
 <div class="body d-flex py-3">
     <div class="container-xxl">
         <!-- Row end  -->
-        <div class="row g-3 mb-xl-3">
-            <div class="col-xxl-4 col-xl-12 col-lg-12 col-md-12">
-                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-1 row-deck g-3">
-                    <div class="col">
-                        <div class="card profile-card">
-                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                                <h6 class="mb-0 fw-bold fs-5">Profile</h6>
-                            </div>
-                            <div class="card-body d-flex profile-fulldeatil flex-column">
-                                <div class="profile-block text-center w220 mx-auto">
-                                    <a href="#">
-                                        <img src="assets/images/lg/avatar4.svg" alt="" class="avatar xl rounded img-thumbnail shadow-sm">
-                                    </a>
-                                    <div class="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
-                                        <span class="text-muted small">ID : #CS-00002</span>
+        @*@foreach (var item in Model)*@
+        @if (Model != null)
+        {
+
+
+            <div class="row g-3 mb-xl-3">
+                <div class="col-xxl-4 col-xl-12 col-lg-12 col-md-12">
+                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-1 row-deck g-3">
+                        <div class="col">
+                            <div class="card profile-card">
+                                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                    <h6 class="mb-0 fw-bold fs-5">Profile</h6>
+                                </div>
+                                <div class="card-body d-flex profile-fulldeatil flex-column">
+                                    <div class="profile-block text-center w220 mx-auto">
+
+                                        <a href="#">
+                                            @if (Model.Avatar != null)
+                                            {
+                                                byte[] imgData = Model.Avatar;
+                                                // chuyển sang chuỗi Base64
+                                                string base64String = Convert.ToBase64String(imgData);
+                                                <img src="data:image/png;base64,@base64String" alt="@Model.AccountCode" class="avatar xl rounded img-thumbnail shadow-sm">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/comments/profile_1.png" alt="@Model.AccountCode" class="w-80px h-80px" style="object-fit:cover;">
+                                            }
+
+                                        </a>
+                                        <div class="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
+                                            <span class="text-muted small">ID : #@Model.AccountCode</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-info w-100">
+                                        <h6 class="mb-0 mt-2  fw-bold d-block fs-6 text-center"> @Model.FirstName @Model.LastName</h6>
+                                        @if (ViewBag.Address != null)
+                                        {
+                                            foreach (var i in ViewBag.Address)
+                                            {
+                                                //if (Model.AccountCode==i.AccountCode)
+                                                //{
+                                                <span class="py-1 fw-bold small-11 mb-0 mt-1 text-muted text-center mx-auto d-block">@i.City</span>
+                                                break;
+                                                //}
+                                            }
+
+
+
+                                        }
+                                        else
+                                        {
+                                            <span class="py-1 fw-bold small-11 mb-0 mt-1 text-muted text-center mx-auto d-block"> </span>
+
+                                        }
+
+                                        @*<p class="mt-2">Duis felis ligula, pharetra at nisl sit amet, ullamcorper fringilla mi. Cras luctus metus non enim porttitor sagittis. Sed tristique scelerisque arcu id dignissim.</p>*@
+                                        <div class="row g-2 pt-2">
+                                            <div class="col-xl-12">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="icofont-ui-touch-phone"></i>
+                                                    <span class="ms-2">@Model.PhoneNumber </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="icofont-email"></i>
+                                                    <span class="ms-2">@Model.Email</span>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-xl-12">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="icofont-birthday-cake"></i>
+                                                        <span class="ms-2">19/03/1980</span>
+                                                    </div>
+                                                </div>*@
+                                            @if (ViewBag.Address != null)
+                                            {
+                                                foreach (var i in ViewBag.Address)
+                                                {
+                                                    if (Model.AccountCode == i.AccountCode)
+                                                    {
+                                                        <div class="col-xl-12">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="icofont-address-book"></i>
+                                                                <span class="ms-2">  @i.Number, @i.Ward, @i.District, @i.City</span>
+                                                            </div>
+                                                        </div>
+                                                        break;
+                                                    }
+                                                }
+
+
+
+                                            }
+                                            else
+                                            {
+                                                <div class="col-xl-12">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="icofont-address-book"></i>
+                                                        <span class="ms-2"> NULL </span>
+                                                    </div>
+                                                </div>
+
+                                            }
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="profile-info w-100">
-                                    <h6 class="mb-0 mt-2  fw-bold d-block fs-6 text-center"> Joan Dyer</h6>
-                                    <span class="py-1 fw-bold small-11 mb-0 mt-1 text-muted text-center mx-auto d-block">24 years, California</span>
-                                    <p class="mt-2">Duis felis ligula, pharetra at nisl sit amet, ullamcorper fringilla mi. Cras luctus metus non enim porttitor sagittis. Sed tristique scelerisque arcu id dignissim.</p>
-                                    <div class="row g-2 pt-2">
-                                        <div class="col-xl-12">
-                                            <div class="d-flex align-items-center">
-                                                <i class="icofont-ui-touch-phone"></i>
-                                                <span class="ms-2">202-555-0174 </span>
-                                            </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                    <h6 class="mb-0 fw-bold fs-5">Expence Count</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-end text-center">
+                                        <div class="p-2">
+                                            @if (ViewBag.Total != null)
+                                            {
+
+                                                <h6 class="mb-0 fw-bold">  @string.Format("₫{0:#,0}", ViewBag.Total)</h6>
+
+                                            }
+                                            else
+                                            {
+                                                <h6 class="mb-0 fw-bold">0</h6>
+
+                                            }
+                                            <span class="text-muted">Total</span>
                                         </div>
-                                        <div class="col-xl-12">
-                                            <div class="d-flex align-items-center">
-                                                <i class="icofont-email"></i>
-                                                <span class="ms-2">adrianallan@gmail.com</span>
-                                            </div>
+                                        <div class="p-2 ms-4">
+                                            @if (ViewBag.Order != null && ViewBag.avg != null && ViewBag.avg != 0)
+                                            {
+
+
+                                                <h6 class="mb-0 fw-bold">@string.Format("₫{0:#,0}", ViewBag.avg)</h6>
+
+
+
+
+                                                <span class="text-muted">Avg Month</span>
+                                            }
+                                            else
+                                            {
+                                                <h6 class="mb-0 fw-bold">₫0</h6>
+                                                <span class="text-muted">Avg Month</span>
+                                            }
+
                                         </div>
-                                        <div class="col-xl-12">
-                                            <div class="d-flex align-items-center">
-                                                <i class="icofont-birthday-cake"></i>
-                                                <span class="ms-2">19/03/1980</span>
-                                            </div>
+                                    </div>
+                                    @if (ViewBag.Order != null && ViewBag.avg != null && ViewBag.avg != 0)
+                                    {
+                                        <div id="apex-circle-gradient" data-ok="@(((ViewBag.avg/ViewBag.Total))*100)"></div>
+
+                                    }
+                                    else
+                                    {
+                                        <div id="apex-circle-gradient" data-ok="0"></div>
+
+                                    }
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="mb-3 d-block">GamingGear</span>
+                                            @if (ViewBag.Total != 0)
+                                            {
+                                                <div class="progress-bar  bg-secondary" role="progressbar" style="width: @((ViewBag.categaminggear / ViewBag.Total) * 100)%; height: 5px;"></div>
+                                                <span class="mt-2 d-block text-secondary">@string.Format("₫{0:#,0}", ViewBag.categaminggear) spend</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="mt-2 d-block text-secondary">₫0 spend</span>
+
+                                            }
+
                                         </div>
-                                        <div class="col-xl-12">
-                                            <div class="d-flex align-items-center">
-                                                <i class="icofont-address-book"></i>
-                                                <span class="ms-2">2734  West Fork Street,EASTON 02334.</span>
-                                            </div>
+                                        <div class="col">
+                                            <span class="mb-3 d-block">Accessory</span>
+                                            @if (ViewBag.Total != 0)
+                                            {
+                                                <div class="progress-bar  bg-primary" role="progressbar" style="width: @((ViewBag.catephukien / ViewBag.Total) * 100)%; height: 5px;"></div>
+                                                <span class="mt-2 d-block text-primary">@string.Format("₫{0:#,0}", ViewBag.catephukien) spend</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="mt-2 d-block text-secondary">₫0 spend</span>
+
+                                            }
+                                        </div>
+                                        <div class="col">
+                                            <span class="mb-3 d-block">SmartHome</span>
+                                            @if (ViewBag.Total != 0)
+                                            {
+                                                <div class="progress-bar  bg-lavender-purple" role="progressbar" style="width: @((ViewBag.catesmarthome / ViewBag.Total) * 100)%; height: 5px;"></div>
+                                                <span class="mt-2 d-block color-lavender-purple">@string.Format("₫{0:#,0}", ViewBag.catesmarthome) spend</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="mt-2 d-block text-secondary">₫0 spend</span>
+
+                                            }
+                                        </div>
+                                        <div class="col">
+                                            <span class="mb-3 d-block">Other</span>
+                                            @if (ViewBag.Total != 0)
+                                            {
+                                                <div class="progress-bar  bg-lavender-purple" role="progressbar" style="width: @((ViewBag.other / ViewBag.Total) * 100)%; height: 5px;"></div>
+                                                <span class="mt-2 d-block color-lavender-purple">@string.Format("₫{0:#,0}", ViewBag.other) spend</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="mt-2 d-block text-secondary">₫0 spend</span>
+
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                                <h6 class="mb-0 fw-bold fs-5">Expence Count</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-end text-center">
-                                    <div class="p-2">
-                                        <h6 class="mb-0 fw-bold">$1790</h6>
-                                        <span class="text-muted">Total</span>
+                    <div class="card mt-3">
+                        <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                            <h6 class="mb-0 fw-bold fs-5">Status report</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                @*<li class="mb-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="mb-0">54</h6>
+                                            <span class="small text-muted">Product Visit</span>
+                                        </div>
+                                        <div class="progress" style="height: 2px;">
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" data-transitiongoal="87" style="width: 87%;"></div>
+                                        </div>
+                                    </li>*@
+                                <li class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        @if (ViewBag.count != null)
+                                        {
+                                            <h6 class="mb-0">@ViewBag.count</h6>
+
+                                        }
+                                        else
+                                        {
+                                            <h6 class="mb-0"> </h6>
+
+                                        }
+                                        <span class="small text-muted">Orders Buy</span>
                                     </div>
-                                    <div class="p-2 ms-4">
-                                        <h6 class="mb-0 fw-bold">$149.16</h6>
-                                        <span class="text-muted">Avg Month</span>
+                                    <div class="progress" style="height: 2px;">
+                                        @if (ViewBag.count != null)
+                                        {
+                                            <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" data-transitiongoal="34" style="width: @ViewBag.count%;"></div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" data-transitiongoal="34" style="width: 0%;"></div>
+
+                                        }
+
                                     </div>
-                                </div>
-                                <div id="apex-circle-gradient"></div>
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="mb-3 d-block">Food</span>
-                                        <div class="progress-bar  bg-secondary" role="progressbar" style="width: 55%; height: 5px;"></div>
-                                        <span class="mt-2 d-block text-secondary">$597 spend</span>
+                                </li>
+                                <li class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        @if (ViewBag.count2 != null)
+                                        {
+
+                                            <h6 class="mb-0"> @ViewBag.count2</h6>
+
+                                        }
+                                        else
+                                        {
+                                            <h6 class="mb-0">cc</h6>
+
+                                        }
+                                        <span class="small text-muted">Comment on Product</span>
                                     </div>
-                                    <div class="col">
-                                        <span class="mb-3 d-block">Cloth</span>
-                                        <div class="progress-bar  bg-primary" role="progressbar" style="width: 60%; height: 5px;"></div>
-                                        <span class="mt-2 d-block text-primary">$845 spend</span>
+                                    <div class="progress" style="height: 2px;">
+                                        @if (ViewBag.count2 != null)
+                                        {
+                                            <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" data-transitiongoal="34" style="width: @ViewBag.count2%;"></div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" data-transitiongoal="34" style="width: 0%;"></div>
+
+                                        }
                                     </div>
-                                    <div class="col">
-                                        <span class="mb-3 d-block">Other</span>
-                                        <div class="progress-bar  bg-lavender-purple" role="progressbar" style="width: 70%; height: 5px;"></div>
-                                        <span class="mt-2 d-block color-lavender-purple">$348 spend</span>
-                                    </div>
-                                </div>
-                            </div>
+                                </li>
+                                @*<li class="mb-0">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="mb-0">1024 Hours</h6>
+                                            <span class="small text-muted">Total spent time</span>
+                                        </div>
+                                        <div class="progress" style="height: 2px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67" data-transitiongoal="67" style="width: 67%;"></div>
+                                        </div>
+                                    </li>*@
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="card mt-3">
-                    <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                        <h6 class="mb-0 fw-bold fs-5">Status report</h6>
+                <div class="col-xxl-8 col-xl-12 col-lg-12 col-md-12">
+                    <div class="row g-3 mb-3 row-cols-1 row-cols-md-1 row-cols-lg-2 row-deck">
+                        <div class="col">
+                            <div class="card auth-detailblock">
+                                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                    <h6 class="mb-0 fw-bold fs-5">Delivery Address</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        @if (ViewBag.Address != null)
+                                        {
+                                            foreach (var i in ViewBag.Address)
+                                            {
+                                                if (Model.AccountCode == i.AccountCode)
+                                                {
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                        <span><strong>@i.Number</strong></span>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Address:</label>
+                                                        <span><strong>@i.Ward ,@i.District,@i.City</strong></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Pincode:</label>
+                                                        <span><strong>28564 </strong></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Phone:</label>
+                                                        <span><strong>@i.PhoneNumber</strong></span>
+                                                    </div>
+                                                    break;
+                                                }
+                                            }
+
+
+
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Address:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Pincode:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Phone:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                    <h6 class="mb-0 fw-bold fs-5">Billing Address</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        @if (ViewBag.Address != null)
+                                        {
+                                            foreach (var i in ViewBag.Address)
+                                            {
+                                                if (Model.AccountCode == i.AccountCode)
+                                                {
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                        <span><strong>@i.Number</strong></span>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Address:</label>
+                                                        <span><strong>@i.Ward ,@i.District,@i.City</strong></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Pincode:</label>
+                                                        <span><strong>28564 </strong></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <label class="form-label col-6 col-sm-5">Phone:</label>
+                                                        <span><strong>@i.PhoneNumber</strong></span>
+                                                    </div>
+                                                    break;
+                                                }
+                                            }
+
+
+
+                                        }
+                                        else
+                                        {
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Block Number:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Address:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Pincode:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label col-6 col-sm-5">Phone:</label>
+                                                <span><strong>Null</strong></span>
+                                            </div>
+
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-4">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="mb-0">54</h6>
-                                    <span class="small text-muted">Product Visit</span>
-                                </div>
-                                <div class="progress" style="height: 2px;">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" data-transitiongoal="87" style="width: 87%;"></div>
-                                </div>
-                            </li>
-                            <li class="mb-4">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="mb-0">27</h6>
-                                    <span class="small text-muted">Product Buy</span>
-                                </div>
-                                <div class="progress" style="height: 2px;">
-                                    <div class="progress-bar bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="34" data-transitiongoal="34" style="width: 34%;"></div>
-                                </div>
-                            </li>
-                            <li class="mb-4">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="mb-0">102</h6>
-                                    <span class="small text-muted">Comment on Product</span>
-                                </div>
-                                <div class="progress" style="height: 2px;">
-                                    <div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" data-transitiongoal="14" style="width: 14%;"></div>
-                                </div>
-                            </li>
-                            <li class="mb-0">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h6 class="mb-0">1024 Hours</h6>
-                                    <span class="small text-muted">Total spent time</span>
-                                </div>
-                                <div class="progress" style="height: 2px;">
-                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="67" data-transitiongoal="67" style="width: 67%;"></div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                            <h6 class="mb-0 fw-bold fs-5">Customer Order</h6>
+                        </div>
+                        <div class="card-body">
+                            <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Item</th>
+                                        <th>Payment Info</th>
+                                        <th>Order Date</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    @Html.Action("Partial_ChiTietSanPham", "Auth", new { acCode = Model.AccountCode })
+
+
+
+
+
+
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-8 col-xl-12 col-lg-12 col-md-12">
-                <div class="row g-3 mb-3 row-cols-1 row-cols-md-1 row-cols-lg-2 row-deck">
-                    <div class="col">
-                        <div class="card auth-detailblock">
-                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                                <h6 class="mb-0 fw-bold fs-5">Delivery Address</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Block Number:</label>
-                                        <span><strong>A-510</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Address:</label>
-                                        <span><strong>81 Fulton London</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Pincode:</label>
-                                        <span><strong>385467</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Phone:</label>
-                                        <span><strong>202-458-4568</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                                <h6 class="mb-0 fw-bold fs-5">Billing Address</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Block Number:</label>
-                                        <span><strong>A-510</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Address:</label>
-                                        <span><strong>81 Fulton London</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Pincode:</label>
-                                        <span><strong>385467</strong></span>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label col-6 col-sm-5">Phone:</label>
-                                        <span><strong>202-458-4568</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
-                        <h6 class="mb-0 fw-bold fs-5">Customer Order</h6>
-                    </div>
-                    <div class="card-body">
-                        <table id="myProjectTable" class="table table-hover align-middle mb-0" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Item</th>
-                                    <th>Payment Info</th>
-                                    <th>Order Date</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-78414</strong></a></td>
-                                    <td><img src="assets/images/product/product-1.jpg" class="avatar lg rounded me-2" alt="profile-image"><span> Oculus VR </span></td>
-                                    <td>Credit Card</td>
-                                    <td>June 16, 2021</td>
-                                    <td>
-                                        $420
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-58414</strong></a></td>
-                                    <td><img src="assets/images/product/product-2.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Wall Clock</span></td>
-                                    <td>Debit Card</td>
-                                    <td>June 16, 2021</td>
-                                    <td>
-                                        $220
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-48414</strong></a></td>
-                                    <td><img src="assets/images/product/product-3.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Note Diaries</span></td>
-                                    <td>Debit Card</td>
-                                    <td>June 16, 2021</td>
-                                    <td>
-                                        $250
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-38414</strong></a></td>
-                                    <td><img src="assets/images/product/product-4.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Flower Port</span></td>
-                                    <td>Credit Card</td>
-                                    <td>June 16, 2021</td>
-                                    <td>
-                                        $320
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-28414</strong></a></td>
-                                    <td><img src="assets/images/product/product-1.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Oculus VR</span></td>
-                                    <td>Debit Card</td>
-                                    <td>June 17, 2021</td>
-                                    <td>
-                                        $20
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-18414</strong></a></td>
-                                    <td><img src="assets/images/product/product-2.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Wall Clock</span></td>
-                                    <td>Debit Card</td>
-                                    <td>June 18, 2021</td>
-                                    <td>
-                                        $820
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-11414</strong></a></td>
-                                    <td><img src="assets/images/product/product-3.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Note Diaries</span></td>
-                                    <td>Bank Emi</td>
-                                    <td>March 16, 2021</td>
-                                    <td>
-                                        $620
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-27414</strong></a></td>
-                                    <td><img src="assets/images/product/product-5.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Bag</span></td>
-                                    <td>Debit Card</td>
-                                    <td>June 18, 2021</td>
-                                    <td>
-                                        $820
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="order-details.html"><strong>#Order-78514</strong></a></td>
-                                    <td><img src="assets/images/product/product-6.jpg" class="avatar lg rounded me-2" alt="profile-image"><span>Rado Watch</span></td>
-                                    <td>Bank Emi</td>
-                                    <td>March 16, 2021</td>
-                                    <td>
-                                        $620
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Row end  -->
+        }
+        <!-- Row end  -->
     </div>
 </div>
 
@@ -352,4 +535,5 @@
     <script src="~/Areas/admin/Content/js/plugins/dataTables.bundle.js"></script>
     <script src="~/Areas/admin/Content/js/plugins/libscripts.bundle.js"></script>
     <script src="~/Areas/admin/Content/js/profile.js"></script>
+    <script src="~/Content/js/main.js"></script>
 }

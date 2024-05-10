@@ -190,6 +190,13 @@ namespace electronics_shop.Controllers
                             db.Entry(itemOrder).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
                         }
+                        ShoppingCart cart = (ShoppingCart)Session["Cart"];
+                        cart.ClearCart();
+                        //displayTmnCode.InnerText = "Mã Website (Terminal ID):" + TerminalID;
+                        ViewBag.Id = "Mã giao dịch thanh toán:" + orderId.ToString();
+                        ViewBag.MaGiaoDich = "Mã giao dịch tại VNPAY:" + vnpayTranId.ToString();
+                        ViewBag.ThanhToanThanhCong = "Số tiền thanh toán (VND):" + vnp_Amount.ToString();
+                        ViewBag.NganHang = "ngân hàng thanh toán:" + bankCode;
                         //Thanh toan thanh cong
                         ViewBag.InnerText = "Giao dịch được thực hiện thành công. Cảm ơn quý khách đã sử dụng dịch vụ";
                         //log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
@@ -200,11 +207,6 @@ namespace electronics_shop.Controllers
                         ViewBag.InnerText = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
                         //log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId, vnpayTranId, vnp_ResponseCode);
                     }
-                    //displayTmnCode.InnerText = "Mã Website (Terminal ID):" + TerminalID;
-                    ViewBag.Id = "Mã giao dịch thanh toán:" + orderId.ToString();
-                    ViewBag.MaGiaoDich = "Mã giao dịch tại VNPAY:" + vnpayTranId.ToString();
-                    ViewBag.ThanhToanThanhCong = "Số tiền thanh toán (VND):" + vnp_Amount.ToString();
-                    ViewBag.NganHang = "ngân hàng thanh toán:" + bankCode;
                 }
             }
 
@@ -395,31 +397,9 @@ namespace electronics_shop.Controllers
                     electronics_shop.Common.Common.SendMail("Besnik.", "Đơn hàng #" + order.OrderCode, contentCustomer.ToString(), req.Email);
 
 
-                    //string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
-                    //contentAdmin = contentAdmin.Replace("{{MaDon}}", order.OrderCode.ToString());
-                    //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                    //if (Session["info"] != null)
-                    //{
-                    //    int userID = (int)Session["UserID"];
-                    //    var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
-                    //    contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", account.FirstName + " " + account.LastName);
-                    //    contentAdmin = contentAdmin.Replace("{{Phone}}", account.PhoneNumber);
-                    //    contentAdmin = contentAdmin.Replace("{{Email}}", account.Email);
+                    
 
-                    //}
-
-
-                    //contentAdmin = contentAdmin.Replace("{{SoNha+Phuong}}", order.AccountAddress.Number + " " + order.AccountAddress.Ward);
-                    //contentAdmin = contentAdmin.Replace("{{Tinh}}", order.AccountAddress.District);
-                    //contentAdmin = contentAdmin.Replace("{{ThanhPho}}", order.AccountAddress.City);
-                    //contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number);
-                    //contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.OrderDate.ToString());
-                    //contentAdmin = contentAdmin.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
-                    //contentAdmin = contentAdmin.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
-                    //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-                    //electronics_shop.Common.Common.SendMail("Besnik.", "Đơn hàng mới #" + order.OrderCode, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-
-                    cart.ClearCart();
+                    
                     code = new { Success = true, Code = req.TypePayment, Url = "" };
                     if (req.TypePayment == 2)
                     {
@@ -433,232 +413,7 @@ namespace electronics_shop.Controllers
             }
             return Json(code);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult CheckOutForm(OrderViewModel req, string total, string promotion)
-        //{
-        //    var code = new { Success = false, Code = -1 };
-
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        ShoppingCart cart = (ShoppingCart)Session["Cart"];
-        //        string magiamgia = "";
-        //        int? mucgiam = 0;
-        //        if (promotion != null && promotion != "")
-        //        {
-        //            Promotion p = db.Promotions.FirstOrDefault(j => j.PromotionCode == promotion);
-        //            magiamgia = p.PromotionCode;
-        //            mucgiam = p.PromotionPercentage;
-        //        }
-        //        if (cart != null)
-        //        {
-        //            Order order = new Order();
-        //            order.AccountAddress = new AccountAddress();
-
-        //            if (Session["info"] != null)
-        //            {
-
-        //                int userID = (int)Session["UserID"];
-        //                var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
-        //                order.Account = account;
-
-        //                order.Account.FirstName = account.FirstName;
-
-        //                order.Account.LastName = account.LastName;
-        //                order.Account.Email = account.Email;
-        //                order.AccountAddress.PhoneNumber = account.PhoneNumber;
-        //            }
-        //            if (magiamgia != "")
-        //            {
-        //                order.PromotionCode = magiamgia;
-        //                Promotion c = db.Promotions.FirstOrDefault(p => p.PromotionCode == magiamgia);
-        //                c.Quantity--;
-        //                db.SaveChanges();
-        //            }
-        //            order.DeliveryCode = "GHN";
-
-        //            order.AccountAddress.Number = req.Number;
-        //            order.AccountAddress.District = req.District;
-        //            order.AccountAddress.Ward = req.Ward;
-        //            order.AccountAddress.City = req.City;
-
-        //            order.AccountCode = (int)Session["UserId"]; // chỗ này nhập accountcode đã có trong csdl của m, hoặc truyên fvaof khi đăng nhập thành công
-        //            order.AccountAddressCode = order.AccountAddressCode;  // chỗ này tạo đại 1 accountaddress trong csdl r nhập accountaddresscode vào
-        //            order.PaymentCode = req.TypePayment;
-        //            // chỗ này tạo đại 1 payment trong csdl r nhập PaymentCode vào
-        //            order.OrderDate = DateTime.Now;
-        //            order.OrderTotal = decimal.Parse(total); //(decimal?)cart.Items.Sum(x => (x.Price * x.Quantity));   // chỗ này nhập tổng bill vào
-        //            order.OrderNote = "";  // chỗ này nhập ghi chú vaof 
-        //            order.Delivered = false; //chưa vận chuyển
-
-
-
-
-
-
-        //            //product.Quantity = product.Quantity - cart.Items.Sum(x=>(x.Quantity));
-        //            //db.SaveChanges();
-
-
-
-
-
-
-
-
-
-
-        //            db.Orders.Add(order);
-        //            db.SaveChanges();
-        //            ViewBag.TypePayment = order.PaymentCode;
-        //            //lấy mã ordercode
-        //            Order ordercode = db.Orders.OrderByDescending(o => o.OrderCode).FirstOrDefault();
-
-
-
-
-
-
-        //            //cart.Items.ForEach(x => order.OrderDetails.Add(new OrderDetail
-        //            //{
-        //            //    OrderCode = ordercode.OrderCode,
-        //            //    ProductCode = x.ProductId,
-        //            //    Quantity = x.Quantity,
-        //            //    Price = (decimal?)x.Price
-        //            //}));
-
-
-
-
-
-
-
-
-        //            foreach (var i in cart.Items)
-        //            {
-        //                OrderDetail p = new OrderDetail();
-        //                p.ProductCode = i.ProductId;
-        //                p.Quantity = i.Quantity;
-        //                p.Price = decimal.Parse(i.Price.ToString());
-        //                p.OrderCode = order.OrderCode;
-        //                p.Total = decimal.Parse((i.Price * i.Quantity).ToString());
-
-        //                Product f = db.Products.FirstOrDefault(j => j.ProductCode == i.ProductId);
-        //                List<Promotion> check = db.Promotions.Where(h => h.StartDate <= DateTime.Now && h.EndDate >= DateTime.Now && h.Quantity > 0).ToList();
-        //                foreach (var item in check)
-        //                {
-        //                    if (f.PromotionCode == item.PromotionCode)
-        //                    {
-        //                        Promotion n = db.Promotions.FirstOrDefault(x => x.PromotionCode == item.PromotionCode);
-        //                        n.Quantity--;
-        //                        db.SaveChanges();
-        //                        p.Total = decimal.Parse((p.Total - p.Total * n.PromotionPercentage / 100).ToString());
-        //                        break;
-        //                    }
-
-        //                }
-        //                db.OrderDetails.Add(p);
-        //                db.SaveChanges();
-
-        //            }
-        //            var listorderdetail = db.OrderDetails.Where(p => p.OrderCode == ordercode.OrderCode).ToList();
-        //            foreach (var i in listorderdetail)
-        //            {
-        //                Product p = db.Products.FirstOrDefault(h => h.ProductCode == i.ProductCode);
-        //                p.Quantity = p.Quantity - i.Quantity;
-        //                db.SaveChanges();
-        //            }
-
-
-
-
-
-
-        //            //order.OrderTotal = (decimal?)cart.Items.Sum(x => (x.Price * x.Quantity));
-        //            //order.typepayment = req.typepayment;
-        //            //order.OrderDate = DateTime.Now;
-
-        //            //order.CreateBy = req.PhoneNumber;
-        //            //Random rd = new Random();
-        //            //order.OrderCode = rd.Next(0,9) + rd.Next(0, 9) + rd.Next(0, 9);
-
-
-
-
-
-
-        //            db.SaveChanges();
-        //            // send mail cho khach hang
-        //            var strSanPham = "";
-        //            var thanhtien = decimal.Zero;
-        //            var TongTien = decimal.Zero;
-        //            foreach (var sp in cart.Items)
-        //            {
-        //                strSanPham += "<tr>";
-        //                strSanPham += "<td>" + sp.ProductName + "</td>";
-        //                strSanPham += "<td>" + sp.Quantity + "</td>";
-        //                strSanPham += "<td>" + string.Format("₫{0:#,0}", sp.ToTalPrice) + "</td>";
-        //                strSanPham += "</tr>";
-        //                thanhtien += (decimal)(sp.Price * sp.Quantity);
-        //            }
-        //            if (mucgiam != 0)
-        //            {
-        //                TongTien = thanhtien - thanhtien * (decimal)mucgiam / 100 + 30000; //+vanchuyen
-        //            }
-        //            else TongTien = thanhtien + 30000; //+vanchuyen
-        //            string contentCustomer = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send2.html"));
-        //            contentCustomer = contentCustomer.Replace("{{MaDon}}", order.OrderCode.ToString());
-        //            contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
-        //            if (Session["info"] != null)
-        //            {
-        //                int userID = (int)Session["UserID"];
-        //                var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
-        //                contentCustomer = contentCustomer.Replace("{{TenKhachHang}}", account.FirstName + " " + account.LastName);
-        //                contentCustomer = contentCustomer.Replace("{{Phone}}", account.PhoneNumber);
-        //                contentCustomer = contentCustomer.Replace("{{Email}}", account.Email);
-        //            }
-        //            contentCustomer = contentCustomer.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number + ", " + order.AccountAddress.Ward + ", " + order.AccountAddress.District + ", " + order.AccountAddress.City);
-        //            contentCustomer = contentCustomer.Replace("{{NgayDat}}", order.OrderDate.ToString());
-        //            contentCustomer = contentCustomer.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
-        //            contentCustomer = contentCustomer.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
-        //            contentCustomer = contentCustomer.Replace("{{SanPham}}", strSanPham);
-
-        //            electronics_shop.Common.Common.SendMail("Beszik.", "Đơn hàng #" + order.OrderCode, contentCustomer.ToString(), req.Email);
-
-
-
-
-        //            //string contentAdmin = System.IO.File.ReadAllText(Server.MapPath("~/Content/templates/send1.html"));
-        //            //contentAdmin = contentAdmin.Replace("{{MaDon}}", order.OrderCode.ToString());
-        //            //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-        //            //if (Session["info"] != null)
-        //            //{
-        //            //    int userID = (int)Session["UserID"];
-        //            //    var account = db.Accounts.FirstOrDefault(a => a.AccountCode == userID);
-        //            //    contentAdmin = contentAdmin.Replace("{{TenKhachHang}}", account.FirstName + " " + account.LastName);
-        //            //    contentAdmin = contentAdmin.Replace("{{Phone}}", account.PhoneNumber);
-        //            //    contentAdmin = contentAdmin.Replace("{{Email}}", account.Email);
-
-        //            //}
-        //            //contentAdmin = contentAdmin.Replace("{{SoNha+Phuong}}", order.AccountAddress.Number + " " + order.AccountAddress.Ward);
-        //            //contentAdmin = contentAdmin.Replace("{{Tinh}}", order.AccountAddress.District);
-        //            //contentAdmin = contentAdmin.Replace("{{ThanhPho}}", order.AccountAddress.City);
-        //            //contentAdmin = contentAdmin.Replace("{{DiaChiNhanHang}}", order.AccountAddress.Number);
-        //            //contentAdmin = contentAdmin.Replace("{{NgayDat}}", order.OrderDate.ToString());
-        //            //contentAdmin = contentAdmin.Replace("{{ThanhTien}}", string.Format("₫{0:#,0}", thanhtien));
-        //            //contentAdmin = contentAdmin.Replace("{{TongTien}}", string.Format("₫{0:#,0}", TongTien));
-        //            //contentAdmin = contentAdmin.Replace("{{SanPham}}", strSanPham);
-        //            //electronics_shop.Common.Common.SendMail("Beszik.", "Đơn hàng mới #" + order.OrderCode, contentAdmin.ToString(), ConfigurationManager.AppSettings["EmailAdmin"]);
-
-
-        //            code = new { Success = true, Code = 1 };
-        //            cart.ClearCart();
-        //            return RedirectToAction("CheckOutSuccess");
-        //        }
-        //    }
-        //    return Json(code);
-        //}
+        
 
         //thanh toan vnpay
         public string UrlPayment(int TypePaymentVN, int orderCode)

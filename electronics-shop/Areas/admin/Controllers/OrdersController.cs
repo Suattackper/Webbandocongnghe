@@ -121,16 +121,20 @@ namespace electronics_shop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateTT(int id, int trangthai, bool giaohang)
+        public ActionResult UpdateTT(int id, int trangthai, string giaohang)
         {
             var item = db.Orders.Find(id);
             if (item != null)
             {
                 db.Orders.Attach(item);
                 item.PaymentCode = trangthai;
-                item.Delivered = giaohang;
-                db.Entry(item).Property(x => x.PaymentCode).IsModified = true;
-                db.Entry(item).Property(x => x.Delivered).IsModified = true;
+                if (giaohang.Equals("true"))
+                {
+                    item.Delivered = true;
+                }
+                else { item.Delivered = false; }
+                //db.Entry(item).Property(x => x.PaymentCode).IsModified = true;
+                //db.Entry(item).Property(x => x.Delivered).IsModified = true;
 
                 db.SaveChanges();
                 return Json(new { message = "Success", Success = true });

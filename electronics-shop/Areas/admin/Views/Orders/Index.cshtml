@@ -162,7 +162,7 @@
                                                 <a href="@Url.Action("Details", "Orders",new { id = item.OrderCode}) " class="menu-link px-3">Chi tiết</a>
                                             </div>
                                             <div class="menu-item px-3">
-                                                <a data-id="@item.OrderCode" class=" btnCapNhat menu-link px-3">Cập Nhật</a>
+                                                <a data-id="@item.OrderCode" data-thanhtoan="@item.PaymentCode" data-giaohang="@item.Delivered" class=" btnCapNhat menu-link px-3">Cập Nhật</a>
                                             </div>
                                             <!--end::Menu item-->
                                             <!--begin::Menu item-->
@@ -279,14 +279,13 @@
                         <input type="hidden"  id="txtOrderId" value="1" />
                         <div class="form-group">
                             <label>Trạng thái</label>
-                            <select class="form-control" id="ddTrangThai">
+                            <select class="form-control" id="ddTrangThaiThanhToan">
                                 <option value="1">
                                     Chưa Thanh Toán
                                 </option>
                                 <option value="2">
                                     Đã Thanh Toán
                                 </option>
-
                             </select>
                            
 
@@ -297,7 +296,7 @@
                                 <option value="false">
                                     Đang Giao Hàng
                                 </option>
-                                <option value="true">
+                                <option value="frue">
                                     Giao Hàng Thành Công
                                 </option>
 
@@ -453,12 +452,41 @@
 @section scripts{
     <script src="~/Areas/Admin/Content/js/orders.js"></script>
     <script>
+
         $(document).ready(function (){
-            $('body').on('click', '.btnCapNhat', function (){
+            $('body').on('click', '.btnCapNhat', function (event){
+
+                var giaohang = $(event.currentTarget).attr('data-giaohang').toLowerCase();
+                var thanhtoan = $(event.currentTarget).attr('data-thanhtoan');
+
                 var id = $(this).data("id");
 
+                
+
+                var selectElement = document.getElementById("ddTrangThaiThanhToan");
+                selectElement.value = thanhtoan;
+                for (var i = 0; i < selectElement.options.length; i++) {
+                    var option = selectElement.options[i];
+                    if (option.value === selectElement.value) {
+                        option.selected = true;
+                    } else {
+                        option.selected = false;
+                    }
+                }
+                console.log(giaohang);
+                var selectElementt = document.getElementById("ddTrangThaiGiaoHang");
+                selectElementt.value = giaohang;
+                for (var i = 0; i < selectElementt.options.length; i++) {
+                    var option = selectElementt.options[i];
+                    if (option.value === selectElementt.value) {
+                        option.selected = true;
+                    } else {
+                        option.selected = false;
+                    }
+                }
                 $("#txtOrderId").val(id);
                 $("#txtOrderId2").val(id);
+
                 $('#update-order-modal').modal('show');
 
             });
@@ -466,20 +494,10 @@
         $(document).ready(function () {
             $('body').on('click', '.btnLuu', function () {
                 var id = $('#txtOrderId').val();
-                var tt = $('#ddTrangThai').val();
+                var tt = $('#ddTrangThaiThanhToan').val();
                 var gh = $('#ddTrangThaiGiaoHang').val().toLowerCase();
                 if (tt !== '2' && gh!=='false' ) {
-                    //iziToast.error({
-                    //    title: 'Lỗi',
-                    //    message: 'Đơn hàng chưa thanh toán, không thể cập nhật giao hàng thành công',
-                    //    icon: 'bi bi-check-circle-fill',  
-                    //    position: 'topCenter',
-                    //    iconColor: "#fff",
-                    //    titleColor: "#fff",
-                    //    messageColor: "#fff",
-                    //    backgroundColor: "rgba(247, 0, 92, 0.9)" 
-                        
-                    //});
+            
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -505,31 +523,7 @@
                         if (res.Success) {
 
                             location.reload();
-                            //iziToast.success({
-                            //    title: 'Thành Công  ',
-                            //    message: 'Cập nhật trạng thái thành công',
-                            //    position: 'topCenter',
-                            //    iconColor: "#fff",
-                            //    titleColor: "#fff",
-                            //    messageColor: "#fff",
-                            //    backgroundColor: "rgba(58, 240, 61, 0.9)",
-
-
-                            //});
-                            //const Toast = Swal.mixin({
-                            //    toast: true,
-                            //    position: 'top-end',
-                            //    showConfirmButton: false,
-                            //    timer: 1000,
-                            //    didOpen: (toast) => {
-                            //        toast.addEventListener('mouseenter', Swal.stopTimer)
-                            //        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            //    }
-                            //})
-                            //Toast.fire({
-                            //    icon: 'success',
-                            //    title: 'Cập nhật trạng thái thành công'
-                            //})
+                            
                         }
                     }
                 });

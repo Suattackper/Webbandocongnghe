@@ -1,17 +1,134 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@using electronics_shop.Models
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="@Url.Action("Index","Home")">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 active hover:text-primary-color">
+            <a href="@Url.Action("Contact","Home")">Contact us</a>
+        </li>
+    </ul>
+</div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="banner-title-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="liner-container my-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+        <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+            Contact Us
+        </h1>
+    </div>
+</div>
+
+<div class="information-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 flex sm:col-span-6 lg:col-span-3">
+            <div class="transition-all-300 flex w-full items-center gap-4 rounded-lg bg-white p-5 hover:shadow-lg xs:pl-[20%] sm:pl-5">
+                <div class="rounded-full border-2">
+                    <i class="bi bi-telephone flex p-3 text-[40px] text-primary-color"></i>
+                </div>
+                <div>
+                    <h6 class="font-bold capitalize">Phone</h6>
+                    <p class="break-all text-sm text-gray-400">0369787811</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 flex sm:col-span-6 lg:col-span-3">
+            <div class="transition-all-300 flex w-full items-center gap-4 rounded-lg bg-white p-5 hover:shadow-lg xs:pl-[20%] sm:pl-5">
+                <div class="rounded-full border-2">
+                    <i class="bi bi-envelope flex p-3 text-[40px] text-primary-color"></i>
+                </div>
+                <div>
+                    <h6 class="font-bold capitalize">E-mail</h6>
+                    <p class="break-all text-sm text-gray-400">
+                        @Html.Raw("Besnik.@example.com")
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 flex sm:col-span-6 lg:col-span-3">
+            <div class="transition-all-300 flex w-full items-center gap-4 rounded-lg bg-white p-5 hover:shadow-lg xs:pl-[20%] sm:pl-5">
+                <div class="rounded-full border-2">
+                    <i class="bi bi-geo-alt flex p-3 text-[40px] text-primary-color"></i>
+                </div>
+                <div>
+                    <h6 class="font-bold capitalize">Ubication</h6>
+                    <p class="break-all text-sm text-gray-400">
+                        Colón 0101, Olavarría
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 flex sm:col-span-6 lg:col-span-3">
+            <div class="transition-all-300 flex w-full items-center gap-4 rounded-lg bg-white p-5 hover:shadow-lg xs:pl-[20%] sm:pl-5">
+                <div class="rounded-full border-2">
+                    <i class="bi bi-clock flex p-3 text-[40px] text-primary-color"></i>
+                </div>
+                <div>
+                    <h6 class="font-bold capitalize">Hours</h6>
+                    <p class="break-all text-sm text-gray-400">
+                        Monday to Friday 10:00 to 23:00
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="leave-message-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="grid grid-cols-12 overflow-hidden rounded-lg">
+        <div class="col-span-12 h-60 sm:col-span-6 sm:h-full">
+            <iframe class="h-full w-full"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7837.145502182953!2d106.800195!3d10.843971999999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527158a0a5b81%3A0xf45c5d34ac580517!2zUGjDom4gaGnhu4d1IFRyxrDhu51uZyDEkOG6oWkgaOG7jWMgR1RWVCB04bqhaSBUcC4gSOG7kyBDaMOtIE1pbmg!5e0!3m2!1svi!2s!4v1713271931324!5m2!1svi!2s"
+                    width="700" height="500" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <div class="col-span-12 bg-white p-5 sm:col-span-6">
+            <h1 class="inline-block pb-3 text-xl font-bold uppercase">
+                Leave a Message
+            </h1>
+            <form id="contactForm" class=" flex flex-col gap-5" action="@Url.Action("Contact", "Home")" method="post">
+                <div>
+                    <input class="input" name="name" type="text" placeholder="Your Name" required />
+                </div>
+                <div>
+                    <input class="input" name="email" type="email" placeholder="Your E-mail" required />
+                </div>
+                <div class="h-32">
+                    <textarea class="input h-full resize-none" name="message" placeholder="Write your message here..." required></textarea>
+                </div>
+                <div>
+                    @if (Session["info"] != null)
+                    {
+                        Account account = (Account)Session["info"];
+                        <input class="input" name="accountcode" type="hidden" value="@account.AccountCode" />
+                    }
+                    else
+                    {
+                        <input class="input" name="accountcode" type="hidden" value="null" />
+                    }
+                </div>
+                <div>
+                    <button class="btn-view-shopping-cart btn-effect transition-all-300 flex items-center justify-center rounded-lg bg-primary-color p-4"
+                            type="submit">
+                        <span class="font-bold uppercase text-white">Send Message</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+        var accountCodeInput = document.getElementsByName('accountcode')[0];
+        if (accountCodeInput.value === 'null') {
+            alert('Please log in before sending a message.');
+            event.preventDefault(); // Ngăn chặn form từ việc submit
+        }
+    });
+</script>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<electronics_shop.Models.Order>
+<div class="table-responsive">
+    <!--begin::Table-->
+    <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
+        <!--begin::Table head-->
+        <thead>
+            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+               
+                <th class="min-w-50px">ID</th>
+                <th class="min-w-120px">Ngày đặt</th>
+                <th class="min-w-120px">Trị giá đơn hàng</th>
+                <th class="min-w-120px">Trạng thái đơn hàng</th>
+                <th class="min-w-150px">Ghi chú</th>
+            </tr>
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody class="fw-bold text-gray-600">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a @*target="_blank"*@ href="@Url.Action("Details", "Orders", new { id = item.OrderCode })" class="text-white btn "style="background-color: #009ef7">
+                    @item.OrderCode
+                    <!--begin::Date-->
+                    <td>@(item.OrderDate != null ? item.OrderDate.Value.ToString(" dd-MM-yyyy") : "")</td>
+                    <!--end::Date-->
+                    <!--begin::Total-->
+
+                    <td>@string.Format("₫{0:#,0}", item.OrderTotal)</td>
+                    <!--end::Total-->
+                    <!--begin::Status-->
+                    <td>
+                        <!--begin::Badges-->
+                        @*@if (item.status == "1")
+                            {*@
+                        <!--<div class="badge badge-light-warning">chờ xử lý</div>-->
+                        @*}*@
+                             @if (item.Delivered != true)
+                            {
+                        <div class="badge badge-light-info">Đang xử lý</div>
+                        }
+                            else 
+                            {
+                        <div class="badge badge-light-success">Hoàn thành</div>
+                        }
+                            @*else
+                            {
+                        <div class="badge badge-light-danger">Bị hủy</div>*@
+
+                        <!--end::Badges-->
+                    </td>
+                    <!--end::Status-->
+                    <!--begin::Customer Notified-->
+                    <td>@(item.OrderNote == "" ? "Không" : item.OrderNote)</td>
+                    <!--end::Customer Notified-->
+                    </a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+        <!--end::Table head-->
+    </table>
+    <!--end::Table-->
+</div>

@@ -1,0 +1,338 @@
+﻿@using electronics_shop.Models
+@{
+    ViewBag.Title = "Bảng điều khiển";
+    Layout = "~/Areas/Admin/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<!--begin::toolbar-->
+<div class="toolbar" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+        <!--begin::Page title-->
+        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+            <!--begin::Title-->
+            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Thống kê</h1>
+            <!--end::Title-->
+            <!--begin::Separator-->
+            <span class="h-20px border-gray-300 border-start mx-4"></span>
+            <!--end::Separator-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-muted">
+                    <a class="text-muted text-hover-primary">Bảng điều khiển</a>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">Thống kê</li>
+                <!--end::Item-->
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::toolbar-->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            @if (Session["InfoAdmin"] != null)
+            {
+                Account account = (Account)Session["InfoAdmin"];
+                <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning @($"{account.LastName} {account.FirstName}")!</h3>
+            }
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index","Dashboard")">Dashboard</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        @*<div class="col-5 align-self-center">
+                <div class="customize-input float-right">
+                    <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                        <option selected>Aug 19</option>
+                        <option value="1">July 19</option>
+                        <option value="2">Jun 19</option>
+                    </select>
+                </div>
+            </div>*@
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!--begin::Post-->
+<div class="post d-flex flex-column-fluid" id="kt_post">
+
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- *************************************************************** -->
+        <!-- Start First Cards -->
+        <!-- *************************************************************** -->
+        <div class="card-group">
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Khachhangmoi</h2>
+                                <span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">@ViewBag.Tylekhachhang%</span>
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Khách hàng mới của tháng</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">
+                                <sup class="set-doller">₫</sup>@string.Format("{0:#,0}", ViewBag.Tongdoanhthu)
+                            </h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
+                                Tổng doanh thu của tháng
+                            </h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Donhangmoi</h2>
+                                @*<span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>*@
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Đơn hàng mới của tháng</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Tongspb</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Tổng sản phẩm bán ra của tháng</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Khachhang</h2>
+                                @*<span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">@ViewBag.Tylekhachhang%</span>*@
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Tổng khách hàng</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">
+                                <sup class="set-doller">₫</sup>@string.Format("{0:#,0}", ViewBag.Doanhthu)
+                            </h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">
+                                Tổng doanh thu
+                            </h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-right">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <div class="d-inline-flex align-items-center">
+                                <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Donhang</h2>
+                                @*<span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>*@
+                            </div>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Tổng đơn hàng đã bán</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 font-weight-medium">@ViewBag.Tongsp</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Tổng sản phẩm đã bán</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- *************************************************************** -->
+        <!-- End First Cards -->
+        <!-- *************************************************************** -->
+        <!-- *************************************************************** -->
+        <!-- Start Sales Charts Section -->
+        <!-- *************************************************************** -->
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Total Sales</h4>
+                        <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div>
+                        <ul class="list-style-none mb-0">
+                            <li>
+                                <i class="fas fa-circle text-primary font-10 mr-2"></i>
+                                <span class="text-muted">Smarthome Sales</span>
+                                <span class="text-dark float-right font-weight-medium">@string.Format("₫{0:#,0}", ViewBag.DoanhthuSmarthome)</span>
+                            </li>
+                            <li class="mt-3">
+                                <i class="fas fa-circle text-danger font-10 mr-2"></i>
+                                <span class="text-muted">GamingGear Sales</span>
+                                <span class="text-dark float-right font-weight-medium">@string.Format("₫{0:#,0}", ViewBag.DoanhthuGamingGear)</span>
+                            </li>
+                            <li class="mt-3">
+                                <i class="fas fa-circle text-cyan font-10 mr-2"></i>
+                                <span class="text-muted">Accessory Sales</span>
+                                <span class="text-dark float-right font-weight-medium">@string.Format("₫{0:#,0}", ViewBag.DoanhthuAccessory)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Net Income</h4>
+                        <div class="net-income mt-4 position-relative" style="height:294px;"></div>
+                        <ul class="list-inline text-center mt-5 mb-2">
+                            <li class="list-inline-item text-muted font-italic">Sales for this month</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Recent Activity</h4>
+                        <div class="mt-4 activity">
+                            <div class="d-flex align-items-start border-left-line pb-3">
+                                <div>
+                                    <a href="javascript:void(0)" class="btn btn-info btn-circle mb-2 btn-item">
+                                        <i data-feather="shopping-cart"></i>
+                                    </a>
+                                </div>
+                                <div class="ml-3 mt-2">
+                                    <h5 class="text-dark font-weight-medium mb-2">New Product Sold!</h5>
+                                    <p class="font-14 mb-2 text-muted">
+                                        @ViewBag.Khanhhangmuasp vừa mới mua <br> @ViewBag.Tensp.
+                                    </p>
+                                    <span class="font-weight-light font-14 text-muted">@ViewBag.Khoangthoigianbansp</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start border-left-line pb-3">
+                                <div>
+                                    <a href="javascript:void(0)"
+                                       class="btn btn-danger btn-circle mb-2 btn-item">
+                                        <i data-feather="message-square"></i>
+                                    </a>
+                                </div>
+                                <div class="ml-3 mt-2">
+                                    <h5 class="text-dark font-weight-medium mb-2">New Review! </h5>
+                                    <p class="font-14 mb-2 text-muted">
+                                        @ViewBag.Khachhangcm vừa đánh giá @ViewBag.Sosao sao cho <br> @ViewBag.Tenspcm.
+                                    </p>
+                                    <span class="font-weight-light font-14 text-muted">@ViewBag.Khoangthoigiancm</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start border-left-line">
+                                <div>
+                                    <a href="javascript:void(0)" class="btn btn-cyan btn-circle mb-2 btn-item">
+                                        <i data-feather="bell"></i>
+                                    </a>
+                                </div>
+                                <div class="ml-3 mt-2">
+                                    <h5 class="text-dark font-weight-medium mb-2">
+                                        Notification New Client!
+                                    </h5>
+                                    <p class="font-14 mb-2 text-muted">Khách hàng @ViewBag.Khachhangtg vừa đăng kí </p>
+                                    <span class="font-weight-light font-14 mb-1 d-block text-muted">
+                                        @ViewBag.Khoangthoigiankhtg
+                                    </span>
+                                    <a href="javascript:void(0)" class="font-14 border-bottom pb-1 border-info"><br /><br /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- *************************************************************** -->
+        <!-- End Sales Charts Section -->
+        <!-- *************************************************************** -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+</div>
+<!--end::Post-->
+
+
+
+
+@section ChartDashboard{
+    <script src="~/Areas/admin/Content/js/custom.js"></script>
+    <script src="~/Areas/admin/Content/js/feather.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/extra-libs/c3/c3.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="~/Areas/admin/Content/js/pages/chartjs/chartjs.init.js"></script>
+    <script src="~/Areas/admin/Content/assets/libs/chart.js/dist/Chart.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/libs/chartist/dist/chartist.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/Areas/admin/Content/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
+    @*@Html.Action("Chart", "DashBoard")*@
+}

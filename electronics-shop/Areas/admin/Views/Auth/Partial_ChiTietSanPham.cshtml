@@ -1,0 +1,74 @@
+﻿
+@model IEnumerable<electronics_shop.Models.Order>
+
+
+
+
+@if (Model != null)
+{
+
+
+    foreach (var item in Model)
+    {
+        <tr>
+            <td><strong>#Order-@item.OrderCode</strong></td>
+            @*@if (item.Product.ImageProduct != null)
+                {
+                    byte[] imgData = item.Product.ImageProduct;
+                    // chuyển sang chuỗi Base64
+                    string base64String = Convert.ToBase64String(imgData);
+                    <td><img src="data:image/png;base64,@base64String" alt="@item.ProductCode" class="avatar lg rounded me-2" alt="profile-image"><span> @item.Product.ProductName </span></td>
+
+
+                }
+                else
+                {
+                    <img src="~/Content/images/comments/profile_1.png" alt="@item.ProductCode" class="w-80px h-80px" style="object-fit:cover;">
+                }*@
+
+            @*<td><a class="btn-open-modal" href="#"><strong>Chi Tiết Đơn</strong></a></td>*@
+            <td>
+                <a href="@Url.Action("Details", "Orders",new { id = item.OrderCode}) "><strong>Chi tiết đơn</strong></a>
+            </td>
+
+            @if (item.PaymentCode != null)
+            {
+                if (item.PaymentCode == 1)
+                {
+
+                    <td>COD</td>
+
+
+                }
+                else
+                {
+                    <td>Online Payment</td>
+
+                }
+
+            }
+            else
+            {
+                <td>NULL</td>
+
+            }
+            <td>@item.OrderDate.Value.ToString(" dd-MM-yyyy") </td>
+            <td>
+                @string.Format("₫{0:#,0}", item.OrderTotal);
+            </td>
+        </tr>
+
+
+    }
+
+
+
+
+}
+
+
+
+else
+{
+    <span> <strong>Null Product</strong> </span>
+}

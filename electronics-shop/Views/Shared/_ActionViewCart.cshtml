@@ -1,0 +1,49 @@
+﻿
+@model IEnumerable<electronics_shop.Models.ShoppingCartItem>
+
+
+
+
+<div id="partialViewAction" class="mt-auto border-t-2 border-gray-200 bg-white px-1 pt-5 xs:px-5">
+
+    @if (Model != null && Model.Any())
+    {
+        decimal total = decimal.Zero;
+        foreach (var item in Model)
+        {
+            total = total + (decimal)(@item.ToTalPrice);
+        }
+
+        <div class="flex justify-between">
+            <span class="text-lg uppercase">Subtotal:</span>
+            <span class="text-lg font-semibold text-primary-color">@string.Format("₫{0:#,0}", total)</span>
+        </div>
+
+        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("Index", "ShoppingCart") ">
+            <span class="font-bold uppercase text-white">View Shopping Cart</span>
+        </a>
+        @*<a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("CheckOut","ShoppingCart")">
+            <span class="font-bold uppercase text-white">Checkout now</span>
+        </a>*@
+
+    }
+    else
+    {
+        <div class="flex justify-between">
+            <span class="text-lg uppercase">Subtotal:</span>
+            <span class="text-lg font-semibold text-primary-color">₫0</span>
+        </div>
+        <a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("Index", "ShoppingCart") ">
+            <span class="font-bold uppercase text-white">View Shopping Cart</span>
+        </a>
+        @*<a class="btn-effect transition-all-300 my-5 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+           href="@Url.Action("CheckOut","ShoppingCart", new {total = ViewBag.total})">
+            <span class="font-bold uppercase text-white">Checkout now</span>
+        </a>*@
+
+    }
+</div>
+

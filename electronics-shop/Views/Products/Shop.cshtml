@@ -1,0 +1,453 @@
+﻿@model PagedList.IPagedList<electronics_shop.Models.Product>
+@using PagedList.Mvc
+@using PagedList
+
+
+@{ ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@*<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+        <ul class="flex flex-wrap items-center gap-1">
+            <li class="transition-all-300 hover:text-primary-color">
+                <a href="@Url.Action("Index","Home")">Home</a>
+            </li>
+            <li>
+                <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+            </li>
+            <li class="transition-all-300 active hover:text-primary-color">
+                <a href="@Url.Action(ViewBag.view,"Products")">@ViewBag.danhmuc</a>
+            </li>
+        </ul>
+    </div>*@
+
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="@Url.Action("Index","Home")">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        @if (ViewBag.Search == null || ViewBag.Search == "")
+        {
+            <li class="transition-all-300 active hover:text-primary-color">
+                <a href="@Url.Action(ViewBag.view,"Products")">@ViewBag.danhmuc</a>
+            </li>
+        }
+        else
+        {
+            <li class="transition-all-300 hover:text-primary-color">
+                <a href="@Url.Action(ViewBag.view,"Products")">@ViewBag.danhmuc</a>
+            </li>
+            <li>
+                <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+            </li>
+            <li class="transition-all-300 active hover:text-primary-color">
+                <p>@ViewBag.Search</p>
+            </li>
+        }
+    </ul>
+</div>
+
+
+<div class="shop-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                @if (ViewBag.Search == null || ViewBag.Search == "")
+                {
+                    <span class="text-lg"><span class="text-primary-color"></span></span>
+                }
+                else
+                {
+                    <span class="text-lg">Results of '<span class="text-primary-color">@ViewBag.Search</span>'</span>
+                }
+                <div class="flex items-center gap-5">
+                    <ul class="shop-mix flex items-center gap-2 text-gray-200">
+                        <li class="control tippy tippy-grid transition-all-300 cursor-pointer hover:text-primary-hover"
+                            data-filter=".mix-main">
+                            <i class="bi bi-grid-3x3-gap-fill flex text-3xl"></i>
+                        </li>
+                        <li class="control tippy tippy-list transition-all-300 cursor-pointer hover:text-primary-hover"
+                            data-filter=".mix-list">
+                            <i class="bi bi-list text-stroke-medium flex text-4xl"></i>
+                        </li>
+                    </ul>
+                    <form>
+                        <select class="nice-select order-by select">
+                            <option value="0">Lower price</option>
+                            <option value="1">Higher price</option>
+                            <option value="2">Most popular</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-4 lg:col-span-4 xl:col-span-3">
+            <form class="flex flex-col rounded-lg bg-white p-5" action="@Url.Action("Fill","Products")">
+                <div class="mb-5 flex items-center gap-2">
+                    <i class="bi bi-funnel flex text-sm text-primary-color"></i>
+                    <h1 class="text-xl font-bold uppercase">Search Filter</h1>
+                </div>
+                @*<div class="mb-5 border-t-2 pt-5">
+                        <div class="relative flex items-center">
+                            <i class="bi bi-search text-stroke-medium absolute ml-4 flex text-gray-400"></i>
+                            <input class="input pl-10" type="search" name="sc" placeholder="Search..." />
+                        </div>
+                    </div>*@
+                <div class="mb-5 border-t-2 pt-5">
+                    <span class="mb-2 flex font-semibold">Service and Promotion</span>
+                    @if (ViewBag.With != null || ViewBag.Avai != null)
+                    {
+                        <label class="transition-all-300 my-1 flex cursor-pointer select-none items-center gap-2 hover:text-primary-color">
+                            <input class="checkbox" type="checkbox" name="with" value="with" @(ViewBag.With == "with" ? "checked" : "") />
+                            <span class="text-gray-title">With discount</span>
+                        </label>
+                        <label class="transition-all-300 my-1 flex cursor-pointer select-none items-center gap-2 hover:text-primary-color">
+                            <input class="checkbox" type="checkbox" name="avai" value="avai" @(ViewBag.Avai == "avai" ? "checked" : "") />
+                            <span class="text-gray-title">Available stock</span>
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="transition-all-300 my-1 flex cursor-pointer select-none items-center gap-2 hover:text-primary-color">
+                            <input class="checkbox" type="checkbox" name="with" value="with" />
+                            <span class="text-gray-title">With discount</span>
+                        </label>
+                        <label class="transition-all-300 my-1 flex cursor-pointer select-none items-center gap-2 hover:text-primary-color">
+                            <input class="checkbox" type="checkbox" name="avai" value="avai" />
+                            <span class="text-gray-title">Available stock</span>
+                        </label>
+                    }
+
+                </div>
+                <div class="mb-5 border-t-2 pt-5">
+                    <span class="mb-2 flex font-semibold">Brands</span>
+                    <div class="max-h-[220px] overflow-auto">
+                        @if (ViewBag.brandd != null)
+                        {
+                            if (ViewBag.brandd != "ALL")
+                            {
+                                <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                    <input type="radio" name="brand" value="ALL" />
+                                    <span class="text-gray-title">ALL</span>
+                                </label>
+                                foreach (var item in ViewBag.Brand)
+                                {
+                                    <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                        <input type="radio" name="brand" value="@item.BrandName" @(ViewBag.brandd == item.BrandName ? "checked" : "") />
+                                        <span class="text-gray-title">@item.BrandName</span>
+                                    </label>
+                                }
+                            }
+                            else
+                            {
+                                <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                    <input type="radio" name="brand" value="ALL" checked />
+                                    <span class="text-gray-title">ALL</span>
+                                </label>
+                                foreach (var item in ViewBag.Brand)
+                                {
+                                    <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                        <input type="radio" name="brand" value="@item.BrandName" />
+                                        <span class="text-gray-title">@item.BrandName</span>
+                                    </label>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                <input type="radio" name="brand" value="ALL" checked />
+                                <span class="text-gray-title">ALL</span>
+                            </label>
+                            foreach (var item in ViewBag.Brand)
+                            {
+                                <label class="transition-all-300 flex cursor-pointer select-none items-center gap-2 p-1 hover:text-primary-color">
+                                    <input type="radio" name="brand" value="@item.BrandName" />
+                                    <span class="text-gray-title">@item.BrandName</span>
+                                </label>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="border-t-2 pt-5">
+                    <span class="mb-2 flex font-semibold">Price range</span>
+                    <div class="flex items-center gap-2">
+                        @if (ViewBag.Min != null && ViewBag.Max != null)
+                        {
+                            <input class="input input-number" type="number" name="min" placeholder="₫ MIN" value="@ViewBag.Min" />
+                            <div class="h-[2px] w-10 bg-gray-200"></div>
+                            <input class="input input-number" type="number" name="max" placeholder="₫ MAX" value="@ViewBag.Max" />
+                        }
+                        else
+                        {
+                            <input class="input input-number" type="number" name="min" placeholder="₫ MIN" />
+                            <div class="h-[2px] w-10 bg-gray-200"></div>
+                            <input class="input input-number" type="number" name="max" placeholder="₫ MAX" />
+                        }
+                        @if (ViewBag.Search == null || ViewBag.Search == "")
+                        {
+                            <input type="hidden" name="search" value="" />
+                        }
+                        else
+                        {
+                            <input type="hidden" name="search" value="@ViewBag.Search" />
+                        }
+                        <input type="hidden" name="view" value="@ViewBag.view" />
+                        <input type="hidden" name="danhmuc" value="@ViewBag.danhmuc" />
+                    </div>
+                    <button class="btn-effect mt-2 w-full rounded-lg bg-primary-color p-2 font-bold uppercase text-white"
+                            type="submit">
+                        <span>Filter @ViewBag.With</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-span-12 md:col-span-8 lg:col-span-8 xl:col-span-9">
+            <div class="mix-elements mix-all grid grid-cols-12 gap-5">
+                @foreach (var product in Model)
+                {
+                    <div class="mix mix-main col-span-12 h-auto sm:col-span-6 lg:col-span-4">
+                        <div class="card-container transition-all-300 translateY-2 relative flex h-full flex-col overflow-hidden rounded-lg bg-white p-5 shadow-md hover:z-[2] hover:shadow-xl">
+                            <!--<div class="absolute top-[10px] right-[10px]">-->
+                                @*<div class="p-[2px]">
+                                    <a class="tippy tippy-left-wishlist btn-wishlist transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center gap-2 rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                       href="javascript:void(0)">
+                                        <i class="bi bi-heart pointer-events-none flex text-white"></i>
+                                    </a>
+                                </div>*@
+                                <!--<div class="p-[2px]">
+                                    <a class="tippy tippy-left-card-view btn-open-modal transition-all-300 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-[rgba(0,0,0,.3)] hover:bg-primary-hover"
+                                       href="javascript:void(0)" data-target=".quick-view-modal">
+                                        <i class="bi bi-eye pointer-events-none flex text-xl text-white"></i>
+                                    </a>
+                                </div>
+                            </div>-->
+                            @foreach (var pro in ViewBag.Promotion)
+                            {
+                                if (pro.PromotionCode == product.PromotionCode)
+                                {
+                                    if (pro.EndDate < DateTime.Now) { break; }
+                                    <div class="absolute left-0 top-0 flex h-[35px] w-[90px] items-center justify-center rounded-br-lg bg-primary-color">
+                                        <span class="text-md text-center font-semibold uppercase text-white">
+                                            @pro.PromotionPercentage% Off
+                                        </span>
+                                    </div>
+                                    break;
+                                }
+                            }
+                            <div class="h-[190px] overflow-hidden rounded-lg">
+                                <a href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
+                                    @{
+                                        byte[] imageData = product.ImageProduct;
+                                        string base64String = Convert.ToBase64String(imageData);
+                                    }
+                                    <img src="data:image/png;base64,@base64String" class="card-object-fit h-full w-full" alt="@product.ProductName" />
+                                    @*<img class="card-object-fit h-full w-full" src="@product.ImageProduct" alt="@product.ProductName" />*@
+                                </a>
+                            </div>
+                            <div class="my-2 flex justify-between">
+                                <div class="flex">
+                                    @if (product.Rate == 0)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (product.Rate > 0 && product.Rate <= 1)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (product.Rate > 1 && product.Rate <= 2)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (product.Rate > 2 && product.Rate <= 3)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else if (product.Rate > 3 && product.Rate <= 4)
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-gray-200"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                        <i class="bi bi-star-fill flex text-base text-star"></i>
+                                    }
+                                </div>
+                                <div>
+                                    @if (product.Quantity > 0)
+                                    {
+                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white">instock</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="rounded-md bg-green-300 py-1 px-2 text-xs font-bold uppercase text-white" style="background-color:red">saleout</span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <a class="clamp break-all font-medium" href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
+                                    @product.ProductName
+                                </a>
+                            </div>
+                            <div class="my-1">
+                                <p class="clamp-2 text-sm text-gray-400">
+                                    @product.Description
+                                </p>
+                            </div>
+
+                            <div class="my-1">
+                                @*<span class="text-lg font-bold">@product.Price </span>*@
+                                @*định dạng tiền vn đxxx.xxx.xxx*@
+                                @{ int d = 0;}
+                                @foreach (var pro in ViewBag.Promotion)
+                                {
+                                    if (pro.PromotionCode == product.PromotionCode)
+                                    {
+                                        if (pro.EndDate < DateTime.Now) { break; }
+                                        d++;
+                                        <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price - pro.PromotionPercentage * product.Price / 100)</span>
+                                        <span class="text-sm text-primary-color line-through">@string.Format("₫{0:#,0}", product.Price)</span>
+                                        break;
+                                    }
+                                }
+                                @if (d == 0)
+                                {
+                                    <span class="text-lg font-bold">@string.Format("₫{0:#,0}", product.Price)</span>
+                                }
+                            </div>
+                            <div class="mt-auto">
+                                <a class="btn-effect transition-all-300 flex w-full items-center justify-center rounded-lg bg-primary-color p-2"
+                                   href="@Url.Action("Detail", "Products", new {id = product.ProductCode})">
+                                    <span class="font-bold uppercase text-white">View details</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="col-span-12">
+            <div class="flex items-center justify-center">
+                @if (ViewBag.Search == null || ViewBag.Search == "")
+                {
+                    if (ViewBag.Fill != null && (ViewBag.With != null || ViewBag.Avai != null || ViewBag.brandd != "ALL" || ViewBag.Min != "" || ViewBag.Max != ""))
+                    {
+                        @Html.PagedListPager(
+                        Model,
+                        page => Url.Action(ViewBag.Fill, new { with = ViewBag.With, avai = ViewBag.Avai, brand = ViewBag.brandd, min = ViewBag.Min, max = ViewBag.Max, search = "", view = ViewBag.view, danhmuc = ViewBag.danhmuc, page }),
+                            new PagedListRenderOptions
+                            {
+                                //danh sách các lớp CSS được áp dụng cho thẻ <ul> của phân trang.
+                                UlElementClasses = new[] { "pagination", "flex", "items-center" },
+                                //danh sách các lớp CSS được áp dụng cho thẻ <li> của phân trang.
+                                LiElementClasses = new[] { "cursor-pointer", "py-2", "px-3" },
+                                //có hiển thị dấu ba chấm(...) khi không hiển thị tất cả số trang không.
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                //hiển thị liên kết đến trang đầu và trang cuối không
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                //định dạng hiển thị liên kết đến trang đầu và trang cuối
+                                LinkToFirstPageFormat = "<<",
+                                LinkToLastPageFormat = ">>",
+                                MaximumPageNumbersToDisplay = 5, // Số lượng trang tối đa hiển thị
+                                // Định dạng cho dấu ba chấm khi nó được hiển thị.
+                                EllipsesFormat = "..."
+                            }
+                        )
+                    }
+                    else
+                    {
+                        @Html.PagedListPager(
+                            Model,
+                            page => Url.Action(ViewBag.view, new { page }),
+                            new PagedListRenderOptions
+                            {
+                                UlElementClasses = new[] { "pagination", "flex", "items-center" },
+                                LiElementClasses = new[] { "cursor-pointer", "py-2", "px-3" },
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                LinkToFirstPageFormat = "<<",
+                                LinkToLastPageFormat = ">>",
+                                MaximumPageNumbersToDisplay = 5,
+                                EllipsesFormat = "..."
+                            }
+                        )
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Fill != null && (ViewBag.With != null || ViewBag.Avai != null || ViewBag.brandd != "ALL" || ViewBag.Min != "" || ViewBag.Max != ""))
+                    {
+                        @Html.PagedListPager(
+                        Model,
+                        page => Url.Action(ViewBag.Fill, new { with = ViewBag.With, avai = ViewBag.Avai, brand = ViewBag.brandd, min = ViewBag.Min, max = ViewBag.Max, search = ViewBag.Search, view = ViewBag.view, danhmuc = ViewBag.danhmuc, page }),
+                            new PagedListRenderOptions
+                            {
+                                UlElementClasses = new[] { "pagination", "flex", "items-center" },
+                                LiElementClasses = new[] { "cursor-pointer", "py-2", "px-3" },
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                LinkToFirstPageFormat = "<<",
+                                LinkToLastPageFormat = ">>",
+                                MaximumPageNumbersToDisplay = 5,
+                                EllipsesFormat = "..."
+                            }
+                        )
+                    }
+                    else
+                    {
+                        @Html.PagedListPager(
+                            Model,
+                            page => Url.Action(ViewBag.view, new { s = ViewBag.Search, page }),
+                            new PagedListRenderOptions
+                            {
+                                UlElementClasses = new[] { "pagination", "flex", "items-center" },
+                                LiElementClasses = new[] { "cursor-pointer", "py-2", "px-3" },
+                                DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                LinkToFirstPageFormat = "<<",
+                                LinkToLastPageFormat = ">>",
+                                MaximumPageNumbersToDisplay = 5,
+                                EllipsesFormat = "..."
+                            }
+                        )
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

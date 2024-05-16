@@ -1,8 +1,48 @@
-.star-rating {
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.75rem;
+    color: #fddb4c;
+}
+
+    .rating .star {
+        cursor: pointer;
+    }
+
+        .rating .star.active {
+            opacity: 0;
+            animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+        }
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.rating .star:hover {
+    transform: scale(1.1);
+}
+
+/*.star-rating {
     width: 0;
     position: relative;
-    display:inline-block;
-    background-image: url('star_0.svg');
+    display: inline-block;
+    background-image: url('./star_0.svg');
     background-position: 0 0;
     background-repeat: repeat-x;
     cursor: pointer;
@@ -12,7 +52,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background: url('star_1.svg')!important;
+    background: url('./star_1.svg') !important;
     background-repeat: repeat-x;
     background-size: 32px !important;
 }
@@ -34,4 +74,4 @@
     -ms-filter: "FlipH";
     right: 0;
     left: auto;
-}
+}*/

@@ -1,0 +1,287 @@
+﻿@model electronics_shop.Models.Order
+@{
+    ViewBag.Title = "CheckOutSuccess";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    
+
+}
+<div class="breadcrumb-section container mx-auto my-5 px-2 sm:px-8">
+    <ul class="flex flex-wrap items-center gap-1">
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 hover:text-primary-color">
+            <a href="shopping-cart.html">Shopping Cart</a>
+        </li>
+        <li>
+            <i class="bi bi-caret-right-fill flex text-primary-color"></i>
+        </li>
+        <li class="transition-all-300 active hover:text-primary-color">
+            <a href="checkout.html">Checkout</a>
+        </li>
+    </ul>
+</div>
+
+<div class="banner-title-section container mx-auto my-5 px-2 sm:px-8">
+    <div class="liner-container my-5 flex justify-center border-b-2 border-[rgba(119,119,119,.17)]">
+        <h1 class="mb-[-2px] inline-block border-b-2 border-primary-color pb-3 text-2xl font-bold uppercase">
+            Checkout
+        </h1>
+    </div>
+</div>
+
+<div class="checkout-section container mx-auto my-5 px-2 sm:px-8">
+    <div id="show_success">
+        <h2 class="text-center">Bạn đã đặt hàng thành công</h2>
+    </div>
+    @*@if (Session["info"] != null)
+        {
+            if (ViewBag.TypePayment == 1)
+            {
+                <div id="show_success">
+                    <h2 class="text-center">Bạn đã đặt hàng thành công</h2>
+                </div>
+            }else if(ViewBag.TypePayment == 2)
+                    {
+                        <h2 class="text-center text-blue-600" >Thanh toán momo</h2>
+                    }
+        else
+                    {
+                        <h2> khong duoc</h2>
+                    }
+
+        }
+        else
+        {
+            <div style="text-align:center;display:flex;flex-direction:column;align-items: center; justify-content:center">
+                <p class="text-center">Vui lòng đăng nhập để thực hiện thanh toán</p>
+
+
+
+                <a class="btn-effect transition-all-300 my-5 flex w-\[30px\] items-center justify-center rounded-xl bg-primary-color p-2"
+                   href="@Url.Action("Login", "Account")">
+
+                    <span class="font-bold uppercase text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4" />
+                        </svg> Đăng nhập ngay
+                    </span>
+                </a>
+            </div>
+
+        }*@
+
+
+</div>
+
+<!-- Modals -->
+@*<div class="menu-mob modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+        <div class="flex h-full w-full">
+            <div class="modal-content transition-all-300 relative left-[-999px] mr-auto flex h-full w-[288px] min-w-[250px] flex-col bg-white">
+                <div class="w-full bg-secondary-color">
+                    <button class="btn-close-modal transition-all-300 absolute top-5 right-5 p-[3px] text-white">
+                        <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                    </button>
+                    <div class="py-12">
+                        <img src="images/logo.png" class="mx-auto h-[40px]" alt="logo" />
+                    </div>
+                </div>
+                <nav class="h-full w-full overflow-auto bg-white">
+                    <ul class="metismenu">
+                        <li class="border-b border-gray-200">
+                            <a class="flex select-none items-center p-2" href="index.html">
+                                <i class="bi bi-house-door mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Home</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false"
+                                 role="menu">
+                                <i class="bi bi-person mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">My Account</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="#"
+                                   data-tab="0"
+                                   data-target=".entry-modal">Login</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="#"
+                                   data-tab="1"
+                                   data-target=".entry-modal">Sign Up</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="btn-open-modal cursor-pointer p-2"
+                                 data-target=".wishlist-modal">
+                                <div class="pointer-events-none flex cursor-pointer select-none items-center">
+                                    <i class="bi bi-heart mr-3 flex text-xl text-primary-color"></i>
+                                    <span class="font-semibold">Wishlist</span>
+                                    <span class="badge ml-auto h-[22px] min-w-[22px] px-[6px]">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="btn-open-modal cursor-pointer p-2"
+                                 data-target=".shopping-cart-modal">
+                                <div class="pointer-events-none flex cursor-pointer select-none items-center">
+                                    <i class="bi bi-cart mr-3 flex text-xl text-primary-color"></i>
+                                    <span class="font-semibold">Shopping Cart</span>
+                                    <span class="badge ml-auto h-[22px] min-w-[22px] px-[6px]">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false"
+                                 role="menu">
+                                <i class="bi bi-motherboard mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Hardware</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Motherboards</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Processors</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Rams</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Video Cards</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Power Supplys</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Hard Drives</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">SSD Disk</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false"
+                                 role="menu">
+                                <i class="bi bi-mouse mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Peripherals</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Keywords</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Mouses</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Mics</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Webcam</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false"
+                                 role="menu">
+                                <i class="bi bi-pc-display mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Computers</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Notebooks</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="#">Desktops</a>
+                            </div>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="flex cursor-pointer select-none items-center p-2"
+                               href="#">
+                                <i class="bi bi-tv mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Monitors</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="flex cursor-pointer select-none items-center p-2"
+                               href="#">
+                                <i class="bi bi-printer mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Printers</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="flex cursor-pointer select-none items-center p-2"
+                               href="#">
+                                <i class="bi bi-phone mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Smartphones</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="flex select-none items-center p-2" href="faqs.html">
+                                <i class="bi bi-question-circle mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">FAQ's</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <a class="flex select-none items-center p-2"
+                               href="contact-us.html">
+                                <i class="bi bi-telephone mr-3 flex text-xl text-primary-color"></i>
+                                <span class="font-semibold">Contact Us</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-gray-200">
+                            <div class="metismenu-btn has-arrow flex cursor-pointer select-none items-center p-2"
+                                 aria-expanded="false"
+                                 role="menu">
+                                <span class="font-semibold">Pages</span>
+                            </div>
+                            <div class="metismenu-content">
+                                <a class="btn-open-modal ml-10 block p-1" href="wishlist.html">Wishlist</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="shopping-cart.html">Shopping Cart</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="product-details.html">Product Details</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="checkout.html">Checkout</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="shop-mixed.html">Shop - Mixed</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="shop-listed.html">Shop - Listed</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="shop-grid.html">Shop - Grid</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="about-us.html">About Us</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="my-account.html">My Account</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="forgot-password.html">Forgot Password</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="login.html">Login</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="sign-up.html">Sign Up</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="verification.html">Verification</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="terms-and-conditions.html">Terms & Conditions</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="privacy-policy.html">Privacy Policy</a>
+                                <a class="btn-open-modal ml-10 block p-1" href="error404.html">Error 404</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="message-sent.html">Message Sent</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="purchase-completed.html">Purchase Completed</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="purchase-failed.html">Purchase Failed</a>
+                                <a class="btn-open-modal ml-10 block p-1"
+                                   href="maintenance.html">Maintenance</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>*@
+
+<div class="shopping-cart-modal modal transition-all-300 invisible fixed inset-0 z-50 h-full w-full bg-overlay opacity-0">
+    <div class="flex h-full w-full">
+        <div class="modal-content transition-all-300 relative right-[-999px] ml-auto flex h-full w-[400px] min-w-[250px] flex-col bg-white">
+            <div class="w-full">
+                <div class="border-b-2 border-gray-200 p-5">
+                    <h3 class="text-xl font-bold uppercase">Shopping Cart</h3>
+                </div>
+                <button class="btn-close-modal transition-all-300 absolute right-5 top-5 p-[3px] hover:text-slate-400">
+                    <i class="bi bi-x-lg text-stroke-medium pointer-events-none flex text-xl"></i>
+                </button>
+            </div>
+
+
+            @Html.Action("RenderShoppingCart", "Products")
+
+            @Html.Action("RenderActionCart", "Products")
+
+
+        </div>
+
+    </div>
+</div>
+

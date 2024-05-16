@@ -36,3 +36,4 @@ Huỳnh Thị Quỳnh Như: </br>
 - User: Xử lý đăng nhập, đăng ký, thay đổi mật khẩu
 - Admin: Xử lý đăng nhập, đăng ký
 - Front-End User/Admin
+- Back-End User/Admin

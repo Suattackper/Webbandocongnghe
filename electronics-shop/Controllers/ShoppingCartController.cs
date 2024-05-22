@@ -147,7 +147,6 @@ namespace electronics_shop.Controllers
             if (Session["info"] == null)
             {
                 return RedirectToAction("login", "Account");
-
             }
             return View();
         }
@@ -209,7 +208,6 @@ namespace electronics_shop.Controllers
                     }
                 }
             }
-
             return View();
         }
 
@@ -302,14 +300,6 @@ namespace electronics_shop.Controllers
                     //lấy mã ordercode
                     Order ordercode = db.Orders.OrderByDescending(o => o.OrderCode).FirstOrDefault();
 
-
-                    //cart.Items.ForEach(x => order.OrderDetails.Add(new OrderDetail
-                    //{
-                    //    OrderCode = ordercode.OrderCode,
-                    //    ProductCode = x.ProductId,
-                    //    Quantity = x.Quantity,
-                    //    Price = (decimal?)x.Price
-                    //}));
                     foreach (var i in cart.Items)
                     {
                         OrderDetail p = new OrderDetail();
@@ -344,15 +334,6 @@ namespace electronics_shop.Controllers
                         p.Quantity = p.Quantity - i.Quantity;
                         db.SaveChanges();
                     }
-
-                    //order.OrderTotal = (decimal?)cart.Items.Sum(x => (x.Price * x.Quantity));
-                    //order.typepayment = req.typepayment;
-                    //order.OrderDate = DateTime.Now;
-
-                    //order.CreateBy = req.PhoneNumber;
-                    //Random rd = new Random();
-                    //order.OrderCode = rd.Next(0,9) + rd.Next(0, 9) + rd.Next(0, 9);
-
                     db.SaveChanges();
                     // send mail cho khach hang
                     var strSanPham = "";
@@ -397,18 +378,15 @@ namespace electronics_shop.Controllers
                     electronics_shop.Common.Common.SendMail("Besnik.", "Đơn hàng #" + order.OrderCode, contentCustomer.ToString(), req.Email);
 
 
-                    
 
+                    cart.ClearCart();
                     
                     code = new { Success = true, Code = req.TypePayment, Url = "" };
                     if (req.TypePayment == 2)
                     {
                         var url = UrlPayment(req.TypePaymentVN, order.OrderCode);
                         code = new { Success = true, Code = req.TypePayment, Url = url };
-
-
                     }
-                    //return RedirectToAction("CheckOutSuccess");
                 }
             }
             return Json(code);

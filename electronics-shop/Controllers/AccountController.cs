@@ -25,6 +25,7 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using IdentityModel.Client;
 using System.Web.Helpers;
+using System.Text.RegularExpressions;
 
 namespace electronics_shop.Controllers
 {
@@ -242,6 +243,11 @@ namespace electronics_shop.Controllers
                 TempData["Error"] = $"Error -- Số điện thoại {phone} đã tồn tại!";
                 return RedirectToAction("EditProfile", new { accountCode = id });
             }
+            if(!Regex.IsMatch(phone, @"^(0|\+84)(3|5|7|8|9)\d{8}$"))
+            {
+                TempData["Error"] = $"Error -- Số điện thoại {phone} sai!";
+                return RedirectToAction("EditProfile", new { accountCode = id });
+            }
             List<Account> checkemail = db.Accounts.Where(c => c.Email == email).ToList();
             if ((p.Email == email && checkemail.Count > 1) || (p.Email != email && checkphone.Count > 0))
             {
@@ -251,7 +257,7 @@ namespace electronics_shop.Controllers
             p.FirstName = firstname;
             p.LastName = lastname;
             p.PhoneNumber = phone;
-            p.Email = email;
+            //p.Email = email;
             // Kiểm tra xem có file được chọn không
             if (image != null && image.ContentLength > 0)
             {
@@ -840,6 +846,7 @@ namespace electronics_shop.Controllers
             {
                 // Kiểm tra email và sdt có trong CSDL
                 Session["info"] = checkMail;
+                Session["UserId"] = checkMail.AccountCode;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -857,6 +864,7 @@ namespace electronics_shop.Controllers
                 db.SaveChanges();
                 var check = db.Accounts.SingleOrDefault(m => m.Email == account.Email);
                 Session["info"] = check;
+                Session["UserId"] = check.AccountCode;
                 return RedirectToAction("Index", "Home");
             }
 
@@ -916,6 +924,7 @@ namespace electronics_shop.Controllers
             {
                 // Kiểm tra email và sdt có trong CSDL
                 Session["info"] = checkMail;
+                Session["UserId"] = checkMail.AccountCode;
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -933,6 +942,7 @@ namespace electronics_shop.Controllers
                 db.SaveChanges();
                 var check = db.Accounts.SingleOrDefault(m => m.Email == account.Email);
                 Session["info"] = check;
+                Session["UserId"] = check.AccountCode;
                 return RedirectToAction("Index", "Home");
             }
         }

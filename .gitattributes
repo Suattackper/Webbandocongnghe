@@ -1,0 +1,2 @@
+/SQL/script/sql filter=lfs diff=lfs merge=lfs -text
+/SQL/script.sql filter=lfs diff=lfs merge=lfs -text

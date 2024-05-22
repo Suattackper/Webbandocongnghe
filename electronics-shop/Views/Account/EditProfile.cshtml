@@ -60,7 +60,7 @@
             <i class="bi bi-caret-right-fill flex text-primary-color"></i>
         </li>
         <li class="transition-all-300 hover:text-primary-color">
-            <a href="@Url.Action("EditProfile", "Account")">My Account</a>
+            <a href="@Url.Action("EditProfile", "Account", new {accountCode = Model.AccountCode})">My Account</a>
         </li>
 
     </ul>
@@ -161,8 +161,19 @@
                                 Telephone
                             </label>
                             @*@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input input-number h-10", @id = "phone", @type = "text" } })*@
-                            <input class="input input-number h-10" id="phone" type="text" placeholder="Nhập số điện thoại" name="phone" value="@Model.PhoneNumber" required />
-                            <span class="form-message"></span>
+                            @{
+                                if (Model.PhoneNumber != null)
+                                {
+                                    <input class="input input-number h-10" id="phone" type="text" placeholder="Nhập số điện thoại" name="phone" value="@Model.PhoneNumber" required />
+                                    <span class="form-message"></span>
+                                }
+                                else
+                                {
+                                    <input class="input input-number h-10" id="phone" type="text" placeholder="Nhập số điện thoại" name="phone" value="" required />
+                                    <span class="form-message"></span>
+                                }
+                            }
+
 
                         </div>
                         <div class="col-span-12 form-group">
@@ -170,7 +181,7 @@
                                 Email
                             </label>
                             @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input h-10", @id = "email", @type = "text" } })*@
-                            <input class="input h-10" id="email" type="email" placeholder="Nhập email" name="email" value="@Model.Email" required />
+                            <input class="input h-10" id="email" type="email" placeholder="Nhập email" name="email" value="@Model.Email" disabled />
                             <span class="form-message"></span>
 
                         </div>

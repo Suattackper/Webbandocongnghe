@@ -1,25 +1,41 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\",
+  "WorkspaceRootPath": "D:\\c#\\Webbandocongnghe\\electronics-shop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|d:\\c#\\webbandocongnghe\\electronics-shop\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\controllers\\productsadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\controllers\\productsadmincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\views\\auth\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|c:\\users\\xuan thao\\desktop\\tandemo\\webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\partial_chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\partial_chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\views\\auth\\partial_chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|c:\\users\\xuan thao\\desktop\\tandemo\\webbandocongnghe\\electronics-shop\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|c:\\users\\xuan thao\\desktop\\tandemo\\webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\views\\auth\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\views\\auth\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|c:\\users\\xuan thao\\desktop\\tandemo\\webbandocongnghe\\electronics-shop\\areas\\admin\\content\\js\\profile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|D:\\c#\\Webbandocongnghe\\electronics-shop\\areas\\admin\\content\\js\\profile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{26073D62-447B-472C-B92E-ED88CB833064}|electronics-shop.csproj|solutionrelative:areas\\admin\\content\\js\\profile.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
@@ -30,96 +46,124 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Partial_ChiTietSanPham.cshtml",
-              "DocumentMoniker": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
-              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
-              "ToolTip": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
-              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
-              "ViewState": "AQIAACIAAAAAAAAAAAAkwEoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T10:28:59.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "profile.js",
-              "DocumentMoniker": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Content\\js\\profile.js",
-              "RelativeDocumentMoniker": "Areas\\admin\\Content\\js\\profile.js",
-              "ToolTip": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Content\\js\\profile.js",
-              "RelativeToolTip": "Areas\\admin\\Content\\js\\profile.js",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAcwE4AAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-04-23T09:42:00.85Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Index.cshtml",
-              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-16T09:51:46.692Z",
-              "EditorCaption": ""
+              "Title": "ProductsAdminController.cs",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\ProductsAdminController.cs",
+              "RelativeDocumentMoniker": "Areas\\admin\\Controllers\\ProductsAdminController.cs",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\ProductsAdminController.cs*",
+              "RelativeToolTip": "Areas\\admin\\Controllers\\ProductsAdminController.cs*",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAAwFAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-16T08:57:09.974Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Details.cshtml",
-              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Details.cshtml",
-              "ToolTip": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Details.cshtml",
-              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Details.cshtml",
-              "ViewState": "AQIAAPMBAAAAAAAAAAAkwBoCAAABAAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAACgAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-23T09:39:22.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-11T11:09:11.032Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAiwCQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T16:03:54.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAwDEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T16:02:38.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Partial_ChiTietSanPham.cshtml",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
+              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
+              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Partial_ChiTietSanPham.cshtml",
+              "ViewState": "AQIAACIAAAAAAAAAAAAkwEoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T10:28:59.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "profile.js",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Content\\js\\profile.js",
+              "RelativeDocumentMoniker": "Areas\\admin\\Content\\js\\profile.js",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Content\\js\\profile.js",
+              "RelativeToolTip": "Areas\\admin\\Content\\js\\profile.js",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAcwE4AAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-04-23T09:42:00.85Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Index.cshtml",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Index.cshtml",
+              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-16T09:51:46.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Details.cshtml",
+              "RelativeDocumentMoniker": "Areas\\admin\\Views\\Auth\\Details.cshtml",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Views\\Auth\\Details.cshtml",
+              "RelativeToolTip": "Areas\\admin\\Views\\Auth\\Details.cshtml",
+              "ViewState": "AQIAAPMBAAAAAAAAAAAkwBoCAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-23T09:39:22.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Areas\\admin\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Xuan Thao\\Desktop\\tandemo\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\c#\\Webbandocongnghe\\electronics-shop\\Areas\\admin\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Areas\\admin\\Controllers\\AuthController.cs",
               "ViewState": "AQIAAFcAAAAAAAAAAAAgwGgAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-23T09:38:17.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-23T09:38:17.781Z"
             }
           ]
         }

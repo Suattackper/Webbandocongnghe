@@ -153,7 +153,6 @@ D:\c#\Webbandocongnghe\electronics-shop\bin\Antlr3.Runtime.pdb
 D:\c#\Webbandocongnghe\electronics-shop\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.AssemblyReference.cache
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CoreCompileInputs.cache
-D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.csproj.CopyComplete
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
 D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
 D:\c#\Webbandocongnghe\electronics-shop\bin\EntityFramework.dll
@@ -680,3 +679,4 @@ C:\Users\Xuan Thao\Desktop\tandemo\Webbandocongnghe\electronics-shop\obj\Debug\e
 C:\Users\Xuan Thao\Desktop\tandemo\Webbandocongnghe\electronics-shop\obj\Debug\electron.52C9BEC1.Up2Date
 C:\Users\Xuan Thao\Desktop\tandemo\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.dll
 C:\Users\Xuan Thao\Desktop\tandemo\Webbandocongnghe\electronics-shop\obj\Debug\electronics-shop.pdb
+D:\c#\Webbandocongnghe\electronics-shop\obj\Debug\electron.52C9BEC1.Up2Date
